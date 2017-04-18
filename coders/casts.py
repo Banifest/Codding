@@ -11,11 +11,11 @@ def IntToBitList(num: int)->list:
 
 
 def BitListToInt(num: list)->int:
-    it = 1
+    it = 1 << len(num) - 1
     answer = 0
     for x in num:
         answer += it * x
-        it <<= 1
+        it >>= 1
     return answer
 
 def BitListCombToInt(num: list)->int:
