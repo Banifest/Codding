@@ -2,13 +2,10 @@ import sys, os, numpy as np, math
 from coders.combinations import GetCombinations
 from coders.casts import *
 from coders.exeption import DecodingException
+from coders import abstractCoder
 
 
-class Coder():
-    lengthInformation = 0
-    lengthAdditional = 0
-    lengthTotal = 0
-    codingInformation = 0
+class Coder(abstractCoder.Coder):
     arr = []
 
     def __init__(self, info: int):

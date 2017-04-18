@@ -4,10 +4,11 @@ from random import random
 from coders.casts import IntToBitList, BitListToInt
 
 
-def GenInterference(info: int, straight: float)->int:
-    info = IntToBitList(info)
+def GenInterference(info: list, straight: float) -> list:
     answer = []
     for x in info:
-        if random.random()<= straight:
-            answer.append(int(x*(random.random()+0.5)))
-    return BitListToInt(answer)
+        if random() <= straight:
+            answer.append(x * int(random() + 0.5))
+        else:
+            answer.append(x)
+    return answer

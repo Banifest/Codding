@@ -1,5 +1,6 @@
 import sys, os
 
+
 class DecodingException(Exception):
     message = ""
     result = ""
