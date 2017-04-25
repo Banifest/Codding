@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/coders/сonvolutional.py" afterPath="$PROJECT_DIR$/coders/сonvolutional.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,8 +75,8 @@
       <file leaf-file-name="сonvolutional.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/coders/сonvolutional.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="39" column="35" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+            <state relative-caret-position="330">
+              <caret line="48" column="32" lean-forward="true" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -149,7 +150,7 @@
       <GitPushTagMode />
     </option>
     <push-targets>
-      <push-target-info target-remote="origin" target-branch="cyclicalCoder" repo="$PROJECT_DIR$" source="master" />
+      <push-target-info target-remote="origin" target-branch="convolutionalCoder" repo="$PROJECT_DIR$" source="master" />
     </push-targets>
   </component>
   <component name="IdeDocumentHistory">
@@ -535,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493155488818</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Добавлен прототип сверточного кодировщика с реализованным шагом">
+      <created>1493155497440</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1493155497440</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView">
@@ -549,10 +557,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="3" width="1550" height="904" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294423" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294423" sideWeight="0.5053691" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32555124" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32555124" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294423" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294423" sideWeight="0.49463087" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -967,11 +976,11 @@
         <state relative-caret-position="-4131">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1493155483998" expanded="true" signature="56642:56677" ph="..." />
-            <marker date="1493155483998" expanded="true" signature="56642:56690" ph="..." />
-            <marker date="1493155483998" expanded="true" signature="56642:56705" ph="..." />
-            <marker date="1493155483998" expanded="true" signature="56642:56659" ph="..." />
-            <marker date="1493155483998" expanded="true" signature="56605:56629" ph="..." />
+            <marker date="1493156177571" expanded="true" signature="57465:57500" ph="..." />
+            <marker date="1493156177571" expanded="true" signature="57465:57513" ph="..." />
+            <marker date="1493156177571" expanded="true" signature="57465:57528" ph="..." />
+            <marker date="1493156177571" expanded="true" signature="57465:57482" ph="..." />
+            <marker date="1493156177571" expanded="true" signature="56605:56629" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1079,8 +1088,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/coders/сonvolutional.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="39" column="35" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+        <state relative-caret-position="330">
+          <caret line="48" column="32" lean-forward="true" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

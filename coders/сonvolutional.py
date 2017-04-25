@@ -36,5 +36,15 @@ class Coder(Coder):
                 addedBit ^= x * (1 << power)
             answer.append(addedBit)
             power += 1
-
         return BitListToInt(answer)
+
+
+    def Encoding(self, information: int) -> list:
+        information = IntToBitList(information)
+        information.reverse()
+        answer = []
+        for x in information:
+            temp = self.DoStep(x)
+            for y in temp:
+                answer.append(y)
+        return answer
