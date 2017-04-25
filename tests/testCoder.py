@@ -1,7 +1,7 @@
 import unittest
 
 
-class TestHemmingCoder(unittest.TestCase):
+class TestHemmingCoder(unittest.TestCase):  # TODO.txt написать тесты для кодера и декодера хэмминга
     def testInit(self):
         pass
 

@@ -1,13 +1,10 @@
-import sys, os
 from random import random
 
-from coders.casts import IntToBitList, BitListToInt
 
-
-def GenInterference(info: list, straight: float) -> list:
+def GenInterference(info: list, straight: float) -> list:  # TODO.txt исправить на корректную генерацию помех
     answer = []
     for x in info:
-        if random() <= straight:
+        if random() >= straight:
             answer.append(x * int(random() + 0.5))
         else:
             answer.append(x)

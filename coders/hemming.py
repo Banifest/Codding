@@ -17,10 +17,8 @@ class Coder(abstractCoder.Coder):
 
         for x in range(self.lengthAdditional):
             temp = []
-            count = 0
             flag = True
             count = (1 << x) - 1  # Количество символов требуемых для зануления вначале
-
             for y in range((1 << x) - 1):
                 temp.append(0)
 
@@ -32,8 +30,6 @@ class Coder(abstractCoder.Coder):
                         break
                 flag = not flag
             self.arr.append(temp)
-
-
         self.arr = np.transpose(np.array(self.arr))
 
     def Encoding(self, encodingInformation: int) -> list:
@@ -66,12 +62,12 @@ class Coder(abstractCoder.Coder):
         status = BitListToInt(status)
         if status != 0:
             code[0][status - 1] = (code[0][status - 1] + 1) % 2
+            oldStatus = status
             status = BitListToInt(list((np.dot(code, self.arr) % 2)[0]))
-
             if status != 0:
                 print(status)
                 raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
-            print("Произошло успешное исправление ошибки в бите под номером {0}".format(status))
+            print("Произошло успешное исправление ошибки в бите под номером {0}".format(oldStatus))
         for count in range(len(code[0])):
             if  math.log2(count + 1) != int(math.log2(count + 1)):
                 answer.append(code[0][count])
