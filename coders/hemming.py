@@ -1,4 +1,5 @@
 import math
+
 import numpy as np
 
 from coders import abstractCoder
@@ -35,19 +36,19 @@ class Coder(abstractCoder.Coder):
 
         self.arr = np.transpose(np.array(self.arr))
 
-    def Encoding(self, info: int) -> list:
-        temp = IntToBitList(info)
-        if len(temp) < self.lengthInformation:
-            for x in range(self.lengthInformation - len(temp)):
-                temp.append(0)
-        temp.reverse()
+    def Encoding(self, encodingInformation: int) -> list:
+        listEncodingInformation = IntToBitList(encodingInformation)
+        if len(listEncodingInformation) < self.lengthInformation:
+            for x in range(self.lengthInformation - len(listEncodingInformation)):
+                listEncodingInformation.append(0)
+        listEncodingInformation.reverse()
         code = []
 
         for count in range(self.lengthTotal):
-            if math.log2(count + 1) == int(math.log2(count + 1)):  #Проверка числа на степень 2х
+            if math.log2(count + 1) == int(math.log2(count + 1)):  # Проверка кратности числа на степень 2х
                 code.append([0])
             else:
-                code.append([temp[count - int(math.log2(count)) - 1]])
+                code.append([listEncodingInformation[count - int(math.log2(count)) - 1]])
 
         answer = [x[0] for x in code]
         code = np.transpose(np.array(code))
@@ -70,7 +71,7 @@ class Coder(abstractCoder.Coder):
             if status != 0:
                 print(status)
                 raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
-            print("Произошло успешное исправление ошибки")
+            print("Произошло успешное исправление ошибки в бите под номером {0}".format(status))
         for count in range(len(code[0])):
             if  math.log2(count + 1) != int(math.log2(count + 1)):
                 answer.append(code[0][count])
