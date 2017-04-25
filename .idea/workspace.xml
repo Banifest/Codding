@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/coders/сonvolutional.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/coders/cyclical.py" afterPath="$PROJECT_DIR$/coders/cyclical.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/coders/exeption.py" afterPath="$PROJECT_DIR$/coders/exeption.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -78,7 +75,7 @@
         <entry file="file://$PROJECT_DIR$/coders/сonvolutional.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="364">
-              <caret line="38" column="35" lean-forward="true" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
+              <caret line="39" column="35" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -111,9 +108,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-333">
               <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -526,7 +521,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493139988325</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Добавлен прототип сверточного кодировщика с реализованным шагом">
+      <created>1493155479094</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1493155479094</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -606,7 +608,8 @@
     <MESSAGE value="Добавлены функции циклических сдвигов для массивов битов" />
     <MESSAGE value="Добавлены метод кодирования в циклический кодер и метод нахождения остатка от деления двоичногополинома на двоичный полином" />
     <MESSAGE value="Добавлены метод декодирования в циклический кодер" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлены метод декодирования в циклический кодер" />
+    <MESSAGE value="Добавлен прототип сверточного кодировщика с реализованным шагом" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен прототип сверточного кодировщика с реализованным шагом" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -958,11 +961,11 @@
         <state relative-caret-position="-4131">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1493155400847" expanded="true" signature="56715:56750" ph="..." />
-            <marker date="1493155400847" expanded="true" signature="56715:56763" ph="..." />
-            <marker date="1493155400847" expanded="true" signature="56715:56778" ph="..." />
-            <marker date="1493155400847" expanded="true" signature="56715:56732" ph="..." />
-            <marker date="1493155400847" expanded="true" signature="56605:56629" ph="..." />
+            <marker date="1493155411150" expanded="true" signature="56713:56748" ph="..." />
+            <marker date="1493155411150" expanded="true" signature="56713:56761" ph="..." />
+            <marker date="1493155411150" expanded="true" signature="56713:56776" ph="..." />
+            <marker date="1493155411150" expanded="true" signature="56713:56730" ph="..." />
+            <marker date="1493155411150" expanded="true" signature="56605:56629" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1040,9 +1043,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-333">
           <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1073,7 +1074,7 @@
     <entry file="file://$PROJECT_DIR$/coders/сonvolutional.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
-          <caret line="38" column="35" lean-forward="true" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
+          <caret line="39" column="35" lean-forward="false" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
