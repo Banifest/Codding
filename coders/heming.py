@@ -1,0 +1,77 @@
+import math
+import numpy as np
+
+from coders import abstractCoder
+from coders.casts import *
+from coders.exeption import DecodingException
+
+
+class Coder(abstractCoder.Coder):
+    arr = []
+
+    def __init__(self, info: int):
+        self.lengthAdditional = int(math.log2(info - 1) + 2)
+        self.lengthInformation = info
+        self.lengthTotal = self.lengthInformation + self.lengthAdditional
+
+        for x in range(self.lengthAdditional):
+            temp = []
+            count = 0
+            flag = True
+            count = (1 << x) - 1  # Количество символов требуемых для зануления вначале
+
+            for y in range((1 << x) - 1):
+                temp.append(0)
+
+            while count < self.lengthTotal:
+                for y in range(1 << x):
+                    temp.append(1) if flag == True else temp.append(0)
+                    count += 1
+                    if count >= self.lengthTotal:
+                        break
+                flag = not flag
+            self.arr.append(temp)
+
+
+        self.arr = np.transpose(np.array(self.arr))
+
+    def Encoding(self, info: int) -> list:
+        temp = IntToBitList(info)
+        if len(temp) < self.lengthInformation:
+            for x in range(self.lengthInformation - len(temp)):
+                temp.append(0)
+        temp.reverse()
+        code = []
+
+        for count in range(self.lengthTotal):
+            if math.log2(count + 1) == int(math.log2(count + 1)):  #Проверка числа на степень 2х
+                code.append([0])
+            else:
+                code.append([temp[count - int(math.log2(count)) - 1]])
+
+        answer = [x[0] for x in code]
+        code = np.transpose(np.array(code))
+        backup_info = list((np.dot(code, self.arr) % 2)[0])
+        for x in range(self.lengthAdditional):
+            answer[((1 << x)-1)] = backup_info[x]
+        return answer
+
+
+    def Decoding(self, info: list) -> int:
+        code = np.transpose(np.array([[x] for x in info]))
+        answer = []
+        status = list((np.dot(code, self.arr) % 2)[0])
+        status.reverse()
+        status = BitListToInt(status)
+        if status != 0:
+            code[0][status - 1] = (code[0][status - 1] + 1) % 2
+            status = BitListToInt(list((np.dot(code, self.arr) % 2)[0]))
+
+            if status != 0:
+                print(status)
+                raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
+            print("Произошло успешное исправление ошибки")
+        for count in range(len(code[0])):
+            if  math.log2(count + 1) != int(math.log2(count + 1)):
+                answer.append(code[0][count])
+        return BitListToInt(answer)
