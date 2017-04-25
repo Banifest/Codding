@@ -1,5 +1,3 @@
-import math
-
 import numpy as np
 
 from coders import abstractCoder
@@ -34,6 +32,7 @@ class Coder(abstractCoder.Coder):
 
     def Encoding(self, encodingInformation: int) -> list:
         listEncodingInformation = IntToBitList(encodingInformation)
+        listEncodingInformation.reverse()
         if len(listEncodingInformation) < self.lengthInformation:
             for x in range(self.lengthInformation - len(listEncodingInformation)):
                 listEncodingInformation.append(0)

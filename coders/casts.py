@@ -1,3 +1,6 @@
+import math
+
+
 def IntToBitList(num: int) -> list:
     it = 1
     answer = []
@@ -7,6 +10,7 @@ def IntToBitList(num: int) -> list:
         else:
             answer.append(0)
         it <<= 1
+    answer.reverse()
     return answer
 
 
@@ -26,9 +30,22 @@ def BitListCombToInt(num: list) -> int:
     return answer
 
 
-def CycleShiftRight(num: list) -> list:
+def CycleShiftRightBitList(num: list) -> list:
+    num = num.copy()
     return num[-1] + num[:-1]
 
 
-def CycleShiftLeft(num: list) -> list:
+def CycleShiftLeftBitList(num: list) -> list:
+    num = num.copy()
     return num[1:] + num[0]
+
+
+def CycleShiftRight(num: int) -> int:
+    juniorBit = num & 1
+    num >>= 1
+    return (juniorBit << (math.log2(num) + 1)) + num
+
+
+def CycleShiftLeft(num: int) -> int:
+    olderBit = num & (1 << math.log2(num))
+    return (((olderBit - 1) & num) << 1) + 1
