@@ -1,4 +1,4 @@
-from coders import cyclical, hemming
+from coders import hemming, сonvolutional
 
 if __name__ == '__main__':
     a = hemming.Coder(5)
@@ -13,9 +13,17 @@ if __name__ == '__main__':
 
    # print(GenInterference(a.Encoding(13), 0.0000000002))
 """
+    """
     b = cyclical.Coder(4)
 
-    print(b.GetRemainder(13))
+    print(b.Encoder(13))
+    print(b.Decoder([1, 1, 0, 1, 0, 0, 0]))
+    """
+    c = сonvolutional.Coder(2, [7, 5], 1, 2, 2)
+
+    print(c.Encoding([0, 1, 1, 0]))
+
+
 
 else:
     raise Exception()
