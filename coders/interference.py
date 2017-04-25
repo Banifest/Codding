@@ -1,11 +1,11 @@
-import random
+from random import random
 
 
-def GenInterference(info: list, straight: float) -> list:
+def GenInterference(info: list, straight: float) -> list:  # TODO.txt исправить на корректную генерацию помех
     answer = []
     for x in info:
-        if random.random() <= straight:
-            answer.append(x * int(random.random() + 0.5))
+        if random() >= straight:
+            answer.append(x * int(random() + 0.5))
         else:
             answer.append(x)
     return answer

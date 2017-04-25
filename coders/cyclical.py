@@ -1,5 +1,3 @@
-import sys, os
-
 from coders import abstractCoder
 
 

@@ -24,3 +24,11 @@ def BitListCombToInt(num: list) -> int:
     for x in num:
         answer += 1 << x
     return answer
+
+
+def CycleShiftRight(num: list) -> list:
+    return num[-1] + num[:-1]
+
+
+def CycleShiftLeft(num: list) -> list:
+    return num[1:] + num[0]
