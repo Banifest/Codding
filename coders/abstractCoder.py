@@ -1,4 +1,3 @@
-import sys, os
 from abc import ABCMeta
 
 
@@ -8,3 +7,7 @@ class Coder:
     lengthAdditional = 0
     lengthTotal = 0
     codingInformation = 0
+
+
+    def GetRedundancy(self) -> int:
+        return int(self.lengthAdditional / self.lengthInformation * 100)
