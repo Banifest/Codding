@@ -1,7 +1,9 @@
-from coders import hemming, сonvolutional
+from GUI.MainWindow import InitMainWindow
+from coders.convolutional import сonvolutional
 
 if __name__ == '__main__':
-    a = hemming.Coder(5)
+    InitMainWindow()
+    #    a = hemming.Coder(5)
     """print(a.Encoding(18801))
     print(a.Decoding([1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1]))
     print(a.Encoding(11))
@@ -21,7 +23,7 @@ if __name__ == '__main__':
     """
     c = сonvolutional.Coder(2, [7, 5], 1, 2, 2)
 
-    print(c.Encoding([0, 1, 1, 0]))
+# print(c.Encoding([0, 1, 1, 0]))
 
 
 
