@@ -6,7 +6,7 @@ from coders.exeption import DecodingException
 
 
 class Coder(abstractCoder.Coder):
-    arr = []
+    arr: list = []
 
     def __init__(self, info: int):
         self.lengthAdditional = int(math.log2(info - 1) + 2)
@@ -14,7 +14,7 @@ class Coder(abstractCoder.Coder):
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
 
         for x in range(self.lengthAdditional):
-            temp = []
+            temp: list = []
             flag = True
             count = (1 << x) - 1  # Количество символов требуемых для зануления вначале
             for y in range((1 << x) - 1):
@@ -26,7 +26,7 @@ class Coder(abstractCoder.Coder):
                     count += 1
                     if count >= self.lengthTotal:
                         break
-                flag = not flag
+                flag: bool = not flag
             self.arr.append(temp)
         self.arr = np.transpose(np.array(self.arr))
 
@@ -37,7 +37,7 @@ class Coder(abstractCoder.Coder):
             for x in range(self.lengthInformation - len(listEncodingInformation)):
                 listEncodingInformation.append(0)
         listEncodingInformation.reverse()
-        code = []
+        code: list = []
 
         for count in range(self.lengthTotal):
             if math.log2(count + 1) == int(math.log2(count + 1)):  # Проверка кратности числа на степень 2х
@@ -55,10 +55,10 @@ class Coder(abstractCoder.Coder):
 
     def Decoding(self, info: list) -> int:
         code = np.transpose(np.array([[x] for x in info]))
-        answer = []
-        status = list((np.dot(code, self.arr) % 2)[0])
+        answer: list = []
+        status: list = list((np.dot(code, self.arr) % 2)[0])
         status.reverse()
-        status = BitListToInt(status)
+        status: int = BitListToInt(status)
         if status != 0:
             code[0][status - 1] = (code[0][status - 1] + 1) % 2
             oldStatus = status

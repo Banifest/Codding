@@ -4,7 +4,7 @@ class Interleaver:
     def __init__(self, lengthSmashing: int):
         self.lengthSmashing = lengthSmashing
 
-    def Mix(self, information: list) -> list:
+    def Shuffle(self, information: list) -> list:
         answer: list = []
         for x in range(self.lengthSmashing):
             isEnd: bool = False

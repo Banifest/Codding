@@ -1,12 +1,16 @@
 from coders.convolutional import Coder
-from coders.interleaver.Deinterleaver import Deinterleaver
-from coders.interleaver.Interleaver import Interleaver
+from coders.fountain import LubyTransform
 
 if __name__ == '__main__':
+    coder = LubyTransform.Coder(3, 4, 9)
+    print(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0]))
+
+    """
     inter: Interleaver = Interleaver(4)
     deInter: Deinterleaver = Deinterleaver(interleaver=inter)
-    print(inter.Mix([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
-    print(deInter.Reestablish(inter.Mix([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])))
+    print(inter.Shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+    print(deInter.Reestablish(inter.Shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])))
+    """
     # InitMainWindow()
     #    a = hemming.Coder(5)
     """print(a.Encoding(18801))
