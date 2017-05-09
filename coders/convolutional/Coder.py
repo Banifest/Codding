@@ -3,12 +3,12 @@ from coders.casts import IntToBitList
 
 
 class Coder(Coder):
-    countPolynomials = 0
-    listPolynomials = []
-    countInput = 0
-    countOutput = 0
-    countRegisters = 0
-    register = 0
+    countPolynomials: int = 0
+    listPolynomials: list = []
+    countInput: int = 0
+    countOutput: int = 0
+    countRegisters: int = 0
+    register: int = 0
 
     def __init__(self, countPolynomials: int, listPolynomials: list, countInput: int, countOutput: int,
                  countRegister: int):

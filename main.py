@@ -1,8 +1,13 @@
-from GUI.MainWindow import InitMainWindow
-from coders.convolutional import сonvolutional
+from coders.convolutional import Coder
+from coders.interleaver.Deinterleaver import Deinterleaver
+from coders.interleaver.Interleaver import Interleaver
 
 if __name__ == '__main__':
-    InitMainWindow()
+    inter: Interleaver = Interleaver(4)
+    deInter: Deinterleaver = Deinterleaver(interleaver=inter)
+    print(inter.Mix([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+    print(deInter.Reestablish(inter.Mix([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])))
+    # InitMainWindow()
     #    a = hemming.Coder(5)
     """print(a.Encoding(18801))
     print(a.Decoding([1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1]))
@@ -21,7 +26,7 @@ if __name__ == '__main__':
     print(b.Encoder(13))
     print(b.Decoder([1, 1, 0, 1, 0, 0, 0]))
     """
-    c = сonvolutional.Coder(2, [7, 5], 1, 2, 2)
+    c = Coder.Coder(2, [7, 5], 1, 2, 2)
 
 # print(c.Encoding([0, 1, 1, 0]))
 
