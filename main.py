@@ -4,6 +4,7 @@ from coders.fountain import LubyTransform
 if __name__ == '__main__':
     coder = LubyTransform.Coder(3, 4, 9)
     print(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0]))
+    coder.Decoding(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0]))
 
     """
     inter: Interleaver = Interleaver(4)

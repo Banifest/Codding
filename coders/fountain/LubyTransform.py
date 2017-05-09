@@ -1,7 +1,7 @@
 import random
 
 import coders
-from coders.casts import BitListToInt, IntToBitList
+from coders.casts import BitListToInt, BitListToIntList, IntToBitList
 
 
 class Coder(coders.abstractCoder.Coder):
@@ -45,16 +45,39 @@ class Coder(coders.abstractCoder.Coder):
 
 
     def Decoding(self, information: list):
-        decodedSet: set = set()
+        decodedSetList: list = [set(BitListToIntList(IntToBitList(x, self.sizeBlock))) for x in self.blocks]
+        decodedSetList.append(set())
         isKill: bool = False
 
         # Разбивка на блоки
-        stastus: list = []
-        for x in range(0, len(information), self.sizeBlock):
-            tempList: list = []
-            for y in range(len(self.sizeBlock)):
-                if (x + y) < len(information):
-                    tempList.append(information[x + y])
+        status: list = [False for x in range(self.countBlocks)]
+        status.append(True)
 
-        while not isKill:
+        tempList: list = []
+        for x in range(0, len(information), self.sizeBlock):
+            temp: list = []
+            for y in range(self.sizeBlock):
+                if (x + y) < len(information):
+                    temp.append(information[x + y])
+            tempList.append(BitListToInt(temp))
+        tempList.append(0)
+
+        answer: list = [0] * self.countCodingBlocks
+        while not isKill or {True} == set(status):
             isKill = True
+            for x in range(len(decodedSetList)):
+                for y in range(len(decodedSetList)):
+                    difference = decodedSetList[x] - decodedSetList[y]
+                    if len(difference) == 1:
+                        isKill = False
+                        status[list(difference)[0]] = True
+                        answer[list(difference)[0]] ^= tempList[x] ^ tempList[y]
+                        for z in decodedSetList:
+                            if difference in z:
+                                z = z - difference
+
+                    difference = decodedSetList[y] - decodedSetList[x]
+                    if len(difference) == 1:
+                        for z in decodedSetList:
+                            if difference in z:
+                                z = z - difference
