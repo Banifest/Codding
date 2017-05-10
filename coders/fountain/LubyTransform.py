@@ -46,12 +46,12 @@ class Coder(coders.abstractCoder.Coder):
 
     def Decoding(self, information: list):
         decodedSetList: list = [set(BitListToIntList(IntToBitList(x, self.sizeBlock))) for x in self.blocks]
-        decodedSetList.append(set())
+        decodedSetList.append(set())  # костыль, чтобы работало
         isKill: bool = False
 
         # Разбивка на блоки
         status: list = [False for x in range(self.countBlocks)]
-        status.append(True)
+        status.append(True)  # костыль, чтобы работало
 
         tempList: list = []
         for x in range(0, len(information), self.sizeBlock):
@@ -60,24 +60,25 @@ class Coder(coders.abstractCoder.Coder):
                 if (x + y) < len(information):
                     temp.append(information[x + y])
             tempList.append(BitListToInt(temp))
-        tempList.append(0)
+        tempList.append(0)  # костыль, чтобы работало
 
         answer: list = [0] * self.countCodingBlocks
-        while not isKill or {True} == set(status):
+        while not isKill or {True} != set(status):
             isKill = True
             for x in range(len(decodedSetList)):
                 for y in range(len(decodedSetList)):
                     difference = decodedSetList[x] - decodedSetList[y]
-                    if len(difference) == 1:
+                    if len(difference) == 1 and (decodedSetList[y] - decodedSetList[x]) == set():
                         isKill = False
                         status[list(difference)[0]] = True
-                        answer[list(difference)[0]] ^= tempList[x] ^ tempList[y]
-                        for z in decodedSetList:
-                            if difference in z:
-                                z = z - difference
+                        answer[list(difference)[0]] = tempList[x] ^ tempList[y]
+                        for z in range(len(decodedSetList)):
+                            if list(difference)[0] in decodedSetList[z]:
+                                tempList[z] ^= answer[list(difference)[0]]
+                                decodedSetList[z] = decodedSetList[z] - difference
 
-                    difference = decodedSetList[y] - decodedSetList[x]
-                    if len(difference) == 1:
-                        for z in decodedSetList:
-                            if difference in z:
-                                z = z - difference
+        # формирование отвера в битовом представлении
+        answer = answer[:-1]
+        answer.reverse()
+        answer = [IntToBitList(x, self.sizeBlock) for x in answer]
+        return [y for x in answer for y in x]
