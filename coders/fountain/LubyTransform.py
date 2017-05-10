@@ -2,6 +2,7 @@ import random
 
 import coders
 from coders.casts import BitListToInt, BitListToIntList, IntToBitList
+from coders.exeption import DecodingException
 
 
 class Coder(coders.abstractCoder.Coder):
@@ -63,7 +64,7 @@ class Coder(coders.abstractCoder.Coder):
         tempList.append(0)  # костыль, чтобы работало
 
         answer: list = [0] * self.countCodingBlocks
-        while not isKill or {True} != set(status):
+        while not isKill and {True} != set(status):
             isKill = True
             for x in range(len(decodedSetList)):
                 for y in range(len(decodedSetList)):
@@ -77,7 +78,10 @@ class Coder(coders.abstractCoder.Coder):
                                 tempList[z] ^= answer[list(difference)[0]]
                                 decodedSetList[z] = decodedSetList[z] - difference
 
-        # формирование отвера в битовом представлении
+        if set(status) != {True}:
+            raise DecodingException("Невозможно декодировать :'(")
+
+        # формирование ответа в битовом представлении
         answer = answer[:-1]
         answer.reverse()
         answer = [IntToBitList(x, self.sizeBlock) for x in answer]
