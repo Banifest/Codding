@@ -1,16 +1,14 @@
-import math
-
 from coders.abstractCoder import Coder
-from coders.casts import BitListToInt, IntToBitList
+from coders.casts import IntToBitList
 
 
 class Coder(Coder):
-    countPolynomials = 0
-    listPolynomials = []
-    countInput = 0
-    countOutput = 0
-    countRegisters = 0
-    register = 0
+    countPolynomials: int = 0
+    listPolynomials: list = []
+    countInput: int = 0
+    countOutput: int = 0
+    countRegisters: int = 0
+    register: int = 0
 
     def __init__(self, countPolynomials: int, listPolynomials: list, countInput: int, countOutput: int,
                  countRegister: int):
@@ -22,10 +20,10 @@ class Coder(Coder):
         # self.registers = [0 for x in range(countRegister)]
 
 
-    def DoStep(self, informationBit) -> int:
-        self.register >>= 1
+    def DoStep(self, informationBit: int) -> list:
+        self.register <<= 1
         # зануление старшего бита
-        self.register = self.register & ((1 << (int(math.log2(self.register)))) - 1)
+        self.register = self.register & ((1 << (self.countRegisters + 1)) - 1)
         self.register += informationBit
 
         answer = []
@@ -33,14 +31,14 @@ class Coder(Coder):
         for count in range(self.countPolynomials):
             addedBit = 0
             for x in IntToBitList(self.listPolynomials[count] & self.register):
-                addedBit ^= x * (1 << power)
-            answer.append(addedBit)
+                addedBit ^= x
+            answer.append(addedBit % 2)
             power += 1
-        return BitListToInt(answer)
+        return answer
 
 
-    def Encoding(self, information: int) -> list:
-        information = IntToBitList(information)
+    def Encoding(self, information: list) -> list:
+        # information = IntToBitList(information)
         information.reverse()
         answer = []
         for x in information:

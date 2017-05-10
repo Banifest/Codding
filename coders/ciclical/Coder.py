@@ -17,7 +17,7 @@ class Coder(abstractCoder.Coder):
         self.polynomial = IntToBitList(generatingPalindromes[self.lengthAdditional])
 
 
-    def GetRemainder(self, number: int, flag: bool) -> list:
+    def GetRemainder(self, number: int, flag: bool = None) -> list:
         polynomial = BitListToInt(self.polynomial)
         if flag:
             number <<= self.lengthAdditional

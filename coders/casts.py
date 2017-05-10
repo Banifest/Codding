@@ -1,18 +1,32 @@
 import math
+from typing import Optional
 
 
-def IntToBitList(num: int) -> list:
-    it = 1
-    answer = []
+def IntToBitList(num: int, size: Optional[int]) -> list:
+    it: int = 1
+    answer: list = []
     while it <= num:
         if num | it == num:
             answer.append(1)
         else:
             answer.append(0)
         it <<= 1
+    if size is not None:
+        answer += [0] * (size - len(answer))
     answer.reverse()
     return answer
 
+
+def BitListToIntList(num: list) -> list:
+    it: int = 0
+    answer: list = []
+
+    num.reverse()
+    for x in num:
+        if x != 0:
+            answer.append(it)
+        it += 1
+    return answer
 
 def BitListToInt(num: list) -> int:
     it = 1 << len(num) - 1
