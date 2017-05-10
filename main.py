@@ -1,9 +1,7 @@
-from coders.chanal.chanal import GenInterference
-from coders.convolutional import Coder
+from src.coders.convolutional import Coder
+
 
 if __name__ == '__main__':
-    print(GenInterference([0, 1, 1, 1, 0, 1, 0, 0, 0, 0], 10))
-
     # coder = LubyTransform.Coder(3, 4, 9)
     # print(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0]))
     # print(coder.Decoding(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0])))
