@@ -1,9 +1,9 @@
-from src.coders.abstractCoder import Coder
+from src.coders import abstractCoder
 
 from src.coders.casts import IntToBitList
 
 
-class Coder(Coder):
+class Coder(abstractCoder.Coder):
     countPolynomials: int = 0
     listPolynomials: list = []
     countInput: int = 0

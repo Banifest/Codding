@@ -34,11 +34,11 @@ class Coder(abstractCoder.Coder):
                 number) if number != 0 else [0]
 
 
-    def Encoder(self, information: int) -> list:
+    def Encoding(self, information: int) -> list:
         return IntToBitList(information) + self.GetRemainder(information, True)
 
 
-    def Decoder(self, information: list) -> int:
+    def Decoding(self, information: list) -> list:
         if BitListToInt(self.GetRemainder(BitListToInt(information), False)) == 0:
             return BitListToInt(information[:-self.lengthAdditional])
         else:
@@ -48,4 +48,4 @@ class Coder(abstractCoder.Coder):
                 if count > 100:
                     raise DecodingException("Не далось исправить ошибку")
             information[count + 1] = information[count + 1] % 2
-            return BitListToInt(information[:-self.lengthAdditional])
+            return information[:-self.lengthAdditional]

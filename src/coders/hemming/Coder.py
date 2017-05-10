@@ -8,9 +8,9 @@ from src.coders.exeption import DecodingException
 class Coder(abstractCoder.Coder):
     arr: list = []
 
-    def __init__(self, info: int):
-        self.lengthAdditional = int(math.log2(info - 1) + 2)
-        self.lengthInformation = info
+    def __init__(self, information: int):
+        self.lengthAdditional = int(math.log2(information - 1) + 2)
+        self.lengthInformation = information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
 
         for x in range(self.lengthAdditional):
@@ -30,8 +30,8 @@ class Coder(abstractCoder.Coder):
             self.arr.append(temp)
         self.arr = np.transpose(np.array(self.arr))
 
-    def Encoding(self, encodingInformation: int) -> list:
-        listEncodingInformation = IntToBitList(encodingInformation)
+    def Encoding(self, information: int) -> list:
+        listEncodingInformation = IntToBitList(information)
         listEncodingInformation.reverse()
         if len(listEncodingInformation) < self.lengthInformation:
             for x in range(self.lengthInformation - len(listEncodingInformation)):
@@ -53,7 +53,7 @@ class Coder(abstractCoder.Coder):
         return answer
 
 
-    def Decoding(self, info: list) -> int:
+    def Decoding(self, info: list) -> list:
         code = np.transpose(np.array([[x] for x in info]))
         answer: list = []
         status: list = list((np.dot(code, self.arr) % 2)[0])
@@ -70,4 +70,4 @@ class Coder(abstractCoder.Coder):
         for count in range(len(code[0])):
             if math.log2(count + 1) != int(math.log2(count + 1)):
                 answer.append(code[0][count])
-        return BitListToInt(answer)
+        return answer

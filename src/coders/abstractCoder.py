@@ -8,6 +8,11 @@ class Coder:
     lengthTotal: int = 0
     codingInformation: int = 0
 
+    def Encoding(self, information: int or list) -> list:
+        pass
+
+    def Decoding(self, information: list) -> list:
+        pass
 
     def GetRedundancy(self) -> int:
         return int(self.lengthAdditional / self.lengthInformation * 100)

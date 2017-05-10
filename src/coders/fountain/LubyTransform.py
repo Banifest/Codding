@@ -46,6 +46,11 @@ class Coder(abstractCoder.Coder):
 
 
     def Decoding(self, information: list):
+        """
+        Декодер LT-фонтанного кода с заранее установленным генератором случайных чисел
+        :param information: list Закодированная информация, представленная в виде массива битов
+        :return: list Декодированная информация, представленная в виде массива битов
+        """
         decodedSetList: list = [set(BitListToIntList(IntToBitList(x, self.sizeBlock))) for x in self.blocks]
         decodedSetList.append(set())  # костыль, чтобы работало
         isKill: bool = False
