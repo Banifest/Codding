@@ -1,18 +1,15 @@
+from src.GUI.windows.MainWindow import InitMainWindow
 from src.coders.convolutional import Coder
 
 
 if __name__ == '__main__':
-    # coder = LubyTransform.Coder(3, 4, 9)
-    # print(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0]))
-    # print(coder.Decoding(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0])))
-
     """
     inter: Interleaver = Interleaver(4)
     deInter: Deinterleaver = Deinterleaver(interleaver=inter)
     print(inter.Shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
     print(deInter.Reestablish(inter.Shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])))
     """
-    # InitMainWindow()
+    InitMainWindow()
     #    a = hemming.Coder(5)
     """print(a.Encoding(18801))
     print(a.Decoding([1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1]))

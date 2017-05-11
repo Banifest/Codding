@@ -14,6 +14,8 @@ class Channel:
     coder: abstractCoder.Coder
     interleaver: Interleaver.Interleaver = False
 
+    # LDPC
+
     def __init__(self, coder: abstractCoder.Coder, noiseProbability: Optional[int], countCyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
         self.coder = coder
@@ -21,6 +23,21 @@ class Channel:
         if countCyclical is not None: self.countCyclical = countCyclical
         if duplex is not None: self.duplex = duplex
         if duplex is not None: self.interleaver = interleaver
+
+    def __str__(self) -> str:
+        return "Вероятность ошибки в канале - {0}.\n"\
+               "Является ли канал двухстаронним - {1}.\n"\
+               "Используеммый кодер:\n {2}."\
+               "Используется ли перемежитель на данном канале связи - {3}.\n"\
+               "Количество циклов передачи пакета - {4}\n"\
+               "Информация о последней передаче:\n{5}".format(
+                self.noiseProbability,
+                "Да" if self.duplex else "Нет",
+                str(self.coder),
+                "Нет" if not self.interleaver else "Да",
+                self.countCyclical,
+                self.information
+                )
 
     def Transfer(self, information: list) -> str:
         countSuccessfully: int = 0
@@ -54,7 +71,8 @@ class Channel:
 
         return self.information
 
-
+    def GetInformationAboutLastTransfer(self):
+        return self.information
 
     def GenInterference(self, information: list, straight: Optional[int]) -> list:
         """
