@@ -7,7 +7,7 @@ from src.coders.interleaver import Interleaver
 
 
 class Channel:
-    noiseProbability: int = 0
+    noiseProbability: int = 0  # вероятность ошибки
     countCyclical: int = 1
     duplex: bool = False
     information: str = ""
@@ -19,7 +19,7 @@ class Channel:
     def __init__(self, coder: abstractCoder.Coder, noiseProbability: Optional[int], countCyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
         self.coder = coder
-        if noiseProbability is not None: self.noiseProbability = noiseProbability
+        if noiseProbability is not None: self.noiseProbability = int(noiseProbability * 100)
         if countCyclical is not None: self.countCyclical = countCyclical
         if duplex is not None: self.duplex = duplex
         if duplex is not None: self.interleaver = interleaver
@@ -74,20 +74,20 @@ class Channel:
     def GetInformationAboutLastTransfer(self):
         return self.information
 
-    def GenInterference(self, information: list, straight: Optional[int]) -> list:
+    def GenInterference(self, information: list, straight: Optional[float]) -> list:
         """
         Генерация помех с задданной вероятностью
         :param information: list Информация, представленная в виде массива битов
-        :param straight: Optional[int] Вероятность помех принимает значения от 0 до 100, может быть опушенна, 
+        :param straight: Optional[float] Вероятность помех принимает значения от 0.00 до 100.00, может быть опушенна, 
         в таком случае будет использоваться значение шума заданное в канале  
         :return: Искажённую информацию, представленную в виде массива битов
         """
         randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
         if straight is None: straight = self.noiseProbability
         answer: list = []
-
+        straight = int(straight * 100)
         for x in information:
-            if randomGenerator.randint(0, 100) < straight:
+            if randomGenerator.randint(0, 10000) < straight:
                 answer.append(x * randomGenerator.getrandbits(1))
             else:
                 answer.append(x)

@@ -8,9 +8,9 @@ from src.coders.exeption import DecodingException
 class Coder(abstractCoder.Coder):
     arr: list = []
 
-    def __init__(self, information: int):
-        self.lengthAdditional = int(math.log2(information - 1) + 2)
-        self.lengthInformation = information
+    def __init__(self, lengthInformation: int):
+        self.lengthAdditional = int(math.log2(lengthInformation - 1) + 2)
+        self.lengthInformation = lengthInformation
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
 
         for x in range(self.lengthAdditional):

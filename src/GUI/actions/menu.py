@@ -1,36 +1,53 @@
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction, QMainWindow, QToolBar
+from PyQt5.QtWidgets import QAction, QMainWindow, QMessageBox, QToolBar
 
+from src.GUI.windows import MainWindow
 from src.GUI.windows.AddCoderWindow import AddCoderWindow
+from src.GUI.windows.TestCoderWindow import TestCoderWindow
 
 
-def SetMainToolBar(window: QMainWindow):
+def SetMainToolBar(window: MainWindow):
     window.mainToolBar: QToolBar
     window.mainToolBar = window.addToolBar("KitCoders")
-    # window.mainToolBar.setToolButtonStyle(QtCore.Qt.ToolButtonTextBesideIcon)
-    window.mainToolBar.addAction(ActionNewCoder(window))
-    # window.mainToolBar.setOrientation(2)
+    window.mainToolBar.addAction(NewCoderAction(window))
+    window.mainToolBar.addAction(TestCoderAction(window))
 
 
 class MainToolBar(QMainWindow):
     def __init__(self, window: QMainWindow):
         super().__init__()
-        self.addAction(ActionNewCoder(window))
+        self.addAction(NewCoderAction(window))
 
 
-
-class ActionNewCoder(QAction):
-    window: QMainWindow
+class NewCoderAction(QAction):
+    window: MainWindow
 
 
     def createWindow(self):
-        a = AddCoderWindow(self.window)
-        pass
+        AddCoderWindow(self.window)
 
-    def __init__(self, window: QMainWindow):
-        super().__init__(QIcon("Resources/img/AddCoder.png"), '&Добавить кодер', window)
+    def __init__(self, window: MainWindow):
+        super().__init__(QIcon("Resources/img/AddCoder.png"), "&Добавить кодер", window)
         self.window = window
         self.setShortcut("Ctrl+Shift+A")
         self.triggered.connect(self.createWindow)
-        #        self.changed.connect(window.setWindowIcon(QIcon('Resources/img/AddCoder.png')))
-        #        self.triggered.connect()
+
+
+class TestCoderAction(QAction):
+    window: MainWindow
+
+
+    def __init__(self, window: MainWindow):
+        super().__init__(QIcon("Resources/img/TestCoder.jpg"), "&Протестировать кодер", window)
+        self.window = window
+        self.setShortcut("Ctrl+Shift+T")
+
+        self.triggered.connect(self.createWindow)
+
+    def createWindow(self):
+        if self.window.coder is not None:
+            TestCoderWindow(self.window)
+        else:
+            QMessageBox.warning(self.window, "А кодер кто будет создовать?",
+                                "Для начала тестирования нужно создать кодер",
+                                QMessageBox.Ok)

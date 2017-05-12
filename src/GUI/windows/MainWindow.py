@@ -4,28 +4,28 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QGridLayout, QLabel, QMainWindow
 
 from src.GUI.actions import menu
+from src.coders import abstractCoder
 
 
 class MainWindow(QMainWindow):
+    coder: abstractCoder.Coder = None
     def __init__(self):
         super().__init__()
-        self.setGeometry(300, 300, 300, 220)
+        self.setFixedSize(300, 220)
         self.setWindowTitle('Icon')
         self.setWindowIcon(QIcon('Resources/img/pic.png'))
 
-        grid = QGridLayout()
-        grid.setSpacing(10)
-        grid.addWidget(QLabel("lol"))
+        self.grid = QGridLayout()
+        self.grid.setSpacing(10)
+        self.grid.addWidget(QLabel(""))
 
-        self.setLayout(grid)
         menu.SetMainToolBar(self)
-
-        """QMessageBox.question(self, 'Message',
-                             "Are you sure to quit?", QMessageBox.Yes |
-                             QMessageBox.No, QMessageBox.Yes)"""
+        self.setLayout(self.grid)
 
         self.show()
 
+    def SetCoder(self, coder: abstractCoder.Coder):
+        self.coder = coder
 
 def InitMainWindow():
     App = QApplication(sys.argv)
