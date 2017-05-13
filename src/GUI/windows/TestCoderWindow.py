@@ -22,6 +22,9 @@ class TestCoderWindow(QWidget):
 
     def __init__(self, parent):
         super().__init__()
+        self.badPackage: int = 0
+        self.successfullyPackage: int = 0
+
         self.setFixedSize(400, 350)
         self.setWindowTitle("Тестирование кодера")
         parent.testCoderWindow = self
@@ -91,8 +94,11 @@ class TestCoderWindow(QWidget):
 
 
     def StartTest(self):
-        if self.noiseProbabilityTextBox.text().isdigit()\
+        if (self.noiseProbabilityTextBox.text().isdecimal()\
+                    or (self.noiseProbabilityTextBox.text().split(".")[0].isdigit()\
+                                and self.noiseProbabilityTextBox.text().split(".")[1].isdigit()))\
                 and self.countCyclicalTextBox.text().isdigit()\
+                and self.informationTextBox.text().isdigit()\
                 and (not self.interleaverCheckBox.isChecked() or self.lengthSmashingTextBox.text().isdigit()):
             self.progressTestingLabel.setVisible(True)
             self.testingProgressBar.setVisible(True)
@@ -111,8 +117,8 @@ class TestCoderWindow(QWidget):
 
             progress = 0.0
             step = 100.0 / int(self.countCyclicalTextBox.text())
-            self.successfullPackage: int = 0
-            self.badPackage: int = 0
+            self.successfullyPackage = 0
+            self.badPackage = 0
             for x in range(int(self.countCyclicalTextBox.text())):
                 self.channel.TransferOneStep(IntToBitList(int(self.countCyclicalTextBox.text())))
                 self.testingProgressBar.setValue(progress)
@@ -120,7 +126,7 @@ class TestCoderWindow(QWidget):
                 self.progressTestingLabel.setText(str(progress) + "%")
                 self.lastResult += self.channel.information
                 if self.channel.information == "Пакет при передаче был успешно передан\n":
-                    self.successfullPackage += 1
+                    self.successfullyPackage += 1
                 else:
                     self.badPackage += 1
 
@@ -139,6 +145,6 @@ class TestCoderWindow(QWidget):
         QMessageBox.information(self, "Последняя попытка",
                                 "Успешно переданно - {0}\n"
                                 "Переданно с ошибкой - {1}\n".
-                                format(self.successfullPackage,
+                                format(self.successfullyPackage,
                                        self.badPackage),
                                 QMessageBox.Ok)
