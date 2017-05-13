@@ -48,15 +48,15 @@ class AddCoderWindow(QWidget):
         self.comboBox.addItem("Циклический")
         self.comboBox.addItem("Свёрточный")
         self.comboBox.addItem("Фонтанный")
-        self.initGrid()
+        self.InitGrid()
         self.setLayout(self.grid)
 
         self.comboBox.activated[str].connect(self.changeCoder)
-        self.submitButton.clicked.connect(self.createCoder)
+        self.submitButton.clicked.connect(self.CreateCoder)
 
         self.show()
 
-    def initGrid(self):
+    def InitGrid(self):
         self.grid: QGridLayout = QGridLayout()
         self.grid.setSpacing(10)
 
@@ -64,7 +64,15 @@ class AddCoderWindow(QWidget):
         self.grid.addWidget(self.submitButton, 0, 1)
         self.setLayout(self.grid)
 
+    def ReDrawGrid(self):
+        for i in reversed(range(self.grid.count())):
+            self.grid.itemAt(i).widget().setParent(None)
+        self.grid.addWidget(self.comboBox, 0, 0)
+        self.grid.addWidget(self.submitButton, 0, 1)
+
+
     def changeCoder(self, text: str):
+        self.ReDrawGrid()
         if text == "Рида-Соломона":
             self.grid.addWidget(QLabel("Размер пакета"), 1, 0)
             self.grid.addWidget(self.sizePackageTextBox, 1, 1)
@@ -89,7 +97,7 @@ class AddCoderWindow(QWidget):
             self.grid.addWidget(self.countBlocksTextBox, 3, 1)
         self.submitButton.setDisabled(False)
 
-    def createCoder(self):
+    def CreateCoder(self):
         text = self.comboBox.currentText()
         if text == "Рида-Соломона":
             if self.sizePackageTextBox.text().isdigit():
@@ -98,7 +106,7 @@ class AddCoderWindow(QWidget):
                         ))
         elif text == "Циклический":
             if self.sizePackageTextBox.text().isdigit():
-                self.windowParent.SetCoder(cyclical.Coder.oder(
+                self.windowParent.SetCoder(cyclical.Coder.Coder(
                         int(self.sizePackageTextBox.text())
                         ))
         elif text == "Свёрточный":

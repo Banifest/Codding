@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QWidget
+from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QPushButton, QWidget
 
 from src.channel.channel import Channel
 
@@ -20,6 +20,8 @@ class TestCoderWindow(QWidget):
         self.windowParent = parent
         self.setWindowIcon(QIcon("Resources/img/TestCoder.jpg"))
 
+        self.submitButton = QPushButton("Начать тестирование")
+
         self.noiseProbabilityLabel = QLabel("Вероятность искжения бита информации")
         self.countCyclicalLabel = QLabel("Количество попыток передачи при тестировании")
         self.duplexLabel = QLabel("Двунаправленный ли канал?")
@@ -32,6 +34,7 @@ class TestCoderWindow(QWidget):
 
         self.InitGrid()
 
+        self.submitButton.clicked.connect(self.StartTest)
         self.show()
 
     def InitGrid(self):
@@ -45,5 +48,10 @@ class TestCoderWindow(QWidget):
         self.grid.addWidget(self.interleaverLabel, 4, 0)
         self.grid.addWidget(self.interleaverTextBox, 4, 1)
 
+        self.grid.addWidget(self.submitButton, 5, 0)
+
         self.grid.setSpacing(10)
         self.setLayout(self.grid)
+
+    def StartTest(self):
+        print("lol kek cheburek")

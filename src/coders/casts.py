@@ -1,8 +1,7 @@
 import math
-from typing import Optional
 
 
-def IntToBitList(num: int, size: Optional[int]) -> list:
+def IntToBitList(num: int, size=None) -> list:
     it: int = 1
     answer: list = []
     while it <= num:
