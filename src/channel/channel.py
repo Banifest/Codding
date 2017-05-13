@@ -14,6 +14,8 @@ class Channel:
     coder: abstractCoder.Coder
     interleaver: Interleaver.Interleaver = False
 
+    countSuccessfullyMessage: int
+
     # LDPC
 
     def __init__(self, coder: abstractCoder.Coder, noiseProbability: Optional[int], countCyclical: Optional[int],
@@ -70,6 +72,28 @@ class Channel:
             format(information, self.countCyclical, countSuccessfully, self.countCyclical - countSuccessfully)
 
         return self.information
+
+
+    def TransferOneStep(self, information: list) -> str:
+        try:
+            nowInformation: list = information
+            nowInformation = self.coder.Encoding(nowInformation)
+            if self.interleaver: nowInformation = self.interleaver.Shuffle(nowInformation)
+            nowInformation = self.GenInterference(nowInformation, self.noiseProbability)
+            if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
+            nowInformation = self.coder.Decoding(nowInformation)
+        except DecodingException:
+            self.information = "Пакет при передаче был повреждён и не подлежит "\
+                               "востановлению\n"
+        else:
+            if nowInformation == information:
+                self.information = "Пакет при передаче был успешно передан\n"
+            else:
+                self.information = "Пакет при передаче был повреждён и не подлежит "\
+                                   "востановлению\n"
+
+        return self.information
+
 
     def GetInformationAboutLastTransfer(self):
         return self.information

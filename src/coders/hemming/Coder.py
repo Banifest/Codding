@@ -30,8 +30,8 @@ class Coder(abstractCoder.Coder):
             self.arr.append(temp)
         self.arr = np.transpose(np.array(self.arr))
 
-    def Encoding(self, information: int) -> list:
-        listEncodingInformation = IntToBitList(information)
+    def Encoding(self, information: list) -> list:
+        listEncodingInformation = information
         listEncodingInformation.reverse()
         if len(listEncodingInformation) < self.lengthInformation:
             for x in range(self.lengthInformation - len(listEncodingInformation)):

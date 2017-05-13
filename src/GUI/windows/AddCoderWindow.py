@@ -23,6 +23,7 @@ class AddCoderWindow(QWidget):
 
     def __init__(self, parent):
         super().__init__()
+        self.setWindowTitle("Добавление кодера")
         self.sizePackageTextBox = QLineEdit()
         self.listPolynomialTextBox = QLineEdit()
         self.countPolynomialTextBox = QLineEdit()
