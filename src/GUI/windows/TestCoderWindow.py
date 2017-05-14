@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageB
 from src.channel.channel import Channel
 from src.coders.casts import IntToBitList
 from src.coders.interleaver.Interleaver import Interleaver
+from src.logger import log
 
 
 class TestCoderWindow(QWidget):
@@ -21,6 +22,8 @@ class TestCoderWindow(QWidget):
     lastResult: str = ""
 
     def __init__(self, parent):
+        self.grid = QGridLayout()
+        log.debug("Создание окна тестирования кодера")
         super().__init__()
         self.badPackage: int = 0
         self.successfullyPackage: int = 0
@@ -66,7 +69,7 @@ class TestCoderWindow(QWidget):
         self.show()
 
     def InitGrid(self):
-        self.grid = QGridLayout()
+        log.debug("Иницилизация grid")
         self.grid.addWidget(self.noiseProbabilityLabel, 1, 0)
         self.grid.addWidget(self.noiseProbabilityTextBox, 1, 1)
         self.grid.addWidget(self.countCyclicalLabel, 2, 0)
@@ -94,6 +97,7 @@ class TestCoderWindow(QWidget):
 
 
     def StartTest(self):
+        log.debug("Кнопка тестирования нажата")
         if (self.noiseProbabilityTextBox.text().isdecimal()\
                     or (self.noiseProbabilityTextBox.text().split(".")[0].isdigit()\
                                 and self.noiseProbabilityTextBox.text().split(".")[1].isdigit()))\
@@ -109,6 +113,7 @@ class TestCoderWindow(QWidget):
             else:
                 interleaver = None
 
+            log.debug("Атрибуты проверены на корректность")
             self.channel = Channel(self.windowParent.coder,
                                    int(self.noiseProbabilityTextBox.text()),
                                    int(self.countCyclicalTextBox.text()),
@@ -119,8 +124,9 @@ class TestCoderWindow(QWidget):
             step = 100.0 / int(self.countCyclicalTextBox.text())
             self.successfullyPackage = 0
             self.badPackage = 0
+            log.debug("Начало цикла тестов")
             for x in range(int(self.countCyclicalTextBox.text())):
-                self.channel.TransferOneStep(IntToBitList(int(self.countCyclicalTextBox.text())))
+                self.channel.TransferOneStep(IntToBitList(int(self.informationTextBox.text())))
                 self.testingProgressBar.setValue(progress)
                 progress += step
                 self.progressTestingLabel.setText(str(progress) + "%")
@@ -130,12 +136,14 @@ class TestCoderWindow(QWidget):
                 else:
                     self.badPackage += 1
 
+            log.debug("Конеци цикла тестов")
             self.testingProgressBar.setValue(100)
             self.progressTestingLabel.setText("100%")
             self.lastResultButton.setVisible(True)
             self.lastResultButton.setShortcut("Ctrl+R")
 
         else:
+            log.debug("Атрибуты указанны некорректно")
             QMessageBox.warning(self, "Неправильно заполнены поля",
                                 "Проверте данные введёные в поля",
                                 QMessageBox.Ok)

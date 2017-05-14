@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QComboBox, QGridLayout, QLabel, QLineEdit, QMessageB
 from src.GUI.windows import MainWindow
 from src.coders import convolutional, cyclical, hemming
 from src.coders.fountain import LubyTransform
+from src.logger import log
 
 
 class AddCoderWindow(QWidget):
@@ -22,6 +23,7 @@ class AddCoderWindow(QWidget):
     countBlocksTextBox: QLineEdit
 
     def __init__(self, parent):
+        log.debug("Создание окна добавления кодера")
         super().__init__()
         self.setWindowTitle("Добавление кодера")
         self.sizePackageTextBox = QLineEdit()

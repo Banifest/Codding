@@ -3,6 +3,7 @@ import random
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt, BitListToIntList, IntToBitList
 from src.coders.exeption import DecodingException
+from src.logger import log
 
 
 class Coder(abstractCoder.Coder):
@@ -12,6 +13,8 @@ class Coder(abstractCoder.Coder):
     blocks: list  # блоки сочетаний
 
     def __init__(self, sizeBlock: int, countCodingBlocks: int, lengthInformation: int):
+        log.debug("Создание фонтанного кодера с параметрами:{0}, {1}, {2}".
+                  format(sizeBlock, countCodingBlocks, lengthInformation))
         self.sizeBlock = sizeBlock
         self.blocks = []
         self.countCodingBlocks = countCodingBlocks
@@ -26,6 +29,7 @@ class Coder(abstractCoder.Coder):
         self.blocks: list = list(setCombinationBlocks)
 
     def Encoding(self, information: list):
+        log.info("Кодирование пакета {0} фонтанным LT-кодером".format(information))
         combinationBlocks: list = []
         for x in range(0, len(information), self.sizeBlock):
             combinationBlocks.append(BitListToInt(information[x:min(x + self.sizeBlock, len(information))]))
@@ -51,6 +55,7 @@ class Coder(abstractCoder.Coder):
         :param information: list Закодированная информация, представленная в виде массива битов
         :return: list Декодированная информация, представленная в виде массива битов
         """
+        log.info("Декодирование пакета {0} фонтанным LT-декодером".format(information))
         decodedSetList: list = [set(BitListToIntList(IntToBitList(x, self.sizeBlock))) for x in self.blocks]
         decodedSetList.append(set())  # костыль, чтобы работало
         isKill: bool = False
@@ -84,6 +89,7 @@ class Coder(abstractCoder.Coder):
                                 decodedSetList[z] = decodedSetList[z] - difference
 
         if set(status) != {True}:
+            log.debug("Недостаточно блоков для декодирования информации")
             raise DecodingException("Невозможно декодировать :'(")
 
         # формирование ответа в битовом представлении

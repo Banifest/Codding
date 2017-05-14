@@ -4,6 +4,7 @@ from typing import Optional
 from src.coders import abstractCoder
 from src.coders.exeption import DecodingException
 from src.coders.interleaver import Interleaver
+from src.logger import log
 
 
 class Channel:
@@ -20,11 +21,15 @@ class Channel:
 
     def __init__(self, coder: abstractCoder.Coder, noiseProbability: Optional[int], countCyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
+        log.debug("Создание канала связи")
+        # log.debug("Создание канала связи с параметрами:{0], {1}, {2}, {3}, {4}".
+        #          format(coder, noiseProbability, countCyclical, duplex, interleaver))
         self.coder = coder
         if noiseProbability is not None: self.noiseProbability = int(noiseProbability * 100)
         if countCyclical is not None: self.countCyclical = countCyclical
         if duplex is not None: self.duplex = duplex
         if duplex is not None: self.interleaver = interleaver
+        log.debug("Канал создан")
 
     def __str__(self) -> str:
         return "Вероятность ошибки в канале - {0}.\n"\
@@ -75,6 +80,7 @@ class Channel:
 
 
     def TransferOneStep(self, information: list) -> str:
+        log.info("Производиться передача последовательности битов - {0}".format(information))
         try:
             nowInformation: list = information
             nowInformation = self.coder.Encoding(nowInformation)
@@ -83,15 +89,18 @@ class Channel:
             if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
             nowInformation = self.coder.Decoding(nowInformation)
         except DecodingException:
+            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(information))
             self.information = "Пакет при передаче был повреждён и не подлежит "\
                                "востановлению\n"
         else:
             if nowInformation == information:
+                log.info("Пакет {0} был успешно передан".format(information))
                 self.information = "Пакет при передаче был успешно передан\n"
             else:
+                log.error(
+                    "Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(information))
                 self.information = "Пакет при передаче был повреждён и не подлежит "\
                                    "востановлению\n"
-
         return self.information
 
 
@@ -106,6 +115,7 @@ class Channel:
         в таком случае будет использоваться значение шума заданное в канале  
         :return: Искажённую информацию, представленную в виде массива битов
         """
+        log.debug("Симуляция шума на канале с вероятностью {0}".format(straight))
         randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
         if straight is None: straight = self.noiseProbability
         answer: list = []
@@ -115,4 +125,5 @@ class Channel:
                 answer.append(x * randomGenerator.getrandbits(1))
             else:
                 answer.append(x)
+        log.debug("В ходе симуляции шума пакет {0} -> {1}".format(information, answer))
         return answer

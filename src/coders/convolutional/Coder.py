@@ -1,6 +1,7 @@
 from src.coders import abstractCoder
 
 from src.coders.casts import IntToBitList
+from src.logger import log
 
 
 class Coder(abstractCoder.Coder):
@@ -13,6 +14,7 @@ class Coder(abstractCoder.Coder):
 
     def __init__(self, countPolynomials: int, listPolynomials: list, countInput: int, countOutput: int,
                  countRegister: int):
+        log.debug("Создание свёрточного кодера ....")
         self.countInput = countInput
         self.countOutput = countOutput
         self.countRegisters = countRegister
@@ -22,6 +24,7 @@ class Coder(abstractCoder.Coder):
 
 
     def DoStep(self, informationBit: int) -> list:
+        log.debug("Шаг при кодировании бита - {0}".format(informationBit))
         self.register <<= 1
         # зануление старшего бита
         self.register = self.register & ((1 << (self.countRegisters + 1)) - 1)
@@ -39,7 +42,7 @@ class Coder(abstractCoder.Coder):
 
 
     def Encoding(self, information: list) -> list:
-        # information = IntToBitList(information)
+        log.info("Кодирование пакета {0} свёрточным кодером".format(information))
         information.reverse()
         answer = []
         for x in information:

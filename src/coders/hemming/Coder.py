@@ -3,12 +3,14 @@ import numpy as np
 from src.coders import abstractCoder
 from src.coders.casts import *
 from src.coders.exeption import DecodingException
+from src.logger import log
 
 
 class Coder(abstractCoder.Coder):
     arr: list = []
 
     def __init__(self, lengthInformation: int):
+        log.debug("Создание кодера хемминга")
         self.lengthAdditional = int(math.log2(lengthInformation - 1) + 2)
         self.lengthInformation = lengthInformation
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
@@ -31,6 +33,7 @@ class Coder(abstractCoder.Coder):
         self.arr = np.transpose(np.array(self.arr))
 
     def Encoding(self, information: list) -> list:
+        log.info("Кодирование пакета {0} кодером хемминга".format(information))
         listEncodingInformation = information
         listEncodingInformation.reverse()
         if len(listEncodingInformation) < self.lengthInformation:
@@ -53,20 +56,22 @@ class Coder(abstractCoder.Coder):
         return answer
 
 
-    def Decoding(self, info: list) -> list:
-        code = np.transpose(np.array([[x] for x in info]))
+    def Decoding(self, information: list) -> list:
+        log.info("Декодирование пакета {0} декодером хемминга".format(information))
+        code = np.transpose(np.array([[x] for x in information]))
         answer: list = []
         status: list = list((np.dot(code, self.arr) % 2)[0])
         status.reverse()
         status: int = BitListToInt(status)
         if status != 0:
+            log.debug("Обнаруженные ошибка(и)")
             code[0][status - 1] = (code[0][status - 1] + 1) % 2
             oldStatus = status
             status = BitListToInt(list((np.dot(code, self.arr) % 2)[0]))
             if status != 0:
-                print(status)
+                log.debug("Не удалось успешно исправить обнаруженные ошибки")
                 raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
-            print("Произошло успешное исправление ошибки в бите под номером {0}".format(oldStatus))
+            log.debug("Произошло успешное исправление ошибки в бите под номером {0}".format(oldStatus))
         for count in range(len(code[0])):
             if math.log2(count + 1) != int(math.log2(count + 1)):
                 answer.append(code[0][count])

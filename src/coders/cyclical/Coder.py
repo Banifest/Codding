@@ -3,6 +3,7 @@ import math
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt, IntToBitList
 from src.coders.exeption import DecodingException
+from src.logger import log
 
 
 generatingPalindromes = [None, None, 0x7, 0xB, 0x29, 0x43, 0x89, 0x1D7]
@@ -12,6 +13,7 @@ class Coder(abstractCoder.Coder):
     polynomial = []
 
     def __init__(self, informationLength: int):
+        log.debug("Создание циклического кодера")
         self.lengthInformation = informationLength
         self.lengthAdditional = int(math.log2(informationLength - 1) + 2)
         self.polynomial = IntToBitList(generatingPalindromes[self.lengthAdditional])
@@ -34,18 +36,23 @@ class Coder(abstractCoder.Coder):
                 number) if number != 0 else [0]
 
 
-    def Encoding(self, information: int) -> list:
-        return IntToBitList(information) + self.GetRemainder(information, True)
+    def Encoding(self, information: list) -> list:
+        log.info("Кодирование пакета {0} циклическим кодером".format(information))
+        return information + self.GetRemainder(BitListToInt(information), True)
 
 
     def Decoding(self, information: list) -> list:
+        log.info("Декодирование пакета {0} циклическим декодером".format(information))
         if BitListToInt(self.GetRemainder(BitListToInt(information), False)) == 0:
+            log.debug("Ошибка в пакете не обнаружена")
             return BitListToInt(information[:-self.lengthAdditional])
         else:
             count = 1
+            log.debug("Обнаружена ошибка в пакете")
             while BitListToInt(self.GetRemainder((BitListToInt(information) << count), False)) != 0:
                 count += 1
                 if count > 100:
+                    log.debug("Не далось исправить ошибку")
                     raise DecodingException("Не далось исправить ошибку")
             information[count + 1] = information[count + 1] % 2
             return information[:-self.lengthAdditional]

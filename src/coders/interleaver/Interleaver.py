@@ -1,3 +1,6 @@
+from src.logger import log
+
+
 class Interleaver:
     lengthSmashing: int
 
@@ -5,6 +8,7 @@ class Interleaver:
         self.lengthSmashing = lengthSmashing
 
     def Shuffle(self, information: list) -> list:
+        log.debug("Используется перемежитель для пакета {0}".format(information))
         answer: list = []
         for x in range(self.lengthSmashing):
             isEnd: bool = False
@@ -19,6 +23,7 @@ class Interleaver:
 
 
     def Reestablish(self, information: list) -> list:
+        log.debug("Используется деперемежитель для пакета {0}".format(information))
         answer: list = [0] * len(information)
         resDiv: int = ((len(information) - 1) // self.lengthSmashing) + 1  # целочисленное деление с округлением вверх
         for x in range(self.lengthSmashing):

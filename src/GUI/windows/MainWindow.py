@@ -5,11 +5,13 @@ from PyQt5.QtWidgets import QApplication, QGridLayout, QLabel, QMainWindow
 
 from src.GUI.actions import menu
 from src.coders import abstractCoder
+from src.logger import log
 
 
 class MainWindow(QMainWindow):
     coder: abstractCoder.Coder = None
     def __init__(self):
+        log.debug("Создание главного окна")
         super().__init__()
         self.setFixedSize(300, 220)
         self.setWindowTitle('Icon')
