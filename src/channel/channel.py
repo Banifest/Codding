@@ -59,7 +59,7 @@ class Channel:
                 nowInformation = self.GenInterference(nowInformation)
                 if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
                 nowInformation = self.coder.Decoding(nowInformation)
-            except DecodingException:
+            except DecodingException as err:
                 self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит "\
                                     "востановлению\n".format(x)
             else:
@@ -81,24 +81,24 @@ class Channel:
 
     def TransferOneStep(self, information: list) -> str:
         log.info("Производиться передача последовательности битов - {0}".format(information))
+        nowInformation: list = information
         try:
-            nowInformation: list = information
             nowInformation = self.coder.Encoding(nowInformation)
             if self.interleaver: nowInformation = self.interleaver.Shuffle(nowInformation)
             nowInformation = self.GenInterference(nowInformation, self.noiseProbability)
             if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
             nowInformation = self.coder.Decoding(nowInformation)
-        except DecodingException:
-            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(information))
-            self.information = "Пакет при передаче был повреждён и не подлежит "\
-                               "востановлению\n"
+        except DecodingException as err:
+            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
+            self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
             if nowInformation == information:
                 log.info("Пакет {0} был успешно передан".format(information))
                 self.information = "Пакет при передаче был успешно передан\n"
             else:
                 log.error(
-                    "Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(information))
+                        "Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
+                            nowInformation))
                 self.information = "Пакет при передаче был повреждён и не подлежит "\
                                    "востановлению\n"
         return self.information

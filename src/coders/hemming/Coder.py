@@ -11,7 +11,7 @@ class Coder(abstractCoder.Coder):
 
     def __init__(self, lengthInformation: int):
         log.debug("Создание кодера хемминга")
-        self.lengthAdditional = int(math.log2(lengthInformation - 1) + 2)
+        self.lengthAdditional = int(math.log2(lengthInformation - 1) + 1)
         self.lengthInformation = lengthInformation
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
 
@@ -42,7 +42,7 @@ class Coder(abstractCoder.Coder):
         listEncodingInformation.reverse()
         code: list = []
 
-        for count in range(self.lengthTotal):
+        for count in range(self.lengthTotal):  # добавление проверяющих битов
             if math.log2(count + 1) == int(math.log2(count + 1)):  # Проверка кратности числа на степень 2х
                 code.append([0])
             else:
@@ -64,10 +64,11 @@ class Coder(abstractCoder.Coder):
         status.reverse()
         status: int = BitListToInt(status)
         if status != 0:
-            log.debug("Обнаруженные ошибка(и)")
-            code[0][status - 1] = (code[0][status - 1] + 1) % 2
-            oldStatus = status
-            status = BitListToInt(list((np.dot(code, self.arr) % 2)[0]))
+            log.debug("Обнаруженна(ы) ошибка(и)")
+            if len(code[0]) > status - 1:
+                code[0][status - 1] = (code[0][status - 1] + 1) % 2
+                oldStatus = status
+                status = BitListToInt(list((np.dot(code, self.arr) % 2)[0]))
             if status != 0:
                 log.debug("Не удалось успешно исправить обнаруженные ошибки")
                 raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")

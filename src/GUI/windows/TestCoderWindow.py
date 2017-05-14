@@ -2,6 +2,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
 from src.channel.channel import Channel
+from src.coders import hemming
 from src.coders.casts import IntToBitList
 from src.coders.interleaver.Interleaver import Interleaver
 from src.logger import log
@@ -115,7 +116,7 @@ class TestCoderWindow(QWidget):
 
             log.debug("Атрибуты проверены на корректность")
             self.channel = Channel(self.windowParent.coder,
-                                   int(self.noiseProbabilityTextBox.text()),
+                                   float(self.noiseProbabilityTextBox.text()),
                                    int(self.countCyclicalTextBox.text()),
                                    self.duplexCheckBox.isChecked(),
                                    interleaver)
@@ -126,7 +127,14 @@ class TestCoderWindow(QWidget):
             self.badPackage = 0
             log.debug("Начало цикла тестов")
             for x in range(int(self.countCyclicalTextBox.text())):
-                self.channel.TransferOneStep(IntToBitList(int(self.informationTextBox.text())))
+                information: list
+                if type(self.channel.coder.__class__) == type(hemming.Coder.Coder):
+                    information = IntToBitList(int(self.informationTextBox.text()),
+                                               self.channel.coder.lengthInformation)
+                else:
+                    information = IntToBitList(int(self.informationTextBox.text()))
+                self.channel.TransferOneStep(information)
+                log.debug("DEBUG")
                 self.testingProgressBar.setValue(progress)
                 progress += step
                 self.progressTestingLabel.setText(str(progress) + "%")

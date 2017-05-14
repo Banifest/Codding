@@ -32,6 +32,7 @@ class MainWindow(QMainWindow):
 def InitMainWindow():
     App = QApplication(sys.argv)
     # win32 = AddCoderWindow()
+
     window = MainWindow()
 
     sys.exit(App.exec_())
