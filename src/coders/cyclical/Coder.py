@@ -15,7 +15,7 @@ class Coder(abstractCoder.Coder):
     def __init__(self, informationLength: int):
         log.debug("Создание циклического кодера")
         self.lengthInformation = informationLength
-        self.lengthAdditional = int(math.log2(informationLength - 1) + 2)
+        self.lengthAdditional = int(math.log2(informationLength - 1) + 1)
         self.polynomial = IntToBitList(generatingPalindromes[self.lengthAdditional])
 
 

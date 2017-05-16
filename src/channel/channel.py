@@ -25,7 +25,7 @@ class Channel:
         # log.debug("Создание канала связи с параметрами:{0], {1}, {2}, {3}, {4}".
         #          format(coder, noiseProbability, countCyclical, duplex, interleaver))
         self.coder = coder
-        if noiseProbability is not None: self.noiseProbability = int(noiseProbability * 100)
+        if noiseProbability is not None: self.noiseProbability = noiseProbability
         if countCyclical is not None: self.countCyclical = countCyclical
         if duplex is not None: self.duplex = duplex
         if duplex is not None: self.interleaver = interleaver
@@ -82,26 +82,32 @@ class Channel:
     def TransferOneStep(self, information: list) -> str:
         log.info("Производиться передача последовательности битов - {0}".format(information))
         nowInformation: list = information
+        status: int = 0
+        helpInformation: list
         try:
             nowInformation = self.coder.Encoding(nowInformation)
             if self.interleaver: nowInformation = self.interleaver.Shuffle(nowInformation)
+            helpInformation = nowInformation
             nowInformation = self.GenInterference(nowInformation, self.noiseProbability)
+            if helpInformation != nowInformation: status = 1
             if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
             nowInformation = self.coder.Decoding(nowInformation)
         except DecodingException as err:
+            status = 2
             log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
             if nowInformation == information:
+                if status != 1: status = 0
                 log.info("Пакет {0} был успешно передан".format(information))
                 self.information = "Пакет при передаче был успешно передан\n"
             else:
-                log.error(
-                        "Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
+                status = 3
+                log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
                             nowInformation))
                 self.information = "Пакет при передаче был повреждён и не подлежит "\
                                    "востановлению\n"
-        return self.information
+        return status
 
 
     def GetInformationAboutLastTransfer(self):
@@ -119,9 +125,9 @@ class Channel:
         randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
         if straight is None: straight = self.noiseProbability
         answer: list = []
-        straight = int(straight * 100)
+        straight /= 100
         for x in information:
-            if randomGenerator.randint(0, 10000) < straight:
+            if randomGenerator.random() < straight:
                 answer.append(x * randomGenerator.getrandbits(1))
             else:
                 answer.append(x)

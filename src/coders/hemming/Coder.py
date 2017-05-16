@@ -69,10 +69,10 @@ class Coder(abstractCoder.Coder):
                 code[0][status - 1] = (code[0][status - 1] + 1) % 2
                 oldStatus = status
                 status = BitListToInt(list((np.dot(code, self.arr) % 2)[0]))
-            if status != 0:
-                log.debug("Не удалось успешно исправить обнаруженные ошибки")
-                raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
-            log.debug("Произошло успешное исправление ошибки в бите под номером {0}".format(oldStatus))
+                if status != 0:
+                    log.debug("Не удалось успешно исправить обнаруженные ошибки")
+                    raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
+                log.debug("Произошло успешное исправление ошибки в бите под номером {0}".format(oldStatus))
         for count in range(len(code[0])):
             if math.log2(count + 1) != int(math.log2(count + 1)):
                 answer.append(code[0][count])

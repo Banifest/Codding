@@ -51,3 +51,23 @@ class TestCoderAction(QAction):
             QMessageBox.warning(self.window, "А кодер кто будет создовать?",
                                 "Для начала тестирования нужно создать кодер",
                                 QMessageBox.Ok)
+
+
+class AboutCoder(QAction):
+    window: MainWindow
+
+
+    def __init__(self, window: MainWindow):
+        super().__init__(QIcon("Resources/img/InformationCoder.png"), "&Информация о кодере кодер", window)
+        self.window = window
+        self.setShortcut("Ctrl+Shift+I")
+
+        self.triggered.connect(self.createWindow)
+
+    def createWindow(self):
+        if self.window.coder is not None:
+            TestCoderWindow(self.window)
+        else:
+            QMessageBox.warning(self.window, "А кодер кто будет создовать?",
+                                "Для начала тестирования нужно создать кодер",
+                                QMessageBox.Ok)

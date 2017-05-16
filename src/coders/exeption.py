@@ -1,6 +1,10 @@
+from typing import Optional
+
+
 class DecodingException(Exception):
     message = ""
-    result = ""
+    status: int
 
-    def __init__(self, message: str):
+    def __init__(self, message: str, status: Optional[int]):
         self.message = message
+        if status is not None: self.status = status
