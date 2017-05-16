@@ -1,3 +1,4 @@
+import os
 import threading
 from random import randint
 
@@ -236,9 +237,11 @@ class TestCoderWindow(QWidget):
                                          format(self.successfullyPackage,
                                                 self.repairPackage,
                                                 self.badPackage + self.invisiblePackage),
-                                         QMessageBox.Ok | QMessageBox.Help)
+                                         QMessageBox.Ok | QMessageBox.Help,
+                                         QMessageBox.Ok)
 
         if choise == QMessageBox.Help:
+            os.system("kek.txt")
             pass
 
 
@@ -278,6 +281,7 @@ class TestCoderWindow(QWidget):
             else:
                 information = IntToBitList(int(self.informationTextBox.text()))
             log.debug("Начало цикла тестов")
+            writer = open("kek.txt", "w")
             for x in range(int(self.countCyclicalTextBox.text())):
                 status: int = self.channel.TransferOneStep(information)
                 if status == 0:
@@ -288,6 +292,7 @@ class TestCoderWindow(QWidget):
                     self.badPackage += 1
                 else:
                     self.invisiblePackage += 1
+                writer.write(self.channel.information)
                 self.testingProgressBar.setValue(progress)
                 progress += step
                 self.lastResult += self.channel.information

@@ -100,7 +100,7 @@ class Channel:
             if nowInformation == information:
                 if status != 1: status = 0
                 log.info("Пакет {0} был успешно передан".format(information))
-                self.information = "Пакет при передаче был успешно передан\n"
+                self.information = "Пакет был успешно передан\n"
             else:
                 status = 3
                 log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
