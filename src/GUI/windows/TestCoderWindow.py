@@ -231,7 +231,7 @@ class TestCoderWindow(QWidget):
     def GetLastResult(self) -> str:
         choise = QMessageBox.information(self, "Последняя попытка\n",
                                          "Успешно переданно (пакет не исказился) - {0}\n"
-                                         "Успешно исправленно паккетов - {1}"
+                                         "Успешно исправленно паккетов - {1}\n"
                                          "Переданно с ошибкой - {2}\n".
                                          format(self.successfullyPackage,
                                                 self.repairPackage,

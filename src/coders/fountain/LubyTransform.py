@@ -27,6 +27,8 @@ class Coder(abstractCoder.Coder):
             setCombinationBlocks.add(randomGenerator.getrandbits(self.countBlocks))
             setCombinationBlocks = setCombinationBlocks - {0}
         self.blocks: list = list(setCombinationBlocks)
+        self.lengthInformation = lengthInformation
+        self.lengthAdditional = sizeBlock * countCodingBlocks - lengthInformation
 
     def Encoding(self, information: list):
         log.info("Кодирование пакета {0} фонтанным LT-кодером".format(information))

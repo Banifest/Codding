@@ -16,3 +16,6 @@ class Coder:
 
     def GetRedundancy(self) -> int:
         return int(self.lengthAdditional / self.lengthInformation * 100)
+
+    def GetSpeed(self) -> float:
+        return 1

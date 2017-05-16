@@ -20,12 +20,17 @@ class Coder(abstractCoder.Coder):
         self.countRegisters = countRegister
         self.countPolynomials = countPolynomials
         self.listPolynomials = listPolynomials
-        # self.registers = [0 for x in range(countRegister)]
 
+        self.lengthInformation = 1
+        self.lengthAdditional = 1
+
+    def GetSpeed(self):
+        return 1 / self.countRegisters
 
     def DoStep(self, informationBit: int) -> list:
         log.debug("Шаг при кодировании бита - {0}".format(informationBit))
         self.register <<= 1
+
         # зануление старшего бита
         self.register = self.register & ((1 << (self.countRegisters + 1)) - 1)
         self.register += informationBit

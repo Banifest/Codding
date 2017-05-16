@@ -16,10 +16,11 @@ class Coder(abstractCoder.Coder):
         log.debug("Создание циклического кодера")
         self.lengthInformation = informationLength
         self.lengthAdditional = int(math.log2(informationLength - 1) + 1)
+        self.lengthTotal = self.lengthInformation + self.lengthAdditional
         self.polynomial = IntToBitList(generatingPalindromes[self.lengthAdditional])
 
 
-    def GetRemainder(self, number: int, flag: bool = None) -> list:
+    def GetRemainder(self, number: int, flag: bool = False) -> list:
         polynomial = BitListToInt(self.polynomial)
         if flag:
             number <<= self.lengthAdditional
@@ -32,8 +33,8 @@ class Coder(abstractCoder.Coder):
                          (((1 << int(math.log2(number) + 1)) - 1) ^ ((1 << distance) - 1))
             tempNumber += ((1 << distance) - 1) & number
             number = tempNumber
-        return [0 for x in range(0, self.lengthAdditional - int(math.log2(number)) - 1)] + IntToBitList(
-                number) if number != 0 else [0]
+        return [0 for x in range(0, self.lengthAdditional - int(math.log2(number)) - 1)] + IntToBitList(number)\
+            if number != 0 else [0]
 
 
     def Encoding(self, information: list) -> list:

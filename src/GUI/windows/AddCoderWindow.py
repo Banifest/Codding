@@ -1,6 +1,7 @@
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QComboBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QWidget
 
+from Resources.stringConsts import CODER_NAMES
 from src.GUI.windows import MainWindow
 from src.coders import convolutional, cyclical, hemming
 from src.coders.fountain import LubyTransform
@@ -47,10 +48,10 @@ class AddCoderWindow(QWidget):
         self.comboBox = QComboBox()
         self.setWindowTitle("Добавить кодер")
 
-        self.comboBox.addItem("Рида-Соломона")
-        self.comboBox.addItem("Циклический")
-        self.comboBox.addItem("Свёрточный")
-        self.comboBox.addItem("Фонтанный")
+        self.comboBox.addItem(CODER_NAMES[0])
+        self.comboBox.addItem(CODER_NAMES[1])
+        self.comboBox.addItem(CODER_NAMES[2])
+        self.comboBox.addItem(CODER_NAMES[3])
         self.InitGrid()
         self.setLayout(self.grid)
 
@@ -76,13 +77,13 @@ class AddCoderWindow(QWidget):
 
     def changeCoder(self, text: str):
         self.ReDrawGrid()
-        if text == "Рида-Соломона":
+        if text == CODER_NAMES[0]:
             self.grid.addWidget(QLabel("Размер пакета"), 1, 0)
             self.grid.addWidget(self.sizePackageTextBox, 1, 1)
-        elif text == "Циклический":
+        elif text == CODER_NAMES[1]:
             self.grid.addWidget(QLabel("Размер пакета"), 1, 0)
             self.grid.addWidget(self.sizePackageTextBox, 1, 1)
-        elif text == "Свёрточный":
+        elif text == CODER_NAMES[2]:
             self.grid.addWidget(QLabel("Количество полиномов"), 1, 0)
             self.grid.addWidget(self.countPolynomialTextBox, 1, 1)
             self.grid.addWidget(QLabel("Список полиномов"), 2, 0)
@@ -91,7 +92,7 @@ class AddCoderWindow(QWidget):
             self.grid.addWidget(self.countExitsTextBox, 3, 1)
             self.grid.addWidget(QLabel("Количество регистров памяти"), 4, 0)
             self.grid.addWidget(self.countMemoryRegistersTextBox, 4, 1)
-        elif text == "Фонтанный":
+        elif text == CODER_NAMES[3]:
             self.grid.addWidget(QLabel("Размер пакета"), 1, 0)
             self.grid.addWidget(self.sizePackageTextBox, 1, 1)
             self.grid.addWidget(QLabel("Размер блока"), 2, 0)
@@ -102,17 +103,17 @@ class AddCoderWindow(QWidget):
 
     def CreateCoder(self):
         text = self.comboBox.currentText()
-        if text == "Рида-Соломона":
+        if text == CODER_NAMES[0]:
             if self.sizePackageTextBox.text().isdigit():
                 self.windowParent.SetCoder(hemming.Coder.Coder(
                         int(self.sizePackageTextBox.text())
                         ))
-        elif text == "Циклический":
+        elif text == CODER_NAMES[1]:
             if self.sizePackageTextBox.text().isdigit():
                 self.windowParent.SetCoder(cyclical.Coder.Coder(
                         int(self.sizePackageTextBox.text())
                         ))
-        elif text == "Свёрточный":
+        elif text == CODER_NAMES[2]:
             if self.countPolynomialTextBox.text().isdigit() and\
                     self.countMemoryRegistersTextBox.text().isdigit() and\
                     self.countExitsTextBox.text().isdigit():
@@ -123,7 +124,7 @@ class AddCoderWindow(QWidget):
                         int(self.countExitsTextBox.text()),
                         int(self.countMemoryRegistersTextBox.text())
                         ))
-        elif text == "Фонтанный":
+        elif text == CODER_NAMES[3]:
             if self.sizeBlockTextBox.text().isdigit() and\
                     self.countBlocksTextBox.text().isdigit() and\
                     self.size.sizePackageTextBox.text().isdigit():
