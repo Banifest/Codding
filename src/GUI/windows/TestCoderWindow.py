@@ -241,7 +241,7 @@ class TestCoderWindow(QWidget):
                                          QMessageBox.Ok)
 
         if choise == QMessageBox.Help:
-            os.system("kek.txt")
+            os.system("lastInformation.txt")
             pass
 
 
@@ -281,7 +281,7 @@ class TestCoderWindow(QWidget):
             else:
                 information = IntToBitList(int(self.informationTextBox.text()))
             log.debug("Начало цикла тестов")
-            writer = open("kek.txt", "w")
+            writer = open("lastInformation.txt", "w")
             for x in range(int(self.countCyclicalTextBox.text())):
                 status: int = self.channel.TransferOneStep(information)
                 if status == 0:

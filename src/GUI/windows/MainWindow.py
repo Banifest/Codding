@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QGridLayout, QLabel, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from src.GUI.actions import menu
 from src.coders import abstractCoder
@@ -13,16 +13,16 @@ class MainWindow(QMainWindow):
     def __init__(self):
         log.debug("Создание главного окна")
         super().__init__()
-        self.setFixedSize(300, 220)
+        self.setFixedSize(300, 30)
         self.setWindowTitle('Icon')
         self.setWindowIcon(QIcon('Resources/img/pic.png'))
 
-        self.grid = QGridLayout()
-        self.grid.setSpacing(10)
-        self.grid.addWidget(QLabel(""))
+        #  self.grid = QGridLayout()
+        # self.grid.setSpacing(10)
+        # self.grid.addWidget(QLabel(""))
 
         menu.SetMainToolBar(self)
-        self.setLayout(self.grid)
+        #  self.setLayout(self.grid)
 
         self.show()
 
