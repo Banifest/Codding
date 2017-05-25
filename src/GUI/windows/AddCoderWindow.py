@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QComboBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QWidget
+from PyQt5.QtWidgets import QComboBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QRadioButton, QWidget
 
 from Resources.stringConsts import CODER_NAMES
 from src.GUI.windows import MainWindow
@@ -23,6 +23,9 @@ class AddCoderWindow(QWidget):
     sizeBlockTextBox: QLineEdit
     countBlocksTextBox: QLineEdit
 
+    firstCoderRadioButton: QRadioButton
+    secondCoderRadioButton: QRadioButton
+
     def __init__(self, parent):
         log.debug("Создание окна добавления кодера")
         super().__init__()
@@ -34,6 +37,9 @@ class AddCoderWindow(QWidget):
         self.countExitsTextBox = QLineEdit()
         self.sizeBlockTextBox = QLineEdit()
         self.countBlocksTextBox = QLineEdit()
+        self.firstCoderRadioButton = QRadioButton("Первый")
+        self.firstCoderRadioButton.setChecked(True)
+        self.secondCoderRadioButton = QRadioButton("Второй")
 
         self.setFixedSize(300, 200)
         parent.newCoderWindow = self
@@ -73,32 +79,34 @@ class AddCoderWindow(QWidget):
             self.grid.itemAt(i).widget().setParent(None)
         self.grid.addWidget(self.comboBox, 0, 0)
         self.grid.addWidget(self.submitButton, 0, 1)
+        self.grid.addWidget(self.firstCoderRadioButton, 1, 0)
+        self.grid.addWidget(self.secondCoderRadioButton, 1, 1)
 
 
     def changeCoder(self, text: str):
         self.ReDrawGrid()
         if text == CODER_NAMES[0]:
-            self.grid.addWidget(QLabel("Размер пакета"), 1, 0)
-            self.grid.addWidget(self.sizePackageTextBox, 1, 1)
+            self.grid.addWidget(QLabel("Размер пакета"), 2, 0)
+            self.grid.addWidget(self.sizePackageTextBox, 2, 1)
         elif text == CODER_NAMES[1]:
-            self.grid.addWidget(QLabel("Размер пакета"), 1, 0)
-            self.grid.addWidget(self.sizePackageTextBox, 1, 1)
+            self.grid.addWidget(QLabel("Размер пакета"), 2, 0)
+            self.grid.addWidget(self.sizePackageTextBox, 2, 1)
         elif text == CODER_NAMES[2]:
-            self.grid.addWidget(QLabel("Количество полиномов"), 1, 0)
-            self.grid.addWidget(self.countPolynomialTextBox, 1, 1)
-            self.grid.addWidget(QLabel("Список полиномов"), 2, 0)
-            self.grid.addWidget(self.listPolynomialTextBox, 2, 1)
-            self.grid.addWidget(QLabel("Количество выходов"), 3, 0)
-            self.grid.addWidget(self.countExitsTextBox, 3, 1)
-            self.grid.addWidget(QLabel("Количество регистров памяти"), 4, 0)
-            self.grid.addWidget(self.countMemoryRegistersTextBox, 4, 1)
+            self.grid.addWidget(QLabel("Количество полиномов"), 2, 0)
+            self.grid.addWidget(self.countPolynomialTextBox, 2, 1)
+            self.grid.addWidget(QLabel("Список полиномов"), 3, 0)
+            self.grid.addWidget(self.listPolynomialTextBox, 3, 1)
+            self.grid.addWidget(QLabel("Количество выходов"), 4, 0)
+            self.grid.addWidget(self.countExitsTextBox, 4, 1)
+            self.grid.addWidget(QLabel("Количество регистров памяти"), 5, 0)
+            self.grid.addWidget(self.countMemoryRegistersTextBox, 5, 1)
         elif text == CODER_NAMES[3]:
-            self.grid.addWidget(QLabel("Размер пакета"), 1, 0)
-            self.grid.addWidget(self.sizePackageTextBox, 1, 1)
-            self.grid.addWidget(QLabel("Размер блока"), 2, 0)
-            self.grid.addWidget(self.sizeBlockTextBox, 2, 1)
-            self.grid.addWidget(QLabel("Количество блоков"), 3, 0)
-            self.grid.addWidget(self.countBlocksTextBox, 3, 1)
+            self.grid.addWidget(QLabel("Размер пакета"), 2, 0)
+            self.grid.addWidget(self.sizePackageTextBox, 2, 1)
+            self.grid.addWidget(QLabel("Размер блока"), 3, 0)
+            self.grid.addWidget(self.sizeBlockTextBox, 3, 1)
+            self.grid.addWidget(QLabel("Количество блоков"), 4, 0)
+            self.grid.addWidget(self.countBlocksTextBox, 4, 1)
         self.submitButton.setDisabled(False)
 
     def CreateCoder(self):
@@ -133,6 +141,11 @@ class AddCoderWindow(QWidget):
                         int(self.countBlocksTextBox.text()),
                         int(self.sizePackageTextBox.text())
                         ))
+
+        if self.firstCoderRadioButton.isChecked():
+            self.windowParent.firstCoder = self.windowParent.coder
+        else:
+            self.windowParent.secondCoder = self.windowParent.coder
 
         if self.windowParent.coder is not None:
             del self.windowParent.newCoderWindow

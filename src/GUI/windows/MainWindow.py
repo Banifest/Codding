@@ -10,6 +10,10 @@ from src.logger import log
 
 class MainWindow(QMainWindow):
     coder: abstractCoder.Coder = None
+    firstCoder: abstractCoder.Coder = None
+    secondCoder: abstractCoder.Coder = None
+
+
     def __init__(self):
         log.debug("Создание главного окна")
         super().__init__()
@@ -17,12 +21,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Icon')
         self.setWindowIcon(QIcon('Resources/img/pic.png'))
 
-        #  self.grid = QGridLayout()
-        # self.grid.setSpacing(10)
-        # self.grid.addWidget(QLabel(""))
-
         menu.SetMainToolBar(self)
-        #  self.setLayout(self.grid)
 
         self.show()
 

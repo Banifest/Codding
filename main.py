@@ -1,5 +1,8 @@
+#!usr/bin/env python3
+
 from src.GUI.windows.MainWindow import InitMainWindow
 from src.logger import log
+
 
 if __name__ == '__main__':
     try:

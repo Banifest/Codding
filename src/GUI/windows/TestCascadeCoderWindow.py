@@ -6,6 +6,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
 from src.GUI.graphics import DrawGraphic
+from src.channel.cascade import Cascade
 from src.channel.channel import Channel
 from src.coders import cyclical, hemming
 from src.coders.casts import IntToBitList
@@ -13,8 +14,9 @@ from src.coders.interleaver.Interleaver import Interleaver
 from src.logger import log
 
 
-class TestCoderWindow(QWidget):
+class TestCascadeCoderWindow(QWidget):
     channel: Channel
+    cascade: Cascade
 
     noiseProbabilityTextBox: QLineEdit
     countCyclicalTextBox: QLineEdit
@@ -22,6 +24,9 @@ class TestCoderWindow(QWidget):
     lengthSmashingTextBox: QLineEdit
     duplexCheckBox: QCheckBox
     interleaverCheckBox: QCheckBox
+
+    interleaverLabelSecond: QLabel
+    lengthSmashingLabelSecond: QLabel
 
     testingProgressBar: QProgressBar
     autoTestingProgressBar: QProgressBar
@@ -41,7 +46,7 @@ class TestCoderWindow(QWidget):
         self.repairPackage: int = 0
         self.invisiblePackage: int = 0
 
-        self.setFixedSize(400, 350)
+        self.setFixedSize(600, 350)
         self.setWindowTitle("Тестирование кодера")
         parent.testCoderWindow = self
         self.windowParent = parent
@@ -60,6 +65,9 @@ class TestCoderWindow(QWidget):
         self.interleaverLabel = QLabel("Использование перемежителя")
         self.lengthSmashingLabel = QLabel("Длина раскидования")
 
+        self.interleaverLabelSecond = QLabel("Использование перемежителя второго кодера")
+        self.lengthSmashingLabelSecond = QLabel("Длина раскидования")
+
         self.testingProgressBar = QProgressBar()
         self.autoTestingProgressBar = QProgressBar()
         self.autoTestingProgressBar.setVisible(False)
@@ -74,12 +82,18 @@ class TestCoderWindow(QWidget):
         self.lengthSmashingTextBox.setVisible(False)
         self.lengthSmashingLabel.setVisible(False)
 
-        self.InitGrid()
+        self.interleaverCheckBoxSecond = QCheckBox()
+        self.lengthSmashingTextBoxSecond = QLineEdit()
 
+        self.lengthSmashingTextBoxSecond.setVisible(False)
+        self.lengthSmashingLabelSecond.setVisible(False)
+
+        self.InitGrid()
 
         self.submitButton.clicked.connect(self.StartTest)
         self.autoTestButton.clicked.connect(self.AutoTest)
         self.interleaverCheckBox.stateChanged.connect(self.CheckIsInterleaver)
+        self.interleaverCheckBoxSecond.stateChanged.connect(self.CheckIsInterleaverSecond)
         self.lastResultButton.clicked.connect(self.GetLastResult)
 
         self.show()
@@ -87,29 +101,36 @@ class TestCoderWindow(QWidget):
     def InitGrid(self):
         log.debug("Иницилизация grid")
         self.grid.addWidget(self.noiseProbabilityLabel, 1, 0)
-        self.grid.addWidget(self.noiseProbabilityTextBox, 1, 1)
+        self.grid.addWidget(self.noiseProbabilityTextBox, 1, 2, 1, 2)
         self.grid.addWidget(self.countCyclicalLabel, 2, 0)
-        self.grid.addWidget(self.countCyclicalTextBox, 2, 1)
+        self.grid.addWidget(self.countCyclicalTextBox, 2, 2, 1, 2)
         self.grid.addWidget(self.duplexLabel, 3, 0)
-        self.grid.addWidget(self.duplexCheckBox, 3, 1)
+        self.grid.addWidget(self.duplexCheckBox, 3, 2, 1, 2)
         self.grid.addWidget(self.interleaverLabel, 4, 0)
         self.grid.addWidget(self.interleaverCheckBox, 4, 1)
+        self.grid.addWidget(self.interleaverLabelSecond, 4, 2)
+        self.grid.addWidget(self.interleaverCheckBoxSecond, 4, 3)
         self.grid.addWidget(self.lengthSmashingLabel, 5, 0)
-        self.grid.addWidget(self.lengthSmashingTextBox, 5, 1)
+        self.grid.addWidget(self.lengthSmashingTextBox, 5, 1, 1, 1)
+        self.grid.addWidget(self.lengthSmashingTextBoxSecond, 5, 3, 1, 1)
         self.grid.addWidget(self.informationLabel, 6, 0)
-        self.grid.addWidget(self.informationTextBox, 6, 1)
+        self.grid.addWidget(self.informationTextBox, 6, 2, 1, 2)
 
-        self.grid.addWidget(self.submitButton, 7, 0, 1, 2)
-        self.grid.addWidget(self.autoTestButton, 8, 0, 1, 2)
-        self.grid.addWidget(self.testingProgressBar, 9, 0, 1, 2)
-        self.grid.addWidget(self.autoTestingProgressBar, 10, 0, 1, 2)
-        self.grid.addWidget(self.lastResultButton, 11, 0, 1, 2)
+        self.grid.addWidget(self.submitButton, 7, 0, 1, 4)
+        self.grid.addWidget(self.autoTestButton, 8, 0, 1, 4)
+        self.grid.addWidget(self.testingProgressBar, 9, 0, 1, 4)
+        self.grid.addWidget(self.autoTestingProgressBar, 10, 0, 1, 4)
+        self.grid.addWidget(self.lastResultButton, 11, 0, 1, 4)
 
         self.grid.setSpacing(10)
         self.setLayout(self.grid)
 
+    def CheckIsInterleaverSecond(self):
+        self.lengthSmashingLabel.setVisible(self.interleaverCheckBoxSecond.isChecked())
+        self.lengthSmashingTextBoxSecond.setVisible(self.interleaverCheckBoxSecond.isChecked())
+
         #  def StartTestThread(self):
-        #      threading.Thread(target=StartTest, name="Start Test", args=(self,)).start()
+        #     threading.Thread(target=StartTest, name="Start Test", args=(self,)).start()
 
     def AutoTestThread(self):
         threading.Thread(target=self.AutoTest, name="Auto Test").start()
@@ -127,6 +148,8 @@ class TestCoderWindow(QWidget):
                and self.informationTextBox.text().isdigit()\
                and (not self.interleaverCheckBox.isChecked() or self.lengthSmashingTextBox.text().isdigit())
 
+    def CycliTest(self):
+        pass
 
     def StartTest(self, flag=None, testInformation=None):
         log.debug("Кнопка тестирования нажата")
@@ -190,8 +213,8 @@ class TestCoderWindow(QWidget):
 
         else:
             log.debug("Атрибуты указанны некорректно")
-            QMessageBox.warning(self.windowParent, "А кодер кто будет создовать?",
-                                "Для начала тестирования нужно создать кодер",
+            QMessageBox.warning(self, "Неправильно заполнены поля"
+                                      "Проверте данные введёные в поля",
                                 QMessageBox.Ok)
 
     def AutoTest(self):
@@ -223,12 +246,9 @@ class TestCoderWindow(QWidget):
             DrawGraphic(drawData)
         else:
             log.debug("Атрибуты указанны некорректно")
-            QMessageBox.warning(self.window, "А кодер кто будет создовать?",
-                                "Для начала тестирования нужно создать кодер",
+            QMessageBox.warning(self, "Неправильно заполнены поля",
+                                "Проверте данные введёные в поля",
                                 QMessageBox.Ok)
-            # QMessageBox.warning(self.window, "Неправильно заполнены поля",
-            #                    "Проверте данные введёные в поля",
-            #                    QMessageBox.Ok)
 
     def GetLastResult(self) -> str:
         choise = QMessageBox.information(self, "Последняя попытка\n",
@@ -247,7 +267,7 @@ class TestCoderWindow(QWidget):
 
 
     def StartTest(self, flag=None, testInformation=None):
-        log.debug("Кнопка тестирования нажата")
+        log.debug("(КАСКАД)Кнопка тестирования нажата")
         if self.TestOnCorrectData():
             self.autoTestButton.setEnabled(False)
             self.lastResultButton.setEnabled(False)

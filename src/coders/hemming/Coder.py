@@ -73,6 +73,9 @@ class Coder(abstractCoder.Coder):
                     log.debug("Не удалось успешно исправить обнаруженные ошибки")
                     raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
                 log.debug("Произошло успешное исправление ошибки в бите под номером {0}".format(oldStatus))
+            else:
+                log.debug("Не удалось успешно исправить обнаруженные ошибки")
+                raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
         for count in range(len(code[0])):
             if math.log2(count + 1) != int(math.log2(count + 1)):
                 answer.append(code[0][count])
