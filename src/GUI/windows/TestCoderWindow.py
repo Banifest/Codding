@@ -190,9 +190,9 @@ class TestCoderWindow(QWidget):
 
         else:
             log.debug("Атрибуты указанны некорректно")
-            QMessageBox.warning(self.windowParent, "А кодер кто будет создовать?",
-                                "Для начала тестирования нужно создать кодер",
-                                QMessageBox.Ok)
+            msg = QMessageBox()
+            msg.setWindowTitle("Неправильно заполнены поля")
+            msg.setText("Проверьте правильность заполнения полей")
 
     def AutoTest(self):
         log.debug("Кнопка авто-тестирования нажата")
@@ -272,7 +272,7 @@ class TestCoderWindow(QWidget):
             self.badPackage = 0
             self.repairPackage = 0
             self.invisiblePackage = 0
-            information: list
+            information: list = []
             if type(testInformation.__class__) != type(list):
                 information = testInformation
             elif type(self.channel.coder.__class__) == type(hemming.Coder.Coder)\
@@ -310,6 +310,9 @@ class TestCoderWindow(QWidget):
 
         else:
             log.debug("Атрибуты указанны некорректно")
-            QMessageBox.warning(self, "Неправильно заполнены поля"
-                                      "Проверте данные введёные в поля",
-                                QMessageBox.Ok)
+            msg = QMessageBox()
+            msg.setWindowTitle("Неправильно заполнены поля")
+            msg.setText("Проверьте правильность заполнения полей")
+            msg.setIcon(QMessageBox.Warning)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()

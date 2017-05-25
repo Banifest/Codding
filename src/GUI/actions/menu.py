@@ -45,7 +45,7 @@ class TestCoderAction(QAction):
 
     def __init__(self, window: MainWindow):
         super().__init__(QIcon("Resources/img/TestCoder.jpg"), "&Протестировать кодер", window)
-        self.window = window
+        self.window: MainWindow.MainWindow = window
         self.setShortcut("Ctrl+Shift+T")
 
         self.triggered.connect(self.createWindow)

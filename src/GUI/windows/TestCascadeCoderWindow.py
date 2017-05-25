@@ -246,9 +246,12 @@ class TestCascadeCoderWindow(QWidget):
             DrawGraphic(drawData)
         else:
             log.debug("Атрибуты указанны некорректно")
-            QMessageBox.warning(self, "Неправильно заполнены поля",
-                                "Проверте данные введёные в поля",
-                                QMessageBox.Ok)
+            msg = QMessageBox()
+            msg.setWindowTitle("Неправильно заполнены поля")
+            msg.setText("Проверьте правильность заполнения полей")
+            msg.setIcon(QMessageBox.Warning)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()
 
     def GetLastResult(self) -> str:
         choise = QMessageBox.information(self, "Последняя попытка\n",
@@ -263,7 +266,6 @@ class TestCascadeCoderWindow(QWidget):
 
         if choise == QMessageBox.Help:
             os.system("lastInformation.txt")
-            pass
 
 
     def StartTest(self, flag=None, testInformation=None):
@@ -330,6 +332,9 @@ class TestCascadeCoderWindow(QWidget):
 
         else:
             log.debug("Атрибуты указанны некорректно")
-            QMessageBox.warning(self, "Неправильно заполнены поля"
-                                      "Проверте данные введёные в поля",
-                                QMessageBox.Ok)
+            msg = QMessageBox()
+            msg.setWindowTitle("Неправильно заполнены поля")
+            msg.setText("Проверьте правильность заполнения полей")
+            msg.setIcon(QMessageBox.Warning)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()
