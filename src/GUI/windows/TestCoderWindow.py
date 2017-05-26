@@ -6,6 +6,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
 from src.GUI.graphics import DrawGraphic
+from src.GUI.windows import MainWindow
 from src.channel.channel import Channel
 from src.coders import cyclical, hemming
 from src.coders.casts import IntToBitList
@@ -44,7 +45,7 @@ class TestCoderWindow(QWidget):
         self.setFixedSize(400, 350)
         self.setWindowTitle("Тестирование кодера")
         parent.testCoderWindow = self
-        self.windowParent = parent
+        self.windowParent: MainWindow.MainWindow = parent
         self.setWindowIcon(QIcon("Resources/img/TestCoder.jpg"))
 
         self.submitButton = QPushButton("Начать тестирование")
@@ -223,12 +224,12 @@ class TestCoderWindow(QWidget):
             DrawGraphic(drawData)
         else:
             log.debug("Атрибуты указанны некорректно")
-            QMessageBox.warning(self.window, "А кодер кто будет создовать?",
-                                "Для начала тестирования нужно создать кодер",
-                                QMessageBox.Ok)
-            # QMessageBox.warning(self.window, "Неправильно заполнены поля",
-            #                    "Проверте данные введёные в поля",
-            #                    QMessageBox.Ok)
+            msg = QMessageBox()
+            msg.setWindowTitle("Неправильно заполнены поля")
+            msg.setText("Проверьте правильность заполнения полей")
+            msg.setIcon(QMessageBox.Warning)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()
 
     def GetLastResult(self) -> str:
         choise = QMessageBox.information(self, "Последняя попытка\n",

@@ -29,9 +29,13 @@ class MainWindow(QMainWindow):
         self.coder = coder
 
 def InitMainWindow():
+    # while True:
+    #      try:
     App = QApplication(sys.argv)
-    # win32 = AddCoderWindow()
 
     window = MainWindow()
+    App.exec()
+    # except:
+    #    pass
 
-    sys.exit(App.exec_())
+    # sys.exit(App.exec_())

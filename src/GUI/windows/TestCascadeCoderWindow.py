@@ -164,12 +164,20 @@ class TestCascadeCoderWindow(QWidget):
             else:
                 interleaver = None
 
+            if self.interleaverCheckBoxSecond.isChecked() and self.lengthSmashingTextBoxSecond.text().isdigit():
+                interleaverSecond = Interleaver(int(self.lengthSmashingTextBox.text()))
+            else:
+                interleaverSecond = None
+
             log.debug("Атрибуты проверены на корректность")
-            self.channel = Channel(self.windowParent.coder,
+            self.cascade = Cascade(self.windowParent.firstCoder,
+                                   self.windowParent.secondCoder,
                                    float(self.noiseProbabilityTextBox.text()),
                                    int(self.countCyclicalTextBox.text()),
                                    self.duplexCheckBox.isChecked(),
-                                   interleaver)
+                                   interleaver,
+                                   interleaverSecond)
+
 
             progress = 0.0
             step = 100.0 / int(self.countCyclicalTextBox.text())
@@ -178,17 +186,19 @@ class TestCascadeCoderWindow(QWidget):
             self.repairPackage = 0
             self.invisiblePackage = 0
             information: list
+
             if type(testInformation.__class__) != type(list):
                 information = testInformation
-            elif type(self.channel.coder.__class__) == type(hemming.Coder.Coder)\
-                    or type(self.channel.coder.__class__) == type(cyclical.Coder.Coder):
+            elif type(self.cascade.firstCoder.__class__) == type(hemming.Coder.Coder)\
+                    or type(self.cascade.firstCoder.__class__) == type(cyclical.Coder.Coder):
                 information = IntToBitList(int(self.informationTextBox.text()),
-                                           self.channel.coder.lengthInformation)
+                                           self.cascade.firstCoder.lengthInformation)
             else:
                 information = IntToBitList(int(self.informationTextBox.text()))
+
             log.debug("Начало цикла тестов")
             for x in range(int(self.countCyclicalTextBox.text())):
-                status: int = self.channel.TransferOneStep(information)
+                status: int = self.cascade.GetTransferOneStep(information)
                 if status == 0:
                     self.successfullyPackage += 1
                 elif status == 1:
@@ -199,7 +209,7 @@ class TestCascadeCoderWindow(QWidget):
                     self.invisiblePackage += 1
                 self.testingProgressBar.setValue(progress)
                 progress += step
-                self.lastResult += self.channel.information
+                #   self.lastResult += self.cascade.information
 
             log.debug("Конец цикла тестов")
             self.testingProgressBar.setValue(100)

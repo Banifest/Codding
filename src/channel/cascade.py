@@ -32,4 +32,4 @@ class Cascade(channel.Channel):
 
         nowInformation = self.firstCoder.Decoding(nowInformation)
 
-        return 0 if nowInformation == information else 1
+        return 0 if nowInformation == information else 2
