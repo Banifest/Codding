@@ -274,6 +274,7 @@ class TestCoderWindow(QWidget):
             self.repairPackage = 0
             self.invisiblePackage = 0
             information: list = []
+
             if type(testInformation.__class__) != type(list):
                 information = testInformation
             elif type(self.channel.coder.__class__) == type(hemming.Coder.Coder)\
@@ -282,6 +283,7 @@ class TestCoderWindow(QWidget):
                                            self.channel.coder.lengthInformation)
             else:
                 information = IntToBitList(int(self.informationTextBox.text()))
+
             log.debug("Начало цикла тестов")
             writer = open("lastInformation.txt", "w")
             for x in range(int(self.countCyclicalTextBox.text())):

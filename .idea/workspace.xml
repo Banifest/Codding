@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/MainWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/MainWindow.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/__init__.py" afterPath="$PROJECT_DIR$/src/GUI/windows/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/channel/cascade.py" afterPath="$PROJECT_DIR$/src/channel/cascade.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/convolutional/Coder.py" afterPath="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/cyclical/Coder.py" afterPath="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,7 +17,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/TestKursach$main.coverage" NAME="main Coverage Results" MODIFIED="1495746211770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TestKursach$main.coverage" NAME="main Coverage Results" MODIFIED="1496002740633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
@@ -27,8 +25,8 @@
       <file leaf-file-name="MainWindow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI/windows/MainWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="74">
+              <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -36,73 +34,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Python/src.GUI.windows.MainWindow.MainWindow" pinned="false" current-in-tab="true">
-        <entry file="uml://Python/src.GUI.windows.MainWindow.MainWindow">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>Python</ID>
-              <OriginalElement>src.GUI.windows.MainWindow.MainWindow</OriginalElement>
-              <nodes>
-                <node x="315.1666666666666" y="804.0">PyQt5.QtWidgets.QMainWindow.QMainWindow</node>
-                <node x="397.0000000000001" y="0.0">_collections_abc.Hashable</node>
-                <node x="326.1666666666665" y="1016.0">src.GUI.windows.MainWindow.MainWindow</node>
-                <node x="379.50000000000006" y="102.0">object</node>
-                <node x="348.16666666666663" y="658.0">PyQt5.QtWidgets.QWidget.QWidget</node>
-                <node x="379.0" y="424.0">PyQt5.QtCore.QObject.QObject</node>
-                <node x="-185.15671641791027" y="287.6940298507463">PyQt5.QtGui.QPaintDevice.QPaintDevice</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="object" target="_collections_abc.Hashable">
-                  <point x="5.6843418860808015E-14" y="-70.0" />
-                  <point x="0.0" y="26.0" />
-                </edge>
-                <edge source="PyQt5.QtWidgets.QMainWindow.QMainWindow" target="PyQt5.QtWidgets.QWidget.QWidget">
-                  <point x="5.6843418860808015E-14" y="-81.0" />
-                  <point x="0.0" y="48.0" />
-                </edge>
-                <edge source="PyQt5.QtWidgets.QWidget.QWidget" target="PyQt5.QtGui.QPaintDevice.QPaintDevice">
-                  <point x="-74.99999999999994" y="-48.0" />
-                  <point x="385.6666666666667" y="633.0" />
-                  <point x="179.5" y="633.0" />
-                  <point x="0.0" y="158.0" />
-                </edge>
-                <edge source="PyQt5.QtWidgets.QWidget.QWidget" target="PyQt5.QtCore.QObject.QObject">
-                  <point x="5.6843418860808015E-14" y="-48.0" />
-                  <point x="460.6666666666667" y="633.0" />
-                  <point x="479.5" y="633.0" />
-                  <point x="0.0" y="26.0" />
-                </edge>
-                <edge source="PyQt5.QtGui.QPaintDevice.QPaintDevice" target="object">
-                  <point x="0.0" y="-158.0" />
-                  <point x="179.5" y="267.0" />
-                  <point x="409.16666666666674" y="267.0" />
-                  <point x="-59.333333333333314" y="70.0" />
-                </edge>
-                <edge source="PyQt5.QtWidgets.QWidget.QWidget" target="object">
-                  <point x="75.00000000000006" y="-48.0" />
-                  <point x="535.6666666666667" y="633.0" />
-                  <point x="590.5" y="633.0" />
-                  <point x="590.5" y="267.0" />
-                  <point x="527.8333333333334" y="267.0" />
-                  <point x="59.333333333333314" y="70.0" />
-                </edge>
-                <edge source="src.GUI.windows.MainWindow.MainWindow" target="PyQt5.QtWidgets.QMainWindow.QMainWindow">
-                  <point x="5.6843418860808015E-14" y="-59.0" />
-                  <point x="0.0" y="81.0" />
-                </edge>
-                <edge source="PyQt5.QtCore.QObject.QObject" target="object">
-                  <point x="0.0" y="-26.0" />
-                  <point x="479.5" y="267.0" />
-                  <point x="468.50000000000006" y="267.0" />
-                  <point x="0.0" y="70.0" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.464471403812825" x="303.5" y="567.0" />
-              <SelectedNodes />
-              <Categories>
-                <Category>Fields</Category>
-              </Categories>
+      <file leaf-file-name="AddCoderWindow.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-317">
+              <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -112,16 +51,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/coders/hemming/Coder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -137,88 +66,110 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCascadeCoderWindow.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py">
+      <file leaf-file-name="TestCoderWindow.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="211" column="14" lean-forward="false" selection-start-line="211" selection-start-column="14" selection-end-line="211" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/coders/convolutional/Coder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="6" column="7" lean-forward="false" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+            <state relative-caret-position="234">
+              <caret line="276" column="0" lean-forward="false" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Python/src.coders.convolutional.Coder.Coder" pinned="false" current-in-tab="false">
-        <entry file="uml://Python/src.coders.convolutional.Coder.Coder">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Python/src.GUI.windows.TestCoderWindow.TestCoderWindow" pinned="false" current-in-tab="false">
+        <entry file="uml://Python/src.GUI.windows.TestCoderWindow.TestCoderWindow">
           <provider selected="true" editor-type-id="UmlEditorProvider">
             <state>
               <ID>Python</ID>
-              <OriginalElement>src.coders.convolutional.Coder.Coder</OriginalElement>
+              <OriginalElement>src.GUI.windows.TestCoderWindow.TestCoderWindow</OriginalElement>
               <nodes>
-                <node x="434.0" y="0.0">_collections_abc.Hashable</node>
-                <node x="311.0" y="646.0">src.coders.abstractCoder.Coder</node>
-                <node x="0.0" y="925.0">src.coders.convolutional.Coder.Coder</node>
-                <node x="278.0" y="147.0">object</node>
+                <node x="61.25" y="320.0">src.GUI.windows.TestCoderWindow.TestCoderWindow</node>
+                <node x="151.25" y="0.0">_collections_abc.Hashable</node>
+                <node x="189.25" y="80.0">object</node>
+                <node x="110.25" y="240.0">PyQt5.QtWidgets.QWidget.QWidget</node>
+                <node x="0.0" y="160.0">PyQt5.QtCore.QObject.QObject</node>
+                <node x="221.0" y="160.0">PyQt5.QtGui.QPaintDevice.QPaintDevice</node>
               </nodes>
               <notes />
               <edges>
                 <edge source="object" target="_collections_abc.Hashable">
-                  <point x="0.0" y="-224.5" />
-                  <point x="0.0" y="48.5" />
+                  <point x="0.0" y="-15.0" />
+                  <point x="0.0" y="15.0" />
                 </edge>
-                <edge source="src.coders.convolutional.Coder.Coder" target="src.coders.abstractCoder.Coder">
-                  <point x="0.0" y="-224.5" />
-                  <point x="0.0" y="114.5" />
+                <edge source="PyQt5.QtWidgets.QWidget.QWidget" target="PyQt5.QtGui.QPaintDevice.QPaintDevice">
+                  <point x="56.25" y="-15.0" />
+                  <point x="279.0" y="215.0" />
+                  <point x="345.0" y="215.0" />
+                  <point x="0.0" y="15.0" />
                 </edge>
-                <edge source="src.coders.abstractCoder.Coder" target="object">
-                  <point x="0.0" y="-114.5" />
-                  <point x="0.0" y="224.5" />
+                <edge source="PyQt5.QtWidgets.QWidget.QWidget" target="PyQt5.QtCore.QObject.QObject">
+                  <point x="-56.25" y="-15.0" />
+                  <point x="166.5" y="215.0" />
+                  <point x="100.5" y="215.0" />
+                  <point x="0.0" y="15.0" />
+                </edge>
+                <edge source="PyQt5.QtGui.QPaintDevice.QPaintDevice" target="object">
+                  <point x="0.0" y="-15.0" />
+                  <point x="345.0" y="135.0" />
+                  <point x="239.5" y="135.0" />
+                  <point x="16.75" y="15.0" />
+                </edge>
+                <edge source="PyQt5.QtCore.QObject.QObject" target="object">
+                  <point x="0.0" y="-15.0" />
+                  <point x="100.5" y="135.0" />
+                  <point x="206.0" y="135.0" />
+                  <point x="-16.75" y="15.0" />
+                </edge>
+                <edge source="src.GUI.windows.TestCoderWindow.TestCoderWindow" target="PyQt5.QtWidgets.QWidget.QWidget">
+                  <point x="0.0" y="-15.0" />
+                  <point x="0.0" y="15.0" />
                 </edge>
               </edges>
-              <settings layout="Hierarchic Group" zoom="0.6984218077474892" x="37.41536565324583" y="1674.6318816762532" />
+              <settings layout="Hierarchic Group" zoom="1.0999999999999999" x="64.18181818181822" y="185.18181818181822" />
               <SelectedNodes>
-                <node>src.coders.convolutional.Coder.Coder</node>
+                <node>src.GUI.windows.TestCoderWindow.TestCoderWindow</node>
               </SelectedNodes>
-              <Categories>
-                <Category>Methods</Category>
-                <Category>Inner Classes</Category>
-                <Category>Fields</Category>
-              </Categories>
+              <Categories />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCoderWindow.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py">
+      <file leaf-file-name="Interleaver.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/coders/interleaver/Interleaver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4658">
-              <caret line="287" column="0" lean-forward="false" selection-start-line="287" selection-start-column="0" selection-end-line="287" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="15" column="28" lean-forward="false" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="channel.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/channel/channel.py">
+      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="884">
-              <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-              <folding>
-                <element signature="e#1980#3774#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="408">
+              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graphics.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GUI/graphics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="659">
+              <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -308,12 +259,10 @@
         <option value="$PROJECT_DIR$/src/coders/interleaver/Interleaver.py" />
         <option value="$PROJECT_DIR$/src/GUI/graphics.py" />
         <option value="$PROJECT_DIR$/src/coders/abstractCoder.py" />
-        <option value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
         <option value="$PROJECT_DIR$/src/coders/fountain/LubyTransform.py" />
         <option value="$PROJECT_DIR$/Resources/stringConsts.py" />
         <option value="$PROJECT_DIR$/lastInformation.txt" />
         <option value="$PROJECT_DIR$/src/coders/exeption.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/src/coders/hemming/Coder.py" />
         <option value="$PROJECT_DIR$/src/coders/cascade.py" />
         <option value="$PROJECT_DIR$/src/channel/channel.py" />
@@ -324,9 +273,11 @@
         <option value="$PROJECT_DIR$/src/channel/cascade.py" />
         <option value="$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py" />
         <option value="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
-        <option value="$PROJECT_DIR$/src/GUI/windows/MainWindow.py" />
         <option value="$PROJECT_DIR$/src/GUI/windows/__init__.py" />
         <option value="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/src/GUI/windows/MainWindow.py" />
+        <option value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
       </list>
     </option>
   </component>
@@ -365,6 +316,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -445,28 +397,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="GUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestKursach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestKursach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="coders" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -489,29 +419,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hemming" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestKursach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestKursach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="coders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fountain" />
+              <option name="myItemId" value="interleaver" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -537,49 +445,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestKursach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestKursach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="coders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="convolutional" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestKursach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TestKursach" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="channel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1079,7 +946,14 @@
       <option name="project" value="LOCAL" />
       <updated>1495741542308</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="мелкие багофиксы">
+      <created>1495780156059</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1495780156059</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1096,12 +970,12 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294423" sideWeight="0.48926175" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24521072" sideWeight="0.64524764" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29374203" sideWeight="0.6974565" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32439336" sideWeight="0.48661312" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294423" sideWeight="0.49731544" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822478" sideWeight="0.3085676" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29374203" sideWeight="0.30254352" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.49464524" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22891566" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24564926" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24899599" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1155,7 +1029,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Добавлены метод декодирования в циклический кодер" />
     <MESSAGE value="Добавлен прототип сверточного кодировщика с реализованным шагом" />
     <MESSAGE value="Добавлен сверточныйкодеровшик" />
     <MESSAGE value="Добавлен сверточныйкодеровщик" />
@@ -1180,7 +1053,8 @@
     <MESSAGE value="Внесены мелкие исправления" />
     <MESSAGE value="Добавлен каскадный кодер" />
     <MESSAGE value="Исправлены ошибки с MessageBox'ами" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправлены ошибки с MessageBox'ами" />
+    <MESSAGE value="мелкие багофиксы" />
+    <option name="LAST_COMMIT_MESSAGE" value="мелкие багофиксы" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1220,12 +1094,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py</url>
-          <line>312</line>
+          <line>314</line>
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py</url>
-          <line>286</line>
+          <line>288</line>
           <option name="timeStamp" value="146" />
         </line-breakpoint>
       </breakpoints>
@@ -1245,25 +1119,18 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/coders/fountain/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="40" lean-forward="false" selection-start-line="0" selection-start-column="40" selection-end-line="0" selection-end-column="40" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="17">
             <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1295,13 +1162,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/interleaver/Interleaver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="15" column="28" lean-forward="false" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/WinPython-64bit-3.6.1.0Qt5/python-3.6.1.amd64/Lib/site-packages/mpmath/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -1327,13 +1187,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1295">
           <caret line="215" column="8" lean-forward="false" selection-start-line="215" selection-start-column="8" selection-end-line="215" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/graphics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="53" column="35" lean-forward="false" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -1428,13 +1281,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/coders/combinations.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1454,13 +1300,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="801" column="0" lean-forward="false" selection-start-line="801" selection-start-column="0" selection-end-line="801" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="95" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1511,7 +1350,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="47" column="36" lean-forward="true" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1519,41 +1357,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="73" lean-forward="false" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/abstractCoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/windows/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4658">
-          <caret line="287" column="0" lean-forward="false" selection-start-line="287" selection-start-column="0" selection-end-line="287" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1569,7 +1372,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/coders/hemming/Coder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="527">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
@@ -1609,35 +1412,24 @@
               <point x="0.0" y="224.5" />
             </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="0.6984218077474892" x="37.41536565324583" y="1674.6318816762532" />
+          <settings layout="Hierarchic Group" zoom="0.6984218077474892" x="37.0" y="1675.0" />
           <SelectedNodes>
             <node>src.coders.convolutional.Coder.Coder</node>
           </SelectedNodes>
           <Categories>
-            <Category>Methods</Category>
-            <Category>Inner Classes</Category>
             <Category>Fields</Category>
+            <Category>Inner Classes</Category>
+            <Category>Methods</Category>
           </Categories>
+          <SCOPE>All</SCOPE>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="211" column="14" lean-forward="false" selection-start-line="211" selection-start-column="14" selection-end-line="211" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/windows/MainWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="3366">
+          <caret line="211" column="17" lean-forward="false" selection-start-line="211" selection-start-column="17" selection-end-line="211" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1647,66 +1439,156 @@
           <ID>Python</ID>
           <OriginalElement>src.GUI.windows.MainWindow.MainWindow</OriginalElement>
           <nodes>
-            <node x="315.1666666666666" y="804.0">PyQt5.QtWidgets.QMainWindow.QMainWindow</node>
-            <node x="397.0000000000001" y="0.0">_collections_abc.Hashable</node>
-            <node x="326.1666666666665" y="1016.0">src.GUI.windows.MainWindow.MainWindow</node>
-            <node x="379.50000000000006" y="102.0">object</node>
-            <node x="348.16666666666663" y="658.0">PyQt5.QtWidgets.QWidget.QWidget</node>
-            <node x="379.0" y="424.0">PyQt5.QtCore.QObject.QObject</node>
-            <node x="-185.15671641791027" y="287.6940298507463">PyQt5.QtGui.QPaintDevice.QPaintDevice</node>
+            <node x="" y="">PyQt5.QtWidgets.QMainWindow.QMainWindow</node>
+            <node x="" y="">_collections_abc.Hashable</node>
+            <node x="" y="">src.GUI.windows.MainWindow.MainWindow</node>
+            <node x="" y="">object</node>
+            <node x="" y="">PyQt5.QtWidgets.QWidget.QWidget</node>
+            <node x="" y="">PyQt5.QtCore.QObject.QObject</node>
+            <node x="" y="">PyQt5.QtGui.QPaintDevice.QPaintDevice</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.6" x="2376.0" y="1348.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Inner Classes</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/graphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="53" column="14" lean-forward="false" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/windows/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://Python/src.GUI.windows.TestCoderWindow.TestCoderWindow">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>Python</ID>
+          <OriginalElement>src.GUI.windows.TestCoderWindow.TestCoderWindow</OriginalElement>
+          <nodes>
+            <node x="61.25" y="320.0">src.GUI.windows.TestCoderWindow.TestCoderWindow</node>
+            <node x="151.25" y="0.0">_collections_abc.Hashable</node>
+            <node x="189.25" y="80.0">object</node>
+            <node x="110.25" y="240.0">PyQt5.QtWidgets.QWidget.QWidget</node>
+            <node x="0.0" y="160.0">PyQt5.QtCore.QObject.QObject</node>
+            <node x="221.0" y="160.0">PyQt5.QtGui.QPaintDevice.QPaintDevice</node>
           </nodes>
           <notes />
           <edges>
             <edge source="object" target="_collections_abc.Hashable">
-              <point x="5.6843418860808015E-14" y="-70.0" />
-              <point x="0.0" y="26.0" />
-            </edge>
-            <edge source="PyQt5.QtWidgets.QMainWindow.QMainWindow" target="PyQt5.QtWidgets.QWidget.QWidget">
-              <point x="5.6843418860808015E-14" y="-81.0" />
-              <point x="0.0" y="48.0" />
+              <point x="0.0" y="-15.0" />
+              <point x="0.0" y="15.0" />
             </edge>
             <edge source="PyQt5.QtWidgets.QWidget.QWidget" target="PyQt5.QtGui.QPaintDevice.QPaintDevice">
-              <point x="-74.99999999999994" y="-48.0" />
-              <point x="385.6666666666667" y="633.0" />
-              <point x="179.5" y="633.0" />
-              <point x="0.0" y="158.0" />
+              <point x="56.25" y="-15.0" />
+              <point x="279.0" y="215.0" />
+              <point x="345.0" y="215.0" />
+              <point x="0.0" y="15.0" />
             </edge>
             <edge source="PyQt5.QtWidgets.QWidget.QWidget" target="PyQt5.QtCore.QObject.QObject">
-              <point x="5.6843418860808015E-14" y="-48.0" />
-              <point x="460.6666666666667" y="633.0" />
-              <point x="479.5" y="633.0" />
-              <point x="0.0" y="26.0" />
+              <point x="-56.25" y="-15.0" />
+              <point x="166.5" y="215.0" />
+              <point x="100.5" y="215.0" />
+              <point x="0.0" y="15.0" />
             </edge>
             <edge source="PyQt5.QtGui.QPaintDevice.QPaintDevice" target="object">
-              <point x="0.0" y="-158.0" />
-              <point x="179.5" y="267.0" />
-              <point x="409.16666666666674" y="267.0" />
-              <point x="-59.333333333333314" y="70.0" />
-            </edge>
-            <edge source="PyQt5.QtWidgets.QWidget.QWidget" target="object">
-              <point x="75.00000000000006" y="-48.0" />
-              <point x="535.6666666666667" y="633.0" />
-              <point x="590.5" y="633.0" />
-              <point x="590.5" y="267.0" />
-              <point x="527.8333333333334" y="267.0" />
-              <point x="59.333333333333314" y="70.0" />
-            </edge>
-            <edge source="src.GUI.windows.MainWindow.MainWindow" target="PyQt5.QtWidgets.QMainWindow.QMainWindow">
-              <point x="5.6843418860808015E-14" y="-59.0" />
-              <point x="0.0" y="81.0" />
+              <point x="0.0" y="-15.0" />
+              <point x="345.0" y="135.0" />
+              <point x="239.5" y="135.0" />
+              <point x="16.75" y="15.0" />
             </edge>
             <edge source="PyQt5.QtCore.QObject.QObject" target="object">
-              <point x="0.0" y="-26.0" />
-              <point x="479.5" y="267.0" />
-              <point x="468.50000000000006" y="267.0" />
-              <point x="0.0" y="70.0" />
+              <point x="0.0" y="-15.0" />
+              <point x="100.5" y="135.0" />
+              <point x="206.0" y="135.0" />
+              <point x="-16.75" y="15.0" />
+            </edge>
+            <edge source="src.GUI.windows.TestCoderWindow.TestCoderWindow" target="PyQt5.QtWidgets.QWidget.QWidget">
+              <point x="0.0" y="-15.0" />
+              <point x="0.0" y="15.0" />
             </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="0.464471403812825" x="303.5" y="567.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Fields</Category>
-          </Categories>
+          <settings layout="Hierarchic Group" zoom="1.0999999999999999" x="64.18181818181822" y="185.18181818181822" />
+          <SelectedNodes>
+            <node>src.GUI.windows.TestCoderWindow.TestCoderWindow</node>
+          </SelectedNodes>
+          <Categories />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/interleaver/Interleaver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="28" lean-forward="false" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="276" column="0" lean-forward="false" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/windows/MainWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-317">
+          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/abstractCoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

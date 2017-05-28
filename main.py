@@ -14,4 +14,4 @@ if __name__ == '__main__':
         log.critical("Необрабатываемое исключение")
         pass
 else:
-    raise Exception()
+    raise Exception("Невозможен import данного файла:(")
