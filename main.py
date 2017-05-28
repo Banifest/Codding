@@ -1,5 +1,8 @@
+#!usr/bin/env python3
+
 from src.GUI.windows.MainWindow import InitMainWindow
 from src.logger import log
+
 
 if __name__ == '__main__':
     try:
@@ -11,4 +14,4 @@ if __name__ == '__main__':
         log.critical("Необрабатываемое исключение")
         pass
 else:
-    raise Exception()
+    raise Exception("Невозможен import данного файла:(")

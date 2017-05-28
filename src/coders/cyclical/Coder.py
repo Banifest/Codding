@@ -10,14 +10,17 @@ generatingPalindromes = [None, None, 0x7, 0xB, 0x29, 0x43, 0x89, 0x1D7]
 
 
 class Coder(abstractCoder.Coder):
-    polynomial = []
+    polynomial: list = []
 
-    def __init__(self, informationLength: int):
+    def __init__(self, informationLength: int, polynomial: int = None):
         log.debug("Создание циклического кодера")
         self.lengthInformation = informationLength
         self.lengthAdditional = int(math.log2(informationLength - 1) + 1)
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
-        self.polynomial = IntToBitList(generatingPalindromes[self.lengthAdditional])
+        if polynomial is not None:
+            self.polynomial = IntToBitList(polynomial)
+        else:
+            self.polynomial = IntToBitList(generatingPalindromes[self.lengthAdditional])
 
 
     def GetRemainder(self, number: int, flag: bool = False) -> list:

@@ -38,24 +38,24 @@ def BitListToInt(num: list) -> int:
 
 
 def BitListCombToInt(num: list) -> int:
-    answer = 0
+    answer: int = 0
     for x in num:
         answer += 1 << x
     return answer
 
 
 def CycleShiftRightBitList(num: list) -> list:
-    num = num.copy()
+    num: list = num.copy()
     return num[-1] + num[:-1]
 
 
 def CycleShiftLeftBitList(num: list) -> list:
-    num = num.copy()
+    num: list = num.copy()
     return num[1:] + num[0]
 
 
 def CycleShiftRight(num: int) -> int:
-    juniorBit = num & 1
+    juniorBit: int = num & 1
     num >>= 1
     return (juniorBit << (math.log2(num) + 1)) + num
 

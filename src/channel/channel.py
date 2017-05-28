@@ -1,5 +1,5 @@
 import random
-from typing import Optional
+from typing import Optional, Union
 
 from src.coders import abstractCoder
 from src.coders.exeption import DecodingException
@@ -19,7 +19,8 @@ class Channel:
 
     # LDPC
 
-    def __init__(self, coder: abstractCoder.Coder, noiseProbability: Optional[int], countCyclical: Optional[int],
+    def __init__(self, coder: abstractCoder.Coder or None, noiseProbability: Optional[int],
+                 countCyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
         log.debug("Создание канала связи")
         # log.debug("Создание канала связи с параметрами:{0], {1}, {2}, {3}, {4}".
@@ -28,7 +29,7 @@ class Channel:
         if noiseProbability is not None: self.noiseProbability = noiseProbability
         if countCyclical is not None: self.countCyclical = countCyclical
         if duplex is not None: self.duplex = duplex
-        if duplex is not None: self.interleaver = interleaver
+        if interleaver is not None: self.interleaver = interleaver
         log.debug("Канал создан")
 
     def __str__(self) -> str:
@@ -79,7 +80,7 @@ class Channel:
         return self.information
 
 
-    def TransferOneStep(self, information: list) -> str:
+    def TransferOneStep(self, information: list) -> int:
         log.info("Производиться передача последовательности битов - {0}".format(information))
         nowInformation: list = information
         status: int = 0
@@ -108,6 +109,38 @@ class Channel:
                 self.information = "Пакет при передаче был повреждён и не подлежит "\
                                    "востановлению\n"
         return status
+
+    def GetTransferOneStep(self, information: list) -> Union[list, int]:
+        log.info("Производиться передача последовательности битов - {0}".format(information))
+        nowInformation: list = information
+        status: int = 0
+        helpInformation: list
+        try:
+            nowInformation = self.coder.Encoding(nowInformation)
+            if self.interleaver: nowInformation = self.interleaver.Shuffle(nowInformation)
+            helpInformation = nowInformation
+            nowInformation = self.GenInterference(nowInformation, self.noiseProbability)
+            if helpInformation != nowInformation: status = 1
+            if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
+            nowInformation = self.coder.Decoding(nowInformation)
+        except DecodingException as err:
+            status = 2
+            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
+            self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
+        else:
+            if nowInformation == information:
+                if status != 1: status = 0
+                log.info("Пакет {0} был успешно передан".format(information))
+                self.information = "Пакет был успешно передан\n"
+            else:
+                status = 3
+                log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
+                        nowInformation))
+                self.information = "Пакет при передаче был повреждён и не подлежит "\
+                                   "востановлению\n"
+        return [nowInformation, status]
+
+
 
 
     def GetInformationAboutLastTransfer(self):

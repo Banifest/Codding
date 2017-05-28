@@ -1,5 +1,5 @@
 def GetCombinations(n: int, k: int) -> list:
-    answer = []
+    answer: list = []
     for x in range(0, 1 << n):
         if GetCountOneBit(x) == k:
             answer.append(GetListOneCombination(x))
@@ -8,7 +8,7 @@ def GetCombinations(n: int, k: int) -> list:
 
 
 def GetCountOneBit(num: int) -> int:
-    count = 0
+    count: int = 0
     while num != 0:
         if num | 1 == num:
             count += 1
@@ -17,9 +17,9 @@ def GetCountOneBit(num: int) -> int:
 
 
 def GetListOneCombination(num: int) -> list:
-    count = 1
-    p = 0
-    answer = []
+    count: int = 1
+    p: int = 0
+    answer: list = []
     while count <= num:
         if num | count == num:
             answer.append(p)

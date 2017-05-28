@@ -55,3 +55,7 @@ class Coder(abstractCoder.Coder):
             for y in temp:
                 answer.append(y)
         return answer
+
+
+    def Decoding(self, information: list):
+        pass

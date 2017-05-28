@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 
 from src.GUI.actions import menu
 from src.coders import abstractCoder
@@ -10,29 +10,39 @@ from src.logger import log
 
 class MainWindow(QMainWindow):
     coder: abstractCoder.Coder = None
+    firstCoder: abstractCoder.Coder = None
+    secondCoder: abstractCoder.Coder = None
+
+    newCoderWindow: QWidget = None
+    testCoderWindow: QWidget = None
+
     def __init__(self):
         log.debug("Создание главного окна")
         super().__init__()
-        self.setFixedSize(300, 30)
-        self.setWindowTitle('Icon')
+        self.setFixedSize(300, 33)
+        self.setWindowTitle('Kursach')
         self.setWindowIcon(QIcon('Resources/img/pic.png'))
 
-        #  self.grid = QGridLayout()
-        # self.grid.setSpacing(10)
-        # self.grid.addWidget(QLabel(""))
-
         menu.SetMainToolBar(self)
-        #  self.setLayout(self.grid)
 
         self.show()
 
     def SetCoder(self, coder: abstractCoder.Coder):
         self.coder = coder
 
+    def closeEvent(self, *args, **kwargs):
+        if self.newCoderWindow is not None: del self.newCoderWindow
+        if self.testCoderWindow is not None: del self.testCoderWindow
+
+
 def InitMainWindow():
+    # while True:
+    #      try:
     App = QApplication(sys.argv)
-    # win32 = AddCoderWindow()
 
     window = MainWindow()
+    App.exec()
+    # except:
+    #    pass
 
-    sys.exit(App.exec_())
+    # sys.exit(App.exec_())
