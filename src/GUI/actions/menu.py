@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QAction, QMainWindow, QMessageBox, QToolBar
+from PyQt5.QtWidgets import QAction, QMessageBox, QToolBar
 
 from Resources.stringConsts import CODER_NAMES
 from src.GUI.windows import MainWindow
@@ -14,20 +14,12 @@ def SetMainToolBar(window: MainWindow):
     window.mainToolBar = window.addToolBar("KitCoders")
     window.mainToolBar.addAction(NewCoderAction(window))
     window.mainToolBar.addAction(TestCoderAction(window))
-    window.mainToolBar.addAction(TestCascadeCodeAction(window))
+    window.mainToolBar.addAction(TestCascadeCoderAction(window))
     window.mainToolBar.addAction(AboutCoder(window))
-
-
-
-class MainToolBar(QMainWindow):
-    def __init__(self, window: QMainWindow):
-        super().__init__()
-        self.addAction(NewCoderAction(window))
 
 
 class NewCoderAction(QAction):
     window: MainWindow
-
 
     def createWindow(self):
         AddCoderWindow(self.window)
@@ -42,12 +34,10 @@ class NewCoderAction(QAction):
 class TestCoderAction(QAction):
     window: MainWindow
 
-
     def __init__(self, window: MainWindow):
         super().__init__(QIcon("Resources/img/TestCoder.jpg"), "&Протестировать кодер", window)
         self.window: MainWindow.MainWindow = window
         self.setShortcut("Ctrl+Shift+T")
-
         self.triggered.connect(self.createWindow)
 
     def createWindow(self):
@@ -59,9 +49,8 @@ class TestCoderAction(QAction):
                                 QMessageBox.Ok)
 
 
-class TestCascadeCodeAction(QAction):
+class TestCascadeCoderAction(QAction):
     window: MainWindow
-
 
     def __init__(self, window: MainWindow):
         super().__init__(QIcon("Resources/img/TestCascadeCoder.jpg"), "&Протестировать каскадный кодер", window)
@@ -81,7 +70,6 @@ class TestCascadeCodeAction(QAction):
 
 class AboutCoder(QAction):
     window: MainWindow
-
 
     def __init__(self, window: MainWindow):
         super().__init__(QIcon("Resources/img/InformationCoder.png"), "&Информация о кодере", window)

@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 
 from src.GUI.actions import menu
 from src.coders import abstractCoder
@@ -13,6 +13,8 @@ class MainWindow(QMainWindow):
     firstCoder: abstractCoder.Coder = None
     secondCoder: abstractCoder.Coder = None
 
+    newCoderWindow: QWidget = None
+    testCoderWindow: QWidget = None
 
     def __init__(self):
         log.debug("Создание главного окна")
@@ -27,6 +29,11 @@ class MainWindow(QMainWindow):
 
     def SetCoder(self, coder: abstractCoder.Coder):
         self.coder = coder
+
+    def closeEvent(self, *args, **kwargs):
+        if self.newCoderWindow is not None: del self.newCoderWindow
+        if self.testCoderWindow is not None: del self.testCoderWindow
+
 
 def InitMainWindow():
     # while True:

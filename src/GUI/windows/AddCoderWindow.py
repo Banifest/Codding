@@ -91,6 +91,8 @@ class AddCoderWindow(QWidget):
         elif text == CODER_NAMES[1]:
             self.grid.addWidget(QLabel("Размер пакета"), 2, 0)
             self.grid.addWidget(self.sizePackageTextBox, 2, 1)
+            self.grid.addWidget(QLabel("Порождающий полином"), 3, 0)
+            self.grid.addWidget(self.listPolynomialTextBox, 3, 1)
         elif text == CODER_NAMES[2]:
             self.grid.addWidget(QLabel("Количество полиномов"), 2, 0)
             self.grid.addWidget(self.countPolynomialTextBox, 2, 1)
@@ -117,9 +119,10 @@ class AddCoderWindow(QWidget):
                         int(self.sizePackageTextBox.text())
                         ))
         elif text == CODER_NAMES[1]:
-            if self.sizePackageTextBox.text().isdigit():
+            if self.sizePackageTextBox.text().isdigit() and self.listPolynomialTextBox.text().isdigit():
                 self.windowParent.SetCoder(cyclical.Coder.Coder(
-                        int(self.sizePackageTextBox.text())
+                        int(self.sizePackageTextBox.text()),
+                        int(self.listPolynomialTextBox.text())
                         ))
         elif text == CODER_NAMES[2]:
             if self.countPolynomialTextBox.text().isdigit() and\
