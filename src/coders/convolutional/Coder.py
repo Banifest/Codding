@@ -1,6 +1,5 @@
 from src.coders import abstractCoder
-
-from src.coders.casts import IntToBitList
+from src.coders.casts import BitListToInt, CycleShiftRightBitList, IntToBitList
 from src.logger import log
 
 
@@ -11,6 +10,8 @@ class Coder(abstractCoder.Coder):
     countOutput: int = 0
     countRegisters: int = 0
     register: int = 0
+
+    graph: list = []
 
     def __init__(self, countPolynomials: int, listPolynomials: list, countInput: int, countOutput: int,
                  countRegister: int):
@@ -23,6 +24,7 @@ class Coder(abstractCoder.Coder):
 
         self.lengthInformation = 1
         self.lengthAdditional = 1
+        self.graph = self.GetGraph()
 
     def GetSpeed(self):
         return 1 / self.countRegisters
@@ -45,6 +47,27 @@ class Coder(abstractCoder.Coder):
             power += 1
         return answer
 
+    def GetGraph(self) -> list:
+        """
+        Формирует список представляющий граф переходов графа, где каждая вершина
+        [вершина, [биты которые соответвуют переходу]]
+        """
+        answer: list = []
+        for x in range(2 ** self.countRegisters):
+            vertex: list = []
+            self.register = x
+            edge: list = IntToBitList(x, self.countRegisters)
+            edge = CycleShiftRightBitList(edge)
+            edge[0] = 0
+            vertex.append([BitListToInt(edge), self.DoStep(0)])
+            self.register = x
+            edge[0] = 1
+            vertex.append([BitListToInt(edge), self.DoStep(1)])
+            answer.append(vertex)
+
+        self.register = 0
+        return answer
+
 
     def Encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} свёрточным кодером".format(information))
@@ -58,4 +81,30 @@ class Coder(abstractCoder.Coder):
 
 
     def Decoding(self, information: list):
-        pass
+        lastStep: list = []  # Информация об предыдущем шаге
+        nowStep: list = []  # Информация о текущем шаге
+        infoAboutVertex: list = []  # информация о вершине
+        travel: list = []  # путь для текущей вершины
+        costTravel: int = 0  # стоимость для текущего пути
+
+        infoDividedIntoSteps: list = []  # информация поделенная на шаги
+        for x in range(0, len(information), self.countOutput):
+            count: int = 0
+            tempList: list = []
+            while count < self.countOutput:
+                tempList.append(information[x + count])
+                count += 1
+            infoDividedIntoSteps.append(tempList)
+
+        lastStep = nowStep = [[0, []]] + [[99999, []] for x in
+                                          range(self.countRegisters ** 2 - 1)]  # заполняет первый шаг
+
+        for x in infoDividedIntoSteps:
+            nowStep = [[99999, []] for x in range(self.countRegisters ** 2)]  # заполняет первый шаг]
+            number: int = 0
+            for infoAboutVertex in lastStep:
+                if infoAboutVertex[]:
+
+                pass
+            lastStep = nowStep
+            pass
