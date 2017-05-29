@@ -14,6 +14,7 @@ class Coder(abstractCoder.Coder):
         self.lengthAdditional = int(math.log2(lengthInformation - 1) + 1)
         self.lengthInformation = lengthInformation
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
+        self.matrixTransformation: list = []
 
         for x in range(self.lengthAdditional):
             temp: list = []
@@ -42,17 +43,20 @@ class Coder(abstractCoder.Coder):
         listEncodingInformation.reverse()
         code: list = []
 
+        step: int = 0
         for count in range(self.lengthTotal):  # добавление проверяющих битов
-            if math.log2(count + 1) == int(math.log2(count + 1)):  # Проверка кратности числа на степень 2х
-                code.append([0])
-            else:
+            if math.log2(count + 1) != int(
+                    math.log2(count + 1)) or step >= self.lengthAdditional:  # Проверка кратности числа на степень 2х
                 code.append([listEncodingInformation[count - int(math.log2(count)) - 1]])
+            else:
+                code.append([0])
+                step += 1
 
         answer = [x[0] for x in code]
         code = np.transpose(np.array(code))
-        backup_info = list((np.dot(code, self.matrixTransformation) % 2)[0])
+        backupInfo = list((np.dot(code, self.matrixTransformation) % 2)[0])
         for x in range(self.lengthAdditional):
-            answer[(1 << x) - 1] = backup_info[x]
+            answer[(1 << x) - 1] = backupInfo[x]
         return answer
 
 
@@ -76,7 +80,12 @@ class Coder(abstractCoder.Coder):
             else:
                 log.debug("Не удалось успешно исправить обнаруженные ошибки")
                 raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
-        for count in range(len(code[0])):
-            if math.log2(count + 1) != int(math.log2(count + 1)):
-                answer.append(code[0][count])
+        count: int = 0
+        step: int = 0
+        for x in information:
+            if math.log2(count + 1) != int(math.log2(count + 1)) or step >= self.lengthAdditional:
+                answer.append(x)
+            else:
+                step += 1
+            count += 1
         return answer

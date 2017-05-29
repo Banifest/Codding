@@ -285,7 +285,7 @@ class TestCascadeCoderWindow(QWidget):
                         "Избыточность информации- {0}%\n"
                         "Скорость кодера - {1}\n".format(
                     (self.windowParent.firstCoder.GetRedundancy() + 100) * (
-                    self.windowParent.secondCoder.GetRedundancy() + 100) / 100 - 1,
+                        self.windowParent.secondCoder.GetRedundancy() + 100) / 100 - 1,
                     (self.windowParent.firstCoder.GetSpeed() * self.windowParent.secondCoder.GetSpeed())
                     ))
             msg.setIcon(QMessageBox.Information)

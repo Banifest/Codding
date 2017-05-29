@@ -28,6 +28,7 @@ class AddCoderWindow(QWidget):
 
     def __init__(self, parent):
         log.debug("Создание окна добавления кодера")
+        parent.coder = None
         super().__init__()
         self.setWindowTitle("Добавление кодера")
         self.sizePackageTextBox = QLineEdit()
@@ -150,6 +151,7 @@ class AddCoderWindow(QWidget):
         else:
             self.windowParent.secondCoder = self.windowParent.coder
 
+        self.close()
         if self.windowParent.coder is not None:
             del self.windowParent.newCoderWindow
         else:
