@@ -6,6 +6,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
 from src.GUI.graphics import DrawGraphic
+from src.GUI.windows import MainWindow
 from src.channel.cascade import Cascade
 from src.channel.channel import Channel
 from src.coders import cyclical, hemming
@@ -49,7 +50,7 @@ class TestCascadeCoderWindow(QWidget):
         self.setFixedSize(600, 350)
         self.setWindowTitle("Тестирование кодера")
         parent.testCoderWindow = self
-        self.windowParent = parent
+        self.windowParent: MainWindow = parent
         self.setWindowIcon(QIcon("Resources/img/TestCoder.jpg"))
 
         self.submitButton = QPushButton("Начать тестирование")
@@ -271,11 +272,25 @@ class TestCascadeCoderWindow(QWidget):
                                          format(self.successfullyPackage,
                                                 self.repairPackage,
                                                 self.badPackage + self.invisiblePackage),
-                                         QMessageBox.Ok | QMessageBox.Help,
+                                         QMessageBox.Ok | QMessageBox.Help | QMessageBox.Open,
                                          QMessageBox.Ok)
 
-        if choise == QMessageBox.Help:
+        if choise == QMessageBox.Open:
             os.system("lastInformation.txt")
+        elif choise == QMessageBox.Help:
+            a = 0
+            msg = QMessageBox()
+            msg.setWindowTitle("Информация о каскадном кодере")
+            msg.setText("Кодер типа - каскадный\n"
+                        "Избыточность информации- {0}%\n"
+                        "Скорость кодера - {1}\n".format(
+                    (self.windowParent.firstCoder.GetRedundancy() + 100) * (
+                    self.windowParent.secondCoder.GetRedundancy() + 100) / 100 - 1,
+                    (self.windowParent.firstCoder.GetSpeed() * self.windowParent.secondCoder.GetSpeed())
+                    ))
+            msg.setIcon(QMessageBox.Information)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()
 
 
     def StartTest(self, flag=None, testInformation=None):

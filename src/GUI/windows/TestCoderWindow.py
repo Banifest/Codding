@@ -239,10 +239,10 @@ class TestCoderWindow(QWidget):
                                          format(self.successfullyPackage,
                                                 self.repairPackage,
                                                 self.badPackage + self.invisiblePackage),
-                                         QMessageBox.Ok | QMessageBox.Help,
+                                         QMessageBox.Ok | QMessageBox.Open,
                                          QMessageBox.Ok)
 
-        if choise == QMessageBox.Help:
+        if choise == QMessageBox.Open:
             os.system("lastInformation.txt")
             pass
 

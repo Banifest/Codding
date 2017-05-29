@@ -7,7 +7,7 @@ from src.logger import log
 
 
 class Coder(abstractCoder.Coder):
-    arr: list = []
+    matrixTransformation: list = []
 
     def __init__(self, lengthInformation: int):
         log.debug("Создание кодера хемминга")
@@ -29,12 +29,12 @@ class Coder(abstractCoder.Coder):
                     if count >= self.lengthTotal:
                         break
                 flag: bool = not flag
-            self.arr.append(temp)
-        self.arr = np.transpose(np.array(self.arr))
+            self.matrixTransformation.append(temp)
+        self.matrixTransformation = np.transpose(np.array(self.matrixTransformation))
 
     def Encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} кодером хемминга".format(information))
-        listEncodingInformation = information
+        listEncodingInformation: list = information
         listEncodingInformation.reverse()
         if len(listEncodingInformation) < self.lengthInformation:
             for x in range(self.lengthInformation - len(listEncodingInformation)):
@@ -50,9 +50,9 @@ class Coder(abstractCoder.Coder):
 
         answer = [x[0] for x in code]
         code = np.transpose(np.array(code))
-        backup_info = list((np.dot(code, self.arr) % 2)[0])
+        backup_info = list((np.dot(code, self.matrixTransformation) % 2)[0])
         for x in range(self.lengthAdditional):
-            answer[((1 << x) - 1)] = backup_info[x]
+            answer[(1 << x) - 1] = backup_info[x]
         return answer
 
 
@@ -60,7 +60,7 @@ class Coder(abstractCoder.Coder):
         log.info("Декодирование пакета {0} декодером хемминга".format(information))
         code = np.transpose(np.array([[x] for x in information]))
         answer: list = []
-        status: list = list((np.dot(code, self.arr) % 2)[0])
+        status: list = list((np.dot(code, self.matrixTransformation) % 2)[0])
         status.reverse()
         status: int = BitListToInt(status)
         if status != 0:
@@ -68,7 +68,7 @@ class Coder(abstractCoder.Coder):
             if len(code[0]) > status - 1:
                 code[0][status - 1] = (code[0][status - 1] + 1) % 2
                 oldStatus = status
-                status = BitListToInt(list((np.dot(code, self.arr) % 2)[0]))
+                status = BitListToInt(list((np.dot(code, self.matrixTransformation) % 2)[0]))
                 if status != 0:
                     log.debug("Не удалось успешно исправить обнаруженные ошибки")
                     raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")

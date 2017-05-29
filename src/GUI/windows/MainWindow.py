@@ -19,7 +19,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         log.debug("Создание главного окна")
         super().__init__()
-        self.setFixedSize(300, 33)
+        self.setFixedSize(250, 34)
         self.setWindowTitle('Kursach')
         self.setWindowIcon(QIcon('Resources/img/pic.png'))
 

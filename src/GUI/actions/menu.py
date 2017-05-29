@@ -64,7 +64,7 @@ class TestCascadeCoderAction(QAction):
             TestCascadeCoderWindow(self.window)
         else:
             QMessageBox.warning(self.window, "А кодеры кто будет создовать?",
-                                "Для начала тестирования нужно создать два кодера кодер",
+                                "Для начала тестирования нужно создать два кодера",
                                 QMessageBox.Ok)
 
 
