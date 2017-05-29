@@ -10,7 +10,8 @@ from src.logger import log
 
 if __name__ == '__main__':
     a = convolutional.Coder.Coder(2, [1, 3], 1, 2, 2)
-
+    b = [1, 1, 0, 1]
+    a.Decoding(b)
     try:
         log.info("Начало работы программы")
         App = QApplication(sys.argv)

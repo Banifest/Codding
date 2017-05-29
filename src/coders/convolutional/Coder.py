@@ -1,5 +1,5 @@
 from src.coders import abstractCoder
-from src.coders.casts import BitListToInt, CycleShiftRightBitList, IntToBitList
+from src.coders.casts import BitListToInt, CycleShiftRightBitList, GetHemmingDistance, IntToBitList
 from src.logger import log
 
 
@@ -24,6 +24,7 @@ class Coder(abstractCoder.Coder):
 
         self.lengthInformation = 1
         self.lengthAdditional = 1
+
         self.graph = self.GetGraph()
 
     def GetSpeed(self):
@@ -49,8 +50,11 @@ class Coder(abstractCoder.Coder):
 
     def GetGraph(self) -> list:
         """
-        Формирует список представляющий граф переходов графа, где каждая вершина
-        [вершина, [биты которые соответвуют переходу]]
+        Формирует список представляющий граф переходов, где каждая вершина
+        [
+        [номер вершины в которую переходим, [биты которые соответвуют переходу]],
+        ...
+        ]
         """
         answer: list = []
         for x in range(2 ** self.countRegisters):
@@ -100,11 +104,26 @@ class Coder(abstractCoder.Coder):
                                           range(self.countRegisters ** 2 - 1)]  # заполняет первый шаг
 
         for x in infoDividedIntoSteps:
-            nowStep = [[99999, []] for x in range(self.countRegisters ** 2)]  # заполняет первый шаг]
+            nowStep = [[99999, []] for x in range(self.countRegisters ** 2)]  # заполняет первый шаг
             number: int = 0
             for infoAboutVertex in lastStep:
-                if infoAboutVertex[]:
+                vertexStep: int = self.graph[number][0][0]  # вершина перехода
+                distance: int = GetHemmingDistance(x, self.graph[number][0][1])
+                if nowStep[vertexStep][0] > lastStep[number][0] + distance:
+                    nowStep[vertexStep] = [infoAboutVertex[0] + distance, infoAboutVertex[1] + self.graph[number][0][1]]
 
-                pass
+                vertexStep: int = self.graph[number][1][0]  # вершина перехода
+                distance: int = GetHemmingDistance(x, self.graph[number][1][1])
+                if nowStep[vertexStep][0] > lastStep[number][0] + distance:
+                    nowStep[vertexStep] = [infoAboutVertex[0] + distance, infoAboutVertex[1] + self.graph[number][1][1]]
+
+                number += 1
             lastStep = nowStep
-            pass
+
+        minAnswer: list = []
+        minCost: int = 999999
+        for x in lastStep:
+            if minCost > x[0]:
+                minCost = x[0]
+                minAnswer = x[1]
+        return minAnswer
