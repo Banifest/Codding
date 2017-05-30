@@ -231,12 +231,12 @@ class TestCascadeCoderWindow(QWidget):
 
     def AutoTest(self):
         log.debug("Кнопка авто-тестирования нажата")
-        if self.CheckOnCorrectTransferData():
-            return
         if self.TestOnCorrectData():
-            # self.testingProgressBar.setVisible(False)
             self.autoTestingProgressBar.setVisible(True)
             self.noiseProbabilityTextBox.setEnabled(False)
+
+            if self.CheckOnCorrectTransferData():
+                return
 
             status: float = 0
             start: int = 0
@@ -248,12 +248,9 @@ class TestCascadeCoderWindow(QWidget):
                 self.noiseProbabilityTextBox.setText(str(x))
                 information: list
                 status += step
-                if isinstance(self.windowParent, hemming.Coder.Coder)\
-                        or isinstance(self.windowParent.coder, cyclical.Coder.Coder):
-                    information = randint(0, 1 << self.windowParent.coder.lengthInformation)
-                    self.StartTest()
-                else:
-                    information = IntToBitList(int(self.informationTextBox.text()))
+                information = randint(0, 1 << self.windowParent.firstCoder.lengthInformation)
+                self.StartTest()
+                #                information = IntToBitList(int(self.informationTextBox.text()))
                 drawData.append(self.StartTest(testInformation=information))
                 self.autoTestingProgressBar.setValue(int(status))
             self.noiseProbabilityTextBox.setEnabled(True)
@@ -299,12 +296,15 @@ class TestCascadeCoderWindow(QWidget):
     def StartTest(self, flag=None, testInformation=None):
         log.debug("(КАСКАД)Кнопка тестирования нажата")
         if self.TestOnCorrectData():
+            if self.CheckOnCorrectTransferData():
+                return
             self.autoTestButton.setEnabled(False)
             self.lastResultButton.setEnabled(False)
             self.submitButton.setEnabled(False)
 
             interleaver: Interleaver
-            if self.interleaverCheckBox.isChecked() and self.lengthSmashingTextBox.text().isdigit():
+            if self.interleaverCheckBox.isChecked() and self.lengthSmashingTextBox.text().isdigit() and\
+                            self.lengthSmashingTextBox.text()[0] != "0":
                 interleaver = Interleaver(int(self.lengthSmashingTextBox.text()))
             else:
                 interleaver = None
@@ -323,14 +323,16 @@ class TestCascadeCoderWindow(QWidget):
             self.repairPackage = 0
             self.invisiblePackage = 0
             information: list
-            if type(testInformation.__class__) != type(list):
+
+            if isinstance(testInformation, list):
                 information = testInformation
-            elif type(self.channel.coder.__class__) == type(hemming.Coder.Coder)\
-                    or type(self.channel.coder.__class__) == type(cyclical.Coder.Coder):
+            elif isinstance(self.channel.coder, hemming.Coder.Coder)\
+                    or isinstance(self.channel.coder, cyclical.Coder.Coder):
                 information = IntToBitList(int(self.informationTextBox.text()),
                                            self.channel.coder.lengthInformation)
             else:
                 information = IntToBitList(int(self.informationTextBox.text()))
+
             log.debug("Начало цикла тестов")
             writer = open("lastInformation.txt", "w")
             for x in range(int(self.countCyclicalTextBox.text())):
@@ -373,6 +375,12 @@ class TestCascadeCoderWindow(QWidget):
                         self.windowParent.secondCoder.lengthInformation < len(
                         IntToBitList(int(self.informationTextBox.text())))\
                 and not isinstance(self.windowParent.secondCoder, convolutional.Coder.Coder):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setWindowTitle("Неправильно заполнены поле передаваемого пакета")
+            msg.setText("Проверьте правильность заполнения полей")
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()
             return True
         else:
             return False

@@ -140,7 +140,9 @@ class AddCoderWindow(QWidget):
         elif text == CODER_NAMES[3]:
             if self.sizeBlockTextBox.text().isdigit() and self.sizeBlockTextBox.text()[0] != "0" and\
                     self.countBlocksTextBox.text().isdigit() and self.countBlocksTextBox.text()[0] != "0" and\
-                    self.sizePackageTextBox.text().isdigit() and self.sizePackageTextBox.text()[0] != "0":
+                    self.sizePackageTextBox.text().isdigit() and self.sizePackageTextBox.text()[0] != "0" and\
+                            int(self.sizePackageTextBox.text()) <= (
+                        int(self.sizeBlockTextBox.text()) * int(self.countBlocksTextBox.text())):
                 self.windowParent.SetCoder(LubyTransform.Coder(
                         int(self.sizeBlockTextBox.text()),
                         int(self.countBlocksTextBox.text()),

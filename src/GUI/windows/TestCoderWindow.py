@@ -132,7 +132,6 @@ class TestCoderWindow(QWidget):
     def AutoTest(self):
         log.debug("Кнопка авто-тестирования нажата")
         if self.TestOnCorrectData():
-            # self.testingProgressBar.setVisible(False)
             self.autoTestingProgressBar.setVisible(True)
             self.noiseProbabilityTextBox.setEnabled(False)
 
@@ -184,6 +183,8 @@ class TestCoderWindow(QWidget):
 
     def StartTest(self, flag=None, testInformation=None):
         log.debug("Кнопка тестирования нажата")
+        if self.CheckOnCorrectTransferData():
+            return
         if self.TestOnCorrectData():
             self.autoTestButton.setEnabled(False)
             self.lastResultButton.setEnabled(False)
@@ -219,9 +220,6 @@ class TestCoderWindow(QWidget):
                                            self.channel.coder.lengthInformation)
             else:
                 information = IntToBitList(int(self.informationTextBox.text()))
-
-            if self.CheckOnCorrectTransferData():
-                return
 
             log.debug("Начало цикла тестов")
             writer = open("lastInformation.txt", "w")
