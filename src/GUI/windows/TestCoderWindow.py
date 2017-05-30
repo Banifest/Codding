@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageB
 from src.GUI.graphics import DrawGraphic
 from src.GUI.windows import MainWindow
 from src.channel.channel import Channel
-from src.coders import cyclical, hemming
+from src.coders import convolutional, cyclical, hemming
 from src.coders.casts import IntToBitList
 from src.coders.interleaver.Interleaver import Interleaver
 from src.logger import log
@@ -117,14 +117,16 @@ class TestCoderWindow(QWidget):
         self.lengthSmashingLabel.setVisible(self.interleaverCheckBox.isChecked())
         self.lengthSmashingTextBox.setVisible(self.interleaverCheckBox.isChecked())
 
-    def TestOnCorrectData(self) -> bool:
+    def TestOnCorrectData(
+            self) -> bool:  # Убил бы, если увидел у другого, но тут я сам....(ПЕРЕПИСАТЬ!!!)з.ы. даже в туду стыдно ставить
         return (self.noiseProbabilityTextBox.text().isdecimal()\
                 or (len(self.noiseProbabilityTextBox.text().split(".")) == 2\
                     and self.noiseProbabilityTextBox.text().split(".")[0].isdigit()\
                     and self.noiseProbabilityTextBox.text().split(".")[1].isdigit()))\
-               and self.countCyclicalTextBox.text().isdigit()\
-               and self.informationTextBox.text().isdigit()\
-               and (not self.interleaverCheckBox.isChecked() or self.lengthSmashingTextBox.text().isdigit())
+               and self.countCyclicalTextBox.text().isdigit() and self.countCyclicalTextBox.text()[0] != "0"\
+               and self.informationTextBox.text().isdigit() and self.informationTextBox.text()[0] != "0"\
+               and (not self.interleaverCheckBox.isChecked() or
+                    (self.lengthSmashingTextBox.text().isdigit() and self.lengthSmashingTextBox.text()[0] != "0"))
 
 
     def AutoTest(self):
@@ -133,6 +135,9 @@ class TestCoderWindow(QWidget):
             # self.testingProgressBar.setVisible(False)
             self.autoTestingProgressBar.setVisible(True)
             self.noiseProbabilityTextBox.setEnabled(False)
+
+            if self.CheckOnCorrectTransferData():
+                return
 
             status: float = 0
             start: int = 0
@@ -185,7 +190,8 @@ class TestCoderWindow(QWidget):
             self.submitButton.setEnabled(False)
 
             interleaver: Interleaver
-            if self.interleaverCheckBox.isChecked() and self.lengthSmashingTextBox.text().isdigit():
+            if self.interleaverCheckBox.isChecked() and self.lengthSmashingTextBox.text().isdigit()\
+                    and self.lengthSmashingTextBox.text()[0] != "0":
                 interleaver = Interleaver(int(self.lengthSmashingTextBox.text()))
             else:
                 interleaver = None
@@ -209,19 +215,13 @@ class TestCoderWindow(QWidget):
                 information = testInformation
             elif isinstance(self.channel.coder, hemming.Coder.Coder)\
                     or isinstance(self.channel.coder, cyclical.Coder.Coder):
-                if self.channel.coder.lengthInformation < len(IntToBitList(int(self.informationTextBox.text()))):
-                    msg = QMessageBox()
-                    msg.setWindowTitle("Неправильно заполнены поле передаваемого пакета")
-                    msg.setText("Проверьте правильность заполнения полей")
-                    msg.setIcon(QMessageBox.Warning)
-                    msg.setStandardButtons(QMessageBox.Ok)
-                    msg.exec()
-                    return []
-                else:
-                    information = IntToBitList(int(self.informationTextBox.text()),
+                information = IntToBitList(int(self.informationTextBox.text()),
                                            self.channel.coder.lengthInformation)
             else:
                 information = IntToBitList(int(self.informationTextBox.text()))
+
+            if self.CheckOnCorrectTransferData():
+                return
 
             log.debug("Начало цикла тестов")
             writer = open("lastInformation.txt", "w")
@@ -260,5 +260,15 @@ class TestCoderWindow(QWidget):
             msg.exec()
 
 
-    def CheckOnCorrectCoder(self):
-        pass
+    def CheckOnCorrectTransferData(self) -> bool:
+        if self.windowParent.coder.lengthInformation < len(IntToBitList(int(self.informationTextBox.text())))\
+                and not isinstance(self.windowParent.coder, convolutional.Coder.Coder):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setWindowTitle("Неправильно заполнены поле передаваемого пакета")
+            msg.setText("Проверьте правильность заполнения полей")
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()
+            return True
+        else:
+            return False

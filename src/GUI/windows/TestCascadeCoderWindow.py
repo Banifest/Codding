@@ -9,7 +9,7 @@ from src.GUI.graphics import DrawGraphic
 from src.GUI.windows import MainWindow
 from src.channel.cascade import Cascade
 from src.channel.channel import Channel
-from src.coders import cyclical, hemming
+from src.coders import convolutional, cyclical, hemming
 from src.coders.casts import IntToBitList
 from src.coders.interleaver.Interleaver import Interleaver
 from src.logger import log
@@ -153,6 +153,8 @@ class TestCascadeCoderWindow(QWidget):
 
     def StartTest(self, flag=None, testInformation=None):
         log.debug("Кнопка тестирования нажата")
+        if self.CheckOnCorrectTransferData():
+            return
         if self.TestOnCorrectData():
             self.autoTestButton.setEnabled(False)
             self.lastResultButton.setEnabled(False)
@@ -229,6 +231,8 @@ class TestCascadeCoderWindow(QWidget):
 
     def AutoTest(self):
         log.debug("Кнопка авто-тестирования нажата")
+        if self.CheckOnCorrectTransferData():
+            return
         if self.TestOnCorrectData():
             # self.testingProgressBar.setVisible(False)
             self.autoTestingProgressBar.setVisible(True)
@@ -362,3 +366,13 @@ class TestCascadeCoderWindow(QWidget):
             msg.setIcon(QMessageBox.Warning)
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec()
+
+    def CheckOnCorrectTransferData(self) -> bool:
+        if self.windowParent.firstCoder.lengthInformation < len(IntToBitList(int(self.informationTextBox.text())))\
+                and not isinstance(self.windowParent.firstCoder, convolutional.Coder.Coder) and\
+                        self.windowParent.secondCoder.lengthInformation < len(
+                        IntToBitList(int(self.informationTextBox.text())))\
+                and not isinstance(self.windowParent.secondCoder, convolutional.Coder.Coder):
+            return True
+        else:
+            return False

@@ -23,21 +23,22 @@ class Coder(abstractCoder.Coder):
             self.polynomial = IntToBitList(generatingPalindromes[self.lengthAdditional])
 
 
-    def GetRemainder(self, number: int, flag: bool = False) -> list:
+    def GetRemainder(self, information: int, flag: bool = False) -> list:
         polynomial = BitListToInt(self.polynomial)
         if flag:
-            number <<= self.lengthAdditional
+            information <<= self.lengthAdditional
 
-        while number != 0 and int(math.log2(polynomial)) <= int(math.log2(number)):
-            distance = int(math.log2(number)) - int(math.log2(polynomial))
+        while information != 0 and int(math.log2(polynomial)) <= int(math.log2(information)):
+            distance = int(math.log2(information)) - int(math.log2(polynomial))
             tempPalindrome = polynomial << distance
             # операция деления
-            tempNumber = (number ^ tempPalindrome) &\
-                         (((1 << int(math.log2(number) + 1)) - 1) ^ ((1 << distance) - 1))
-            tempNumber += ((1 << distance) - 1) & number
-            number = tempNumber
-        return [0 for x in range(0, self.lengthAdditional - int(math.log2(number)) - 1)] + IntToBitList(number)\
-            if number != 0 else [0]
+            tempNumber = (information ^ tempPalindrome) &\
+                         (((1 << int(math.log2(information) + 1)) - 1) ^ ((1 << distance) - 1))
+            tempNumber += ((1 << distance) - 1) & information
+            information = tempNumber
+        return [0 for x in range(0, self.lengthAdditional - int(math.log2(information)) - 1)] + IntToBitList(
+                information)\
+            if information != 0 else [0]
 
 
     def Encoding(self, information: list) -> list:
@@ -49,7 +50,7 @@ class Coder(abstractCoder.Coder):
         log.info("Декодирование пакета {0} циклическим декодером".format(information))
         if BitListToInt(self.GetRemainder(BitListToInt(information), False)) == 0:
             log.debug("Ошибка в пакете не обнаружена")
-            return BitListToInt(information[:-self.lengthAdditional])
+            return information[:-self.lengthAdditional]
         else:
             count = 1
             log.debug("Обнаружена ошибка в пакете")

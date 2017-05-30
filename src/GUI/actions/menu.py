@@ -100,5 +100,5 @@ class AboutCoder(QAction):
                                     )
         else:
             QMessageBox.warning(self.window, "А кодер кто будет создовать?",
-                                "Для начала тестирования нужно создать кодер",
+                                "Для начала нужно создать кодер",
                                 QMessageBox.Ok)

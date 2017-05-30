@@ -105,10 +105,10 @@ class Coder(abstractCoder.Coder):
             infoDividedIntoSteps.append(tempList)
 
         lastStep = nowStep = [[0, []]] + [[99999, []] for x in
-                                          range(self.countRegisters ** 2 - 1)]  # заполняет первый шаг
+                                          range(2 ** self.countRegisters - 1)]  # заполняет первый шаг
 
         for x in infoDividedIntoSteps:
-            nowStep = [[99999, []] for x in range(self.countRegisters ** 2)]  # заполняет первый шаг
+            nowStep = [[99999, []] for x in range(2 ** self.countRegisters)]  # заполняет первый шаг
             number: int = 0
             for infoAboutVertex in lastStep:
                 vertexStep: int = self.graph[number][0][0]  # вершина перехода

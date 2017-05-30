@@ -98,8 +98,8 @@ class AddCoderWindow(QWidget):
         elif text == CODER_NAMES[2]:
             self.grid.addWidget(QLabel("Список полиномов"), 3, 0)
             self.grid.addWidget(self.listPolynomialTextBox, 3, 1)
-            self.grid.addWidget(QLabel("Количество выходов"), 4, 0)
-            self.grid.addWidget(self.countExitsTextBox, 4, 1)
+            #  self.grid.addWidget(QLabel("Количество выходов"), 4, 0)
+            #  self.grid.addWidget(self.countExitsTextBox, 4, 1)
             self.grid.addWidget(QLabel("Количество регистров памяти"), 5, 0)
             self.grid.addWidget(self.countMemoryRegistersTextBox, 5, 1)
         elif text == CODER_NAMES[3]:
@@ -126,14 +126,15 @@ class AddCoderWindow(QWidget):
                         int(self.listPolynomialTextBox.text())
                         ))
         elif text == CODER_NAMES[2]:
-            if self.countMemoryRegistersTextBox.text().isdigit() and self.countMemoryRegistersTextBox.text()[
-                0] != "0" and\
-                    self.countExitsTextBox.text().isdigit() and self.countExitsTextBox.text()[0] != "0" and\
-                    StrListToList(self.listPolynomialTextBox.text()):
+            if self.countMemoryRegistersTextBox.text().isdigit() and\
+                            self.countMemoryRegistersTextBox.text()[0] != "0" and\
+                    StrListToList(self.listPolynomialTextBox.text()) and\
+                            max(StrListToList(self.listPolynomialTextBox.text())) <\
+                            (1 << int(self.countMemoryRegistersTextBox.text())):
                 self.windowParent.SetCoder(convolutional.Coder.Coder(
                         StrListToList(self.listPolynomialTextBox.text()),
                         1,
-                        int(self.countExitsTextBox.text()),
+                        int(len(StrListToList(self.listPolynomialTextBox.text()))),
                         int(self.countMemoryRegistersTextBox.text())
                         ))
         elif text == CODER_NAMES[3]:
