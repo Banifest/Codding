@@ -75,12 +75,13 @@ class Coder(abstractCoder.Coder):
 
     def Encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} свёрточным кодером".format(information))
-        information.reverse()
-        answer = []
-        for x in information:
-            temp = self.DoStep(x)
-            for y in temp:
-                answer.append(y)
+        answer: list = []
+        nowVertex: int = 0  # текущая вершина
+        for nowBit in information:
+            answer.append(self.graph[nowVertex][nowBit][1])
+            nowVertex = self.graph[nowVertex][nowBit][0]
+
+        answer = [y for x in answer for y in x]
         return answer
 
 
@@ -110,12 +111,12 @@ class Coder(abstractCoder.Coder):
                 vertexStep: int = self.graph[number][0][0]  # вершина перехода
                 distance: int = GetHemmingDistance(x, self.graph[number][0][1])
                 if nowStep[vertexStep][0] > lastStep[number][0] + distance:
-                    nowStep[vertexStep] = [infoAboutVertex[0] + distance, infoAboutVertex[1] + self.graph[number][0][1]]
+                    nowStep[vertexStep] = [infoAboutVertex[0] + distance, infoAboutVertex[1] + [0]]
 
                 vertexStep: int = self.graph[number][1][0]  # вершина перехода
                 distance: int = GetHemmingDistance(x, self.graph[number][1][1])
                 if nowStep[vertexStep][0] > lastStep[number][0] + distance:
-                    nowStep[vertexStep] = [infoAboutVertex[0] + distance, infoAboutVertex[1] + self.graph[number][1][1]]
+                    nowStep[vertexStep] = [infoAboutVertex[0] + distance, infoAboutVertex[1] + [1]]
 
                 number += 1
             lastStep = nowStep

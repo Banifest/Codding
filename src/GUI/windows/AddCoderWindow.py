@@ -128,7 +128,8 @@ class AddCoderWindow(QWidget):
         elif text == CODER_NAMES[2]:
             if self.countPolynomialTextBox.text().isdigit() and\
                     self.countMemoryRegistersTextBox.text().isdigit() and\
-                    self.countExitsTextBox.text().isdigit():
+                    self.countExitsTextBox.text().isdigit() and\
+                    self.listPolynomialTextBox.text():
                 self.windowParent.SetCoder(convolutional.Coder.Coder(
                         int(self.countPolynomialTextBox.text()),
                         list(self.listPolynomialTextBox.text()),
