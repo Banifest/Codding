@@ -1,7 +1,5 @@
-import sys
-
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
+from PyQt5.QtWidgets import QMainWindow, QWidget
 
 from src.GUI.actions import menu
 from src.coders import abstractCoder
@@ -20,7 +18,7 @@ class MainWindow(QMainWindow):
         log.debug("Создание главного окна")
         super().__init__()
         self.setFixedSize(250, 34)
-        self.setWindowTitle('Kursach')
+        self.setWindowTitle('MAVR')
         self.setWindowIcon(QIcon('Resources/img/pic.png'))
 
         menu.SetMainToolBar(self)
@@ -33,16 +31,3 @@ class MainWindow(QMainWindow):
     def closeEvent(self, *args, **kwargs):
         if self.newCoderWindow is not None: del self.newCoderWindow
         if self.testCoderWindow is not None: del self.testCoderWindow
-
-
-def InitMainWindow():
-    # while True:
-    #      try:
-    App = QApplication(sys.argv)
-
-    window = MainWindow()
-    App.exec()
-    # except:
-    #    pass
-
-    # sys.exit(App.exec_())

@@ -91,8 +91,6 @@ class TestCoderWindow(QWidget):
         self.grid.addWidget(self.noiseProbabilityTextBox, 1, 1)
         self.grid.addWidget(self.countCyclicalLabel, 2, 0)
         self.grid.addWidget(self.countCyclicalTextBox, 2, 1)
-        self.grid.addWidget(self.duplexLabel, 3, 0)
-        self.grid.addWidget(self.duplexCheckBox, 3, 1)
         self.grid.addWidget(self.interleaverLabel, 4, 0)
         self.grid.addWidget(self.interleaverCheckBox, 4, 1)
         self.grid.addWidget(self.lengthSmashingLabel, 5, 0)
@@ -146,8 +144,7 @@ class TestCoderWindow(QWidget):
                 self.noiseProbabilityTextBox.setText(str(x))
                 information: list
                 status += step
-                if type(self.windowParent.coder.__class__) == type(hemming.Coder.Coder)\
-                        or type(self.windowParent.coder.__class__) == type(cyclical.Coder.Coder):
+                if isinstance(self.windowParent.coder, cyclical.Coder.Coder):
                     information = randint(0, 1 << self.windowParent.coder.lengthInformation)
                     self.StartTest()
                 else:
@@ -165,7 +162,7 @@ class TestCoderWindow(QWidget):
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec()
 
-    def GetLastResult(self) -> str:
+    def GetLastResult(self) -> None:
         choise = QMessageBox.information(self, "Последняя попытка\n",
                                          "Успешно переданно (пакет не исказился) - {0}\n"
                                          "Успешно исправленно паккетов - {1}\n"
@@ -178,7 +175,6 @@ class TestCoderWindow(QWidget):
 
         if choise == QMessageBox.Open:
             os.system("lastInformation.txt")
-            pass
 
 
     def StartTest(self, flag=None, testInformation=None):
@@ -209,11 +205,20 @@ class TestCoderWindow(QWidget):
             self.invisiblePackage = 0
             information: list = []
 
-            if type(testInformation.__class__) != type(list):
+            if isinstance(testInformation, list):
                 information = testInformation
-            elif type(self.channel.coder.__class__) == type(hemming.Coder.Coder)\
-                    or type(self.channel.coder.__class__) == type(cyclical.Coder.Coder):
-                information = IntToBitList(int(self.informationTextBox.text()),
+            elif isinstance(self.channel.coder, hemming.Coder.Coder)\
+                    or isinstance(self.channel.coder, cyclical.Coder.Coder):
+                if self.channel.coder.lengthInformation < len(IntToBitList(int(self.informationTextBox.text()))):
+                    msg = QMessageBox()
+                    msg.setWindowTitle("Неправильно заполнены поле передаваемого пакета")
+                    msg.setText("Проверьте правильность заполнения полей")
+                    msg.setIcon(QMessageBox.Warning)
+                    msg.setStandardButtons(QMessageBox.Ok)
+                    msg.exec()
+                    return []
+                else:
+                    information = IntToBitList(int(self.informationTextBox.text()),
                                            self.channel.coder.lengthInformation)
             else:
                 information = IntToBitList(int(self.informationTextBox.text()))
@@ -253,3 +258,7 @@ class TestCoderWindow(QWidget):
             msg.setIcon(QMessageBox.Warning)
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec()
+
+
+    def CheckOnCorrectCoder(self):
+        pass

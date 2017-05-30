@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QComboBox, QGridLayout, QLabel, QLineEdit, QMessageB
 from Resources.stringConsts import CODER_NAMES
 from src.GUI.windows import MainWindow
 from src.coders import convolutional, cyclical, hemming
+from src.coders.casts import StrListToList
 from src.coders.fountain import LubyTransform
 from src.logger import log
 
@@ -95,8 +96,6 @@ class AddCoderWindow(QWidget):
             self.grid.addWidget(QLabel("Порождающий полином"), 3, 0)
             self.grid.addWidget(self.listPolynomialTextBox, 3, 1)
         elif text == CODER_NAMES[2]:
-            self.grid.addWidget(QLabel("Количество полиномов"), 2, 0)
-            self.grid.addWidget(self.countPolynomialTextBox, 2, 1)
             self.grid.addWidget(QLabel("Список полиномов"), 3, 0)
             self.grid.addWidget(self.listPolynomialTextBox, 3, 1)
             self.grid.addWidget(QLabel("Количество выходов"), 4, 0)
@@ -115,32 +114,32 @@ class AddCoderWindow(QWidget):
     def CreateCoder(self):
         text = self.comboBox.currentText()
         if text == CODER_NAMES[0]:
-            if self.sizePackageTextBox.text().isdigit():
+            if self.sizePackageTextBox.text().isdigit() and self.sizePackageTextBox.text()[0] != "0":
                 self.windowParent.SetCoder(hemming.Coder.Coder(
                         int(self.sizePackageTextBox.text())
                         ))
         elif text == CODER_NAMES[1]:
-            if self.sizePackageTextBox.text().isdigit() and self.listPolynomialTextBox.text().isdigit():
+            if self.sizePackageTextBox.text().isdigit() and self.sizePackageTextBox.text()[0] != "0" and\
+                    self.listPolynomialTextBox.text().isdigit() and self.listPolynomialTextBox.text()[0] != "0":
                 self.windowParent.SetCoder(cyclical.Coder.Coder(
                         int(self.sizePackageTextBox.text()),
                         int(self.listPolynomialTextBox.text())
                         ))
         elif text == CODER_NAMES[2]:
-            if self.countPolynomialTextBox.text().isdigit() and\
-                    self.countMemoryRegistersTextBox.text().isdigit() and\
-                    self.countExitsTextBox.text().isdigit() and\
-                    self.listPolynomialTextBox.text():
+            if self.countMemoryRegistersTextBox.text().isdigit() and self.countMemoryRegistersTextBox.text()[
+                0] != "0" and\
+                    self.countExitsTextBox.text().isdigit() and self.countExitsTextBox.text()[0] != "0" and\
+                    StrListToList(self.listPolynomialTextBox.text()):
                 self.windowParent.SetCoder(convolutional.Coder.Coder(
-                        int(self.countPolynomialTextBox.text()),
-                        list(self.listPolynomialTextBox.text()),
+                        StrListToList(self.listPolynomialTextBox.text()),
                         1,
                         int(self.countExitsTextBox.text()),
                         int(self.countMemoryRegistersTextBox.text())
                         ))
         elif text == CODER_NAMES[3]:
-            if self.sizeBlockTextBox.text().isdigit() and\
-                    self.countBlocksTextBox.text().isdigit() and\
-                    self.size.sizePackageTextBox.text().isdigit():
+            if self.sizeBlockTextBox.text().isdigit() and self.sizeBlockTextBox.text()[0] != "0" and\
+                    self.countBlocksTextBox.text().isdigit() and self.countBlocksTextBox.text()[0] != "0" and\
+                    self.sizePackageTextBox.text().isdigit() and self.sizePackageTextBox.text()[0] != "0":
                 self.windowParent.SetCoder(LubyTransform.Coder(
                         int(self.sizeBlockTextBox.text()),
                         int(self.countBlocksTextBox.text()),

@@ -126,18 +126,20 @@ class TestCascadeCoderWindow(QWidget):
         self.grid.setSpacing(10)
         self.setLayout(self.grid)
 
-    def CheckIsInterleaverSecond(self):
-        self.lengthSmashingLabel.setVisible(self.interleaverCheckBoxSecond.isChecked())
-        self.lengthSmashingTextBoxSecond.setVisible(self.interleaverCheckBoxSecond.isChecked())
-
-        #  def StartTestThread(self):
-        #     threading.Thread(target=StartTest, name="Start Test", args=(self,)).start()
 
     def AutoTestThread(self):
         threading.Thread(target=self.AutoTest, name="Auto Test").start()
 
+
+    def CheckIsInterleaverSecond(self):
+        self.lengthSmashingLabel.setVisible(
+            self.interleaverCheckBox.isChecked() or self.interleaverCheckBoxSecond.isChecked())
+        self.lengthSmashingTextBoxSecond.setVisible(self.interleaverCheckBoxSecond.isChecked())
+
+
     def CheckIsInterleaver(self):
-        self.lengthSmashingLabel.setVisible(self.interleaverCheckBox.isChecked())
+        self.lengthSmashingLabel.setVisible(
+            self.interleaverCheckBox.isChecked() or self.interleaverCheckBoxSecond.isChecked())
         self.lengthSmashingTextBox.setVisible(self.interleaverCheckBox.isChecked())
 
     def TestOnCorrectData(self) -> bool:
@@ -148,9 +150,6 @@ class TestCascadeCoderWindow(QWidget):
                and self.countCyclicalTextBox.text().isdigit()\
                and self.informationTextBox.text().isdigit()\
                and (not self.interleaverCheckBox.isChecked() or self.lengthSmashingTextBox.text().isdigit())
-
-    def CycliTest(self):
-        pass
 
     def StartTest(self, flag=None, testInformation=None):
         log.debug("Кнопка тестирования нажата")
@@ -188,10 +187,10 @@ class TestCascadeCoderWindow(QWidget):
             self.invisiblePackage = 0
             information: list
 
-            if type(testInformation.__class__) != type(list):
+            if isinstance(testInformation, list):
                 information = testInformation
-            elif type(self.cascade.firstCoder.__class__) == type(hemming.Coder.Coder)\
-                    or type(self.cascade.firstCoder.__class__) == type(cyclical.Coder.Coder):
+            elif isinstance(self.cascade.firstCoder, hemming.Coder.Coder)\
+                    or isinstance(self.cascade.firstCoder, cyclical.Coder.Coder):
                 information = IntToBitList(int(self.informationTextBox.text()),
                                            self.cascade.firstCoder.lengthInformation)
             else:
@@ -245,8 +244,8 @@ class TestCascadeCoderWindow(QWidget):
                 self.noiseProbabilityTextBox.setText(str(x))
                 information: list
                 status += step
-                if type(self.windowParent.coder.__class__) == type(hemming.Coder.Coder)\
-                        or type(self.windowParent.coder.__class__) == type(cyclical.Coder.Coder):
+                if isinstance(self.windowParent, hemming.Coder.Coder)\
+                        or isinstance(self.windowParent.coder, cyclical.Coder.Coder):
                     information = randint(0, 1 << self.windowParent.coder.lengthInformation)
                     self.StartTest()
                 else:

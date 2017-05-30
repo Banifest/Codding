@@ -61,7 +61,7 @@ def CycleShiftRight(num: int) -> int:
 
 
 def CycleShiftLeft(num: int) -> int:
-    olderBit = num & (1 << math.log2(num))
+    olderBit: int = num & (1 << math.log2(num))
     return (((olderBit - 1) & num) << 1) + 1
 
 
@@ -72,3 +72,11 @@ def GetHemmingDistance(first: list, second: list) -> int:
         if first[x] != second[x]:
             answer += 1
     return answer
+
+
+def StrListToList(value: str) -> list:
+    # TODO Нужно будет переписать
+    try:
+        return [int(x) for x in value.split(",")]
+    except:
+        False

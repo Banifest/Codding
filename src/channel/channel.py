@@ -2,6 +2,7 @@ import random
 from typing import Optional, Union
 
 from src.coders import abstractCoder
+from src.coders.casts import BitListToInt
 from src.coders.exeption import DecodingException
 from src.coders.interleaver import Interleaver
 from src.logger import log
@@ -23,8 +24,6 @@ class Channel:
                  countCyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
         log.debug("Создание канала связи")
-        # log.debug("Создание канала связи с параметрами:{0], {1}, {2}, {3}, {4}".
-        #          format(coder, noiseProbability, countCyclical, duplex, interleaver))
         self.coder = coder
         if noiseProbability is not None: self.noiseProbability = noiseProbability
         if countCyclical is not None: self.countCyclical = countCyclical
@@ -84,7 +83,6 @@ class Channel:
         log.info("Производиться передача последовательности битов - {0}".format(information))
         nowInformation: list = information
         status: int = 0
-        helpInformation: list
         try:
             nowInformation = self.coder.Encoding(nowInformation)
             if self.interleaver: nowInformation = self.interleaver.Shuffle(nowInformation)
@@ -128,7 +126,7 @@ class Channel:
             log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
-            if nowInformation == information:
+            if BitListToInt(nowInformation) == BitListToInt(information):
                 if status != 1: status = 0
                 log.info("Пакет {0} был успешно передан".format(information))
                 self.information = "Пакет был успешно передан\n"

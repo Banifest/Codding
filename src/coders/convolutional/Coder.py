@@ -13,13 +13,13 @@ class Coder(abstractCoder.Coder):
 
     graph: list = []
 
-    def __init__(self, countPolynomials: int, listPolynomials: list, countInput: int, countOutput: int,
+    def __init__(self, listPolynomials: list, countInput: int, countOutput: int,
                  countRegister: int):
         log.debug("Создание свёрточного кодера ....")
         self.countInput = countInput
         self.countOutput = countOutput
         self.countRegisters = countRegister
-        self.countPolynomials = countPolynomials
+        self.countPolynomials = len(listPolynomials)
         self.listPolynomials = listPolynomials
 
         self.lengthInformation = 1
@@ -29,6 +29,9 @@ class Coder(abstractCoder.Coder):
 
     def GetSpeed(self):
         return 1 / self.countRegisters
+
+    def GetRedundancy(self):
+        return self.countOutput * 100
 
     def DoStep(self, informationBit: int) -> list:
         log.debug("Шаг при кодировании бита - {0}".format(informationBit))

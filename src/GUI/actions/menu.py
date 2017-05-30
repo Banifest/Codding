@@ -81,13 +81,13 @@ class AboutCoder(QAction):
     def createWindow(self):
         if self.window.coder is not None:
             information: str = ""
-            if type(self.window.coder.__class__) == type(hemming.Coder.Coder.__class__):
+            if isinstance(self.window.coder, hemming.Coder.Coder):
                 information = CODER_NAMES[0]
-            elif type(self.window.coder.__class__) == type(cyclical.Coder.Coder.__class__):
+            elif isinstance(self.window.coder, cyclical.Coder.Coder):
                 information = CODER_NAMES[1]
-            elif type(self.window.coder.__class__) == type(convolutional.Coder.Coder.__class__):
+            elif isinstance(self.window.coder, convolutional.Coder.Coder):
                 information = CODER_NAMES[2]
-            elif type(self.window.coder.__class__) == type(fountain.LubyTransform.Coder.__class__):
+            elif isinstance(self.window.coder, fountain.LubyTransform.Coder):
                 information = CODER_NAMES[3]
             QMessageBox.information(self.window, "Информация о последнем добавленом кодере",
                                     "Кодер типа - {0}\n"
