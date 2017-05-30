@@ -8,18 +8,6 @@ from src.logger import log
 
 
 if __name__ == '__main__':
-    # a = convolutional.Coder.Coder(2, [1, 3], 1, 2, 2)
-    # test = [1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0]
-    # print(a.Encoding(test))
-    # print(BitListToInt(test))
-    # print(BitListToInt(a.Decoding([0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1])))
-    # b = [1, 1, 0, 1]
-    # a.Decoding(b)
-
-    # coder = LubyTransform.Coder(3, 4, 9)
-    # print(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0]))
-    # print(coder.Decoding(coder.Encoding([0, 1, 0, 1, 1, 1, 1, 0, 0])))
-
     try:
         log.info("Начало работы программы")
         App = QApplication(sys.argv)
