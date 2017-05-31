@@ -2,6 +2,7 @@ from typing import Optional
 
 from src.channel import channel
 from src.coders import abstractCoder
+from src.coders.casts import BitListToInt
 from src.coders.interleaver import Interleaver
 
 
@@ -32,4 +33,4 @@ class Cascade(channel.Channel):
 
         nowInformation = self.firstCoder.Decoding(nowInformation)
 
-        return 0 if nowInformation == information else 2
+        return 0 if BitListToInt(nowInformation) == BitListToInt(information) else 2

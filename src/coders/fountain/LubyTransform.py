@@ -15,6 +15,7 @@ class Coder(abstractCoder.Coder):
     def __init__(self, sizeBlock: int, countCodingBlocks: int, lengthInformation: int):
         log.debug("Создание фонтанного кодера с параметрами:{0}, {1}, {2}".
                   format(sizeBlock, countCodingBlocks, lengthInformation))
+        self.lengthInformation = lengthInformation
         self.sizeBlock = sizeBlock
         self.blocks = []
         self.countCodingBlocks = countCodingBlocks
@@ -33,6 +34,7 @@ class Coder(abstractCoder.Coder):
     def Encoding(self, information: list):
         log.info("Кодирование пакета {0} фонтанным LT-кодером".format(information))
         combinationBlocks: list = []
+        information = [0] * abs(len(information) - self.lengthInformation) + information  # добавление 0 битов вначало
         for x in range(0, len(information), self.sizeBlock):
             combinationBlocks.append(BitListToInt(information[x:min(x + self.sizeBlock, len(information))]))
 
@@ -96,6 +98,6 @@ class Coder(abstractCoder.Coder):
 
         # формирование ответа в битовом представлении
         answer = answer[:-1]
+        answer = [IntToBitList(answer[0])] + [IntToBitList(x, self.sizeBlock) for x in answer[1:]]
         answer.reverse()
-        answer = [IntToBitList(x, self.sizeBlock) for x in answer]
         return [y for x in answer for y in x]

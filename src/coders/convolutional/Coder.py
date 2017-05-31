@@ -89,6 +89,7 @@ class Coder(abstractCoder.Coder):
 
 
     def Decoding(self, information: list):
+        log.info("Декодирование пакета {0} свёрточным декодером по максимуму правдоподобия".format(information))
         lastStep: list = []  # Информация об предыдущем шаге
         nowStep: list = []  # Информация о текущем шаге
         infoAboutVertex: list = []  # информация о вершине
@@ -108,7 +109,7 @@ class Coder(abstractCoder.Coder):
                                           range(2 ** self.countRegisters - 1)]  # заполняет первый шаг
 
         for x in infoDividedIntoSteps:
-            nowStep = [[99999, []] for x in range(2 ** self.countRegisters)]  # заполняет первый шаг
+            nowStep = [[99999, []] for x in range(2 ** self.countRegisters)]
             number: int = 0
             for infoAboutVertex in lastStep:
                 vertexStep: int = self.graph[number][0][0]  # вершина перехода

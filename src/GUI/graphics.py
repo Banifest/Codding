@@ -44,6 +44,8 @@ def DrawGraphic(drawInformation: list):
     df2 = DataFrame(drawInformation,
                     columns=["Без искажений", "Исправленные ошибки", "Обнаруженные ошибки", "Необнаруженные ошибки"])
     df2.plot(kind='bar', stacked=True)
+    plt.xlabel("Шанс на искажение бита информации, %")
+    plt.ylabel("Количество тестов")
     plt.show()
 
 
