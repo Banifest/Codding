@@ -59,7 +59,7 @@ class TestCoderWindow(QWidget):
         self.countCyclicalLabel = QLabel("Количество попыток передачи при тестировании")
         self.duplexLabel = QLabel("Двунаправленный ли канал?")
         self.interleaverLabel = QLabel("Использование перемежителя")
-        self.lengthSmashingLabel = QLabel("Длина раскидования")
+        self.lengthSmashingLabel = QLabel("Длина разбрасывания")
 
         self.testingProgressBar = QProgressBar()
         self.autoTestingProgressBar = QProgressBar()
