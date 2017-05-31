@@ -3,11 +3,7 @@ from matplotlib import rcParams
 from pandas import DataFrame
 
 
-
-def DrawGraphic(drawInformation: list):
-    import matplotlib.pyplot as plt
-
-
+def InitGraphics():
     # colorbrewer2 Dark2 qualitative color table
     dark2_colors = brewer2mpl.get_map('Dark2', 'Qualitative', 7).mpl_colors
 
@@ -21,24 +17,21 @@ def DrawGraphic(drawInformation: list):
     rcParams['patch.facecolor'] = dark2_colors[0]
     rcParams['font.family'] = 'StixGeneral'
 
+def DrawGraphic(drawInformation: list):
+    import matplotlib.pyplot as plt
+    InitGraphics()
+
 
     def remove_border(axes=None, top=False, right=False, left=True, bottom=True):
-        """
-        Minimize chartjunk by stripping out unnecesasry plot borders and axis ticks
-
-        The top/right/left/bottom keywords toggle whether the corresponding plot border is drawn
-        """
         ax = axes or plt.gca()
         ax.spines['top'].set_visible(top)
         ax.spines['right'].set_visible(right)
         ax.spines['left'].set_visible(left)
         ax.spines['bottom'].set_visible(bottom)
 
-        # turn off all ticks
         ax.yaxis.set_ticks_position('none')
         ax.xaxis.set_ticks_position('none')
 
-        # now re-enable visibles
         if top:
             ax.xaxis.tick_top()
         if bottom:
@@ -51,4 +44,19 @@ def DrawGraphic(drawInformation: list):
     df2 = DataFrame(drawInformation,
                     columns=["Без искажений", "Исправленные ошибки", "Обнаруженные ошибки", "Необнаруженные ошибки"])
     df2.plot(kind='bar', stacked=True)
+    plt.show()
+
+
+def DrawPlotPie(drawInformation: list):
+    import matplotlib.pyplot as plt
+
+    InitGraphics()
+
+    fig = plt.figure()
+    sumResult: int = sum(drawInformation)
+    plt.pie(drawInformation, labels=[
+        "Без искажений\n{0}".format(drawInformation[0] / sumResult * 100),
+        "Исправленные ошибки\n{0}".format(drawInformation[1] / sumResult * 100),
+        "Ошибки\n{0}".format(drawInformation[2] / sumResult * 100)])
+    plt.title("Информация о последнем тесте")
     plt.show()

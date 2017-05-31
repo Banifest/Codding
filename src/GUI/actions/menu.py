@@ -53,7 +53,7 @@ class TestCascadeCoderAction(QAction):
     window: MainWindow
 
     def __init__(self, window: MainWindow):
-        super().__init__(QIcon("Resources/img/TestCascadeCoder.jpg"), "&Протестировать каскадный кодер", window)
+        super().__init__(QIcon("Resources/img/TestCascadeCoder.png"), "&Протестировать каскадный кодер", window)
         self.window = window
         self.setShortcut("Ctrl+Shift+С")
 

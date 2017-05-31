@@ -5,7 +5,7 @@ from random import randint
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
-from src.GUI.graphics import DrawGraphic
+from src.GUI.graphics import DrawGraphic, DrawPlotPie
 from src.GUI.windows import MainWindow
 from src.channel.cascade import Cascade
 from src.channel.channel import Channel
@@ -51,7 +51,7 @@ class TestCascadeCoderWindow(QWidget):
         self.setWindowTitle("Тестирование кодера")
         parent.testCoderWindow = self
         self.windowParent: MainWindow = parent
-        self.setWindowIcon(QIcon("Resources/img/TestCoder.jpg"))
+        self.setWindowIcon(QIcon("Resources/img/TestCascadeCoder.png"))
 
         self.submitButton = QPushButton("Начать тестирование")
         self.submitButton.setShortcut("Enter")
@@ -277,6 +277,7 @@ class TestCascadeCoderWindow(QWidget):
 
         if choise == QMessageBox.Open:
             os.system("lastInformation.txt")
+            DrawPlotPie([self.successfullyPackage, self.repairPackage, self.badPackage + self.invisiblePackage])
         elif choise == QMessageBox.Help:
             a = 0
             msg = QMessageBox()

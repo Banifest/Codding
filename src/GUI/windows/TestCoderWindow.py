@@ -5,7 +5,7 @@ from random import randint
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
-from src.GUI.graphics import DrawGraphic
+from src.GUI.graphics import DrawGraphic, DrawPlotPie
 from src.GUI.windows import MainWindow
 from src.channel.channel import Channel
 from src.coders import convolutional, cyclical, hemming
@@ -179,7 +179,7 @@ class TestCoderWindow(QWidget):
 
         if choise == QMessageBox.Open:
             os.system("lastInformation.txt")
-
+            DrawPlotPie([self.successfullyPackage, self.repairPackage, self.badPackage + self.invisiblePackage])
 
     def StartTest(self, flag=None, testInformation=None):
         log.debug("Кнопка тестирования нажата")

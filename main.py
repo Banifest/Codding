@@ -17,6 +17,5 @@ if __name__ == '__main__':
     except Exception as e:
         print(e)
         log.critical("Необрабатываемое исключение")
-        pass
 else:
     raise Exception("Невозможен import данного файла:(")

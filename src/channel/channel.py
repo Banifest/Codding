@@ -95,6 +95,10 @@ class Channel:
             status = 2
             log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
+        except:
+            status = 2
+            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
+            self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
             if nowInformation == information:
                 if status != 1: status = 0
