@@ -57,8 +57,8 @@ def DrawPlotPie(drawInformation: list):
     fig = plt.figure()
     sumResult: int = sum(drawInformation)
     plt.pie(drawInformation, labels=[
-        "Без искажений\n{0}".format(drawInformation[0] / sumResult * 100),
-        "Исправленные ошибки\n{0}".format(drawInformation[1] / sumResult * 100),
-        "Ошибки\n{0}".format(drawInformation[2] / sumResult * 100)])
+        "Без искажений\n{0}%".format(int(drawInformation[0] / sumResult * 100)),
+        "Исправленные ошибки\n{0}%".format(int(drawInformation[1] / sumResult * 100)),
+        "Ошибки\n{0}%".format(int(drawInformation[2] / sumResult * 100))])
     plt.title("Информация о последнем тесте")
     plt.show()

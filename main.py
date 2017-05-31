@@ -8,6 +8,8 @@ from src.logger import log
 
 
 if __name__ == '__main__':
+    # coder = LubyTransform.Coder(3,4,10)
+    # print(coder.Decoding(coder.Encoding([0,1,1,1,0,1,0,1])))
     try:
         log.info("Начало работы программы")
         App = QApplication(sys.argv)
