@@ -40,11 +40,9 @@ class Coder(abstractCoder.Coder):
                 information)\
             if information != 0 else [0]
 
-
     def Encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} циклическим кодером".format(information))
         return information + self.GetRemainder(BitListToInt(information), True)
-
 
     def Decoding(self, information: list) -> list:
         log.info("Декодирование пакета {0} циклическим декодером".format(information))

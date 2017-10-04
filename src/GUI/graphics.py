@@ -11,7 +11,7 @@ def InitGraphics():
     rcParams['figure.dpi'] = 150
     rcParams['axes.color_cycle'] = dark2_colors
     rcParams['lines.linewidth'] = 2
-    rcParams['axes.facecolor'] = 'white'
+    rcParams["axes.facecolor"] = 'white'
     rcParams['font.size'] = 14
     rcParams['patch.edgecolor'] = 'white'
     rcParams['patch.facecolor'] = dark2_colors[0]

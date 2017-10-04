@@ -1,9 +1,9 @@
 from typing import Optional
 
+from coders.interleaver import Interleaver
 from src.channel import channel
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt
-from src.coders.interleaver import Interleaver
 
 
 class Cascade(channel.Channel):
@@ -12,9 +12,13 @@ class Cascade(channel.Channel):
     secondCoder: abstractCoder.Coder
     secondInterleaver: Interleaver.Interleaver
 
-    def __init__(self, firstCoder: abstractCoder.Coder, secondCoder: abstractCoder.Coder,
-                 noiseProbability: Optional[int], countCyclical: Optional[int],
-                 duplex: Optional[bool], firstInterleaver: Optional[Interleaver.Interleaver],
+    def __init__(self,
+                 firstCoder: abstractCoder.Coder,
+                 secondCoder: abstractCoder.Coder,
+                 noiseProbability: Optional[int],
+                 countCyclical: Optional[int],
+                 duplex: Optional[bool],
+                 firstInterleaver: Optional[Interleaver.Interleaver],
                  secondInterleaver: Optional[Interleaver.Interleaver]):
         super().__init__(None, noiseProbability, countCyclical, duplex, firstInterleaver)
         self.firstCoder = firstCoder
@@ -29,8 +33,8 @@ class Cascade(channel.Channel):
         if self.secondInterleaver is not None: nowInformation = self.secondInterleaver.Shuffle(nowInformation)
         status: list = self.GetTransferOneStep(nowInformation)
         nowInformation = status[0]
-        if self.secondInterleaver is not None: nowInformation = self.secondInterleaver.Reestablish(nowInformation)
 
+        if self.secondInterleaver is not None: nowInformation = self.secondInterleaver.Reestablish(nowInformation)
         nowInformation = self.firstCoder.Decoding(nowInformation)
 
         return 0 if BitListToInt(nowInformation) == BitListToInt(information) else 2

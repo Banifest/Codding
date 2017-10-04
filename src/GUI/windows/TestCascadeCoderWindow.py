@@ -5,13 +5,13 @@ from random import randint
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
+from coders.interleaver import Interleaver
 from src.GUI.graphics import DrawGraphic, DrawPlotPie
 from src.GUI.windows import MainWindow
 from src.channel.cascade import Cascade
 from src.channel.channel import Channel
 from src.coders import convolutional, cyclical, hemming
 from src.coders.casts import IntToBitList
-from src.coders.interleaver.Interleaver import Interleaver
 from src.logger import log
 
 

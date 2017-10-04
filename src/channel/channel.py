@@ -1,10 +1,10 @@
 import random
 from typing import Optional, Union
 
+from coders.interleaver import Interleaver
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt
 from src.coders.exeption import DecodingException
-from src.coders.interleaver import Interleaver
 from src.logger import log
 
 
@@ -107,7 +107,7 @@ class Channel:
             else:
                 status = 3
                 log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
-                            nowInformation))
+                        nowInformation))
                 self.information = "Пакет при передаче был повреждён и не подлежит "\
                                    "востановлению\n"
         return status
@@ -144,7 +144,6 @@ class Channel:
 
 
 
-
     def GetInformationAboutLastTransfer(self):
         return self.information
 
@@ -157,6 +156,24 @@ class Channel:
         :return: Искажённую информацию, представленную в виде массива битов
         """
         log.debug("Симуляция шума на канале с вероятностью {0}".format(straight))
+
+        randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
+
+        count_change_bit: int = int(len(information) * straight)  # кол-во ошибок на канале
+        if count_change_bit == 0 and straight != 0: count_change_bit = 0  # если ошибок не ноль, то увеличиваем до 1
+        changes_bits: set = set()  # множество битов которые будут измененны
+
+        while len(changes_bits) < count_change_bit:  # собираем номеров множество неповторяющихся битов
+            changes_bits += random.Random.randint(0, len(information))
+
+        changes_bits: list = list(changes_bits)  # преобразуем в список
+        for x in changes_bits:  # инвертирование битов
+            information[x] *= -1
+
+        return information
+
+
+"""
         randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
         if straight is None: straight = self.noiseProbability
         answer: list = []
@@ -168,3 +185,4 @@ class Channel:
                 answer.append(x)
         log.debug("В ходе симуляции шума пакет {0} -> {1}".format(information, answer))
         return answer
+"""
