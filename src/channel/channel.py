@@ -159,18 +159,20 @@ class Channel:
 
         randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
 
-        count_change_bit: int = int(len(information) * straight)  # кол-во ошибок на канале
+        count_change_bit: int = int(len(information) * straight / 100)  # кол-во ошибок на канале
         if count_change_bit == 0 and straight != 0: count_change_bit = 0  # если ошибок не ноль, то увеличиваем до 1
         changes_bits: set = set()  # множество битов которые будут измененны
 
         while len(changes_bits) < count_change_bit:  # собираем номеров множество неповторяющихся битов
-            changes_bits += random.Random.randint(0, len(information))
+            changes_bits.add(randomGenerator.randint(0, len(information)))
 
         changes_bits: list = list(changes_bits)  # преобразуем в список
+        answer: list = information.copy()
         for x in changes_bits:  # инвертирование битов
-            information[x] *= -1
+            answer[x] ^= 1
 
-        return information
+        log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(answer))
+        return answer
 
 
 """

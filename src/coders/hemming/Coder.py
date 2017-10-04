@@ -82,7 +82,7 @@ class Coder(abstractCoder.Coder):
                 raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
         count: int = 0
         step: int = 0
-        for x in information:
+        for x in code[0]:
             if math.log2(count + 1) != int(math.log2(count + 1)) or step >= self.lengthAdditional:
                 answer.append(x)
             else:
