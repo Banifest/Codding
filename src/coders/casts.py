@@ -79,4 +79,4 @@ def StrListToList(value: str) -> list:
     try:
         return [int(x) for x in value.split(",")]
     except:
-        False
+        pass
