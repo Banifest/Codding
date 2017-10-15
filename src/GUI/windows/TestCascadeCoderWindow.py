@@ -6,7 +6,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
 from coders.interleaver import Interleaver
-from src.GUI.graphics import DrawGraphic, DrawPlotPie
+from src.GUI.graphics import draw_graphic, draw_plot_pie
 from src.GUI.windows import MainWindow
 from src.channel.cascade import Cascade
 from src.channel.channel import Channel
@@ -251,7 +251,7 @@ class TestCascadeCoderWindow(QWidget):
                 drawData.append(self.StartTest(testInformation=information))
                 self.autoTestingProgressBar.setValue(int(status))
             self.noiseProbabilityTextBox.setEnabled(True)
-            DrawGraphic(drawData)
+            draw_graphic(drawData)
         else:
             log.debug("Атрибуты указанны некорректно")
             msg = QMessageBox()
@@ -274,7 +274,7 @@ class TestCascadeCoderWindow(QWidget):
 
         if choise == QMessageBox.Open:
             os.system("lastInformation.txt")
-            DrawPlotPie([self.successfullyPackage, self.repairPackage, self.badPackage + self.invisiblePackage])
+            draw_plot_pie([self.successfullyPackage, self.repairPackage, self.badPackage + self.invisiblePackage])
         elif choise == QMessageBox.Help:
             a = 0
             msg = QMessageBox()

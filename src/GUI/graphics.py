@@ -1,6 +1,5 @@
 from brewer2mpl import brewer2mpl
 from matplotlib import rcParams
-from pandas import DataFrame
 
 
 def InitGraphics():
@@ -17,10 +16,10 @@ def InitGraphics():
     rcParams['patch.facecolor'] = dark2_colors[0]
     rcParams['font.family'] = 'StixGeneral'
 
-def DrawGraphic(drawInformation: list):
+
+def draw_graphic(draw_information: list):
     import matplotlib.pyplot as plt
     InitGraphics()
-
 
     def remove_border(axes=None, top=False, right=False, left=True, bottom=True):
         ax = axes or plt.gca()
@@ -41,24 +40,30 @@ def DrawGraphic(drawInformation: list):
         if right:
             ax.yaxis.tick_right()
 
-    df2 = DataFrame(drawInformation,
-                    columns=["Без искажений", "Исправленные ошибки", "Обнаруженные ошибки", "Необнаруженные ошибки"])
-    df2.plot(kind='bar', stacked=True)
+
+
+    print(draw_information)
+    # df2 = DataFrame(draw_information,
+    #                columns=["Без искажений", "Исправленные ошибки", "Обнаруженные ошибки", "Необнаруженные ошибки"])
+    # df2.plot(kind='bar', stacked=True)
+
+
+    plt.plot([x[0] + x[1] for x in draw_information])
     plt.xlabel("Шанс на искажение бита информации, %")
     plt.ylabel("Количество тестов")
     plt.show()
 
 
-def DrawPlotPie(drawInformation: list):
+def draw_plot_pie(draw_information: list):
     import matplotlib.pyplot as plt
 
     InitGraphics()
 
     fig = plt.figure()
-    sumResult: int = sum(drawInformation)
-    plt.pie(drawInformation, labels=[
-        "Без искажений\n{0}%".format(int(drawInformation[0] / sumResult * 100)),
-        "Исправленные ошибки\n{0}%".format(int(drawInformation[1] / sumResult * 100)),
-        "Ошибки\n{0}%".format(int(drawInformation[2] / sumResult * 100))])
+    sumResult: int = sum(draw_information)
+    plt.pie(draw_information, labels=[
+        "Без искажений\n{0}%".format(int(draw_information[0] / sumResult * 100)),
+        "Исправленные ошибки\n{0}%".format(int(draw_information[1] / sumResult * 100)),
+        "Ошибки\n{0}%".format(int(draw_information[2] / sumResult * 100))])
     plt.title("Информация о последнем тесте")
     plt.show()
