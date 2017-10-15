@@ -31,6 +31,8 @@ class AddCoderWindow(QWidget):
         log.debug("Создание окна добавления кодера")
         parent.coder = None
         super().__init__()
+        self.windowParent = parent
+
         self.setWindowTitle("Добавление кодера")
         self.sizePackageTextBox = QLineEdit()
         self.listPolynomialTextBox = QLineEdit()
@@ -45,7 +47,6 @@ class AddCoderWindow(QWidget):
 
         self.setFixedSize(300, 200)
         parent.newCoderWindow = self
-        self.windowParent = parent
         self.setWindowIcon(QIcon("Resources/img/AddCoder.png"))
 
         self.submitButton = QPushButton("Подтвердить")
@@ -137,17 +138,20 @@ class AddCoderWindow(QWidget):
                         int(len(StrListToList(self.listPolynomialTextBox.text()))),
                         int(self.countMemoryRegistersTextBox.text())
                         ))
+
         elif text == CODER_NAMES[3]:
             if self.sizeBlockTextBox.text().isdigit() and self.sizeBlockTextBox.text()[0] != "0" and\
                     self.countBlocksTextBox.text().isdigit() and self.countBlocksTextBox.text()[0] != "0" and\
                     self.sizePackageTextBox.text().isdigit() and self.sizePackageTextBox.text()[0] != "0" and\
-                            int(self.sizePackageTextBox.text()) <= (
-                        int(self.sizeBlockTextBox.text()) * int(self.countBlocksTextBox.text())):
+                            int(self.sizePackageTextBox.text()) <=\
+                            (int(self.sizeBlockTextBox.text()) * int(self.countBlocksTextBox.text())):
                 self.windowParent.SetCoder(LubyTransform.Coder(
                         int(self.sizeBlockTextBox.text()),
                         int(self.countBlocksTextBox.text()),
                         int(self.sizePackageTextBox.text())
                         ))
+
+        self.windowParent.coder_name = text
 
         if self.firstCoderRadioButton.isChecked():
             self.windowParent.firstCoder = self.windowParent.coder

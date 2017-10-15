@@ -17,7 +17,7 @@ def InitGraphics():
     rcParams['font.family'] = 'StixGeneral'
 
 
-def draw_graphic(draw_information: list):
+def draw_graphic(draw_information: list, coder_name: str = "", coder=None):
     import matplotlib.pyplot as plt
     InitGraphics()
 
@@ -45,7 +45,10 @@ def draw_graphic(draw_information: list):
     # df2 = DataFrame(draw_information,
     #                columns=["Без искажений", "Исправленные ошибки", "Обнаруженные ошибки", "Необнаруженные ошибки"])
     # df2.plot(kind='bar', stacked=True)
-    plt.plot([x[0] + x[1] for x in draw_information])
+    plt.plot([x[0] + x[1] for x in draw_information], label="Кодер типа {0}\n"
+                                                            "Скорость кодера {1}"
+             .format(coder_name, int(coder.GetSpeed())))
+    plt.legend()
     plt.xlabel("Шанс на искажение бита информации, %")
     plt.ylabel("Количество тестов")
     plt.show()

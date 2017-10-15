@@ -8,6 +8,7 @@ from src.logger import log
 
 class MainWindow(QMainWindow):
     coder: abstractCoder.Coder = None
+    coder_name: str = ""
     firstCoder: abstractCoder.Coder = None
     secondCoder: abstractCoder.Coder = None
 
