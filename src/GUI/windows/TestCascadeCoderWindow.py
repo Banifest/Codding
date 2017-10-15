@@ -251,7 +251,7 @@ class TestCascadeCoderWindow(QWidget):
                 drawData.append(self.StartTest(testInformation=information))
                 self.autoTestingProgressBar.setValue(int(status))
             self.noiseProbabilityTextBox.setEnabled(True)
-            draw_graphic(drawData)
+            draw_graphic(drawData, self.parent.coder_name)
         else:
             log.debug("Атрибуты указанны некорректно")
             msg = QMessageBox()

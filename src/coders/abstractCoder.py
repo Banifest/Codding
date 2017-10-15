@@ -4,10 +4,10 @@ from abc import ABCMeta
 class Coder:
     __metaclass__ = ABCMeta
 
-    codingInformation: int = 0
+    coding_information: int = 0
     count_additional: int = 0
-    n: int = 0
-    k: int = 0
+    lengthTotal: int = 0
+    lengthInformation: int = 0
 
     def Encoding(self, information: int or list) -> list:
         pass
@@ -16,7 +16,7 @@ class Coder:
         pass
 
     def GetRedundancy(self) -> int:
-        return int(self.count_additional / self.k * 100)
+        return int(self.count_additional / self.lengthInformation * 100)
 
     def GetSpeed(self) -> float:
-        return 1
+        return self.lengthInformation / self.lengthTotal * 100

@@ -33,6 +33,10 @@ class Coder(abstractCoder.Coder):
             self.matrixTransformation.append(temp)
         self.matrixTransformation = np.transpose(np.array(self.matrixTransformation))
 
+    def GetSpeed(self):
+        return self.lengthInformation / self.lengthTotal * 100
+
+
     def Encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} кодером хемминга".format(information))
         listEncodingInformation: list = information
