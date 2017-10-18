@@ -15,12 +15,12 @@ class TestHemmingCoder(unittest.TestCase):  # TODO.txt написать тест
         self.assertFalse(self.first_coder.lengthAdditional == 3)
 
         self.second_coder = HemmingCoder.Coder(8)
-        self.assertFalse(self.second_coder.lengthTotal == 7)
-        self.assertFalse(self.second_coder.lengthInformation == 4)
-        self.assertFalse(self.second_coder.lengthAdditional == 3)
+        self.assertFalse(self.second_coder.lengthTotal == 12)
+        self.assertFalse(self.second_coder.lengthInformation == 8)
+        self.assertFalse(self.second_coder.lengthAdditional == 4)
 
         self.third_coder = HemmingCoder.Coder(15)
-        self.assertFalse(self.third_coder.lengthTotal == 7)
+        self.assertFalse(self.third_coder.lengthTotal == 20)
         self.assertFalse(self.third_coder.lengthInformation == 4)
         self.assertFalse(self.third_coder.lengthAdditional == 3)
 
