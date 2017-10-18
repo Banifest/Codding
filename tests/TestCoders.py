@@ -1,6 +1,7 @@
 import unittest
 
 from coders.convolutional.Coder import Coder as ConvolutionalCoder
+from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
 from coders.hemming.Coder import Coder as HemmingCoder
 
 
@@ -17,15 +18,17 @@ class TestConvolutionalCoder(unittest.TestCase):
 
         start_code: list = [1, 1, 0, 1, 0, 0, 1]
         code: list = test_coder.Encoding(start_code)
+
+        code[2] ^= 1
+        code[4] ^= 1
+        self.assertTrue(test_coder.Decoding(code) == start_code)
         code[2] ^= 1
         code[4] ^= 1
 
-        self.assertTrue(test_coder.Decoding(code) == start_code)
-
         code[0] ^= 1
         code[1] ^= 1
-        self.assertFalse(test_coder.Decoding(
-                code) == start_code)  # так как d(min)=5, кодер не может исправить однозначно 3 подрят идущие ошибки
+        self.assertFalse(test_coder.Decoding(code) == start_code)
+        # так как d(min)=4, кодер не может исправить однозначно 3 подряд идущие ошибки
 
 
 class TestHemmingCoder(unittest.TestCase):
@@ -55,4 +58,23 @@ class TestHemmingCoder(unittest.TestCase):
 
 
 class TestConvolutionalCoderForPacket(unittest.TestCase):
-    pass
+    def test_encode(self):
+        test_coder: ConvolutionalCoderForPacket = ConvolutionalCoderForPacket([5, 7], 1, 2, 3, 3)
+
+        start_code: list = [1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1]
+        code: list = test_coder.Encoding(start_code)
+        self.assertTrue(test_coder.Decoding(code) == start_code)
+
+    def test_correct_ability(self):
+        test_coder: ConvolutionalCoderForPacket = ConvolutionalCoderForPacket([1, 101], 1, 2, 6, 2)
+
+        start_code: list = [1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0]
+        code: list = test_coder.Encoding(start_code)
+        print(code)
+        code[8] ^= 1
+        code[7] ^= 1
+        # code[4] ^= 1
+
+        print(start_code)
+        print(test_coder.Decoding(code))
+        self.assertTrue(test_coder.Decoding(code) == start_code)

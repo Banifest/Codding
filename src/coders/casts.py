@@ -67,7 +67,9 @@ def CycleShiftLeft(num: int) -> int:
 
 def GetHemmingDistance(first: list, second: list) -> int:
     answer: int = 0
-    if len(first) != len(second): raise Exception("Списки должны быть одинаковой длины")
+    if len(first) != len(second):
+        raise Exception("Списки должны быть одинаковой длины")
+
     for x in range(len(first)):
         if first[x] != second[x]:
             answer += 1
