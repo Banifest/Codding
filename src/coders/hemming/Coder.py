@@ -7,14 +7,14 @@ from src.logger import log
 
 
 class Coder(abstractCoder.Coder):
-    matrixTransformation: list = []
+    matrix_transformation: list = []
 
-    def __init__(self, lengthInformation: int):
+    def __init__(self, length_information: int):
         log.debug("Создание кодера хемминга")
-        self.lengthAdditional = int(math.log2(lengthInformation - 1) + 1)
-        self.lengthInformation = lengthInformation
+        self.lengthAdditional = int(math.log2(length_information) + 1)
+        self.lengthInformation = length_information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
-        self.matrixTransformation: list = []
+        self.matrix_transformation = []
 
         for x in range(self.lengthAdditional):
             temp: list = []
@@ -30,57 +30,57 @@ class Coder(abstractCoder.Coder):
                     if count >= self.lengthTotal:
                         break
                 flag: bool = not flag
-            self.matrixTransformation.append(temp)
-        self.matrixTransformation = np.transpose(np.array(self.matrixTransformation))
+            self.matrix_transformation.append(temp)
+        self.matrix_transformation = np.transpose(np.array(self.matrix_transformation))
 
     def GetSpeed(self):
-        return self.lengthInformation / self.lengthTotal * 100
-
+        return self.lengthInformation / self.lengthTotal
 
     def Encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} кодером хемминга".format(information))
-        listEncodingInformation: list = information
-        listEncodingInformation.reverse()
-        if len(listEncodingInformation) < self.lengthInformation:
-            for x in range(self.lengthInformation - len(listEncodingInformation)):
-                listEncodingInformation.append(0)
-        listEncodingInformation.reverse()
+        list_encoding_information: list = information
+        list_encoding_information.reverse()
+        if len(list_encoding_information) < self.lengthInformation:
+            for x in range(self.lengthInformation - len(list_encoding_information)):
+                list_encoding_information.append(0)
+        list_encoding_information.reverse()
         code: list = []
 
         step: int = 0
         for count in range(self.lengthTotal):  # добавление проверяющих битов
             if math.log2(count + 1) != int(
                     math.log2(count + 1)) or step >= self.lengthAdditional:  # Проверка кратности числа на степень 2х
-                code.append([listEncodingInformation[count - int(math.log2(count)) - 1]])
+                code.append([list_encoding_information[count - int(math.log2(count)) - 1]])
             else:
                 code.append([0])
                 step += 1
 
         answer = [x[0] for x in code]
         code = np.transpose(np.array(code))
-        backupInfo = list((np.dot(code, self.matrixTransformation) % 2)[0])
+        backupInfo = list((np.dot(code, self.matrix_transformation) % 2)[0])
         for x in range(self.lengthAdditional):
             answer[(1 << x) - 1] = backupInfo[x]
         return answer
-
 
     def Decoding(self, information: list) -> list:
         log.info("Декодирование пакета {0} декодером хемминга".format(information))
         code = np.transpose(np.array([[x] for x in information]))
         answer: list = []
-        status: list = list((np.dot(code, self.matrixTransformation) % 2)[0])
+        status: list = list((np.dot(code, self.matrix_transformation) % 2)[0])
         status.reverse()
         status: int = BitListToInt(status)
         if status != 0:
             log.debug("Обнаруженна(ы) ошибка(и)")
+
             if len(code[0]) > status - 1:
                 code[0][status - 1] = (code[0][status - 1] + 1) % 2
-                oldStatus = status
-                status = BitListToInt(list((np.dot(code, self.matrixTransformation) % 2)[0]))
+                old_status = status
+                status = BitListToInt(list((np.dot(code, self.matrix_transformation) % 2)[0]))
+
                 if status != 0:
                     log.debug("Не удалось успешно исправить обнаруженные ошибки")
                     raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
-                log.debug("Произошло успешное исправление ошибки в бите под номером {0}".format(oldStatus))
+                log.debug("Произошло успешное исправление ошибки в бите под номером {0}".format(old_status))
             else:
                 log.debug("Не удалось успешно исправить обнаруженные ошибки")
                 raise DecodingException("Не удалось успешно исправить обнаруженные ошибки")
