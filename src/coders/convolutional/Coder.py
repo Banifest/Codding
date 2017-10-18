@@ -13,14 +13,14 @@ class Coder(abstractCoder.Coder):
 
     graph: list = []
 
-    def __init__(self, listPolynomials: list, countInput: int, countOutput: int,
-                 countRegister: int):
+    def __init__(self, list_polynomials: list, count_input: int, count_output: int,
+                 count_register: int):
         log.debug("Создание свёрточного кодера ....")
-        self.countInput = countInput
-        self.countOutput = countOutput
-        self.countRegisters = countRegister
-        self.countPolynomials = len(listPolynomials)
-        self.listPolynomials = listPolynomials
+        self.countInput = count_input
+        self.countOutput = count_output
+        self.countRegisters = count_register
+        self.countPolynomials = len(list_polynomials)
+        self.listPolynomials = list_polynomials
 
         self.lengthInformation = 1
         self.lengthAdditional = 1

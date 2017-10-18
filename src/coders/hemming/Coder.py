@@ -11,7 +11,7 @@ class Coder(abstractCoder.Coder):
 
     def __init__(self, length_information: int):
         log.debug("Создание кодера хемминга")
-        self.lengthAdditional = int(math.log2(length_information) + 1)
+        self.lengthAdditional = int(math.log2(length_information - 1) + 2)
         self.lengthInformation = length_information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
         self.matrix_transformation = []
