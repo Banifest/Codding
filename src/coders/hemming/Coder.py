@@ -33,8 +33,8 @@ class Coder(abstractCoder.Coder):
             self.matrix_transformation.append(temp)
         self.matrix_transformation = np.transpose(np.array(self.matrix_transformation))
 
-    def GetSpeed(self):
-        return self.lengthInformation / self.lengthTotal
+    def GetSpeed(self) -> float:
+        return float(self.lengthInformation) / float(self.lengthTotal)
 
     def Encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} кодером хемминга".format(information))
@@ -57,13 +57,14 @@ class Coder(abstractCoder.Coder):
 
         answer = [x[0] for x in code]
         code = np.transpose(np.array(code))
-        backupInfo = list((np.dot(code, self.matrix_transformation) % 2)[0])
+        backup_info = list((np.dot(code, self.matrix_transformation) % 2)[0])
         for x in range(self.lengthAdditional):
-            answer[(1 << x) - 1] = backupInfo[x]
+            answer[(1 << x) - 1] = backup_info[x]
         return answer
 
     def Decoding(self, information: list) -> list:
         log.info("Декодирование пакета {0} декодером хемминга".format(information))
+
         code = np.transpose(np.array([[x] for x in information]))
         answer: list = []
         status: list = list((np.dot(code, self.matrix_transformation) % 2)[0])

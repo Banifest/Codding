@@ -48,10 +48,10 @@ def draw_graphic(draw_information: list, coder_name: str = "", coder=None):
     plt.plot([x[0] + x[1] for x in draw_information],
              label="Кодер типа {0}\n"
                    "Скорость кодера {1}"
-             .format(coder_name, int(coder.GetSpeed())))
+             .format(coder_name, coder.GetSpeed()))
     plt.legend()
     plt.xlabel("Шанс на искажение бита информации, %")
-    plt.ylabel("Количество тестов")
+    plt.ylabel("Количество успешно пройденных тестов")
     plt.show()
 
 

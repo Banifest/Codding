@@ -4,29 +4,27 @@ from coders.hemming import Coder as HemmingCoder
 
 
 class TestHemmingCoder(unittest.TestCase):  # TODO.txt написать тесты для кодера и декодера хэмминга
-    first_coder: HemmingCoder.Coder
-    second_coder: HemmingCoder.Coder
-    third_coder: HemmingCoder.Coder
 
     def test_init(self):
-        self.first_coder = HemmingCoder.Coder(4)
-        self.assertFalse(self.first_coder.lengthTotal == 7)
-        self.assertFalse(self.first_coder.lengthInformation == 4)
-        self.assertFalse(self.first_coder.lengthAdditional == 3)
+        first_coder = HemmingCoder.Coder(4)
+        self.assertFalse(first_coder.lengthTotal == 7)
+        self.assertFalse(first_coder.lengthInformation == 4)
+        self.assertFalse(first_coder.lengthAdditional == 3)
 
-        self.second_coder = HemmingCoder.Coder(8)
-        self.assertFalse(self.second_coder.lengthTotal == 12)
-        self.assertFalse(self.second_coder.lengthInformation == 8)
-        self.assertFalse(self.second_coder.lengthAdditional == 4)
+        second_coder = HemmingCoder.Coder(8)
+        self.assertFalse(second_coder.lengthTotal == 12)
+        self.assertFalse(second_coder.lengthInformation == 8)
+        self.assertFalse(second_coder.lengthAdditional == 4)
 
-        self.third_coder = HemmingCoder.Coder(15)
-        self.assertFalse(self.third_coder.lengthTotal == 20)
-        self.assertFalse(self.third_coder.lengthInformation == 4)
-        self.assertFalse(self.third_coder.lengthAdditional == 3)
-
+        third_coder = HemmingCoder.Coder(15)
+        self.assertFalse(third_coder.lengthTotal == 20)
+        self.assertFalse(third_coder.lengthInformation == 4)
+        self.assertFalse(third_coder.lengthAdditional == 3)
 
     def test_coder(self):
-        pass
+        test_coder: HemmingCoder.Coder = HemmingCoder.Coder(4)
+        self.assertTrue([1, 0, 1, 0] == test_coder.Decoding(test_coder.Encoding([1, 0, 1, 0])))
 
-    def test_decoder(self):
-        pass
+        test_coder: HemmingCoder.Coder = HemmingCoder.Coder(12)
+        self.assertTrue([1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0] == test_coder.Decoding(
+            test_coder.Encoding([1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0])))
