@@ -7,8 +7,25 @@ from coders.hemming.Coder import Coder as HemmingCoder
 class TestConvolutionalCoder(unittest.TestCase):
     def test_encode(self):
         test_coder: ConvolutionalCoder = ConvolutionalCoder([5, 7], 1, 2, 3)
-        code: list = test_coder.Encoding([1, 1, 0, 1])
-        self.assertTrue(test_coder.Decoding(code) == [1, 1, 0, 1])
+
+        start_code: list = [1, 1, 0, 1, 0, 0, 1]
+        code: list = test_coder.Encoding(start_code)
+        self.assertTrue(test_coder.Decoding(code) == start_code)
+
+    def test_correct_ability(self):
+        test_coder: ConvolutionalCoder = ConvolutionalCoder([5, 7], 1, 2, 3)
+
+        start_code: list = [1, 1, 0, 1, 0, 0, 1]
+        code: list = test_coder.Encoding(start_code)
+        code[2] ^= 1
+        code[4] ^= 1
+
+        self.assertTrue(test_coder.Decoding(code) == start_code)
+
+        code[0] ^= 1
+        code[1] ^= 1
+        self.assertFalse(test_coder.Decoding(
+                code) == start_code)  # так как d(min)=5, кодер не может исправить однозначно 3 подрят идущие ошибки
 
 
 class TestHemmingCoder(unittest.TestCase):

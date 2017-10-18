@@ -6,12 +6,9 @@
     </enabled-run-configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="исправлены ошибки при кодировании">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/coders/convolutional/CoderForPacket.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/testCoder.py" afterPath="$PROJECT_DIR$/tests/TestCoders.py" />
+    <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/convolutional/Coder.py" afterPath="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/hemming/Coder.py" afterPath="$PROJECT_DIR$/src/coders/hemming/Coder.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TestCoders.py" afterPath="$PROJECT_DIR$/tests/TestCoders.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,6 +21,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_testCoder_TestHemmingCoder.coverage" NAME="Unittests for tests.TestCoders.TestHemmingCoder Coverage Results" MODIFIED="1508353761022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestHemmingCoder_test_init.coverage" NAME="Unittests for TestCoders.TestHemmingCoder.test_init Coverage Results" MODIFIED="1508354166174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoder_test_correct_ability.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability Coverage Results" MODIFIED="1508354864355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$setup.coverage" NAME="setup Coverage Results" MODIFIED="1496064951728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TestKursach$main.coverage" NAME="main Coverage Results" MODIFIED="1508354399349" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_testCoder_TestHemmingCoder_test_coder.coverage" NAME="Unittests for tests.TestCoders.TestHemmingCoder.test_coder Coverage Results" MODIFIED="1508353476997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -77,8 +75,8 @@
       <file leaf-file-name="TestCoders.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="10" column="66" lean-forward="false" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
+            <state relative-caret-position="429">
+              <caret line="29" column="30" lean-forward="false" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -100,7 +98,7 @@
         <entry file="file://$PROJECT_DIR$/src/coders/convolutional/CoderForPacket.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="4" column="36" lean-forward="true" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+              <caret line="4" column="36" lean-forward="false" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -412,7 +410,22 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability">
+    <configuration name="Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="TestKursach" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;TestCoders.TestConvolutionalCoder.test_correct_ability&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
     <configuration name="Unittests for TestCoders.TestConvolutionalCoder.test_init" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -456,21 +469,6 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;tests.TestCoders.TestHemmingCoder&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-    </configuration>
-    <configuration name="Unittests for tests.TestCoders.TestHemmingCoder.test_coder" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TestKursach" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.TestCoders.TestHemmingCoder.test_coder&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
@@ -641,17 +639,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
       <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for tests.TestCoders.TestHemmingCoder" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for tests.TestCoders.TestHemmingCoder.test_coder" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_init" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestHemmingCoder.test_init" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_init" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestHemmingCoder.test_init" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestHemmingCoder.test_init" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_init" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for tests.TestCoders.TestHemmingCoder" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for tests.TestCoders.TestHemmingCoder.test_coder" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" />
+        <item index="1" class="java.lang.String" itemvalue="Python.main" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestHemmingCoder.test_init" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_init" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for tests.TestCoders.TestHemmingCoder" />
       </list>
     </recent_temporary>
   </component>
@@ -668,13 +666,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1490813097617</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Добавлен сверточныйкодеровщик">
-      <created>1493156361127</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1493156361128</updated>
     </task>
     <task id="LOCAL-00016" summary="Исправлена ошибки в свёрточном кодеровщике">
       <created>1493158008358</created>
@@ -1012,18 +1003,25 @@
       <option name="project" value="LOCAL" />
       <updated>1508349801078</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="исправлены ошибки при кодировании">
+      <created>1508354530303</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1508354530303</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_TestCoders_TestHemmingCoder_test_init - 2017.10.18 at 22h 10m 46s.xml">
-      <configuration name="Unittests for TestCoders.TestHemmingCoder.test_init" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestConvolutionalCoder_test_correct_ability - 2017.10.18 at 22h 25m 25s.xml">
+      <configuration name="Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestHemmingCoder_test_init - 2017.10.18 at 22h 11m 12s.xml">
-      <configuration name="Unittests for TestCoders.TestHemmingCoder.test_init" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestConvolutionalCoder_test_correct_ability - 2017.10.18 at 22h 26m 32s.xml">
+      <configuration name="Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestHemmingCoder_test_init - 2017.10.18 at 22h 12m 03s.xml">
-      <configuration name="Unittests for TestCoders.TestHemmingCoder.test_init" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestConvolutionalCoder_test_correct_ability - 2017.10.18 at 22h 27m 44s.xml">
+      <configuration name="Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_for_TestCoders_TestHemmingCoder_test_init - 2017.10.18 at 22h 12m 22s.xml">
       <configuration name="Unittests for TestCoders.TestHemmingCoder.test_init" configurationId="tests" />
@@ -1061,11 +1059,11 @@
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277635" sideWeight="0.48393574" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32904884" sideWeight="0.49732262" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32904884" sideWeight="0.5026774" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.49732262" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29434448" sideWeight="0.5441767" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32262212" sideWeight="0.4678715" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.4892905" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29434448" sideWeight="0.45850068" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29434448" sideWeight="0.4558233" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.48661312" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24096386" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12851405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1640,7 +1638,7 @@
     <entry file="file://$PROJECT_DIR$/src/coders/convolutional/CoderForPacket.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="4" column="36" lean-forward="true" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+          <caret line="4" column="36" lean-forward="false" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
@@ -1665,8 +1663,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="10" column="66" lean-forward="false" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
+        <state relative-caret-position="429">
+          <caret line="29" column="30" lean-forward="false" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
