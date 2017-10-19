@@ -2,6 +2,7 @@ import unittest
 
 from coders.convolutional.Coder import Coder as ConvolutionalCoder
 from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
+from coders.fountain.LubyTransform import Coder as LubyTransformCoder
 from coders.hemming.Coder import Coder as HemmingCoder
 
 
@@ -66,15 +67,34 @@ class TestConvolutionalCoderForPacket(unittest.TestCase):
         self.assertTrue(test_coder.Decoding(code) == start_code)
 
     def test_correct_ability(self):
-        test_coder: ConvolutionalCoderForPacket = ConvolutionalCoderForPacket([1, 101], 1, 2, 6, 2)
+        test_coder: ConvolutionalCoderForPacket = ConvolutionalCoderForPacket([1, 101], 1, 2, 6, 3)
 
         start_code: list = [1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0]
         code: list = test_coder.Encoding(start_code)
         print(code)
         code[8] ^= 1
         code[7] ^= 1
-        # code[4] ^= 1
 
         print(start_code)
         print(test_coder.Decoding(code))
         self.assertTrue(test_coder.Decoding(code) == start_code)
+
+
+class TestFountainCoder(unittest.TestCase):
+    def test_coder(self):
+        test_code: LubyTransformCoder = LubyTransformCoder(3, 3, 6)
+
+        start_code = [1, 0, 0, 1, 1, 0]
+        code: list = test_code.Encoding(start_code)
+        print(code)
+        self.assertTrue(test_code.Decoding(code) == start_code)
+
+    def test_correct_ability(self):
+        test_code: LubyTransformCoder = LubyTransformCoder(3, 3, 6)
+
+        start_code = [1, 0, 0, 1, 1, 0]
+        code: list = test_code.Encoding(start_code)
+        print(code)
+        code[2] ^= 1
+        code[4] ^= 1
+        self.assertTrue(test_code.Decoding(code) == start_code)

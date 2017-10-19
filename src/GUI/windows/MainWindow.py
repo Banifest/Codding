@@ -7,16 +7,17 @@ from src.logger import log
 
 
 class MainWindow(QMainWindow):
-    coder: abstractCoder.Coder = None
+    coder: abstractCoder.Coder
     coder_name: str = ""
-    firstCoder: abstractCoder.Coder = None
-    secondCoder: abstractCoder.Coder = None
+    firstCoder: abstractCoder.Coder
+    secondCoder: abstractCoder.Coder
 
     newCoderWindow: QWidget = None
     testCoderWindow: QWidget = None
 
     def __init__(self):
         log.debug("Создание главного окна")
+
         super().__init__()
         self.setFixedSize(250, 34)
         self.setWindowTitle('MAVR')

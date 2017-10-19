@@ -12,14 +12,14 @@ class Coder(abstractCoder.Coder):
     sizeBlock: int  # Размер одного блока
     blocks: list  # блоки сочетаний
 
-    def __init__(self, sizeBlock: int, countCodingBlocks: int, lengthInformation: int):
+    def __init__(self, size_block: int, count_coding_blocks: int, length_information: int):
         log.debug("Создание фонтанного кодера с параметрами:{0}, {1}, {2}".
-                  format(sizeBlock, countCodingBlocks, lengthInformation))
-        self.lengthInformation = lengthInformation
-        self.sizeBlock = sizeBlock
+                  format(size_block, count_coding_blocks, length_information))
+        self.lengthInformation = length_information
+        self.sizeBlock = size_block
         self.blocks = []
-        self.countCodingBlocks = countCodingBlocks
-        self.countBlocks = ((lengthInformation - 1) // self.sizeBlock) + 1  # целочисленное деление с округлением вверх
+        self.countCodingBlocks = count_coding_blocks
+        self.countBlocks = ((length_information - 1) // self.sizeBlock) + 1  # целочисленное деление с округлением вверх
 
         randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
         # Генерация блоков сочетаний
@@ -28,8 +28,8 @@ class Coder(abstractCoder.Coder):
             setCombinationBlocks.add(randomGenerator.getrandbits(self.countBlocks))
             setCombinationBlocks = setCombinationBlocks - {0}
         self.blocks: list = list(setCombinationBlocks)
-        self.lengthInformation = lengthInformation
-        self.lengthAdditional = sizeBlock * countCodingBlocks - lengthInformation
+        self.lengthInformation = length_information
+        self.lengthAdditional = size_block * count_coding_blocks - length_information
 
     def Encoding(self, information: list):
         log.info("Кодирование пакета {0} фонтанным LT-кодером".format(information))
