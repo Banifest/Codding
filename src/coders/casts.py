@@ -1,7 +1,7 @@
 import math
 
 
-def IntToBitList(num: int, size=None) -> list:
+def IntToBitList(num: int, size: int = None, rev: bool = False) -> list:
     it: int = 1
     answer: list = []
     while it <= num:
@@ -12,7 +12,8 @@ def IntToBitList(num: int, size=None) -> list:
         it <<= 1
     if size is not None:
         answer += [0] * (size - len(answer))
-    answer.reverse()
+    if not rev:
+        answer.reverse()
     return answer
 
 
