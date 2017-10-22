@@ -1,5 +1,7 @@
 import unittest
 
+import numpy as np
+
 from coders.convolutional.Coder import Coder as ConvolutionalCoder
 from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
 from coders.cyclical.Coder import Coder as CyclicalCoder
@@ -104,13 +106,22 @@ class TestFountainCoder(unittest.TestCase):
 class TestCyclicalCoder(unittest.TestCase):
     def test_init(self):
         test_coder = CyclicalCoder(4, 11)
+        print(test_coder.matrix_G)
+        print(test_coder.matrix_H)
         # при перемножении порождающей и проверочной матриц должна получиться нулевая
         self.assertTrue(sum([y % 2 for x in (test_coder.matrix_G * test_coder.matrix_H.T).tolist() for y in x]) == 0)
 
     def test_encoding(self):
         test_coder = CyclicalCoder(4, 11)
 
+        starting_code = [1, 0, 0, 1]
 
-        # print(test_coder.Encoding([1, 0, 0, 1]))
-        # print(test_coder.Encoding([1, 1, 0, 1]))
-        # print((np.matrix([1, 0, 1, 0, 0, 0, 1])*test_coder.matrix_H.T).tolist())
+        code = test_coder.Encoding(starting_code)
+
+        a = np.polynomial.Polynomial([1, 1, 0, 1, 0, 0, 1])
+        print(a % np.polynomial.Polynomial([1, 1, 0, 1]))
+
+        code[3] ^= 1
+
+        test_coder.Decoding(code)
+        # print(test_coder.Decoding(test_coder.Encoding(code)))

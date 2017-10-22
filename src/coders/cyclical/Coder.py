@@ -53,7 +53,7 @@ class Coder(abstractCoder.Coder):
     def Decoding(self, information: list):
         syndrome: int = sum([x % 2 for x in (np.matrix(information) * self.matrix_H.T).tolist()[0]])
         if syndrome != 0:
-            pass
+            print(syndrome)
         else:
             return information[:self.lengthInformation]
 """

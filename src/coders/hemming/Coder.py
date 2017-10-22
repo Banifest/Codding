@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 
 from src.coders import abstractCoder
