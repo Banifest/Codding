@@ -1,7 +1,5 @@
 import unittest
 
-from numpy.polynomial import polynomial as plm
-
 from coders.convolutional.Coder import Coder as ConvolutionalCoder
 from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
 from coders.cyclical.Coder import Coder as CyclicalCoder
@@ -104,13 +102,13 @@ class TestFountainCoder(unittest.TestCase):
 
 
 class TestCyclicalCoder(unittest.TestCase):
-    def test_get_remainder(self):
+    def test_init(self):
         test_coder = CyclicalCoder(4, 11)
 
-        p1 = plm.Polynomial([1, 1, 0, 1])
-        p2 = plm.Polynomial([0, 0, 1])
-        a = [1, 2, 3, 4, 5, 6]
+        # при перемножении порождающей и проверочной матриц должна получиться нулевая
+        self.assertTrue(sum([y % 2 for x in (test_coder.matrix_G * test_coder.matrix_H.T).tolist() for y in x]) == 0)
 
-        print([int(x) for x in (p2 % p1)])
+    def test_encoding(self):
+        test_coder = CyclicalCoder(4, 11)
 
-        pass
+        print(test_coder.Encoding([1, 1, 0, 1]))

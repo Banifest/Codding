@@ -1,5 +1,5 @@
 from src.coders import abstractCoder
-from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList
+from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList, cycle_shift_list
 from src.logger import log
 
 
@@ -64,7 +64,7 @@ class Coder(abstractCoder.Coder):
             vertex: list = []
             self.register = x
             edge: list = IntToBitList(x, self.countRegisters)
-            edge = CycleShiftRightBitList(edge)
+            edge = cycle_shift_list(edge)
             edge[0] = 0
             vertex.append([BitListToInt(edge), self.DoStep(0)])
             self.register = x

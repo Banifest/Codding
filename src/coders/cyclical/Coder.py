@@ -41,12 +41,8 @@ class Coder(abstractCoder.Coder):
 
         self.matrix_H = np.matrix(init_matrix).T
 
-
-    def get_mod(self, information: int, flag: bool = False) -> list:
-        plm.Polynomial()
-        pass
-
-
+    def Encoding(self, information: list):
+        return [x % 2 for x in (np.matrix(information) * self.matrix_G.A).tolist()[0]]
 """
     def __init__(self, information_length: int, polynomial: int = None):
         log.debug("Создание циклического кодера")
