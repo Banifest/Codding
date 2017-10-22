@@ -1,6 +1,3 @@
-import math
-
-
 def IntToBitList(num: int, size: int = None, rev: bool = False) -> list:
     it: int = 1
     answer: list = []
@@ -29,7 +26,10 @@ def BitListToIntList(num: list) -> list:
     return answer
 
 
-def BitListToInt(num: list) -> int:
+def BitListToInt(num: list, rev: bool = False) -> int:
+    if rev:
+        num.reverse()
+
     it = 1 << len(num) - 1
     answer = 0
     for x in num:
@@ -45,25 +45,11 @@ def BitListCombToInt(num: list) -> int:
     return answer
 
 
-def CycleShiftRightBitList(num: list) -> list:
-    num: list = num.copy()
-    return [num[-1]] + num[:-1]
-
-
-def CycleShiftLeftBitList(num: list) -> list:
-    num: list = num.copy()
-    return num[1:] + num[0]
-
-
-def CycleShiftRight(num: int) -> int:
-    juniorBit: int = num & 1
-    num >>= 1
-    return (juniorBit << (math.log2(num) + 1)) + num
-
-
-def CycleShiftLeft(num: int) -> int:
-    olderBit: int = num & (1 << math.log2(num))
-    return (((olderBit - 1) & num) << 1) + 1
+def cycle_shift_list(num: list, right: bool = True, count: int = 1):
+    if right:
+        return num[-count:] + num[:-count]
+    else:
+        return num[count:] + num[:count]
 
 
 def GetHemmingDistance(first: list, second: list) -> int:
