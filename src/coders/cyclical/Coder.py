@@ -4,7 +4,7 @@ import numpy as np
 from numpy.polynomial import polynomial as plm
 
 from src.coders import abstractCoder
-from src.coders.casts import IntToBitList, cycle_shift_list
+from src.coders.casts import IntToBitList
 from src.logger import log
 
 
@@ -29,20 +29,33 @@ class Coder(abstractCoder.Coder):
         self.polynomial = plm.Polynomial(IntToBitList(polynomial, rev=True))
         init_matrix: list = []
         column: list = IntToBitList(polynomial, rev=True) + [0] * self.lengthAdditional
-        for x in range(self.lengthInformation):
-            init_matrix.append(cycle_shift_list(column, count=x))
+
+        for x in range(self.lengthTotal - 1, self.lengthAdditional - 1, -1):
+            init_matrix.append([int(x) % 2 for x in (plm.Polynomial(IntToBitList(1 << x, rev=True)) % self.polynomial)])
+
+        for x in init_matrix:
+            x += (self.lengthAdditional - len(x)) * [0]
+
+        init_H_matrix: list = np.matrix(init_matrix).T.tolist()
+        for x in range(self.lengthInformation):  # генерация единичной матрицы
+            init_matrix[x] = [0] * x + [1] + [0] * (self.lengthInformation - x - 1) + init_matrix[x]
 
         self.matrix_G = np.matrix(init_matrix)
 
-        init_matrix: list = []
-        for x in range(self.lengthTotal):  # I regret about that
-            column = [int(y) % 2 for y in plm.Polynomial(IntToBitList(1 << x, rev=True)) % self.polynomial]
-            init_matrix.append(column + [0] * (self.lengthAdditional - len(column)))
+        for x in range(self.lengthAdditional):  # генерация единичной матрицы
+            init_H_matrix[x] += [0] * x + [1] + [0] * (self.lengthAdditional - x - 1)
 
-        self.matrix_H = np.matrix(init_matrix).T
+        self.matrix_H = np.matrix(init_H_matrix)
 
     def Encoding(self, information: list):
         return [x % 2 for x in (np.matrix(information) * self.matrix_G.A).tolist()[0]]
+
+    def Decoding(self, information: list):
+        syndrome: int = sum([x % 2 for x in (np.matrix(information) * self.matrix_H.T).tolist()[0]])
+        if syndrome != 0:
+            pass
+        else:
+            return information[:self.lengthInformation]
 """
     def __init__(self, information_length: int, polynomial: int = None):
         log.debug("Создание циклического кодера")

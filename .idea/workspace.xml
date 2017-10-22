@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/convolutional/Coder.py" afterPath="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/cyclical/Coder.py" afterPath="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TestCoders.py" afterPath="$PROJECT_DIR$/tests/TestCoders.py" />
     </list>
@@ -21,9 +20,11 @@
     <SUITE FILE_PATH="coverage/TestKursach$setup.coverage" NAME="setup Coverage Results" MODIFIED="1496064951728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_testCoder_TestHemmingCoder_test_coder.coverage" NAME="Unittests for tests.TestCoders.TestHemmingCoder.test_coder Coverage Results" MODIFIED="1508353476997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoder_test_init.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoder.test_init Coverage Results" MODIFIED="1508353782203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestCyclicalCoder_test_encoding.coverage" NAME="Unittests for TestCoders.TestCyclicalCoder.test_encoding Coverage Results" MODIFIED="1508697581410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_testCoder_TestHemmingCoder.coverage" NAME="Unittests for tests.TestCoders.TestHemmingCoder Coverage Results" MODIFIED="1508353761022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestHemmingCoder_test_init.coverage" NAME="Unittests for TestCoders.TestHemmingCoder.test_init Coverage Results" MODIFIED="1508354166174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/TestKursach$main.coverage" NAME="main Coverage Results" MODIFIED="1508390728015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestCyclicalCoder_test_init.coverage" NAME="Unittests for TestCoders.TestCyclicalCoder.test_init Coverage Results" MODIFIED="1508697666949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/TestKursach$main.coverage" NAME="main Coverage Results" MODIFIED="1508694026826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoderForPacket_test_correct_ability.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoderForPacket.test_correct_ability Coverage Results" MODIFIED="1508358069135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoderForPacket.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoderForPacket Coverage Results" MODIFIED="1508357457554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$test.coverage" NAME="test Coverage Results" MODIFIED="1506073949833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -42,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="39" column="84" lean-forward="true" selection-start-line="39" selection-start-column="84" selection-end-line="39" selection-end-column="84" />
+            <state relative-caret-position="139">
+              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -59,16 +60,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="polynomial.py" pinned="false" current-in-tab="false">
-        <entry file="file://C:/Program Files/Python36/Lib/site-packages/numpy/polynomial/polynomial.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="1600" column="6" lean-forward="false" selection-start-line="1600" selection-start-column="6" selection-end-line="1600" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -94,6 +85,26 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="case.py" pinned="false" current-in-tab="false">
+        <entry file="file://C:/Program Files/Python36/Lib/unittest/case.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="suite.py" pinned="false" current-in-tab="false">
+        <entry file="file://C:/Program Files/Python36/Lib/unittest/suite.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="abstractCoder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/coders/abstractCoder.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -104,11 +115,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCoders.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestCoders.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="110" column="31" lean-forward="false" selection-start-line="110" selection-start-column="31" selection-end-line="110" selection-end-column="31" />
+            <state relative-caret-position="141">
+              <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -269,8 +280,8 @@
         <option value="$PROJECT_DIR$/src/coders/abstractCoder.py" />
         <option value="$PROJECT_DIR$/src/coders/casts.py" />
         <option value="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
-        <option value="$PROJECT_DIR$/tests/TestCoders.py" />
         <option value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
+        <option value="$PROJECT_DIR$/tests/TestCoders.py" />
       </list>
     </option>
   </component>
@@ -421,22 +432,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder">
-    <configuration name="Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="TestKursach" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestCoders.TestConvolutionalCoder.test_correct_ability&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-    </configuration>
+  <component name="RunManager" selected="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_init">
     <configuration name="Unittests for TestCoders.TestCyclicalCoder" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -450,6 +446,21 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;TestCoders.TestCyclicalCoder&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+    </configuration>
+    <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="TestKursach" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;TestCoders.TestCyclicalCoder.test_encoding&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -467,7 +478,7 @@
       <option name="_new_target" value="&quot;TestCoders.TestCyclicalCoder.test_get_remainder&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
-    <configuration name="Unittests for TestCoders.TestFountainCoder.test_coder" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_init" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -479,7 +490,7 @@
       <module name="TestKursach" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestCoders.TestFountainCoder.test_coder&quot;" />
+      <option name="_new_target" value="&quot;TestCoders.TestCyclicalCoder.test_init&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
@@ -649,18 +660,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestFountainCoder.test_coder" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_encoding" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_init" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_init" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_encoding" />
         <item index="2" class="java.lang.String" itemvalue="Python.main" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestFountainCoder.test_coder" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder" />
       </list>
     </recent_temporary>
   </component>
@@ -677,13 +688,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1490813097617</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Изменена структура проекта">
-      <created>1494397732156</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1494397732156</updated>
     </task>
     <task id="LOCAL-00023" summary="Изменена структура проекта">
       <created>1494398760106</created>
@@ -1021,39 +1025,46 @@
       <option name="project" value="LOCAL" />
       <updated>1508690314312</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="добавлен кодировщик циклического кодера">
+      <created>1508692376998</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1508692376998</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 07m 34s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 37m 46s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 08m 04s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 37m 57s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 08m 11s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 39m 00s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 08m 27s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 39m 34s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 08m 33s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 39m 36s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 10m 01s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 39m 41s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 10m 13s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_init - 2017.10.22 at 21h 39m 48s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 11m 16s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_init - 2017.10.22 at 21h 40m 03s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 11m 27s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_init - 2017.10.22 at 21h 40m 30s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder - 2017.10.22 at 20h 12m 04s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_init - 2017.10.22 at 21h 41m 07s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_init" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -1073,9 +1084,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29434448" sideWeight="0.5441767" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32262212" sideWeight="0.4678715" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.4892905" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29434448" sideWeight="0.4558233" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29434448" sideWeight="0.4558233" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.48661312" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.251004" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24966533" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12851405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277635" sideWeight="0.46251673" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24899599" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1088,7 +1100,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931727" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24966533" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822478" sideWeight="0.48125836" order="12" side_tool="false" content_ui="tabs" />
@@ -1129,7 +1140,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="просто чтобы сохранить изменения" />
     <MESSAGE value="полностью переработан свёрточный кодер и декодер" />
     <MESSAGE value="исправлены ошибки в свёрточном кодере" />
     <MESSAGE value="исправлены ошибки с определением типов кодеров" />
@@ -1154,7 +1164,8 @@
     <MESSAGE value="измененна функция перевода из числа в массив битов" />
     <MESSAGE value="добавлена функия циклических сдвигов листов" />
     <MESSAGE value="переписана инициализация циклического кодера" />
-    <option name="LAST_COMMIT_MESSAGE" value="переписана инициализация циклического кодера" />
+    <MESSAGE value="добавлен кодировщик циклического кодера" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлен кодировщик циклического кодера" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1217,6 +1228,16 @@
           <line>87</line>
           <option name="timeStamp" value="212" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/coders/cyclical/Coder.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="213" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/coders/cyclical/Coder.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="214" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -1228,18 +1249,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="213" />
+      <option name="time" value="215" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Resources/img/TestCascadeCoder.png" />
     <entry file="uml://Python/#C:/Users/Banifest/PycharmProjects/TestKursach/src/coders/hemming/Coder.py">
       <provider selected="true" editor-type-id="UmlEditorProvider">
@@ -1567,14 +1581,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Program Files/Python36/Lib/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11356">
-          <caret line="681" column="0" lean-forward="false" selection-start-line="681" selection-start-column="0" selection-end-line="681" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/windows/MainWindow.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1673,22 +1679,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
+    <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="110" column="31" lean-forward="false" selection-start-line="110" selection-start-column="31" selection-end-line="110" selection-end-column="31" />
+        <state relative-caret-position="139">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
+    <entry file="file://C:/Program Files/Python36/Lib/unittest/suite.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="39" column="84" lean-forward="true" selection-start-line="39" selection-start-column="84" selection-end-line="39" selection-end-column="84" />
+        <state relative-caret-position="139">
+          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Python36/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
