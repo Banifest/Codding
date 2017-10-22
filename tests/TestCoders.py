@@ -1,7 +1,10 @@
 import unittest
 
+from numpy.polynomial import polynomial as plm
+
 from coders.convolutional.Coder import Coder as ConvolutionalCoder
 from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
+from coders.cyclical.Coder import Coder as CyclicalCoder
 from coders.fountain.LubyTransform import Coder as LubyTransformCoder
 from coders.hemming.Coder import Coder as HemmingCoder
 
@@ -98,3 +101,16 @@ class TestFountainCoder(unittest.TestCase):
         code[2] ^= 1
         code[4] ^= 1
         self.assertTrue(test_code.Decoding(code) == start_code)
+
+
+class TestCyclicalCoder(unittest.TestCase):
+    def test_get_remainder(self):
+        test_coder = CyclicalCoder(4, 11)
+
+        p1 = plm.Polynomial([1, 1, 0, 1])
+        p2 = plm.Polynomial([0, 0, 1])
+        a = [1, 2, 3, 4, 5, 6]
+
+        print([int(x) for x in (p2 % p1)])
+
+        pass

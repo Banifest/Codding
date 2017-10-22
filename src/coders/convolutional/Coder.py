@@ -1,5 +1,5 @@
 from src.coders import abstractCoder
-from src.coders.casts import BitListToInt, CycleShiftRightBitList, GetHemmingDistance, IntToBitList
+from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList
 from src.logger import log
 
 
