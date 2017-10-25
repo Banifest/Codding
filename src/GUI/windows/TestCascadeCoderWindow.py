@@ -10,7 +10,7 @@ from src.GUI.graphics import draw_graphic, draw_plot_pie
 from src.GUI.windows import MainWindow
 from src.channel.cascade import Cascade
 from src.channel.channel import Channel
-from src.coders import convolutional, cyclical, hemming
+from src.coders import convolutional, cyclical, linear
 from src.coders.casts import IntToBitList
 from src.logger import log
 
@@ -188,7 +188,7 @@ class TestCascadeCoderWindow(QWidget):
 
             if isinstance(testInformation, list):
                 information = testInformation
-            elif isinstance(self.cascade.firstCoder, hemming.Coder.Coder)\
+            elif isinstance(self.cascade.firstCoder, linear.Coder.Coder)\
                     or isinstance(self.cascade.firstCoder, cyclical.Coder.Coder):
                 information = IntToBitList(int(self.informationTextBox.text()),
                                            self.cascade.firstCoder.lengthInformation)
@@ -324,7 +324,7 @@ class TestCascadeCoderWindow(QWidget):
 
             if isinstance(testInformation, list):
                 information = testInformation
-            elif isinstance(self.channel.coder, hemming.Coder.Coder)\
+            elif isinstance(self.channel.coder, linear.Coder.Coder)\
                     or isinstance(self.channel.coder, cyclical.Coder.Coder):
                 information = IntToBitList(int(self.informationTextBox.text()),
                                            self.channel.coder.lengthInformation)

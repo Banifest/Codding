@@ -6,7 +6,7 @@ from coders.convolutional.Coder import Coder as ConvolutionalCoder
 from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
 from coders.cyclical.Coder import Coder as CyclicalCoder
 from coders.fountain.LubyTransform import Coder as LubyTransformCoder
-from coders.hemming.Coder import Coder as HemmingCoder
+from coders.linear.Coder import Coder as HemmingCoder
 
 
 class TestConvolutionalCoder(unittest.TestCase):
@@ -56,9 +56,9 @@ class TestHemmingCoder(unittest.TestCase):
         test_coder: HemmingCoder = HemmingCoder(4)
         self.assertTrue([1, 0, 1, 0] == test_coder.Decoding(test_coder.Encoding([1, 0, 1, 0])))
 
-        test_coder: HemmingCoder = HemmingCoder(12)
-        self.assertTrue([1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0] == test_coder.Decoding(
-                test_coder.Encoding([1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0])))
+        test_coder: HemmingCoder = HemmingCoder(10)
+        self.assertTrue([1, 0, 1, 0, 1, 1, 1, 1, 1, 0] == test_coder.Decoding(
+                test_coder.Encoding([1, 0, 1, 0, 1, 1, 1, 1, 1, 0, ])))
 
 
 class TestConvolutionalCoderForPacket(unittest.TestCase):

@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QComboBox, QGridLayout, QLabel, QLineEdit, QMessageB
 
 from Resources.stringConsts import CODER_NAMES
 from src.GUI.windows import MainWindow
-from src.coders import convolutional, cyclical, hemming
+from src.coders import convolutional, cyclical, linear
 from src.coders.casts import StrListToList
 from src.coders.fountain import LubyTransform
 from src.logger import log
@@ -116,7 +116,7 @@ class AddCoderWindow(QWidget):
         text = self.comboBox.currentText()
         if text == CODER_NAMES[0]:
             if self.sizePackageTextBox.text().isdigit() and self.sizePackageTextBox.text()[0] != "0":
-                self.windowParent.SetCoder(hemming.Coder.Coder(
+                self.windowParent.SetCoder(linear.Coder.Coder(
                         int(self.sizePackageTextBox.text())
                         ))
         elif text == CODER_NAMES[1]:

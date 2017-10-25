@@ -13,7 +13,14 @@ class Coder(abstractCoder.Coder):
 
     def __init__(self, length_information: int):
         log.debug("Создание кодера хемминга")
-        self.lengthAdditional = int(math.log2(length_information - 1) + 2)
+
+        # sum (2**(n-1)-1) from 1 to n must be >= length_information for correct check
+        for x in range(1, length_information):
+            if 2 ** x - x - 1 >= length_information:
+                self.lengthAdditional = x
+                break
+
+
         self.lengthInformation = length_information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
         self.matrix_transformation = []
@@ -50,8 +57,9 @@ class Coder(abstractCoder.Coder):
 
         step: int = 0
         for count in range(self.lengthTotal):  # добавление проверяющих битов
-            if math.log2(count + 1) != int(
-                    math.log2(count + 1)) or step >= self.lengthAdditional:  # Проверка кратности числа на степень 2х
+
+            # Проверка кратности числа на степень 2х
+            if math.log2(count + 1) != int(math.log2(count + 1)) or step >= self.lengthAdditional:
                 code.append([list_encoding_information[count - int(math.log2(count)) - 1]])
             else:
                 code.append([0])

@@ -6,7 +6,7 @@ from src.GUI.windows import MainWindow
 from src.GUI.windows.AddCoderWindow import AddCoderWindow
 from src.GUI.windows.TestCascadeCoderWindow import TestCascadeCoderWindow
 from src.GUI.windows.TestCoderWindow import TestCoderWindow
-from src.coders import convolutional, cyclical, fountain, hemming
+from src.coders import convolutional, cyclical, fountain, linear
 
 
 def SetMainToolBar(window: MainWindow):
@@ -81,7 +81,7 @@ class AboutCoder(QAction):
     def createWindow(self):
         if self.window.coder is not None:
             information: str = ""
-            if isinstance(self.window.coder, hemming.Coder.Coder):
+            if isinstance(self.window.coder, linear.Coder.Coder):
                 information = CODER_NAMES[0]
             elif isinstance(self.window.coder, cyclical.Coder.Coder):
                 information = CODER_NAMES[1]

@@ -28,7 +28,7 @@ class Coder(abstractCoder.Coder):
 
         if sum([int(x) % 2 for x in
                 plm.Polynomial([-1] + [0] * (information_length - 2) + [1]) / self.polynomial]) != 0:
-            raise CodingException("Не верный полином")
+            raise CodingException("Неверный полином")
 
         init_matrix: list = []
         column: list = IntToBitList(polynomial, rev=True) + [0] * self.lengthAdditional
@@ -55,7 +55,6 @@ class Coder(abstractCoder.Coder):
         additional_bits: list = [int(x) % 2 for x in
                                  (plm.Polynomial(information + [0] * self.lengthAdditional) % self.polynomial)]
         return information + [0] * (self.lengthAdditional - len(additional_bits)) + additional_bits
-        pass
         # return [x % 2 for x in (np.matrix(information) * self.matrix_G.A).tolist()[0]]
 
     def Decoding(self, information: list):
