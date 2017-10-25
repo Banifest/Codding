@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/channel/channel.py" afterPath="$PROJECT_DIR$/src/channel/channel.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/cyclical/Coder.py" afterPath="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/exeption.py" afterPath="$PROJECT_DIR$/src/coders/exeption.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/fountain/LubyTransform.py" afterPath="$PROJECT_DIR$/src/coders/fountain/LubyTransform.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/hemming/Coder.py" afterPath="$PROJECT_DIR$/src/coders/hemming/Coder.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TestCoders.py" afterPath="$PROJECT_DIR$/tests/TestCoders.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,9 +22,10 @@
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestFountainCoder_test_coder.coverage" NAME="Unittests for TestCoders.TestFountainCoder.test_coder Coverage Results" MODIFIED="1508390607913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoder_test_correct_ability.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability Coverage Results" MODIFIED="1508358228378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$setup.coverage" NAME="setup Coverage Results" MODIFIED="1496064951728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TestKursach$Coder.coverage" NAME="Coder Coverage Results" MODIFIED="1508704088760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/coders/cyclical" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_testCoder_TestHemmingCoder_test_coder.coverage" NAME="Unittests for tests.TestCoders.TestHemmingCoder.test_coder Coverage Results" MODIFIED="1508353476997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoder_test_init.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoder.test_init Coverage Results" MODIFIED="1508353782203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestCyclicalCoder_test_encoding.coverage" NAME="Unittests for TestCoders.TestCyclicalCoder.test_encoding Coverage Results" MODIFIED="1508697581410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestCyclicalCoder_test_encoding.coverage" NAME="Unittests for TestCoders.TestCyclicalCoder.test_encoding Coverage Results" MODIFIED="1508704092723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_testCoder_TestHemmingCoder.coverage" NAME="Unittests for tests.TestCoders.TestHemmingCoder Coverage Results" MODIFIED="1508353761022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestHemmingCoder_test_init.coverage" NAME="Unittests for TestCoders.TestHemmingCoder.test_init Coverage Results" MODIFIED="1508354166174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestCyclicalCoder_test_init.coverage" NAME="Unittests for TestCoders.TestCyclicalCoder.test_init Coverage Results" MODIFIED="1508697666949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -43,11 +48,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+            <state relative-caret-position="132">
+              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -59,7 +64,7 @@
         <entry file="file://$PROJECT_DIR$/src/coders/exeption.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -68,7 +73,7 @@
       <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/coders/hemming/Coder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
+            <state relative-caret-position="136">
               <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding />
             </state>
@@ -88,8 +93,8 @@
       <file leaf-file-name="case.py" pinned="false" current-in-tab="false">
         <entry file="file://C:/Program Files/Python36/Lib/unittest/case.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
+            <state relative-caret-position="10081">
+              <caret line="606" column="0" lean-forward="false" selection-start-line="606" selection-start-column="0" selection-end-line="606" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -98,28 +103,18 @@
       <file leaf-file-name="suite.py" pinned="false" current-in-tab="false">
         <entry file="file://C:/Program Files/Python36/Lib/unittest/suite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
+            <state relative-caret-position="1751">
               <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="abstractCoder.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/coders/abstractCoder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestCoders.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestCoders.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+            <state relative-caret-position="1938">
+              <caret line="114" column="41" lean-forward="true" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="41" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -127,10 +122,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="common.py" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/common.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="663">
+              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="casts.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/coders/casts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
+            <state relative-caret-position="901">
               <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding />
             </state>
@@ -140,7 +145,7 @@
       <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/coders/convolutional/Coder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-412">
+            <state relative-caret-position="1088">
               <caret line="66" column="41" lean-forward="true" selection-start-line="66" selection-start-column="41" selection-end-line="66" selection-end-column="41" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
@@ -248,7 +253,6 @@
         <option value="$PROJECT_DIR$/src/coders/fountain/__init__.py" />
         <option value="$PROJECT_DIR$/src/__init__.py" />
         <option value="$PROJECT_DIR$/src/logger.py" />
-        <option value="$PROJECT_DIR$/src/coders/exeption.py" />
         <option value="$PROJECT_DIR$/src/coders/cascade.py" />
         <option value="$PROJECT_DIR$/src/GUI/windows/TestCascadeCodeWindow.py" />
         <option value="$PROJECT_DIR$/src/GUI/windows/__init__.py" />
@@ -280,8 +284,9 @@
         <option value="$PROJECT_DIR$/src/coders/abstractCoder.py" />
         <option value="$PROJECT_DIR$/src/coders/casts.py" />
         <option value="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
-        <option value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
         <option value="$PROJECT_DIR$/tests/TestCoders.py" />
+        <option value="$PROJECT_DIR$/src/coders/exeption.py" />
+        <option value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
       </list>
     </option>
   </component>
@@ -318,6 +323,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -384,8 +391,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -432,21 +437,24 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_init">
-    <configuration name="Unittests for TestCoders.TestCyclicalCoder" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_encoding">
+    <configuration name="Coder" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/coders/cyclical" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="TestKursach" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;TestCoders.TestCyclicalCoder&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
     <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -660,18 +668,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_encoding" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_init" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_encoding" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_init" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Coder" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_init" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_encoding" />
-        <item index="2" class="java.lang.String" itemvalue="Python.main" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_encoding" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Coder" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_init" />
+        <item index="3" class="java.lang.String" itemvalue="Python.main" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests for TestCoders.TestCyclicalCoder.test_get_remainder" />
       </list>
     </recent_temporary>
   </component>
@@ -1036,29 +1044,29 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 37m 46s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 23h 25m 21s.xml">
       <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 37m 57s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 23h 25m 32s.xml">
       <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 39m 00s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 23h 25m 34s.xml">
       <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 39m 34s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 23h 26m 00s.xml">
       <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 39m 36s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 23h 26m 32s.xml">
       <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 21h 39m 41s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 23h 26m 47s.xml">
       <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_init - 2017.10.22 at 21h 39m 48s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_init" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 23h 27m 55s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_init - 2017.10.22 at 21h 40m 03s.xml">
-      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_init" configurationId="tests" />
+    <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_encoding - 2017.10.22 at 23h 28m 12s.xml">
+      <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_encoding" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_for_TestCoders_TestCyclicalCoder_test_init - 2017.10.22 at 21h 40m 30s.xml">
       <configuration name="Unittests for TestCoders.TestCyclicalCoder.test_init" configurationId="tests" />
@@ -1080,17 +1088,15 @@
     <frame x="-8" y="0" width="1554" height="911" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25769746" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277635" sideWeight="0.48393574" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29434448" sideWeight="0.5441767" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12851405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32262212" sideWeight="0.4678715" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.4892905" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29434448" sideWeight="0.4558233" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.48661312" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.251004" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24966533" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12851405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277635" sideWeight="0.46251673" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29434448" sideWeight="0.4558233" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24899599" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.48661312" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39717224" sideWeight="0.7248996" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14792503" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1100,7 +1106,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931727" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24966533" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3277635" sideWeight="0.46251673" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822478" sideWeight="0.48125836" order="12" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1229,14 +1237,9 @@
           <option name="timeStamp" value="212" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/coders/cyclical/Coder.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="213" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/coders/cyclical/Coder.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="214" />
+          <url>file://$PROJECT_DIR$/tests/TestCoders.py</url>
+          <line>118</line>
+          <option name="timeStamp" value="216" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1249,12 +1252,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="215" />
+      <option name="time" value="217" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Resources/img/TestCascadeCoder.png" />
     <entry file="uml://Python/#C:/Users/Banifest/PycharmProjects/TestKursach/src/coders/hemming/Coder.py">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -1569,7 +1571,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1564">
           <caret line="92" column="4" lean-forward="false" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1585,7 +1586,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1601,7 +1601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1623,7 +1622,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/coders/hemming/Coder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
+        <state relative-caret-position="136">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
         </state>
@@ -1637,25 +1636,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/combinations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="30" lean-forward="false" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/exeption.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/combinations.py" />
     <entry file="file://$PROJECT_DIR$/src/coders/casts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
+        <state relative-caret-position="901">
           <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding />
         </state>
@@ -1665,13 +1649,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="25" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/coders/convolutional/Coder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-412">
+        <state relative-caret-position="1088">
           <caret line="66" column="41" lean-forward="true" selection-start-line="66" selection-start-column="41" selection-end-line="66" selection-end-column="41" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
@@ -1679,38 +1662,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
+    <entry file="file://C:/Program Files/Python36/Lib/unittest/suite.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1751">
+          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Program Files/Python36/Lib/unittest/suite.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/common.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+        <state relative-caret-position="663">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/Program Files/Python36/Lib/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="652" column="0" lean-forward="false" selection-start-line="652" selection-start-column="0" selection-end-line="652" selection-end-column="0" />
+        <state relative-caret-position="10081">
+          <caret line="606" column="0" lean-forward="false" selection-start-line="606" selection-start-column="0" selection-end-line="606" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        <state relative-caret-position="1938">
+          <caret line="114" column="41" lean-forward="true" selection-start-line="114" selection-start-column="41" selection-end-line="114" selection-end-column="41" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/exeption.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

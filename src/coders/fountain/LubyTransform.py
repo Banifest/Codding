@@ -2,7 +2,7 @@ import random
 
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt, BitListToIntList, IntToBitList
-from src.coders.exeption import DecodingException
+from src.coders.exeption import CodingException
 from src.logger import log
 
 
@@ -94,7 +94,7 @@ class Coder(abstractCoder.Coder):
 
         if set(status) != {True}:
             log.debug("Недостаточно блоков для декодирования информации")
-            raise DecodingException("Невозможно декодировать :'(")
+            raise CodingException("Невозможно декодировать :'(")
 
         # формирование ответа в битовом представлении
         answer = answer[:-1]

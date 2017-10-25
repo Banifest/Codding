@@ -114,12 +114,12 @@ class TestCyclicalCoder(unittest.TestCase):
     def test_encoding(self):
         test_coder = CyclicalCoder(4, 11)
 
-        starting_code = [1, 0, 0, 1]
+        starting_code = [1, 1, 0, 1]
 
         code = test_coder.Encoding(starting_code)
-
+        print(code)
         a = np.polynomial.Polynomial([1, 1, 0, 1, 0, 0, 1])
-        print(a % np.polynomial.Polynomial([1, 1, 0, 1]))
+        # print(a % np.polynomial.Polynomial([1, 1, 0, 1]))
 
         code[3] ^= 1
 

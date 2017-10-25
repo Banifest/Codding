@@ -4,7 +4,7 @@ from typing import Optional, Union
 from coders.interleaver import Interleaver
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt
-from src.coders.exeption import DecodingException
+from src.coders.exeption import CodingException
 from src.logger import log
 
 
@@ -59,7 +59,7 @@ class Channel:
                 nowInformation = self.GenInterference(nowInformation)
                 if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
                 nowInformation = self.coder.Decoding(nowInformation)
-            except DecodingException as err:
+            except CodingException as err:
                 self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит "\
                                     "востановлению\n".format(x)
             else:
@@ -91,7 +91,7 @@ class Channel:
             if helpInformation != nowInformation: status = 1
             if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
             nowInformation = self.coder.Decoding(nowInformation)
-        except DecodingException as err:
+        except CodingException as err:
             status = 2
             log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
@@ -125,7 +125,7 @@ class Channel:
             if helpInformation != nowInformation: status = 1
             if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
             nowInformation = self.coder.Decoding(nowInformation)
-        except DecodingException as err:
+        except CodingException as err:
             status = 2
             log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
