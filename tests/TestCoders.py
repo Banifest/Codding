@@ -6,7 +6,8 @@ from coders.convolutional.Coder import Coder as ConvolutionalCoder
 from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
 from coders.cyclical.Coder import Coder as CyclicalCoder
 from coders.fountain.LubyTransform import Coder as LubyTransformCoder
-from coders.linear.Coder import Coder as HemmingCoder
+from coders.linear.ReedMuller import Coder as ReedMullerCoder
+from coders.linear.hemming import Coder as HemmingCoder
 
 
 class TestConvolutionalCoder(unittest.TestCase):
@@ -125,3 +126,11 @@ class TestCyclicalCoder(unittest.TestCase):
 
         test_coder.Decoding(code)
         # print(test_coder.Decoding(test_coder.Encoding(code)))
+
+
+class TestReedMullerCoder(unittest.TestCase):
+    def test_init(self):
+        test_coder = ReedMullerCoder(4, 2)
+        print(test_coder.matrix_G)
+
+        pass

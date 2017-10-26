@@ -188,7 +188,7 @@ class TestCascadeCoderWindow(QWidget):
 
             if isinstance(testInformation, list):
                 information = testInformation
-            elif isinstance(self.cascade.firstCoder, linear.Coder.Coder)\
+            elif isinstance(self.cascade.firstCoder, linear.hemming.Coder)\
                     or isinstance(self.cascade.firstCoder, cyclical.Coder.Coder):
                 information = IntToBitList(int(self.informationTextBox.text()),
                                            self.cascade.firstCoder.lengthInformation)
@@ -324,7 +324,7 @@ class TestCascadeCoderWindow(QWidget):
 
             if isinstance(testInformation, list):
                 information = testInformation
-            elif isinstance(self.channel.coder, linear.Coder.Coder)\
+            elif isinstance(self.channel.coder, linear.hemming.Coder)\
                     or isinstance(self.channel.coder, cyclical.Coder.Coder):
                 information = IntToBitList(int(self.informationTextBox.text()),
                                            self.channel.coder.lengthInformation)

@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/coders/linear/ReedMuller.py" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/src/coders/linear/Coder.py" afterPath="$PROJECT_DIR$/src/coders/linear/hemming.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/actions/menu.py" afterPath="$PROJECT_DIR$/src/GUI/actions/menu.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/linear/__init__.py" afterPath="$PROJECT_DIR$/src/coders/linear/__init__.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TestCoders.py" afterPath="$PROJECT_DIR$/tests/TestCoders.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,9 +67,9 @@
         <entry file="file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="384">
-              <caret line="25" column="31" lean-forward="true" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+              <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#0#16#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -681,13 +679,6 @@
       <option name="presentableId" value="Default" />
       <updated>1490813097617</updated>
     </task>
-    <task id="LOCAL-00025" summary="Добавлена симуляция канала связи без памяти">
-      <created>1494404213523</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1494404213523</updated>
-    </task>
     <task id="LOCAL-00026" summary="Проба Pyqt">
       <created>1494485763270</created>
       <option name="number" value="00026" />
@@ -1024,7 +1015,14 @@
       <option name="project" value="LOCAL" />
       <updated>1508963847999</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="добавлена инициализация кодера Рида-Миллера">
+      <created>1508999254987</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1508999254987</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1132,7 +1130,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="исправлены ошибки с определением типов кодеров" />
     <MESSAGE value="баги баги баги. слишком много багов исправленно" />
     <MESSAGE value="Рабочее состояние (но это не точно)" />
     <MESSAGE value="удаление коментов" />
@@ -1157,7 +1154,8 @@
     <MESSAGE value="добавлен кодировщик циклического кодера" />
     <MESSAGE value="добавлен проверка полинома для циклического кодера" />
     <MESSAGE value="исправлена ошибка некорректно считаюшая количество нужных дополнительных бит для пакета" />
-    <option name="LAST_COMMIT_MESSAGE" value="исправлена ошибка некорректно считаюшая количество нужных дополнительных бит для пакета" />
+    <MESSAGE value="добавлена инициализация кодера Рида-Миллера" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлена инициализация кодера Рида-Миллера" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1232,7 +1230,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py</url>
-          <line>17</line>
+          <line>19</line>
           <option name="timeStamp" value="225" />
         </line-breakpoint>
       </breakpoints>
@@ -1612,9 +1610,9 @@
     <entry file="file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
-          <caret line="25" column="31" lean-forward="true" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
+          <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>

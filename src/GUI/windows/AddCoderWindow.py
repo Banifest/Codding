@@ -116,7 +116,7 @@ class AddCoderWindow(QWidget):
         text = self.comboBox.currentText()
         if text == CODER_NAMES[0]:
             if self.sizePackageTextBox.text().isdigit() and self.sizePackageTextBox.text()[0] != "0":
-                self.windowParent.SetCoder(linear.Coder.Coder(
+                self.windowParent.SetCoder(linear.hemming.Coder(
                         int(self.sizePackageTextBox.text())
                         ))
         elif text == CODER_NAMES[1]:
