@@ -1,1 +1,1 @@
-import src.coders.linear.Coder
+import src.coders.linear.hemming
