@@ -130,7 +130,13 @@ class TestCyclicalCoder(unittest.TestCase):
 
 class TestReedMullerCoder(unittest.TestCase):
     def test_init(self):
-        test_coder = ReedMullerCoder(4, 2)
-        print(test_coder.matrix_G)
+        test_coder = ReedMullerCoder(3, 1)
+
+        code = [1, 0, 1, 0]
+
+        enc_code = test_coder.Encoding(code)
+
+        dec_code = test_coder.Decoding(enc_code)
+        # print(test_coder.matrix_G)
 
         pass
