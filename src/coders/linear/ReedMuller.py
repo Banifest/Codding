@@ -46,10 +46,10 @@ class Coder(abstractCoder.Coder):
         vec_xor = lambda a, b: [a[x] ^ b[x] for x in range(len(a))]
         vec_mul = lambda a, b: [a[x] & b[x] for x in range(len(a))]
         vec_inv = lambda a: [x ^ 1 for x in a]
-        vec_gen = lambda a, b: [a for x in b]
+        vec_gen = lambda a, b: [a for k in range(b)]
 
         result_voice: list = []
-        for vector in self.matrix_G.tolist()[1::-1]:
+        for vector in self.matrix_G.tolist()[::-1][:-1]:
             voice: int = 1  # голосовалка
 
             # проверка на ортогональность
@@ -85,24 +85,12 @@ class Coder(abstractCoder.Coder):
             first_sum = vec_xor(vec_mul(vector, vec_gen(result_voice[counter], len(information))), first_sum)
             counter += 1
 
-        result_voice.append(0 if sum(first_sum) % 2 == 0 else 1)
+        result_voice.append(0 if sum(first_sum) > 5 else 1)
 
         temp_matrix: list = self.matrix_G.tolist()
         result_voice.reverse()
         decoding_information: list = []
-        for x in range(len(temp_matrix)):
-            vec_xor(vec_mul(temp_matrix[x], vec_gen(result_voice[counter], len(information))), decoding_information)
+        #        for x in range(len(temp_matrix)):
+        #            vec_xor(vec_mul(temp_matrix[x], vec_gen(result_voice[counter], len(information))), decoding_information)
 
-        return result_voice[::-1]
-"""
-        for x in range(len(self.matrix_G) - 1, 0, -1):
-            voice: int = 0
-            for options_mul in range(1 << len(self.vectors_rise[x - 1])):
-                val_vector_mul = [1 for x in information] # заглушка состоящая из одних единиц, нужна для умножения
-                counter = 0
-                for now_option in IntToBitList(options_mul, size=len(self.vectors_rise[x - 1])):
-                    val_vector_mul = vec_mul(val_vector_mul, self.vectors[self.vectors_rise[x - 1][counter]])
-                    counter += 1
-                print(val_vector_mul)
-            pass
-"""
+        return result_voice
