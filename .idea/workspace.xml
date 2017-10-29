@@ -31,7 +31,7 @@
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoderForPacket_test_correct_ability.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoderForPacket.test_correct_ability Coverage Results" MODIFIED="1508358069135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoderForPacket.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoderForPacket Coverage Results" MODIFIED="1508357457554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$test.coverage" NAME="test Coverage Results" MODIFIED="1506073949833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestReedMullerCoder_test_init.coverage" NAME="Unittests for TestCoders.TestReedMullerCoder.test_init Coverage Results" MODIFIED="1509292848982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestReedMullerCoder_test_init.coverage" NAME="Unittests for TestCoders.TestReedMullerCoder.test_init Coverage Results" MODIFIED="1509301353993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_in_cheburechnaya_py.coverage" NAME="Unittests in cheburechnaya.py Coverage Results" MODIFIED="1496142897947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestCyclicalCoder.coverage" NAME="Unittests for TestCoders.TestCyclicalCoder Coverage Results" MODIFIED="1508684763427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestCyclicalCoder_test_get_remainder.coverage" NAME="Unittests for TestCoders.TestCyclicalCoder.test_get_remainder Coverage Results" MODIFIED="1508692324559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -57,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ReedMuller.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ReedMuller.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state relative-caret-position="298">
+              <caret line="80" column="8" lean-forward="false" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -69,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCoders.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestCoders.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+            <state relative-caret-position="265">
+              <caret line="134" column="26" lean-forward="false" selection-start-line="134" selection-start-column="26" selection-end-line="134" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -82,7 +82,7 @@
       <file leaf-file-name="casts.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/coders/casts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
+            <state relative-caret-position="352">
               <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
               <folding />
             </state>
@@ -232,8 +232,8 @@
         <option value="$PROJECT_DIR$/src/coders/exeption.py" />
         <option value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
         <option value="$PROJECT_DIR$/src/coders/hemming/Coder.py" />
-        <option value="$PROJECT_DIR$/src/coders/linear/ReedMuller.py" />
         <option value="$PROJECT_DIR$/tests/TestCoders.py" />
+        <option value="$PROJECT_DIR$/src/coders/linear/ReedMuller.py" />
       </list>
     </option>
   </component>
@@ -641,13 +641,6 @@
       <option name="presentableId" value="Default" />
       <updated>1490813097617</updated>
     </task>
-    <task id="LOCAL-00027" summary="Добавено:&#10;меню выбора кодера&#10;меню тестирования кодера">
-      <created>1494594358165</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1494594358165</updated>
-    </task>
     <task id="LOCAL-00028" summary="Исправлена перерисовка в окне добавления кодера">
       <created>1494654797092</created>
       <option name="number" value="00028" />
@@ -984,38 +977,45 @@
       <option name="project" value="LOCAL" />
       <updated>1508999341220</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="добавлена операция кодирования в код рида мюллера">
+      <created>1509293452217</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1509293452218</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 23m 24s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 10m 16s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 23m 29s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 14m 05s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 32m 36s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 14m 46s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 32m 43s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 15m 53s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 57m 41s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 16m 16s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 57m 59s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 16m 22s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 59m 25s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 16m 36s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 59m 47s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 17m 56s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 18h 59m 58s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 22m 17s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 19h 00m 49s.xml">
+    <history-entry file="Unittests_for_TestCoders_TestReedMullerCoder_test_init - 2017.10.29 at 21h 23m 13s.xml">
       <configuration name="Unittests for TestCoders.TestReedMullerCoder.test_init" configurationId="tests" />
     </history-entry>
   </component>
@@ -1038,11 +1038,11 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12851405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32262212" sideWeight="0.4678715" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.4892905" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29246488" sideWeight="0.4558233" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29246488" sideWeight="0.4558233" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24899599" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.48661312" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44189018" sideWeight="0.7248996" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44189018" sideWeight="0.7248996" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14792503" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.49732262" order="7" side_tool="false" content_ui="tabs" />
@@ -1092,7 +1092,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Рабочее состояние (но это не точно)" />
     <MESSAGE value="удаление коментов" />
     <MESSAGE value="изменена картинка на каскадное тестирование&#10;добавлены графики-пироги" />
     <MESSAGE value="сокрытие ненужных преализаций" />
@@ -1117,7 +1116,8 @@
     <MESSAGE value="исправлена ошибка некорректно считаюшая количество нужных дополнительных бит для пакета" />
     <MESSAGE value="добавлена инициализация кодера Рида-Миллера" />
     <MESSAGE value="переименован файл кода хэмминга" />
-    <option name="LAST_COMMIT_MESSAGE" value="переименован файл кода хэмминга" />
+    <MESSAGE value="добавлена операция кодирования в код рида мюллера" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлена операция кодирования в код рида мюллера" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1186,24 +1186,9 @@
           <option name="timeStamp" value="222" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tests/TestCoders.py</url>
-          <line>131</line>
-          <option name="timeStamp" value="226" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py</url>
-          <line>26</line>
-          <option name="timeStamp" value="227" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="228" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py</url>
-          <line>45</line>
-          <option name="timeStamp" value="229" />
+          <line>65</line>
+          <option name="timeStamp" value="231" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1216,14 +1201,9 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="230" />
+      <option name="time" value="232" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="tests">
-        <watch expression="information" />
-        <watch expression="self" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/README.md">
@@ -1454,14 +1434,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/coders/combinations.py" />
-    <entry file="file://$PROJECT_DIR$/src/coders/casts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TODO.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1498,6 +1470,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
           <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1505,13 +1478,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
           <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files/Python36/Lib/unittest/case.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10081">
-          <caret line="606" column="0" lean-forward="false" selection-start-line="606" selection-start-column="0" selection-end-line="606" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1547,14 +1513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Program Files/Python36/Lib/site-packages/numpy/matrixlib/defmatrix.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2017.2/system/python_stubs/-1120166012/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="889">
@@ -1563,21 +1521,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py">
+    <entry file="file://C:/Program Files/Python36/Lib/site-packages/numpy/matrixlib/defmatrix.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Python36/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="607" column="0" lean-forward="false" selection-start-line="607" selection-start-column="0" selection-end-line="607" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/casts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+        <state relative-caret-position="265">
+          <caret line="134" column="26" lean-forward="false" selection-start-line="134" selection-start-column="26" selection-end-line="134" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="80" column="8" lean-forward="false" selection-start-line="80" selection-start-column="8" selection-end-line="80" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

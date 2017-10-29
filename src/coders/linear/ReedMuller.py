@@ -43,17 +43,52 @@ class Coder(abstractCoder.Coder):
         pass
 
     def Decoding(self, information: list):
-        vec_sum = lambda a, b: [a[x] ^ b[x] for x in range(len(a))]
+        vec_xor = lambda a, b: [a[x] ^ b[x] for x in range(len(a))]
         vec_mul = lambda a, b: [a[x] & b[x] for x in range(len(a))]
         vec_inv = lambda a: [x ^ 1 for x in a]
 
-        for x in range(len(self.matrix_G), 0, -1):
-            voice: int = 0
-            for option_mul in range(1 << len(self.vectors_rise[x])):
-                pass
-            pass
+        result_voice: list = []
+        for vector in self.matrix_G.tolist()[1::-1]:
+            voice: int = 1  # голосовалка
 
-        pass
-        #
-        # [1111011011011000]
-        # [1111101001101100]
+            # проверка на ортогональность
+            orthogonal_vectors: list = [vector]
+            for test_vector in self.matrix_G.tolist()[1:]:
+                for x in orthogonal_vectors:
+                    if sum(vec_mul(x, test_vector)) % 2 != 0 or test_vector == vector:
+                        break
+                else:
+                    orthogonal_vectors.append(test_vector)
+
+            orthogonal_vectors = orthogonal_vectors[1:]
+            # проверка на ортогональность
+
+            for options_mul in range(1 << len(orthogonal_vectors)):
+                orthogonal_vec_num: int = 0
+
+                val_vector_mul = [1 for x in information]  # заглушка состоящая из одних единиц, нужна для умножения
+                for option in IntToBitList(options_mul, size=len(orthogonal_vectors)):
+                    if option:
+                        val_vector_mul = vec_mul(val_vector_mul, orthogonal_vectors[orthogonal_vec_num])
+                    else:
+                        val_vector_mul = vec_mul(val_vector_mul, vec_inv(orthogonal_vectors[orthogonal_vec_num]))
+                    orthogonal_vec_num += 1
+
+                voice += 1 if sum(vec_mul(val_vector_mul, information)) % 2 != 0 else -1
+
+            result_voice.append(0 if voice < 1 else 1)
+
+
+
+"""
+        for x in range(len(self.matrix_G) - 1, 0, -1):
+            voice: int = 0
+            for options_mul in range(1 << len(self.vectors_rise[x - 1])):
+                val_vector_mul = [1 for x in information] # заглушка состоящая из одних единиц, нужна для умножения
+                counter = 0
+                for now_option in IntToBitList(options_mul, size=len(self.vectors_rise[x - 1])):
+                    val_vector_mul = vec_mul(val_vector_mul, self.vectors[self.vectors_rise[x - 1][counter]])
+                    counter += 1
+                print(val_vector_mul)
+            pass
+"""
