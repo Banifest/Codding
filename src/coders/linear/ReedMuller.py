@@ -81,16 +81,19 @@ class Coder(abstractCoder.Coder):
 
         first_sum: int = information.copy()
         counter: int = 0
-        for vector in self.matrix_G.tolist()[1::-1]:
+        for vector in self.matrix_G.tolist()[::-1][:-1]:
             first_sum = vec_xor(vec_mul(vector, vec_gen(result_voice[counter], len(information))), first_sum)
             counter += 1
 
         result_voice.append(0 if sum(first_sum) > 5 else 1)
-
         temp_matrix: list = self.matrix_G.tolist()
         result_voice.reverse()
-        decoding_information: list = []
-        #        for x in range(len(temp_matrix)):
-        #            vec_xor(vec_mul(temp_matrix[x], vec_gen(result_voice[counter], len(information))), decoding_information)
+        decoding_information: list = vec_gen(0, len(information))
+        for x in range(len(temp_matrix)):
+            decoding_information = vec_xor(vec_mul(temp_matrix[x], vec_gen(result_voice[x], len(information))),
+                                           decoding_information)
+
+        decoding_information.reverse()  # исправленное кодовое слово
+        result_voice[0] = 0 if sum(decoding_information) < 5 else 1
 
         return result_voice

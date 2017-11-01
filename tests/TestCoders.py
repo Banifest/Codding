@@ -1,7 +1,5 @@
 import unittest
 
-import numpy as np
-
 from coders.convolutional.Coder import Coder as ConvolutionalCoder
 from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
 from coders.cyclical.Coder import Coder as CyclicalCoder
@@ -113,19 +111,11 @@ class TestCyclicalCoder(unittest.TestCase):
         self.assertTrue(sum([y % 2 for x in (test_coder.matrix_G * test_coder.matrix_H.T).tolist() for y in x]) == 0)
 
     def test_encoding(self):
-        test_coder = CyclicalCoder(4, 11)
-
-        starting_code = [1, 1, 0, 1]
-
+        test_coder = CyclicalCoder(3, 29)
+        starting_code = [1, 0, 1]
         code = test_coder.Encoding(starting_code)
-        print(code)
-        a = np.polynomial.Polynomial([1, 1, 0, 1, 0, 0, 1])
-        # print(a % np.polynomial.Polynomial([1, 1, 0, 1]))
-
         code[3] ^= 1
-
         test_coder.Decoding(code)
-        # print(test_coder.Decoding(test_coder.Encoding(code)))
 
 
 class TestReedMullerCoder(unittest.TestCase):
