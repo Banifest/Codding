@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>main_window</class>
+    <widget class="QMainWindow" name="main_window">
+        <property name="enabled">
+            <bool>true</bool>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>191</width>
+                <height>192</height>
+            </rect>
+        </property>
+        <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+            </sizepolicy>
+        </property>
+        <property name="minimumSize">
+            <size>
+                <width>100</width>
+                <height>100</height>
+            </size>
+        </property>
+        <property name="maximumSize">
+            <size>
+                <width>291</width>
+                <height>192</height>
+            </size>
+        </property>
+        <property name="focusPolicy">
+            <enum>Qt::ClickFocus</enum>
+        </property>
+        <property name="contextMenuPolicy">
+            <enum>Qt::DefaultContextMenu</enum>
+        </property>
+        <property name="windowTitle">
+            <string>Test coder</string>
+        </property>
+        <property name="windowIcon">
+            <iconset resource="../../../Resources/img/img.qrc">
+                <normaloff>:/MainWindow/AddCoder.png</normaloff>:/MainWindow/AddCoder.png
+            </iconset>
+        </property>
+        <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="autoFillBackground">
+            <bool>false</bool>
+        </property>
+        <property name="locale">
+            <locale language="Russian" country="Belarus"/>
+        </property>
+        <property name="toolButtonStyle">
+            <enum>Qt::ToolButtonTextUnderIcon</enum>
+        </property>
+        <property name="tabShape">
+            <enum>QTabWidget::Rounded</enum>
+        </property>
+        <property name="dockNestingEnabled">
+            <bool>false</bool>
+        </property>
+        <widget class="QWidget" name="centralwidget">
+            <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="minimumSize">
+                <size>
+                    <width>100</width>
+                    <height>100</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>200</width>
+                    <height>200</height>
+                </size>
+            </property>
+            <property name="acceptDrops">
+                <bool>false</bool>
+            </property>
+            <property name="layoutDirection">
+                <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="locale">
+                <locale language="Russian" country="Kyrgyzstan"/>
+            </property>
+        </widget>
+        <widget class="QToolBar" name="main_tool_bar">
+            <property name="minimumSize">
+                <size>
+                    <width>0</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property name="maximumSize">
+                <size>
+                    <width>16777214</width>
+                    <height>16777214</height>
+                </size>
+            </property>
+            <property name="focusPolicy">
+                <enum>Qt::ClickFocus</enum>
+            </property>
+            <property name="windowTitle">
+                <string>KitCoders</string>
+            </property>
+            <property name="autoFillBackground">
+                <bool>false</bool>
+            </property>
+            <property name="movable">
+                <bool>false</bool>
+            </property>
+            <property name="floatable">
+                <bool>false</bool>
+            </property>
+            <attribute name="toolBarArea">
+                <enum>LeftToolBarArea</enum>
+            </attribute>
+            <attribute name="toolBarBreak">
+                <bool>false</bool>
+            </attribute>
+            <addaction name="action_create_new_coder"/>
+            <addaction name="action_test_simple_coder"/>
+            <addaction name="action_test_cascade_coder"/>
+            <addaction name="action_about_coder"/>
+        </widget>
+        <action name="action_create_new_coder">
+            <property name="checkable">
+                <bool>false</bool>
+            </property>
+            <property name="icon">
+                <iconset>
+                    <normalon>:/MainWindow/AddCoder.png</normalon>
+                </iconset>
+            </property>
+            <property name="text">
+                <string>Создание нового кодера</string>
+            </property>
+            <property name="toolTip">
+                <string>Создание нового кодера</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+Shift+N</string>
+            </property>
+            <property name="priority">
+                <enum>QAction::NormalPriority</enum>
+            </property>
+        </action>
+        <action name="action_test_simple_coder">
+            <property name="enabled">
+                <bool>true</bool>
+            </property>
+            <property name="icon">
+                <iconset resource="../../../Resources/img/img.qrc">
+                    <normaloff>:/MainWindow/TestCoder.jpg</normaloff>
+                    <normalon>:/MainWindow/AddCoder.png</normalon>:/MainWindow/TestCoder.jpg
+                </iconset>
+            </property>
+            <property name="text">
+                <string>Тестирование одиночного кодера</string>
+            </property>
+            <property name="toolTip">
+                <string>Тестирование одиночного кодера</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+Shift+T</string>
+            </property>
+            <property name="priority">
+                <enum>QAction::NormalPriority</enum>
+            </property>
+        </action>
+        <action name="action_test_cascade_coder">
+            <property name="enabled">
+                <bool>true</bool>
+            </property>
+            <property name="icon">
+                <iconset resource="../../../Resources/img/img.qrc">
+                    <normaloff>:/MainWindow/TestCoder.jpg</normaloff>
+                    <normalon>:/MainWindow/AddCoder.png</normalon>:/MainWindow/TestCoder.jpg
+                </iconset>
+            </property>
+            <property name="text">
+                <string>Тестирование каскадного кодера</string>
+            </property>
+            <property name="toolTip">
+                <string>Тестирование каскадного кодера</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+Shift+K</string>
+            </property>
+            <property name="priority">
+                <enum>QAction::NormalPriority</enum>
+            </property>
+        </action>
+        <action name="action_about_coder">
+            <property name="icon">
+                <iconset resource="../../../Resources/img/img.qrc">
+                    <normaloff>:/MainWindow/InformationCoder.png</normaloff>:/MainWindow/InformationCoder.png
+                </iconset>
+            </property>
+            <property name="text">
+                <string>О кодере</string>
+            </property>
+            <property name="toolTip">
+                <string>О кодере</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+Shift+H</string>
+            </property>
+        </action>
+    </widget>
+    <resources>
+        <include location="../../../Resources/img/img.qrc"/>
+    </resources>
+    <connections/>
+</ui>
