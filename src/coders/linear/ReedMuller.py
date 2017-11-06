@@ -6,7 +6,7 @@ from coders import abstractCoder
 from coders.casts import BitListToInt, IntToBitList
 
 
-class Coder(abstractCoder.Coder):
+class Coder(abstractCoder.AbstractCoder):
     matrix_G: np.matrix
     vectors: list
     vectors_rise: list = []

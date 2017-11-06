@@ -6,7 +6,7 @@ from src.coders.exeption import CodingException
 from src.logger import log
 
 
-class Coder(abstractCoder.Coder):
+class Coder(abstractCoder.AbstractCoder):
     countCodingBlocks: int  # количество блоков информации
     countBlocks: int  # количество блоков сочетаний
     sizeBlock: int  # Размер одного блока

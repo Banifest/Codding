@@ -3,7 +3,7 @@ from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList, cyc
 from src.logger import log
 
 
-class Coder(abstractCoder.Coder):
+class Coder(abstractCoder.AbstractCoder):
     countPolynomials: int = 0
     listPolynomials: list = []
     countInput: int = 0

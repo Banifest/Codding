@@ -1,9 +1,10 @@
 from abc import ABCMeta, abstractmethod
 
 
-class Coder:
+class AbstractCoder:
     __metaclass__ = ABCMeta
 
+    name: str = ""
     coding_information: int = 0
     count_additional: int = 0
     lengthTotal: int = 0

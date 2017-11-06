@@ -13,14 +13,14 @@ class Channel:
     countCyclical: int = 1
     duplex: bool = False
     information: str = ""
-    coder: abstractCoder.Coder
+    coder: abstractCoder.AbstractCoder
     interleaver: Interleaver.Interleaver = False
 
     countSuccessfullyMessage: int
 
     # LDPC
 
-    def __init__(self, coder: abstractCoder.Coder or None, noiseProbability: Optional[int],
+    def __init__(self, coder: abstractCoder.AbstractCoder or None, noiseProbability: Optional[int],
                  countCyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
         log.debug("Создание канала связи")

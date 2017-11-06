@@ -7,14 +7,14 @@ from src.coders.casts import BitListToInt
 
 
 class Cascade(channel.Channel):
-    firstCoder: abstractCoder.Coder
+    firstCoder: abstractCoder.AbstractCoder
     firstInterleaver: Interleaver.Interleaver
-    secondCoder: abstractCoder.Coder
+    secondCoder: abstractCoder.AbstractCoder
     secondInterleaver: Interleaver.Interleaver
 
     def __init__(self,
-                 firstCoder: abstractCoder.Coder,
-                 secondCoder: abstractCoder.Coder,
+                 firstCoder: abstractCoder.AbstractCoder,
+                 secondCoder: abstractCoder.AbstractCoder,
                  noiseProbability: Optional[int],
                  countCyclical: Optional[int],
                  duplex: Optional[bool],

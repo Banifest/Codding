@@ -3,7 +3,7 @@ import numpy as np
 from src.coders import abstractCoder
 
 
-class Coder(abstractCoder.Coder):
+class Coder(abstractCoder.AbstractCoder):
     """
     Для хранения матриц большого размера будем использовать граф
     где columns список верхних вершин, а lines нижних. В каждом элементе

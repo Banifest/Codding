@@ -1,35 +1,28 @@
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QWidget
+from PyQt5 import uic
+from PyQt5.QtWidgets import QMainWindow
 
-from src.GUI.actions import menu
-from src.coders import abstractCoder
+from GUI.windows.AddCoderWindow import AddCoderWindow
+# from GUI.windows.TestCascadeCoderWindow import TestCascadeCoderWindow
+# from GUI.windows.TestCoderWindow import TestCoderWindow
 from src.logger import log
 
 
 class MainWindow(QMainWindow):
-    coder: abstractCoder.Coder
-    coder_name: str = ""
-    firstCoder: abstractCoder.Coder
-    secondCoder: abstractCoder.Coder
-
-    newCoderWindow: QWidget = None
-    testCoderWindow: QWidget = None
-
-    def __init__(self):
+    def __init__(self, controller):
         log.debug("Создание главного окна")
 
-        super().__init__()
-        self.setFixedSize(250, 34)
-        self.setWindowTitle('MAVR')
-        self.setWindowIcon(QIcon('Resources/img/pic.png'))
+        super(MainWindow, self).__init__()
+        self.controller = controller
+        uic.loadUi(r'src\GUI\UI\main_window.ui', self)
 
-        menu.SetMainToolBar(self)
+        self.action_create_new_coder.triggered.connect(self.controller.set_create_coder_window)
+        self.action_test_simple_coder.triggered.connect(self.controller.set_test_coder_window)
+        self.action_test_cascade_coder.triggered.connect(lambda: TestCascadeCoderWindow(self))
+        self.action_about_coder.triggered.connect(lambda: AddCoderWindow(self))
 
         self.show()
 
-    def SetCoder(self, coder: abstractCoder.Coder):
-        self.coder = coder
-
     def closeEvent(self, *args, **kwargs):
-        if self.newCoderWindow is not None: del self.newCoderWindow
-        if self.testCoderWindow is not None: del self.testCoderWindow
+        self.controller.del_add_coder_window()
+        self.controller.del_test_simple_coder_window()
+        self.controller.del_test_cascade_coder_window()

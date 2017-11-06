@@ -11,7 +11,7 @@ from src.logger import log
 generatingPalindromes = [None, None, 0x7, 0xB, 0x29, 0x43, 0x89, 0x1D7]
 
 
-class Coder(abstractCoder.Coder):
+class Coder(abstractCoder.AbstractCoder):
     polynomial: plm.Polynomial
     matrix_G: np.matrix  # порождающая матрица
     matrix_H: np.matrix  # проверочная матрицал

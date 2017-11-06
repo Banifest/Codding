@@ -8,8 +8,11 @@ from src.coders.exeption import CodingException
 from src.logger import log
 
 
-class Coder(abstractCoder.Coder):
-    matrix_transformation: list = []
+class Coder(abstractCoder.AbstractCoder):
+    def GetRedundancy(self) -> int:
+        pass
+
+    _matrixTransformation: list = []
 
     def __init__(self, length_information: int):
         log.debug("Создание кодера хемминга")
@@ -23,7 +26,7 @@ class Coder(abstractCoder.Coder):
 
         self.lengthInformation = length_information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
-        self.matrix_transformation = []
+        self._matrixTransformation = []
 
         for x in range(self.lengthAdditional):
             temp: list = []
@@ -39,8 +42,8 @@ class Coder(abstractCoder.Coder):
                     if count >= self.lengthTotal:
                         break
                 flag: bool = not flag
-            self.matrix_transformation.append(temp)
-        self.matrix_transformation = np.transpose(np.array(self.matrix_transformation))
+            self._matrixTransformation.append(temp)
+        self._matrixTransformation = np.transpose(np.array(self._matrixTransformation))
 
     def GetSpeed(self) -> float:
         return float(self.lengthInformation) / float(self.lengthTotal)
@@ -67,7 +70,7 @@ class Coder(abstractCoder.Coder):
 
         answer = [x[0] for x in code]
         code = np.transpose(np.array(code))
-        backup_info = list((np.dot(code, self.matrix_transformation) % 2)[0])
+        backup_info = list((np.dot(code, self._matrixTransformation) % 2)[0])
         for x in range(self.lengthAdditional):
             answer[(1 << x) - 1] = backup_info[x]
         return answer
@@ -77,7 +80,7 @@ class Coder(abstractCoder.Coder):
 
         code = np.transpose(np.array([[x] for x in information]))
         answer: list = []
-        status: list = list((np.dot(code, self.matrix_transformation) % 2)[0])
+        status: list = list((np.dot(code, self._matrixTransformation) % 2)[0])
         status.reverse()
         status: int = BitListToInt(status)
         if status != 0:
@@ -86,7 +89,7 @@ class Coder(abstractCoder.Coder):
             if len(code[0]) > status - 1:
                 code[0][status - 1] = (code[0][status - 1] + 1) % 2
                 old_status = status
-                status = BitListToInt(list((np.dot(code, self.matrix_transformation) % 2)[0]))
+                status = BitListToInt(list((np.dot(code, self._matrixTransformation) % 2)[0]))
 
                 if status != 0:
                     log.debug("Не удалось успешно исправить обнаруженные ошибки")
