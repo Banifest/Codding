@@ -145,8 +145,10 @@ class TestCoder(QThread):
             self.repairPackage = 0
             self.invisiblePackage = 0
             status += step
-            self.noiseChance = x
+
+            self.channel.noiseProbability = x
             self.one_test()
+
             draw_data.append([self.successfullyPackage, self.repairPackage, self.badPackage, self.invisiblePackage])
             self.autoStepFinished.emit(int(status))
 
