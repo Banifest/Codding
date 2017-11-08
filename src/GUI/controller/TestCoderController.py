@@ -8,6 +8,7 @@ from GUI.windows.TestCoderWindow import TestCoderWindow
 # noinspection PyAttributeOutsideInit
 from coders.abstractCoder import AbstractCoder
 from coders.casts import IntToBitList
+from coders.interleaver import Interleaver
 from src.channel.channel import Channel
 from src.logger import log
 
@@ -27,16 +28,18 @@ class TestCoderController:
         self._testCoderWindow.get_last_result_button.setEnabled(param)
         self._testCoderWindow.noise_text_box.setEnabled(param)
         self._testCoderWindow.count_test_text_box.setEnabled(param)
-        self._testCoderWindow.isInterleaver.setEnabled(param)
+        self._testCoderWindow.is_interleaver_first.setEnabled(param)
         self._testCoderWindow.information_text_box.setEnabled(param)
         self._testCoderWindow.begin_test_button.setEnabled(param)
         self._testCoderWindow.begin_auto_test_button.setEnabled(param)
+        if self._testCoderWindow.first_length_text_box.isEnabled():
+            self._testCoderWindow.first_length_text_box.setEnabled(param)
 
-    def starting_test(self, flag: bool):
+    def starting_test(self, param: bool):
         try:
             self._threadClass = TestCoder(self._testCoderWindow, self._mainController.currentCoder, self._lastResult)
             self.enable_disable_widget(False)
-            self._threadClass.set_auto(flag)
+            self._threadClass.set_auto(param)
 
             self._threadClass.autoStepFinished.connect(lambda val: self._testCoderWindow.auto_test.setValue(val))
             self._threadClass.stepFinished.connect(lambda val: self._testCoderWindow.single_test.setValue(val))
@@ -45,10 +48,9 @@ class TestCoderController:
         except:
             QMessageBox.warning(self._testCoderWindow,
                                 "Проверте параметры на корректность информации",
-                                "Ошибочно заполнены поля параметры",
+                                "Ошибочно заполнены поля параметров",
                                 QMessageBox.Ok,
                                 QMessageBox.Ok)
-
 
     def get_last_result(self):
         msg = QMessageBox.information(self._testCoderWindow,
@@ -77,6 +79,8 @@ class TestCoder(QThread):
     information: int = 1
     currentCoder: AbstractCoder
     is_auto: bool = False
+    is_interleaver: bool = False
+    first_length_interleaver: int = 1
 
     def __init__(self, test_window: QWidget, currentCoder: AbstractCoder, lastResult: str):
         super(TestCoder, self).__init__(None)
@@ -90,6 +94,15 @@ class TestCoder(QThread):
         self.countTest = int(test_window.count_test_text_box.text())
         self.information = int(test_window.information_text_box.text())
 
+        self.channel = Channel(
+                self.currentCoder,
+                self.noiseChance,
+                self.countTest,
+                False,
+                Interleaver.Interleaver(int(test_window.first_length_text_box.text()))
+                if test_window.is_interleaver_first.isChecked() else None)
+
+
     def __del__(self):
         self.wait()
 
@@ -99,21 +112,12 @@ class TestCoder(QThread):
     def one_test(self):
         progress = 0.0
         step = 100.0 / self.countTest
-        information: list = []
-
-        channel = Channel(
-                self.currentCoder,
-                self.noiseChance,
-                self.countTest,
-                False,
-                None)
-
-        information = IntToBitList(self.information)
+        information: list = IntToBitList(self.information)
 
         log.debug("Начало цикла тестов")
         writer = open("lastInformation.txt", "w")
         for x in range(self.countTest):
-            status: int = channel.TransferOneStep(information)
+            status: int = self.channel.TransferOneStep(information)
             if status == 0:
                 self.successfullyPackage += 1
             elif status == 1:
@@ -122,9 +126,9 @@ class TestCoder(QThread):
                 self.badPackage += 1
             else:
                 self.invisiblePackage += 1
-            writer.write(channel.information)
+            writer.write(self.channel.information)
             progress += step
-            self.lastResult += channel.information
+            self.lastResult += self.channel.information
             self.stepFinished.emit(int(progress))
 
     def auto_test(self):

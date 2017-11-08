@@ -4,6 +4,8 @@ from src.logger import log
 
 
 class Coder(abstractCoder.AbstractCoder):
+    name = "Сверточный"
+
     countPolynomials: int = 0
     listPolynomials: list = []
     countInput: int = 0

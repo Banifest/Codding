@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>TestCoder</class>
+    <widget class="QWidget" name="TestCoder">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>419</width>
+                <height>299</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>Тестирование</string>
+        </property>
+        <property name="windowIcon">
+            <iconset resource="../../../Resources/img/img.qrc">
+                <normaloff>:/MainWindow/TestCoder.jpg</normaloff>:/MainWindow/TestCoder.jpg
+            </iconset>
+        </property>
+        <widget class="QWidget" name="gridLayoutWidget">
+            <property name="geometry">
+                <rect>
+                    <x>4</x>
+                    <y>0</y>
+                    <width>411</width>
+                    <height>291</height>
+                </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+                <item row="2" column="0">
+                    <widget class="QCheckBox" name="is_interleaver_first">
+                        <property name="text">
+                            <string>Первый перемежитель</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="9" column="0" colspan="2">
+                    <widget class="QPushButton" name="get_last_result_button">
+                        <property name="enabled">
+                            <bool>false</bool>
+                        </property>
+                        <property name="text">
+                            <string>Результаты последнего теста</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="2" column="1">
+                    <widget class="QCheckBox" name="is_interleaver_second">
+                        <property name="text">
+                            <string>Второй перемежитель</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="4" column="1">
+                    <widget class="QLineEdit" name="information_text_box"/>
+                </item>
+                <item row="0" column="0">
+                    <widget class="QLabel" name="label">
+                        <property name="text">
+                            <string>Вероятность искажения информации</string>
+                        </property>
+                        <property name="textFormat">
+                            <enum>Qt::AutoText</enum>
+                        </property>
+                    </widget>
+                </item>
+                <item row="4" column="0">
+                    <widget class="QLabel" name="label_3">
+                        <property name="text">
+                            <string>Передаваемая информация</string>
+                        </property>
+                        <property name="textFormat">
+                            <enum>Qt::AutoText</enum>
+                        </property>
+                    </widget>
+                </item>
+                <item row="1" column="0">
+                    <widget class="QLabel" name="label_2">
+                        <property name="text">
+                            <string>Количество передач при тестировании</string>
+                        </property>
+                        <property name="textFormat">
+                            <enum>Qt::AutoText</enum>
+                        </property>
+                    </widget>
+                </item>
+                <item row="0" column="1">
+                    <widget class="QLineEdit" name="noise_text_box"/>
+                </item>
+                <item row="7" column="0" colspan="2">
+                    <widget class="QProgressBar" name="single_test">
+                        <property name="value">
+                            <number>0</number>
+                        </property>
+                    </widget>
+                </item>
+                <item row="6" column="0">
+                    <widget class="QPushButton" name="begin_test_button">
+                        <property name="text">
+                            <string>Тест по заданным параметрам</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="6" column="1">
+                    <widget class="QPushButton" name="begin_auto_test_button">
+                        <property name="text">
+                            <string>Автоматическое тестирование</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="8" column="0" colspan="2">
+                    <widget class="QProgressBar" name="auto_test">
+                        <property name="value">
+                            <number>0</number>
+                        </property>
+                    </widget>
+                </item>
+                <item row="1" column="1">
+                    <widget class="QLineEdit" name="count_test_text_box"/>
+                </item>
+                <item row="3" column="0">
+                    <widget class="QLineEdit" name="first_length_text_box">
+                        <property name="enabled">
+                            <bool>false</bool>
+                        </property>
+                        <property name="placeholderText">
+                            <string>Длина расскидывания</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="3" column="1">
+                    <widget class="QLineEdit" name="second_length_text_box">
+                        <property name="enabled">
+                            <bool>false</bool>
+                        </property>
+                        <property name="placeholderText">
+                            <string>Длина расскидывания</string>
+                        </property>
+                    </widget>
+                </item>
+            </layout>
+        </widget>
+    </widget>
+    <resources>
+        <include location="../../../Resources/img/img.qrc"/>
+    </resources>
+    <connections/>
+</ui>

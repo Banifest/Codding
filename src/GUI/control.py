@@ -2,6 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
+from GUI.controller.TestCascadeCoderController import TestCascadeCoderController
 from GUI.controller.TestCoderController import TestCoderController
 from GUI.windows.AddCoderWindow import AddCoderWindow
 from GUI.windows.MainWindow import MainWindow
@@ -22,6 +23,7 @@ from coders.linear.hemming import Coder as HemmingCoder
 class Controller:
     _mainWindow: MainWindow = None
     _addCoderWindow: AddCoderWindow = None
+    _testCascadeCoderController: TestCascadeCoderController = None
     _testSimpleCoderController: TestCoderController = None
     _testCascadeCoderWindow: TestCascadeCoderWindow = None
     _testSimpleCoderWindow: TestCoderWindow = None
@@ -87,6 +89,10 @@ class Controller:
 
     def set_create_coder_window(self):
         self._addCoderWindow = AddCoderWindow(self)
+
+    def set_test_cascade_coder_window(self):
+        self._testCascadeCoderController = TestCascadeCoderController()
+        self._testCascadeCoderWindow = TestCascadeCoderWindow(self._testCascadeCoderController)
 
     def del_add_coder_window(self):
         if self._addCoderWindow is not None:

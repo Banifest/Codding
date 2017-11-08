@@ -7,6 +7,8 @@ from coders.casts import BitListToInt, IntToBitList
 
 
 class Coder(abstractCoder.AbstractCoder):
+    name = "Рида-Миллера"
+
     matrix_G: np.matrix
     vectors: list
     vectors_rise: list = []

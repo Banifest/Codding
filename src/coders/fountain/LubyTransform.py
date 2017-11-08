@@ -7,6 +7,8 @@ from src.logger import log
 
 
 class Coder(abstractCoder.AbstractCoder):
+    name = "Фонтанный"
+
     countCodingBlocks: int  # количество блоков информации
     countBlocks: int  # количество блоков сочетаний
     sizeBlock: int  # Размер одного блока

@@ -4,6 +4,8 @@ from coders.convolutional.Coder import Coder
 
 
 class ConvolutionalCoderForPacket(Coder):
+    name = "Сверточный для пакетов"
+
     def __init__(self, list_polynomials: list, count_input: int, count_output: int,
                  count_register: int, count_control_bits: int):
         new_list_polynomials = []

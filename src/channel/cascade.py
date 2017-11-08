@@ -15,7 +15,7 @@ class Cascade(channel.Channel):
     def __init__(self,
                  firstCoder: abstractCoder.AbstractCoder,
                  secondCoder: abstractCoder.AbstractCoder,
-                 noiseProbability: Optional[int],
+                 noiseProbability: int or float,
                  countCyclical: Optional[int],
                  duplex: Optional[bool],
                  firstInterleaver: Optional[Interleaver.Interleaver],

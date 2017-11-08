@@ -9,6 +9,8 @@ from src.logger import log
 
 
 class Coder(abstractCoder.AbstractCoder):
+    name = "Хемминга"
+
     def GetRedundancy(self) -> int:
         pass
 

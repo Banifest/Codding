@@ -1,13 +1,11 @@
 import os
-import threading
 from random import randint
 
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
+from PyQt5 import uic
+from PyQt5.QtWidgets import QCheckBox, QLabel, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
 from coders.interleaver import Interleaver
 from src.GUI.graphics import draw_graphic, draw_plot_pie
-from src.GUI.windows import MainWindow
 from src.channel.cascade import Cascade
 from src.channel.channel import Channel
 from src.coders import convolutional, cyclical, linear
@@ -38,106 +36,15 @@ class TestCascadeCoderWindow(QWidget):
 
     lastResult: str = ""
 
-    def __init__(self, parent):
-        self.grid = QGridLayout()
+    def __init__(self, controller):
         log.debug("Создание окна тестирования кодера")
         super().__init__()
-        self.badPackage: int = 0
-        self.successfullyPackage: int = 0
-        self.repairPackage: int = 0
-        self.invisiblePackage: int = 0
 
-        self.setFixedSize(600, 350)
-        self.setWindowTitle("Тестирование кодера")
-        parent.testCoderWindow = self
-        self.windowParent: MainWindow = parent
-        self.setWindowIcon(QIcon("Resources/img/TestCascadeCoder.png"))
-
-        self.submitButton = QPushButton("Начать тестирование")
-        self.submitButton.setShortcut("Enter")
-        self.lastResultButton = QPushButton("Последний результат")
-        self.lastResultButton.setVisible(False)
-        self.autoTestButton = QPushButton("Авто тестирование")
-
-        self.informationLabel = QLabel("Передаваемая информация")
-        self.noiseProbabilityLabel = QLabel("Вероятность искжения бита информации")
-        self.countCyclicalLabel = QLabel("Количество попыток передачи при тестировании")
-        self.interleaverLabel = QLabel("Использование перемежителя")
-        self.lengthSmashingLabel = QLabel("Длина разбрасывания")
-
-        self.interleaverLabelSecond = QLabel("Использование перемежителя второго кодера")
-        self.lengthSmashingLabelSecond = QLabel("Длина раскидования")
-
-        self.testingProgressBar = QProgressBar()
-        self.autoTestingProgressBar = QProgressBar()
-        self.autoTestingProgressBar.setVisible(False)
-
-        self.noiseProbabilityTextBox = QLineEdit()
-        self.countCyclicalTextBox = QLineEdit()
-        self.duplexCheckBox = QCheckBox()
-        self.interleaverCheckBox = QCheckBox()
-        self.lengthSmashingTextBox = QLineEdit()
-        self.informationTextBox = QLineEdit()
-
-        self.lengthSmashingTextBox.setVisible(False)
-        self.lengthSmashingLabel.setVisible(False)
-
-        self.interleaverCheckBoxSecond = QCheckBox()
-        self.lengthSmashingTextBoxSecond = QLineEdit()
-
-        self.lengthSmashingTextBoxSecond.setVisible(False)
-        self.lengthSmashingLabelSecond.setVisible(False)
-
-        self.InitGrid()
-
-        self.submitButton.clicked.connect(self.StartTest)
-        self.autoTestButton.clicked.connect(self.AutoTest)
-        self.interleaverCheckBox.stateChanged.connect(self.CheckIsInterleaver)
-        self.interleaverCheckBoxSecond.stateChanged.connect(self.CheckIsInterleaverSecond)
-        self.lastResultButton.clicked.connect(self.GetLastResult)
+        uic.loadUi(r'src\GUI\UI\test_cascade_coder.ui', self)
+        self.controller = controller
+        self.controller._testCascadeCoderWindow = self
 
         self.show()
-
-    def InitGrid(self):
-        log.debug("Иницилизация grid")
-        self.grid.addWidget(self.noiseProbabilityLabel, 1, 0)
-        self.grid.addWidget(self.noiseProbabilityTextBox, 1, 2, 1, 2)
-        self.grid.addWidget(self.countCyclicalLabel, 2, 0)
-        self.grid.addWidget(self.countCyclicalTextBox, 2, 2, 1, 2)
-        self.grid.addWidget(self.interleaverLabel, 4, 0)
-        self.grid.addWidget(self.interleaverCheckBox, 4, 1)
-        self.grid.addWidget(self.interleaverLabelSecond, 4, 2)
-        self.grid.addWidget(self.interleaverCheckBoxSecond, 4, 3)
-        self.grid.addWidget(self.lengthSmashingLabel, 5, 0)
-        self.grid.addWidget(self.lengthSmashingTextBox, 5, 1, 1, 1)
-        self.grid.addWidget(self.lengthSmashingTextBoxSecond, 5, 3, 1, 1)
-        self.grid.addWidget(self.informationLabel, 6, 0)
-        self.grid.addWidget(self.informationTextBox, 6, 2, 1, 2)
-
-        self.grid.addWidget(self.submitButton, 7, 0, 1, 4)
-        self.grid.addWidget(self.autoTestButton, 8, 0, 1, 4)
-        self.grid.addWidget(self.testingProgressBar, 9, 0, 1, 4)
-        self.grid.addWidget(self.autoTestingProgressBar, 10, 0, 1, 4)
-        self.grid.addWidget(self.lastResultButton, 11, 0, 1, 4)
-
-        self.grid.setSpacing(10)
-        self.setLayout(self.grid)
-
-
-    def AutoTestThread(self):
-        threading.Thread(target=self.AutoTest, name="Auto Test").start()
-
-
-    def CheckIsInterleaverSecond(self):
-        self.lengthSmashingLabel.setVisible(
-            self.interleaverCheckBox.isChecked() or self.interleaverCheckBoxSecond.isChecked())
-        self.lengthSmashingTextBoxSecond.setVisible(self.interleaverCheckBoxSecond.isChecked())
-
-
-    def CheckIsInterleaver(self):
-        self.lengthSmashingLabel.setVisible(
-            self.interleaverCheckBox.isChecked() or self.interleaverCheckBoxSecond.isChecked())
-        self.lengthSmashingTextBox.setVisible(self.interleaverCheckBox.isChecked())
 
     def TestOnCorrectData(self) -> bool:
         return (self.noiseProbabilityTextBox.text().isdecimal()\
