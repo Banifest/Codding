@@ -1,6 +1,8 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 
+# noinspection PyUnresolvedReferences
+import Resources.img_rc
 from GUI.windows.AddCoderWindow import AddCoderWindow
 # from GUI.windows.TestCascadeCoderWindow import TestCascadeCoderWindow
 # from GUI.windows.TestCoderWindow import TestCoderWindow

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="MainWindow">
+        <file>AddCoder.png</file>
+        <file>InformationCoder.png</file>
+        <file>pic.png</file>
+        <file>TestCoder.jpg</file>
+    </qresource>
+</RCC>
