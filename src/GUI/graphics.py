@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from brewer2mpl import brewer2mpl
 from matplotlib import rcParams
 
@@ -18,7 +19,6 @@ def InitGraphics():
 
 
 def draw_graphic(draw_information: list, coder_name: str = "", coder=None):
-    import matplotlib.pyplot as plt
     InitGraphics()
 
     def remove_border(axes=None, top=False, right=False, left=True, bottom=True):
@@ -40,8 +40,6 @@ def draw_graphic(draw_information: list, coder_name: str = "", coder=None):
         if right:
             ax.yaxis.tick_right()
 
-
-
     # df2 = DataFrame(draw_information,
     #                columns=["Без искажений", "Исправленные ошибки", "Обнаруженные ошибки", "Необнаруженные ошибки"])
     # df2.plot(kind='bar', stacked=True)
@@ -62,9 +60,9 @@ def draw_plot_pie(draw_information: list):
 
     fig = plt.figure()
     sumResult: int = sum(draw_information)
-    plt.pie(draw_information, labels=[
-        "Без искажений\n{0}%".format(int(draw_information[0] / sumResult * 100)),
-        "Исправленные ошибки\n{0}%".format(int(draw_information[1] / sumResult * 100)),
-        "Ошибки\n{0}%".format(int(draw_information[2] / sumResult * 100))])
+    plt.pie(draw_information,
+            labels=["Без искажений\n{0}%".format(int(draw_information[0] / sumResult * 100)),
+                    "Исправленные ошибки\n{0}%".format(int(draw_information[1] / sumResult * 100)),
+                    "Ошибки\n{0}%".format(int(draw_information[2] / sumResult * 100))])
     plt.title("Информация о последнем тесте")
     plt.show()

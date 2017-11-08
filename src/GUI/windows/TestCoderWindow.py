@@ -1,5 +1,3 @@
-import os
-import threading
 from random import randint
 
 from PyQt5 import uic
@@ -7,7 +5,7 @@ from PyQt5.QtGui import QDoubleValidator, QIntValidator
 from PyQt5.QtWidgets import QCheckBox, QGridLayout, QLineEdit, QMessageBox, QProgressBar, QPushButton, QWidget
 
 from coders.interleaver import Interleaver
-from src.GUI.graphics import draw_graphic, draw_plot_pie
+from src.GUI.graphics import draw_graphic
 from src.channel.channel import Channel
 from src.coders import convolutional, cyclical, linear
 from src.coders.casts import IntToBitList
@@ -43,15 +41,11 @@ class TestCoderWindow(QWidget):
         self.noise_text_box.setValidator(QDoubleValidator())
         self.count_test_text_box.setValidator(QIntValidator())
 
-        self.begin_test_button.pushButton.connect(self.controller)
+        self.controller.set_window(self)
+        self.begin_test_button.clicked.connect(lambda: self.controller.starting_test(False))
+        self.begin_auto_test_button.clicked.connect(lambda: self.controller.starting_test(True))
+        self.get_last_result_button.clicked.connect(self.controller.get_last_result)
         self.show()
-
-    def AutoTestThread(self):
-        threading.Thread(target=self.AutoTest, name="Auto Test").start()
-
-    def CheckIsInterleaver(self):
-        self.lengthSmashingLabel.setVisible(self.interleaverCheckBox.isChecked())
-        self.lengthSmashingTextBox.setVisible(self.interleaverCheckBox.isChecked())
 
     def AutoTest(self):
         log.debug("Кнопка авто-тестирования нажата")
@@ -89,21 +83,6 @@ class TestCoderWindow(QWidget):
             msg.setIcon(QMessageBox.Warning)
             msg.setStandardButtons(QMessageBox.Ok)
             msg.exec()
-
-    def GetLastResult(self) -> None:
-        choise = QMessageBox.information(self, "Последняя попытка\n",
-                                         "Успешно переданно (пакет не исказился) - {0}\n"
-                                         "Успешно исправленно паккетов - {1}\n"
-                                         "Переданно с ошибкой - {2}\n".
-                                         format(self.successfullyPackage,
-                                                self.repairPackage,
-                                                self.badPackage + self.invisiblePackage),
-                                         QMessageBox.Ok | QMessageBox.Open,
-                                         QMessageBox.Ok)
-
-        if choise == QMessageBox.Open:
-            os.system("lastInformation.txt")
-            draw_plot_pie([self.successfullyPackage, self.repairPackage, self.badPackage + self.invisiblePackage])
 
     def StartTest(self, flag=None, testInformation=None):
         log.debug("Кнопка тестирования нажата")

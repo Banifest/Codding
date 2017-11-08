@@ -20,7 +20,7 @@ class Channel:
 
     # LDPC
 
-    def __init__(self, coder: abstractCoder.AbstractCoder or None, noiseProbability: Optional[int],
+    def __init__(self, coder: abstractCoder.AbstractCoder or None, noiseProbability: int or float,
                  countCyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
         log.debug("Создание канала связи")
@@ -33,7 +33,7 @@ class Channel:
 
     def __str__(self) -> str:
         return "Вероятность ошибки в канале - {0}.\n"\
-               "Является ли канал двухстаронним - {1}.\n"\
+               "Является ли канал двухсторонним - {1}.\n"\
                "Используеммый кодер:\n {2}."\
                "Используется ли перемежитель на данном канале связи - {3}.\n"\
                "Количество циклов передачи пакета - {4}\n"\
@@ -173,18 +173,3 @@ class Channel:
 
         log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(answer))
         return answer
-
-
-"""
-        randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
-        if straight is None: straight = self.noiseProbability
-        answer: list = []
-        straight /= 100
-        for x in information:
-            if randomGenerator.random() < straight:
-                answer.append(x * randomGenerator.getrandbits(1))
-            else:
-                answer.append(x)
-        log.debug("В ходе симуляции шума пакет {0} -> {1}".format(information, answer))
-        return answer
-"""

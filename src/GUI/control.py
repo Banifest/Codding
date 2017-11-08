@@ -75,9 +75,8 @@ class Controller:
 
     def set_test_coder_window(self):
         if self.currentCoder is not None:
-            self._testSimpleCoderController = TestCoderController()
+            self._testSimpleCoderController = TestCoderController(self)
             self._testSimpleCoderWindow = TestCoderWindow(self._testSimpleCoderController)
-            self._testSimpleCoderController.set_window(self._testSimpleCoderWindow)
         else:
             QMessageBox.warning(self._mainWindow,
                                 "Не был создан ни один кодер",
