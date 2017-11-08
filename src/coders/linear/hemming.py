@@ -4,7 +4,6 @@ import numpy as np
 
 from src.coders import abstractCoder
 from src.coders.casts import *
-from src.coders.exeption import CodingException
 from src.logger import log
 
 
@@ -95,11 +94,11 @@ class Coder(abstractCoder.AbstractCoder):
 
                 if status != 0:
                     log.debug("Не удалось успешно исправить обнаруженные ошибки")
-                    raise CodingException("Не удалось успешно исправить обнаруженные ошибки")
+                    # raise CodingException("Не удалось успешно исправить обнаруженные ошибки")
                 log.debug("Произошло успешное исправление ошибки в бите под номером {0}".format(old_status))
             else:
                 log.debug("Не удалось успешно исправить обнаруженные ошибки")
-                raise CodingException("Не удалось успешно исправить обнаруженные ошибки")
+                # raise CodingException("Не удалось успешно исправить обнаруженные ошибки")
         count: int = 0
         step: int = 0
         for x in code[0]:

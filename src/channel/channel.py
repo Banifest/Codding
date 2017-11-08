@@ -55,9 +55,14 @@ class Channel:
             try:
                 nowInformation: list = information
                 nowInformation = self.coder.Encoding(nowInformation)
-                if self.interleaver: nowInformation = self.interleaver.Shuffle(nowInformation)
+                if self.interleaver:
+                    nowInformation = self.interleaver.Shuffle(nowInformation)
+
                 nowInformation = self.GenInterference(nowInformation)
-                if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
+
+                if self.interleaver:
+                    nowInformation = self.interleaver.Reestablish(nowInformation)
+
                 nowInformation = self.coder.Decoding(nowInformation)
             except CodingException as err:
                 self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит "\
@@ -114,33 +119,40 @@ class Channel:
 
     def GetTransferOneStep(self, information: list) -> Union[list, int]:
         log.info("Производиться передача последовательности битов - {0}".format(information))
-        nowInformation: list = information
+        now_information: list = information
         status: int = 0
-        helpInformation: list
+        help_information: list
         try:
-            nowInformation = self.coder.Encoding(nowInformation)
-            if self.interleaver: nowInformation = self.interleaver.Shuffle(nowInformation)
-            helpInformation = nowInformation
-            nowInformation = self.GenInterference(nowInformation, self.noiseProbability)
-            if helpInformation != nowInformation: status = 1
-            if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
-            nowInformation = self.coder.Decoding(nowInformation)
+            now_information = self.coder.Encoding(now_information)
+            if self.interleaver:
+                now_information = self.interleaver.Shuffle(now_information)
+
+            help_information = now_information
+            now_information = self.GenInterference(now_information, self.noiseProbability)
+
+            if help_information != now_information:
+                status = 1
+
+            if self.interleaver:
+                now_information = self.interleaver.Reestablish(now_information)
+
+            now_information = self.coder.Decoding(now_information)
         except CodingException as err:
             status = 2
-            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
+            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
-            if BitListToInt(nowInformation) == BitListToInt(information):
+            if BitListToInt(now_information) == BitListToInt(information):
                 if status != 1: status = 0
                 log.info("Пакет {0} был успешно передан".format(information))
                 self.information = "Пакет был успешно передан\n"
             else:
                 status = 3
                 log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
-                        nowInformation))
+                        now_information))
                 self.information = "Пакет при передаче был повреждён и не подлежит "\
                                    "востановлению\n"
-        return [nowInformation, status]
+        return [now_information, status]
 
 
 
@@ -164,7 +176,7 @@ class Channel:
         changes_bits: set = set()  # множество битов которые будут измененны
 
         while len(changes_bits) < count_change_bit:  # собираем номеров множество неповторяющихся битов
-            changes_bits.add(randomGenerator.randint(0, len(information)))
+            changes_bits.add(randomGenerator.randint(0, len(information) - 1))
 
         changes_bits: list = list(changes_bits)  # преобразуем в список
         answer: list = information.copy()

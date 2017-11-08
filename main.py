@@ -1,6 +1,6 @@
 #!usr/bin/env python3
 
-from GUI.control import Controller
+from GUI.controller.MainController import Controller
 from src.logger import log
 
 if __name__ == '__main__':

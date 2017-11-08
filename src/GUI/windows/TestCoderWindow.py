@@ -22,4 +22,5 @@ class TestCoderWindow(QWidget):
         self.get_last_result_button.clicked.connect(self.controller.get_last_result)
         self.is_interleaver_first.stateChanged.connect(lambda val: self.first_length_text_box.setEnabled
         (self.first_length_text_box.isEnabled() ^ 1))
+
         self.show()

@@ -86,12 +86,11 @@ class Controller:
                                 QMessageBox.Ok
                                 )
 
-
     def set_create_coder_window(self):
         self._addCoderWindow = AddCoderWindow(self)
 
     def set_test_cascade_coder_window(self):
-        self._testCascadeCoderController = TestCascadeCoderController()
+        self._testCascadeCoderController = TestCascadeCoderController(self)
         self._testCascadeCoderWindow = TestCascadeCoderWindow(self._testCascadeCoderController)
 
     def del_add_coder_window(self):

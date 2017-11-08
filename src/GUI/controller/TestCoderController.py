@@ -35,9 +35,14 @@ class TestCoderController:
         if self._testCoderWindow.first_length_text_box.isEnabled():
             self._testCoderWindow.first_length_text_box.setEnabled(param)
 
+    # необходимо для наследования
+    # noinspection PyAttributeOutsideInit
+    def set_thread_class(self):
+        self._threadClass = TestCoder(self._testCoderWindow, self._mainController.currentCoder, self._lastResult)
+
     def starting_test(self, param: bool):
         try:
-            self._threadClass = TestCoder(self._testCoderWindow, self._mainController.currentCoder, self._lastResult)
+            self.set_thread_class()
             self.enable_disable_widget(False)
             self._threadClass.set_auto(param)
 
