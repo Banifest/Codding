@@ -67,9 +67,8 @@ class Controller:
                 self.secondCoderForCascade = self.currentCoder
 
             del self._addCoderWindow
-
         except:
-            QMessageBox.warning(self,
+            QMessageBox.warning(self._addCoderWindow,
                                 "Поля заполнены не верной информацией",
                                 "Поля заполнены не верной информацией",
                                 QMessageBox.Ok

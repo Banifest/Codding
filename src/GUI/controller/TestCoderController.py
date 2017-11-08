@@ -107,7 +107,6 @@ class TestCoder(QThread):
                 Interleaver.Interleaver(int(test_window.first_length_text_box.text()))
                 if test_window.is_interleaver_first.isChecked() else None)
 
-
     def __del__(self):
         self.wait()
 
