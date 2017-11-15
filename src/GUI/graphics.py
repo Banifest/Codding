@@ -18,7 +18,7 @@ def InitGraphics():
     rcParams['font.family'] = 'StixGeneral'
 
 
-def draw_graphic(draw_information: list, coder_name: str = "", coder=None):
+def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1):
     InitGraphics()
 
     def remove_border(axes=None, top=False, right=False, left=True, bottom=True):
@@ -46,7 +46,7 @@ def draw_graphic(draw_information: list, coder_name: str = "", coder=None):
     plt.plot([x[0] + x[1] for x in draw_information],
              label="Кодер типа {0}\n"
                    "Скорость кодера {1}"
-             .format(coder_name, coder.GetSpeed()))
+             .format(coder_name, str(coder_speed)))
     plt.legend()
     plt.xlabel("Шанс на искажение бита информации, %")
     plt.ylabel("Количество успешно пройденных тестов")

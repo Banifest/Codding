@@ -47,7 +47,7 @@ class MainController:
                         int(self._addCoderWindow.sizePackageTextBox.text()),
                         int(self._addCoderWindow.listPolynomialTextBox.text())
                         )
-            elif coder_name == "Cверточный":
+            elif coder_name == 'Сверточный':
                 self.currentCoder = ConvolutionalCoder(
                         StrListToList(self._addCoderWindow.listPolynomialTextBox.text()),
                         1,
@@ -96,8 +96,7 @@ class MainController:
             QMessageBox.warning(self._mainWindow,
                                 "Не были созданы кодеры",
                                 "Не были созданы кодеры",
-                                QMessageBox.Ok
-                                )
+                                QMessageBox.Ok)
 
     def del_add_coder_window(self):
         if self._addCoderWindow is not None:

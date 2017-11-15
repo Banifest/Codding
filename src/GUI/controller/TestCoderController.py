@@ -98,6 +98,8 @@ class TestCoder(QThread):
         self.noiseChance = float(test_window.noise_text_box.text())
         self.countTest = int(test_window.count_test_text_box.text())
         self.information = int(test_window.information_text_box.text())
+        self.speed = self.currentCoder.GetSpeed()
+        self.coderName = self.currentCoder.name
 
         self.channel = Channel(
                 self.currentCoder,
@@ -157,7 +159,8 @@ class TestCoder(QThread):
             self.autoStepFinished.emit(int(status))
 
         self.autoStepFinished.emit(100)
-        draw_graphic(draw_data, self.currentCoder.name, self.currentCoder)
+        if self.is_auto:
+            draw_graphic(draw_data, self.coderName, self.speed)
 
     def run(self):
         if self.is_auto:

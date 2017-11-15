@@ -29,7 +29,7 @@ class Coder(abstractCoder.AbstractCoder):
 
         self.graph = self.GetGraph()
 
-    def GetSpeed(self):
+    def GetSpeed(self) -> float:
         return 1 / self.countRegisters
 
     def GetRedundancy(self):

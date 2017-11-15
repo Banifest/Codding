@@ -20,8 +20,8 @@ class AbstractCoder:
 
     @abstractmethod
     def GetRedundancy(self) -> int:
-        return int(self.count_additional / self.lengthInformation * 100)
+        return self.count_additional / self.lengthInformation
 
     @abstractmethod
     def GetSpeed(self) -> float:
-        return self.lengthInformation / self.lengthTotal * 100
+        return self.lengthInformation / self.lengthTotal
