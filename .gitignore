@@ -121,3 +121,5 @@ src/coders/interleaver/__pycache__/
 src/coders/linear/__pycache__/hemming.cpython-36.pyc
 /.idea
 log.txt
+/.idea/
+lastInformation.txt

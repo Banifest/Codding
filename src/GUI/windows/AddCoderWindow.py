@@ -62,10 +62,8 @@ class AddCoderWindow(QWidget):
         elif text == "Сверточный":
             self.grid_coder_options.addWidget(QLabel("Список полиномов"), 3, 0)
             self.grid_coder_options.addWidget(self.listPolynomialTextBox, 3, 1)
-            self.grid_coder_options.addWidget(QLabel("Количество выходов"), 4, 0)
-            self.grid_coder_options.addWidget(self.countExitsTextBox, 4, 1)
-            self.grid_coder_options.addWidget(QLabel("Количество регистров памяти"), 5, 0)
-            self.grid_coder_options.addWidget(self.countMemoryRegistersTextBox, 5, 1)
+            self.grid_coder_options.addWidget(QLabel("Количество регистров памяти"), 4, 0)
+            self.grid_coder_options.addWidget(self.countMemoryRegistersTextBox, 4, 1)
         elif text == "Фонтанный":
             self.grid_coder_options.addWidget(QLabel("Размер пакета"), 2, 0)
             self.grid_coder_options.addWidget(self.sizePackageTextBox, 2, 1)
