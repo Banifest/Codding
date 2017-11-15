@@ -20,7 +20,7 @@ from coders.linear.hemming import Coder as HemmingCoder
 
 
 # noinspection PyAttributeOutsideInit
-class Controller:
+class MainController:
     _mainWindow: MainWindow = None
     _addCoderWindow: AddCoderWindow = None
     _testCascadeCoderController: TestCascadeCoderController = None
@@ -89,8 +89,15 @@ class Controller:
         self._addCoderWindow = AddCoderWindow(self)
 
     def set_test_cascade_coder_window(self):
-        self._testCascadeCoderController = TestCascadeCoderController(self)
-        self._testCascadeCoderWindow = TestCascadeCoderWindow(self._testCascadeCoderController)
+        if self.firstCoderForCascade is not None and self.secondCoderForCascade is not None:
+            self._testCascadeCoderController = TestCascadeCoderController(self)
+            self._testCascadeCoderWindow = TestCascadeCoderWindow(self._testCascadeCoderController)
+        else:
+            QMessageBox.warning(self._mainWindow,
+                                "Не были созданы кодеры",
+                                "Не были созданы кодеры",
+                                QMessageBox.Ok
+                                )
 
     def del_add_coder_window(self):
         if self._addCoderWindow is not None:

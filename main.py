@@ -1,16 +1,14 @@
-#!usr/bin/env python3
+from GUI.controller.MainController import MainController
 
-from GUI.controller.MainController import Controller
-from src.logger import log
+# from src.logger import log
 
 if __name__ == '__main__':
     try:
-        log.info("Начало работы программы")
-        controller = Controller()
-        log.info("Конец работы программы")
+        #        log.info("Начало работы программы")
+        controller = MainController()
+    #        log.info("Конец работы программы")
     except Exception as e:
         print(e)
-        log.critical("Необработанное исключение")
+#        log.critical("Необработанное исключение")
 else:
     raise Exception("Невозможен import данного файла:(")
-
