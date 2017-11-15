@@ -3,7 +3,8 @@ from brewer2mpl import brewer2mpl
 from matplotlib import rcParams
 
 
-def InitGraphics():
+# noinspection SpellCheckingInspection
+def init_graphics():
     # colorbrewer2 Dark2 qualitative color table
     dark2_colors = brewer2mpl.get_map('Dark2', 'Qualitative', 7).mpl_colors
 
@@ -19,7 +20,7 @@ def InitGraphics():
 
 
 def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1):
-    InitGraphics()
+    init_graphics()
 
     def remove_border(axes=None, top=False, right=False, left=True, bottom=True):
         ax = axes or plt.gca()
@@ -56,7 +57,7 @@ def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1):
 def draw_plot_pie(draw_information: list):
     import matplotlib.pyplot as plt
 
-    InitGraphics()
+    init_graphics()
 
     fig = plt.figure()
     sumResult: int = sum(draw_information)

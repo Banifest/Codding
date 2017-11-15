@@ -45,13 +45,13 @@ class Coder(abstractCoder.AbstractCoder):
         pass
 
     def Decoding(self, information: list):
-        def vec_xor(a, b): [a[i] ^ b[i] for i in range(len(a))]
+        def vec_xor(a, b): return [a[i] ^ b[i] for i in range(len(a))]
 
-        def vec_mul(a, b): [a[i] & b[i] for i in range(len(a))]
+        def vec_mul(a, b): return [a[i] & b[i] for i in range(len(a))]
 
-        def vec_inv(a): [x ^ 1 for x in a]
+        def vec_inv(a): return [x ^ 1 for x in a]
 
-        def vec_gen(a, b): [a for k in range(b)]
+        def vec_gen(a, b): return [a for k in range(b)]
 
         result_voice: list = []
         for vector in self.matrix_G.tolist()[::-1][:-1]:
