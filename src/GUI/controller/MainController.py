@@ -2,8 +2,10 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
+from GUI.controller.AboutCoderController import AboutCoderController
 from GUI.controller.TestCascadeCoderController import TestCascadeCoderController
 from GUI.controller.TestCoderController import TestCoderController
+from GUI.windows.AboutCoderWindow import AboutCoderWindow
 from GUI.windows.AddCoderWindow import AddCoderWindow
 from GUI.windows.MainWindow import MainWindow
 from GUI.windows.TestCascadeCoderWindow import TestCascadeCoderWindow
@@ -29,6 +31,8 @@ class MainController:
     _testSimpleCoderController: TestCoderController = None
     _testCascadeCoderWindow: TestCascadeCoderWindow = None
     _testSimpleCoderWindow: TestCoderWindow = None
+    _dialogAboutCoderController: AboutCoderController = None
+    _dialogAboutCoderWindow: AboutCoderWindow = None
 
     currentCoder: AbstractCoder = None
     firstCoderForCascade: AbstractCoder = None
@@ -107,6 +111,16 @@ class MainController:
         if self.firstCoderForCascade is not None and self.secondCoderForCascade is not None:
             self._testCascadeCoderController = TestCascadeCoderController(self)
             self._testCascadeCoderWindow = TestCascadeCoderWindow(self._testCascadeCoderController)
+        else:
+            QMessageBox.warning(self._mainWindow,
+                                "Не были созданы кодеры",
+                                "Не были созданы кодеры",
+                                QMessageBox.Ok)
+
+    def set_about_coder_dialog(self):
+        if self.currentCoder is not None:
+            self._dialogAboutCoderController = AboutCoderController(self)
+            self._dialogAboutCoderWindow = AboutCoderWindow(self._dialogAboutCoderController)
         else:
             QMessageBox.warning(self._mainWindow,
                                 "Не были созданы кодеры",

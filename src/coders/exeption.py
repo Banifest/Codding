@@ -4,5 +4,5 @@ class CodingException(Exception):
 
     def __init__(self, message: str, status=None):
         self.message = message
-        if status is not None: self.status = status
-
+        if status is not None:
+            self.status = status

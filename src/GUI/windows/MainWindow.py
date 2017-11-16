@@ -3,7 +3,6 @@ from PyQt5.QtWidgets import QMainWindow
 
 # noinspection PyUnresolvedReferences
 import Resources.img_rc
-from GUI.windows.AddCoderWindow import AddCoderWindow
 from src.logger import log
 
 
@@ -18,7 +17,7 @@ class MainWindow(QMainWindow):
         self.action_create_new_coder.triggered.connect(self.controller.set_create_coder_window)
         self.action_test_simple_coder.triggered.connect(self.controller.set_test_coder_window)
         self.action_test_cascade_coder.triggered.connect(self.controller.set_test_cascade_coder_window)
-        self.action_about_coder.triggered.connect(lambda: AddCoderWindow(self))
+        self.action_about_coder.triggered.connect(self.controller.set_about_coder_dialog)
 
         self.show()
 

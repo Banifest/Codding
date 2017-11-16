@@ -31,7 +31,6 @@ class Coder(abstractCoder.AbstractCoder):
                 self.lengthAdditional = x
                 break
 
-
         self.lengthInformation = length_information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
         self._matrixTransformation = []
