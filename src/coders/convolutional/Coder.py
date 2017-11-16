@@ -4,6 +4,9 @@ from src.logger import log
 
 
 class Coder(abstractCoder.AbstractCoder):
+    def try_normalization(self, bit_list: list) -> list:
+        return bit_list
+
     name = "Сверточный"
 
     countPolynomials: int = 0

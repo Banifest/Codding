@@ -103,3 +103,12 @@ class Coder(abstractCoder.AbstractCoder):
         answer = [IntToBitList(answer[0])] + [IntToBitList(x, self.sizeBlock) for x in answer[1:]]
         answer.reverse()
         return [y for x in answer for y in x]
+
+    def get_redundancy(self) -> float:
+        pass
+
+    def get_speed(self) -> float:
+        pass
+
+    def try_normalization(self, bit_list: list) -> list:
+        pass

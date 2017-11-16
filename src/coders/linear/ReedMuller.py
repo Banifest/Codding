@@ -4,9 +4,22 @@ import numpy as np
 
 from coders import abstractCoder
 from coders.casts import BitListToInt, IntToBitList
+from coders.exeption import CodingException
 
 
 class Coder(abstractCoder.AbstractCoder):
+    def get_redundancy(self) -> float:
+        return super().get_redundancy()
+
+    def get_speed(self) -> float:
+        return super().get_speed()
+
+    def try_normalization(self, bit_list: list) -> list:
+        if len(bit_list) > self.lengthInformation:
+            raise CodingException("Невозможно привести информационное слово с большей длиной к меньшему")
+        else:
+            return (self.lengthInformation - len(bit_list)) * [0] + bit_list
+
     name = "Рида-Миллера"
 
     matrix_G: np.matrix
@@ -39,6 +52,9 @@ class Coder(abstractCoder.AbstractCoder):
             init_matrix += new_matrix_G
 
         self.matrix_G = np.matrix(init_matrix)
+        self.lengthInformation = len(self.matrix_G.tolist())
+        self.lengthAdditional = len(self.matrix_G.tolist()[0])
+        self.lengthTotal = self.lengthAdditional + self.lengthInformation
 
     def Encoding(self, information: list):
         return [x % 2 for x in (np.matrix(information) * self.matrix_G).tolist()[0]]

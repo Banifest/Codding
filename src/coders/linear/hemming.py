@@ -2,6 +2,7 @@ import math
 
 import numpy as np
 
+from coders.exeption import CodingException
 from src.coders import abstractCoder
 from src.coders.casts import *
 from src.logger import log
@@ -10,8 +11,14 @@ from src.logger import log
 class Coder(abstractCoder.AbstractCoder):
     name = "Хемминга"
 
-    def get_redundancy(self) -> int:
-        pass
+    def try_normalization(self, bit_list: list) -> list:
+        if len(bit_list) > self.lengthInformation:
+            raise CodingException("Невозможно привести информационное слово с большей длиной к меньшему")
+        else:
+            return (self.lengthInformation - len(bit_list)) * [0] + bit_list
+
+    def get_redundancy(self) -> float:
+        return super().get_redundancy()
 
     _matrixTransformation: list = []
 

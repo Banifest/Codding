@@ -7,7 +7,7 @@ class Interleaver:
     def __init__(self, lengthSmashing: int):
         self.lengthSmashing = lengthSmashing
 
-    def Shuffle(self, information: list) -> list:
+    def shuffle(self, information: list) -> list:
         log.debug("Используется перемежитель для пакета {0}".format(information))
         answer: list = []
         for x in range(self.lengthSmashing):
@@ -21,8 +21,7 @@ class Interleaver:
                 counter += 1
         return answer
 
-
-    def Reestablish(self, information: list) -> list:
+    def reestablish(self, information: list) -> list:
         log.debug("Используется деперемежитель для пакета {0}".format(information))
         answer: list = [0] * len(information)
         resDiv: int = ((len(information) - 1) // self.lengthSmashing) + 1  # целочисленное деление с округлением вверх

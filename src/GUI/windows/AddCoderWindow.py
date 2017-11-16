@@ -89,4 +89,5 @@ class AddCoderWindow(QWidget):
             self.grid_coder_options.addWidget(self.listPolynomialTextBox, 3, 1)
             self.grid_coder_options.addWidget(QLabel("Количество регистров памяти"), 4, 0)
             self.grid_coder_options.addWidget(self.countMemoryRegistersTextBox, 4, 1)
+
         self.submit_button.setDisabled(text == 'Выбор кодера')

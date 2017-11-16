@@ -56,12 +56,12 @@ class Channel:
                 nowInformation: list = information
                 nowInformation = self.coder.Encoding(nowInformation)
                 if self.interleaver:
-                    nowInformation = self.interleaver.Shuffle(nowInformation)
+                    nowInformation = self.interleaver.shuffle(nowInformation)
 
                 nowInformation = self.GenInterference(nowInformation)
 
                 if self.interleaver:
-                    nowInformation = self.interleaver.Reestablish(nowInformation)
+                    nowInformation = self.interleaver.reestablish(nowInformation)
 
                 nowInformation = self.coder.Decoding(nowInformation)
             except CodingException as err:
@@ -90,11 +90,11 @@ class Channel:
         status: int = 0
         try:
             nowInformation = self.coder.Encoding(nowInformation)
-            if self.interleaver: nowInformation = self.interleaver.Shuffle(nowInformation)
+            if self.interleaver: nowInformation = self.interleaver.shuffle(nowInformation)
             helpInformation = nowInformation
             nowInformation = self.GenInterference(nowInformation, self.noiseProbability)
             if helpInformation != nowInformation: status = 1
-            if self.interleaver: nowInformation = self.interleaver.Reestablish(nowInformation)
+            if self.interleaver: nowInformation = self.interleaver.reestablish(nowInformation)
             nowInformation = self.coder.Decoding(nowInformation)
         except CodingException as err:
             status = 2
@@ -125,7 +125,7 @@ class Channel:
         try:
             now_information = self.coder.Encoding(now_information)
             if self.interleaver:
-                now_information = self.interleaver.Shuffle(now_information)
+                now_information = self.interleaver.shuffle(now_information)
 
             help_information = now_information
             now_information = self.GenInterference(now_information, self.noiseProbability)
@@ -134,7 +134,7 @@ class Channel:
                 status = 1
 
             if self.interleaver:
-                now_information = self.interleaver.Reestablish(now_information)
+                now_information = self.interleaver.reestablish(now_information)
 
             now_information = self.coder.Decoding(now_information)
         except CodingException as err:
