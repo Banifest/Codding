@@ -42,7 +42,7 @@ class AddCoderWindow(QWidget):
         self.sizeBlockTextBox.setValidator(QIntValidator())
         self.countBlocksTextBox.setValidator(QIntValidator())
         self.powerReedMullerTextBox.setValidator(QIntValidator())
-        self.maxLengthRecoverPackageTextBox(QIntValidator())
+        self.maxLengthRecoverPackageTextBox.setValidator(QIntValidator())
 
         self.choose_comboBox.activated[str].connect(self.change_coder)
         self.submit_button.clicked.connect(self.controller.set_coder)
