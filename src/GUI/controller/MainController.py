@@ -13,6 +13,7 @@ from coders.abstractCoder import AbstractCoder
 from coders.casts import StrListToList
 # noinspection PyAttributeOutsideInit
 from coders.convolutional.Coder import Coder as ConvolutionalCoder
+from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
 from coders.cyclical.Coder import Coder as CyclicalCoder
 # noinspection PyAttributeOutsideInit,PyAttributeOutsideInit
 from coders.fountain.LubyTransform import Coder as LubyTransform
@@ -64,6 +65,14 @@ class MainController:
             elif coder_name == 'Рида-Маллера':
                 self.currentCoder = ReedMullerCoder(
                         int(self._addCoderWindow.sizePackageTextBox.text()),
+                        int(self._addCoderWindow.powerReedMullerTextBox.text())
+                        )
+            elif coder_name == 'Сверточный для пакетов':
+                self.currentCoder = ConvolutionalCoderForPacket(
+                        StrListToList(self._addCoderWindow.listPolynomialTextBox.text()),
+                        1,
+                        int(len(StrListToList(self._addCoderWindow.listPolynomialTextBox.text()))),
+                        int(self._addCoderWindow.countMemoryRegistersTextBox.text()),
                         int(self._addCoderWindow.powerReedMullerTextBox.text())
                         )
 

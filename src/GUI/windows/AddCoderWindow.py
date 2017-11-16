@@ -32,6 +32,7 @@ class AddCoderWindow(QWidget):
         self.sizeBlockTextBox: QLineEdit = QLineEdit()
         self.countBlocksTextBox: QLineEdit = QLineEdit()
         self.powerReedMullerTextBox = QLineEdit()
+        self.maxLengthRecoverPackageTextBox = QLineEdit()
 
         self.sizePackageTextBox.setValidator(QIntValidator())
         # self.listPolynomialTextBox.setValidator(QIntValidator())
@@ -41,6 +42,7 @@ class AddCoderWindow(QWidget):
         self.sizeBlockTextBox.setValidator(QIntValidator())
         self.countBlocksTextBox.setValidator(QIntValidator())
         self.powerReedMullerTextBox.setValidator(QIntValidator())
+        self.maxLengthRecoverPackageTextBox(QIntValidator())
 
         self.choose_comboBox.activated[str].connect(self.change_coder)
         self.submit_button.clicked.connect(self.controller.set_coder)
@@ -76,8 +78,15 @@ class AddCoderWindow(QWidget):
         elif text == 'Рида-Маллера':
             self.grid_coder_options.addWidget(QLabel("Размер пакета"), 2, 0)
             self.grid_coder_options.addWidget(self.sizePackageTextBox, 2, 1)
-            self.grid_coder_options.addWidget(QLabel("Степень кодера"), 3,
-                                              0)  # я не знаю как корректно описать это поле
-            self.grid_coder_options.addWidget(self.powerReedMullerTextBox, 3, 1)
 
+            # я не знаю как корректно описать это поле
+            self.grid_coder_options.addWidget(QLabel("Степень кодера"), 3, 0)
+            self.grid_coder_options.addWidget(self.powerReedMullerTextBox, 3, 1)
+        elif text == 'Сверточный для пакетов':
+            self.grid_coder_options.addWidget(QLabel("Макс длина исправляемого пакета"), 2, 0)
+            self.grid_coder_options.addWidget(self.maxLengthRecoverPackageTextBox, 2, 1)
+            self.grid_coder_options.addWidget(QLabel("Список полиномов"), 3, 0)
+            self.grid_coder_options.addWidget(self.listPolynomialTextBox, 3, 1)
+            self.grid_coder_options.addWidget(QLabel("Количество регистров памяти"), 4, 0)
+            self.grid_coder_options.addWidget(self.countMemoryRegistersTextBox, 4, 1)
         self.submit_button.setDisabled(text == 'Выбор кодера')
