@@ -31,6 +31,7 @@ class AddCoderWindow(QWidget):
         self.countExitsTextBox: QLineEdit = QLineEdit()
         self.sizeBlockTextBox: QLineEdit = QLineEdit()
         self.countBlocksTextBox: QLineEdit = QLineEdit()
+        self.powerReedMullerTextBox = QLineEdit()
 
         self.sizePackageTextBox.setValidator(QIntValidator())
         # self.listPolynomialTextBox.setValidator(QIntValidator())
@@ -39,6 +40,7 @@ class AddCoderWindow(QWidget):
         self.countExitsTextBox.setValidator(QIntValidator())
         self.sizeBlockTextBox.setValidator(QIntValidator())
         self.countBlocksTextBox.setValidator(QIntValidator())
+        self.powerReedMullerTextBox.setValidator(QIntValidator())
 
         self.choose_comboBox.activated[str].connect(self.change_coder)
         self.submit_button.clicked.connect(self.controller.set_coder)
@@ -71,5 +73,11 @@ class AddCoderWindow(QWidget):
             self.grid_coder_options.addWidget(self.sizeBlockTextBox, 3, 1)
             self.grid_coder_options.addWidget(QLabel("Количество блоков"), 4, 0)
             self.grid_coder_options.addWidget(self.countBlocksTextBox, 4, 1)
+        elif text == 'Рида-Маллера':
+            self.grid_coder_options.addWidget(QLabel("Размер пакета"), 2, 0)
+            self.grid_coder_options.addWidget(self.sizePackageTextBox, 2, 1)
+            self.grid_coder_options.addWidget(QLabel("Степень кодера"), 3,
+                                              0)  # я не знаю как корректно описать это поле
+            self.grid_coder_options.addWidget(self.powerReedMullerTextBox, 3, 1)
 
         self.submit_button.setDisabled(text == 'Выбор кодера')

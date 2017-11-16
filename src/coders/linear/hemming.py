@@ -10,7 +10,7 @@ from src.logger import log
 class Coder(abstractCoder.AbstractCoder):
     name = "Хемминга"
 
-    def GetRedundancy(self) -> int:
+    def get_redundancy(self) -> int:
         pass
 
     _matrixTransformation: list = []
@@ -46,7 +46,7 @@ class Coder(abstractCoder.AbstractCoder):
             self._matrixTransformation.append(temp)
         self._matrixTransformation = np.transpose(np.array(self._matrixTransformation))
 
-    def GetSpeed(self) -> float:
+    def get_speed(self) -> float:
         return float(self.lengthInformation) / float(self.lengthTotal)
 
     def Encoding(self, information: list) -> list:

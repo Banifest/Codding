@@ -98,7 +98,7 @@ class TestCoder(QThread):
         self.noiseChance = float(test_window.noise_text_box.text())
         self.countTest = int(test_window.count_test_text_box.text())
         self.information = int(test_window.information_text_box.text())
-        self.speed = self.currentCoder.GetSpeed()
+        self.speed = self.currentCoder.get_speed()
         self.coderName = self.currentCoder.name
 
         self.channel = Channel(

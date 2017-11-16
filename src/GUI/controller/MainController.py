@@ -16,6 +16,7 @@ from coders.convolutional.Coder import Coder as ConvolutionalCoder
 from coders.cyclical.Coder import Coder as CyclicalCoder
 # noinspection PyAttributeOutsideInit,PyAttributeOutsideInit
 from coders.fountain.LubyTransform import Coder as LubyTransform
+from coders.linear.ReedMuller import Coder as ReedMullerCoder
 from coders.linear.hemming import Coder as HemmingCoder
 
 
@@ -59,6 +60,11 @@ class MainController:
                         int(self._addCoderWindow.sizeBlockTextBox.text()),
                         int(self._addCoderWindow.countBlocksTextBox.text()),
                         int(self._addCoderWindow.sizePackageTextBox.text())
+                        )
+            elif coder_name == 'Рида-Маллера':
+                self.currentCoder = ReedMullerCoder(
+                        int(self._addCoderWindow.sizePackageTextBox.text()),
+                        int(self._addCoderWindow.powerReedMullerTextBox.text())
                         )
 
             if self._addCoderWindow.first_coder_radio_button.isChecked():

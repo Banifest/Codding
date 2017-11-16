@@ -29,10 +29,10 @@ class Coder(abstractCoder.AbstractCoder):
 
         self.graph = self.GetGraph()
 
-    def GetSpeed(self) -> float:
+    def get_speed(self) -> float:
         return 1 / self.countRegisters
 
-    def GetRedundancy(self):
+    def get_redundancy(self):
         return self.countOutput * 100
 
     def DoStep(self, informationBit: int) -> list:

@@ -33,7 +33,7 @@ class TestCascadeCoder(TestCoder):
                  firstCoder: AbstractCoder, secondCoder: AbstractCoder):
         super().__init__(test_window, currentCoder, lastResult)
 
-        self.speed = firstCoder.GetSpeed() * secondCoder.GetSpeed()
+        self.speed = firstCoder.get_speed() * secondCoder.get_speed()
         self.coderName = 'Каскадный кодер из: {0} и {1}'.format(firstCoder.name, secondCoder.name)
         self.channel = Cascade(
                 firstCoder,

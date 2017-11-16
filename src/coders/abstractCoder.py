@@ -19,9 +19,9 @@ class AbstractCoder:
         pass
 
     @abstractmethod
-    def GetRedundancy(self) -> int:
+    def get_redundancy(self) -> int:
         return self.count_additional / self.lengthInformation
 
     @abstractmethod
-    def GetSpeed(self) -> float:
+    def get_speed(self) -> float:
         return self.lengthInformation / self.lengthTotal
