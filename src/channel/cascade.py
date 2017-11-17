@@ -43,4 +43,4 @@ class Cascade(channel.Channel):
 
         now_information = self.firstCoder.Decoding(now_information)
 
-        return 0 if BitListToInt(now_information) == BitListToInt(information) else 2
+        return 0 if BitListToInt(now_information) == BitListToInt(normalization_information) else 2
