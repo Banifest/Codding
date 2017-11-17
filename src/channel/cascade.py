@@ -28,7 +28,7 @@ class Cascade(channel.Channel):
 
     def transfer_one_step(self, information: list) -> int:
         self.coder = self.secondCoder
-        normalization_information = self.coder.try_normalization(information)
+        normalization_information = self.firstCoder.try_normalization(information)
 
         now_information: list = self.firstCoder.Encoding(normalization_information)
 
@@ -36,7 +36,9 @@ class Cascade(channel.Channel):
             now_information = self.secondInterleaver.Shuffle(now_information)
 
         status: list = self.get_transfer_one_step(now_information)
-        now_information = status[0]
+
+        # обрезка добавленных битов для нормализации
+        now_information = status[0][-len(now_information):]
 
         if self.secondInterleaver is not None:
             now_information = self.secondInterleaver.Reestablish(now_information)

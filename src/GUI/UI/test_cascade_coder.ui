@@ -53,7 +53,11 @@
                     </widget>
                 </item>
                 <item row="4" column="1">
-                    <widget class="QLineEdit" name="information_text_box"/>
+                    <widget class="QLineEdit" name="information_text_box">
+                        <property name="text">
+                            <string>10</string>
+                        </property>
+                    </widget>
                 </item>
                 <item row="0" column="0">
                     <widget class="QLabel" name="label">
@@ -86,7 +90,11 @@
                     </widget>
                 </item>
                 <item row="0" column="1">
-                    <widget class="QLineEdit" name="noise_text_box"/>
+                    <widget class="QLineEdit" name="noise_text_box">
+                        <property name="text">
+                            <string>2.5</string>
+                        </property>
+                    </widget>
                 </item>
                 <item row="7" column="0" colspan="2">
                     <widget class="QProgressBar" name="single_test">
@@ -117,7 +125,11 @@
                     </widget>
                 </item>
                 <item row="1" column="1">
-                    <widget class="QLineEdit" name="count_test_text_box"/>
+                    <widget class="QLineEdit" name="count_test_text_box">
+                        <property name="text">
+                            <string>1000</string>
+                        </property>
+                    </widget>
                 </item>
                 <item row="3" column="0">
                     <widget class="QLineEdit" name="first_length_text_box">

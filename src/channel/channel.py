@@ -125,9 +125,9 @@ class Channel:
         log.info("Производиться передача последовательности битов - {0}".format(information))
         now_information: list = information
         status: int = 0
-        help_information: list
+        normalization_information = self.coder.try_normalization(information)
         try:
-            now_information = self.coder.Encoding(now_information)
+            now_information = self.coder.Encoding(normalization_information)
             if self.interleaver:
                 now_information = self.interleaver.shuffle(now_information)
 
@@ -161,7 +161,8 @@ class Channel:
     def get_information_about_last_transfer(self):
         return self.information
 
-    def gen_interference(self, information: list, straight: Optional[float]) -> list:
+    @staticmethod
+    def gen_interference(information: list, straight: Optional[float]) -> list:
         """
         Генерация помех с задданной вероятностью
         :param information: list Информация, представленная в виде массива битов

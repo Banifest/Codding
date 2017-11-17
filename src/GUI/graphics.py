@@ -44,13 +44,14 @@ def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1):
     # df2 = DataFrame(draw_information,
     #                columns=["Без искажений", "Исправленные ошибки", "Обнаруженные ошибки", "Необнаруженные ошибки"])
     # df2.plot(kind='bar', stacked=True)
+
+    plt.legend()
+    plt.xlabel("Шанс на искажение бита информации, %")
+    plt.ylabel("Количество успешно пройденных тестов")
     plt.plot([x[0] + x[1] for x in draw_information],
              label="Кодер типа {0}\n"
                    "Скорость кодера {1}"
              .format(coder_name, str(coder_speed)))
-    plt.legend()
-    plt.xlabel("Шанс на искажение бита информации, %")
-    plt.ylabel("Количество успешно пройденных тестов")
     plt.show()
 
 
