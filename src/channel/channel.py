@@ -1,8 +1,8 @@
 import random
 from typing import Optional, Union
 
+from coders.abstractCoder import AbstractCoder
 from coders.interleaver import Interleaver
-from src.coders import abstractCoder
 from src.coders.casts import BitListToInt
 from src.coders.exeption import CodingException
 from src.logger import log
@@ -13,18 +13,16 @@ class Channel:
     countCyclical: int = 1
     duplex: bool = False
     information: str = ""
-    coder: abstractCoder.AbstractCoder
+    coder: AbstractCoder
     interleaver: Interleaver.Interleaver = False
 
     countSuccessfullyMessage: int
 
-    # LDPC
-
-    def __init__(self, coder: abstractCoder.AbstractCoder or None, noiseProbability: int or float,
+    def __init__(self, coder: AbstractCoder or None, noiseProbability: int or float,
                  countCyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
         log.debug("Создание канала связи")
-        self.coder = coder
+        self.coder: AbstractCoder = coder
         if noiseProbability is not None: self.noiseProbability = noiseProbability
         if countCyclical is not None: self.countCyclical = countCyclical
         if duplex is not None: self.duplex = duplex
@@ -46,7 +44,7 @@ class Channel:
                 self.information
                 )
 
-    def Transfer(self, information: list) -> str:
+    def transfer(self, information: list) -> str:
         countSuccessfully: int = 0
         self.information += "Начата циклическая передача пакета ({0}).\n Количество передач {1}.\n".\
             format(information, self.countCyclical)
@@ -58,7 +56,7 @@ class Channel:
                 if self.interleaver:
                     nowInformation = self.interleaver.shuffle(nowInformation)
 
-                nowInformation = self.GenInterference(nowInformation)
+                nowInformation = self.gen_interference(nowInformation)
 
                 if self.interleaver:
                     nowInformation = self.interleaver.reestablish(nowInformation)
@@ -83,41 +81,47 @@ class Channel:
 
         return self.information
 
-
-    def TransferOneStep(self, information: list) -> int:
+    def transfer_one_step(self, information: list) -> list:
         log.info("Производиться передача последовательности битов - {0}".format(information))
-        nowInformation: list = information
+        now_information: list = information
         status: int = 0
+        normalization_information = self.coder.try_normalization(information)
         try:
-            nowInformation = self.coder.Encoding(nowInformation)
-            if self.interleaver: nowInformation = self.interleaver.shuffle(nowInformation)
-            helpInformation = nowInformation
-            nowInformation = self.GenInterference(nowInformation, self.noiseProbability)
-            if helpInformation != nowInformation: status = 1
-            if self.interleaver: nowInformation = self.interleaver.reestablish(nowInformation)
-            nowInformation = self.coder.Decoding(nowInformation)
+            now_information = self.coder.Encoding(normalization_information)
+
+            if self.interleaver: now_information = self.interleaver.shuffle(now_information)
+
+            help_information = now_information
+
+            now_information = self.gen_interference(now_information, self.noiseProbability)
+
+            if help_information != now_information: status = 1
+
+            if self.interleaver: now_information = self.interleaver.reestablish(now_information)
+
+            now_information = self.coder.Decoding(now_information)
         except CodingException as err:
             status = 2
-            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
+            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         except:
             status = 2
-            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(nowInformation))
+            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
-            if nowInformation == information:
+            if now_information == normalization_information:
                 if status != 1: status = 0
                 log.info("Пакет {0} был успешно передан".format(information))
                 self.information = "Пакет был успешно передан\n"
             else:
                 status = 3
                 log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
-                        nowInformation))
+                        now_information))
                 self.information = "Пакет при передаче был повреждён и не подлежит "\
                                    "востановлению\n"
         return status
 
-    def GetTransferOneStep(self, information: list) -> Union[list, int]:
+    def get_transfer_one_step(self, information: list) -> Union[list, int]:
         log.info("Производиться передача последовательности битов - {0}".format(information))
         now_information: list = information
         status: int = 0
@@ -128,7 +132,7 @@ class Channel:
                 now_information = self.interleaver.shuffle(now_information)
 
             help_information = now_information
-            now_information = self.GenInterference(now_information, self.noiseProbability)
+            now_information = self.gen_interference(now_information, self.noiseProbability)
 
             if help_information != now_information:
                 status = 1
@@ -154,12 +158,10 @@ class Channel:
                                    "востановлению\n"
         return [now_information, status]
 
-
-
-    def GetInformationAboutLastTransfer(self):
+    def get_information_about_last_transfer(self):
         return self.information
 
-    def GenInterference(self, information: list, straight: Optional[float]) -> list:
+    def gen_interference(self, information: list, straight: Optional[float]) -> list:
         """
         Генерация помех с задданной вероятностью
         :param information: list Информация, представленная в виде массива битов

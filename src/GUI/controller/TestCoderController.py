@@ -8,6 +8,7 @@ from GUI.windows.TestCoderWindow import TestCoderWindow
 # noinspection PyAttributeOutsideInit
 from coders.abstractCoder import AbstractCoder
 from coders.casts import IntToBitList
+from coders.exeption import CodingException
 from coders.interleaver import Interleaver
 from src.channel.channel import Channel
 from src.logger import log
@@ -49,6 +50,7 @@ class TestCoderController:
             self._threadClass.autoStepFinished.connect(lambda val: self._testCoderWindow.auto_test.setValue(val))
             self._threadClass.stepFinished.connect(lambda val: self._testCoderWindow.single_test.setValue(val))
             self._threadClass.ended.connect(lambda: self.enable_disable_widget(True))
+            self._threadClass.notCorrect.connect(self.coders_correct_warning)
             self._threadClass.start()
         except:
             QMessageBox.warning(self._testCoderWindow,
@@ -56,6 +58,15 @@ class TestCoderController:
                                 "Ошибочно заполнены поля параметров",
                                 QMessageBox.Ok,
                                 QMessageBox.Ok)
+
+    def coders_correct_warning(self):
+        QMessageBox.warning(self._testCoderWindow,
+                            "Длина кодовых слов не согласована",
+                            "Длина кодовых слов не согласована. Возможно указан слишком большой массив информации"
+                            " или первый и второй кодеры не возможно поставить в каскад",
+                            QMessageBox.Ok,
+                            QMessageBox.Ok)
+        self.enable_disable_widget(True)
 
     def get_last_result(self):
         msg = QMessageBox.information(self._testCoderWindow,
@@ -78,6 +89,7 @@ class TestCoder(QThread):
     stepFinished = pyqtSignal('int')
     autoStepFinished = pyqtSignal('int')
     ended = pyqtSignal()
+    notCorrect = pyqtSignal()
 
     noiseChance: float = 0
     countTest: int = 1
@@ -123,7 +135,7 @@ class TestCoder(QThread):
         log.debug("Начало цикла тестов")
         writer = open("lastInformation.txt", "w")
         for x in range(self.countTest):
-            status: int = self.channel.TransferOneStep(information)
+            status: int = self.channel.transfer_one_step(information)
             if status == 0:
                 self.successfullyPackage += 1
             elif status == 1:
@@ -163,11 +175,15 @@ class TestCoder(QThread):
             draw_graphic(draw_data, self.coderName, self.speed)
 
     def run(self):
-        if self.is_auto:
-            self.auto_test()
-        else:
-            self.one_test()
+        try:
+            if self.is_auto:
+                self.auto_test()
+            else:
+                self.one_test()
 
-        self.stepFinished.emit(100)
-        self.ended.emit()
-        log.debug("Конец цикла тестов")
+            self.stepFinished.emit(100)
+            self.ended.emit()
+            log.debug("Конец цикла тестов")
+
+        except CodingException as err:
+            self.notCorrect.emit()

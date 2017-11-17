@@ -26,14 +26,16 @@ class Cascade(channel.Channel):
 
         self.secondInterleaver = secondInterleaver if secondInterleaver is not None else None
 
-    def TransferOneStep(self, information: list) -> int:
+    def transfer_one_step(self, information: list) -> int:
         self.coder = self.secondCoder
-        now_information: list = self.firstCoder.Encoding(information)
+        normalization_information = self.coder.try_normalization(information)
+
+        now_information: list = self.firstCoder.Encoding(normalization_information)
 
         if self.secondInterleaver is not None:
             now_information = self.secondInterleaver.Shuffle(now_information)
 
-        status: list = self.GetTransferOneStep(now_information)
+        status: list = self.get_transfer_one_step(now_information)
         now_information = status[0]
 
         if self.secondInterleaver is not None:
