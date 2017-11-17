@@ -35,5 +35,5 @@ class AboutCoderController:
                         str(self._mainController.secondCoderForCascade.lengthInformation))
                     self._dialogAboutCoder.coder_speed_label.setText(str(
                             self._mainController.secondCoderForCascade.get_speed()))
-                    self._dialogAboutCoder.coder_speed_label.setText(str(
-                            self._mainController.length_coding_word_label.lengthTotal))
+                    self._dialogAboutCoder.length_coding_word_label.setText(str(
+                            self._mainController.secondCoderForCascade.lengthTotal))
