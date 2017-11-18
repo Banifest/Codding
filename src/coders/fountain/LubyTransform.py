@@ -29,6 +29,9 @@ class Coder(abstractCoder.AbstractCoder):
         while len(setCombinationBlocks) < self.countCodingBlocks:
             setCombinationBlocks.add(randomGenerator.getrandbits(self.countBlocks))
             setCombinationBlocks = setCombinationBlocks - {0}
+            if 2 ** self.countBlocks - 1 == len(setCombinationBlocks):
+                raise CodingException("Не возможно содат кодер с заданными параметрами")
+
         self.blocks: list = list(setCombinationBlocks)
         self.lengthInformation = length_information
         self.lengthAdditional = size_block * count_coding_blocks - length_information

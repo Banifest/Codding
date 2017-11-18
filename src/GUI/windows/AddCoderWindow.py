@@ -1,4 +1,5 @@
-from PyQt5.QtGui import QIntValidator
+from PyQt5.QtCore import QRegExp
+from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QLabel, QLineEdit, QRadioButton, QWidget
 from PyQt5.uic import loadUi
 
@@ -25,7 +26,7 @@ class AddCoderWindow(QWidget):
         loadUi(r'src\GUI\UI\adding_coder.ui', self)
 
         self.sizePackageTextBox: QLineEdit = QLineEdit("120")
-        self.listPolynomialTextBox: QLineEdit = QLineEdit("3, 5, 7")
+        self.listPolynomialTextBox: QLineEdit = QLineEdit()
         self.countPolynomialTextBox: QLineEdit = QLineEdit("3")
         self.countMemoryRegistersTextBox: QLineEdit = QLineEdit("3")
         self.countExitsTextBox: QLineEdit = QLineEdit("2")
@@ -34,8 +35,11 @@ class AddCoderWindow(QWidget):
         self.powerReedMullerTextBox = QLineEdit("2")
         self.maxLengthRecoverPackageTextBox = QLineEdit("3")
 
+        regexp = QRegExp('^([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])$')
+        validator = QRegExpValidator(regexp)
+
         self.sizePackageTextBox.setValidator(QIntValidator())
-        # self.listPolynomialTextBox.setValidator(QIntValidator())
+        self.listPolynomialTextBox.setValidator(validator)
         self.countPolynomialTextBox.setValidator(QIntValidator())
         self.countMemoryRegistersTextBox.setValidator(QIntValidator())
         self.countExitsTextBox.setValidator(QIntValidator())
@@ -57,9 +61,11 @@ class AddCoderWindow(QWidget):
         self.redraw_grid()
         if text == "Хемминга":
             self.grid_coder_options.addWidget(QLabel("Размер пакета"), 2, 0)
+            self.sizePackageTextBox: QLineEdit = QLineEdit("120")
             self.grid_coder_options.addWidget(self.sizePackageTextBox, 2, 1)
         elif text == "Циклический":
             self.grid_coder_options.addWidget(QLabel("Размер пакета"), 2, 0)
+            self.sizePackageTextBox: QLineEdit = QLineEdit("10")
             self.grid_coder_options.addWidget(self.sizePackageTextBox, 2, 1)
             self.grid_coder_options.addWidget(QLabel("Порождающий полином"), 3, 0)
             self.listPolynomialTextBox: QLineEdit = QLineEdit("13")

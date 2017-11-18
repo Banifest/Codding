@@ -13,7 +13,7 @@ class TestCoderWindow(QWidget):
         self.controller = controller
         uic.loadUi(r'src\GUI\UI\test_simple_coder.ui', self)
 
-        self.noise_text_box.setValidator(QDoubleValidator())
+        self.noise_text_box.setValidator(QDoubleValidator(0, 50, 2))
         self.count_test_text_box.setValidator(QIntValidator())
 
         self.controller.set_window(self)

@@ -1,4 +1,5 @@
 from PyQt5 import uic
+from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QCheckBox, QLabel, QLineEdit, QProgressBar, QPushButton, QWidget
 
 from src.channel.cascade import Cascade
@@ -31,7 +32,7 @@ class TestCascadeCoderWindow(QWidget):
 
     def __init__(self, controller):
         log.debug("Создание окна тестирования кодера")
-        super().__init__()
+        super().__init__(super, 0)
 
         uic.loadUi(r'src\GUI\UI\test_cascade_coder.ui', self)
         self.controller = controller
@@ -40,6 +41,8 @@ class TestCascadeCoderWindow(QWidget):
         self.begin_test_button.clicked.connect(lambda: self.controller.starting_test(False))
         self.begin_auto_test_button.clicked.connect(lambda: self.controller.starting_test(True))
         self.get_last_result_button.clicked.connect(self.controller.get_last_result)
+
+        self.count_test_text_box.setValidator(QIntValidator())
 
         self.is_interleaver_first.stateChanged.connect(lambda val: self.first_length_text_box.setEnabled
         (self.first_length_text_box.isEnabled() ^ 1))
