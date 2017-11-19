@@ -91,9 +91,8 @@ class AddCoderWindow(QWidget):
             self.grid_coder_options.addWidget(QLabel("Степень кодера"), 3, 0)
             self.grid_coder_options.addWidget(self.powerReedMullerTextBox, 3, 1)
         elif text == 'Сверточный для пакетов':
-            self.grid_coder_options.addWidget(QLabel("Макс длина исправляемого пакета"), 2, 0)
-            self.grid_coder_options.addWidget(self.maxLengthRecoverPackageTextBox, 2, 1)
             self.grid_coder_options.addWidget(QLabel("Список полиномов"), 3, 0)
+            self.listPolynomialTextBox: QLineEdit = QLineEdit("3, 5, 7")
             self.grid_coder_options.addWidget(self.listPolynomialTextBox, 3, 1)
             self.grid_coder_options.addWidget(QLabel("Количество регистров памяти"), 4, 0)
             self.grid_coder_options.addWidget(self.countMemoryRegistersTextBox, 4, 1)

@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+from coders.exeption import CodingException
+
 
 class AbstractCoder:
     __metaclass__ = ABCMeta
@@ -59,4 +61,7 @@ class AbstractCoder:
         Returns: list consist of 0 or 1
 
         """
-        return bit_list
+        if len(bit_list) > self.lengthInformation:
+            raise CodingException("Невозможно привести информационное слово с большей длиной к меньшему")
+        else:
+            return (self.lengthInformation - len(bit_list)) * [0] + bit_list

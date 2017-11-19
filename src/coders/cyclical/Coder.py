@@ -3,7 +3,6 @@ import math
 import numpy as np
 from numpy.polynomial import polynomial as plm
 
-from coders.exeption import CodingException
 from src.coders import abstractCoder
 from src.coders.casts import IntToBitList
 from src.logger import log
@@ -41,13 +40,10 @@ class Coder(abstractCoder.AbstractCoder):
         return information[self.lengthAdditional:]
 
     def get_redundancy(self) -> float:
-        pass
+        return super().get_redundancy()
 
     def get_speed(self) -> float:
-        return self.lengthAdditional / self.lengthTotal
+        return super().get_speed()
 
     def try_normalization(self, bit_list: list) -> list:
-        if len(bit_list) > self.lengthInformation:
-            raise CodingException("Невозможно привести информационное слово с большей длиной к меньшему")
-        else:
-            return (self.lengthInformation - len(bit_list)) * [0] + bit_list
+        return super().try_normalization()

@@ -4,7 +4,6 @@ import numpy as np
 
 from coders import abstractCoder
 from coders.casts import BitListToInt, IntToBitList
-from coders.exeption import CodingException
 
 
 class Coder(abstractCoder.AbstractCoder):
@@ -15,10 +14,7 @@ class Coder(abstractCoder.AbstractCoder):
         return super().get_speed()
 
     def try_normalization(self, bit_list: list) -> list:
-        if len(bit_list) > self.lengthInformation:
-            raise CodingException("Невозможно привести информационное слово с большей длиной к меньшему")
-        else:
-            return (self.lengthInformation - len(bit_list)) * [0] + bit_list
+        return super().try_normalization()
 
     name = "Рида-Миллера"
 
@@ -30,17 +26,18 @@ class Coder(abstractCoder.AbstractCoder):
 
     def __init__(self, power: int, r: int):
         self.r = r
-        self.power = power
+        self.power = int(round(np.log2(power) + 0.5))
 
-        init_matrix: list = [IntToBitList((1 << (1 << power)) - 1)]
+        init_matrix: list = [IntToBitList((2 ** (2 ** self.power)) - 1)]
         if r > 0:
-            self.vectors = np.matrix([IntToBitList(x, size=power, rev=False) for x in range(2 ** power)]).T.tolist()
+            self.vectors = np.matrix(
+                    [IntToBitList(x, size=self.power, rev=False) for x in range(2 ** self.power)]).T.tolist()
             init_matrix += self.vectors
             matrix_int_G1 = [BitListToInt(x) for x in init_matrix[1:]]
-            self.vectors_rise = [[x] for x in range(1, power + 1)]
+            self.vectors_rise = [[x] for x in range(1, self.power + 1)]
 
         for x in range(r - 1):
-            comb: list = list(itertools.combinations(range(power), x + 2))
+            comb: list = list(itertools.combinations(range(self.power), x + 2))
 
             new_matrix_G: list = []
             self.vectors_rise += comb
@@ -48,13 +45,13 @@ class Coder(abstractCoder.AbstractCoder):
                 val: int = matrix_int_G1[x[0]]
                 for y in x:
                     val &= matrix_int_G1[y]
-                new_matrix_G.append(IntToBitList(val, size=1 << power))
+                new_matrix_G.append(IntToBitList(val, size=1 << self.power))
             init_matrix += new_matrix_G
 
         self.matrix_G = np.matrix(init_matrix)
         self.lengthInformation = len(self.matrix_G.tolist())
-        self.lengthAdditional = len(self.matrix_G.tolist()[0])
-        self.lengthTotal = self.lengthAdditional + self.lengthInformation
+        self.lengthTotal = len(self.matrix_G.tolist()[0])
+        self.lengthAdditional = self.lengthTotal - self.lengthInformation
 
     def Encoding(self, information: list):
         return [x % 2 for x in (np.matrix(information) * self.matrix_G).tolist()[0]]

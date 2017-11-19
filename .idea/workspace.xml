@@ -3,12 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="644f2794-217c-4110-9a05-d20d7f1a060f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/UI/test_cascade_coder.ui" afterPath="$PROJECT_DIR$/src/GUI/UI/test_cascade_coder.ui" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/UI/test_simple_coder.ui" afterPath="$PROJECT_DIR$/src/GUI/UI/test_simple_coder.ui" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" afterPath="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/abstractCoder.py" afterPath="$PROJECT_DIR$/src/coders/abstractCoder.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/convolutional/Coder.py" afterPath="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/cyclical/Coder.py" afterPath="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/fountain/LubyTransform.py" afterPath="$PROJECT_DIR$/src/coders/fountain/LubyTransform.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/linear/ReedMuller.py" afterPath="$PROJECT_DIR$/src/coders/linear/ReedMuller.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/coders/linear/hemming.py" afterPath="$PROJECT_DIR$/src/coders/linear/hemming.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,7 +44,7 @@
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_TestCoders_TestConvolutionalCoder_test_correct_ability.coverage" NAME="Unittests for TestCoders.TestConvolutionalCoder.test_correct_ability Coverage Results" MODIFIED="1508358228378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Codding$Unittests_for_TestCoders_TestCyclicalCoder_test_encoding.coverage" NAME="Unittests for TestCoders.TestCyclicalCoder.test_encoding Coverage Results" MODIFIED="1510809553546" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$ReedMuller.coverage" NAME="ReedMuller Coverage Results" MODIFIED="1509350793340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/coders/linear" />
-    <SUITE FILE_PATH="coverage/Codding$main.coverage" NAME="main Coverage Results" MODIFIED="1510986202665" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Codding$main.coverage" NAME="main Coverage Results" MODIFIED="1511121815082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TestKursach$Unittests_for_testCoder_TestHemmingCoder.coverage" NAME="Unittests for tests.TestCoders.TestHemmingCoder Coverage Results" MODIFIED="1508353761022" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/TestKursach$main.coverage" NAME="main Coverage Results" MODIFIED="1510168082881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/TestKursach$_polybase.coverage" NAME="_polybase Coverage Results" MODIFIED="1509732284451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:/Program Files/Python36/Lib/site-packages/numpy/polynomial" />
@@ -70,11 +73,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="hemming.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/coders/linear/hemming.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReedMuller.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="383">
+              <caret line="47" column="74" lean-forward="false" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="AboutCoderController.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI/controller/AboutCoderController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="37" column="67" lean-forward="false" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
+            <state relative-caret-position="139">
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -83,10 +110,34 @@
       <file leaf-file-name="MainController.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI/controller/MainController.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="859">
-              <caret line="96" column="70" lean-forward="true" selection-start-line="96" selection-start-column="70" selection-end-line="96" selection-end-column="70" />
+            <state relative-caret-position="360">
+              <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="abstractCoder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/coders/abstractCoder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="83">
+              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -95,62 +146,20 @@
       <file leaf-file-name="LubyTransform.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/coders/fountain/LubyTransform.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="32" column="86" lean-forward="false" selection-start-line="32" selection-start-column="86" selection-end-line="32" selection-end-column="86" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestCoderController.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/controller/TestCoderController.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-714">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="272">
+              <caret line="38" column="73" lean-forward="false" selection-start-line="38" selection-start-column="73" selection-end-line="38" selection-end-column="73" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graphics.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/graphics.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="49" column="54" lean-forward="false" selection-start-line="49" selection-start-column="54" selection-end-line="49" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainWindow.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/windows/MainWindow.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QMainWindow.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharm2017.2/system/python_stubs/-1120166012/PyQt5/QtWidgets/QMainWindow.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="47" column="8" lean-forward="false" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddCoderWindow.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AddCoderWindow.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+            <state relative-caret-position="180">
+              <caret line="87" column="76" lean-forward="true" selection-start-line="87" selection-start-column="76" selection-end-line="87" selection-end-column="76" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -158,11 +167,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCascadeCoderWindow.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestCascadeCoderWindow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+            <state relative-caret-position="204">
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -170,13 +179,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestCoderWindow.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py">
+      <file leaf-file-name="Coder.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/coders/convolutional/Coder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="16" selection-end-column="62" />
+            <state relative-caret-position="323">
+              <caret line="31" column="73" lean-forward="false" selection-start-line="31" selection-start-column="73" selection-end-line="31" selection-end-column="73" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#36#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -194,7 +203,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>connect</find>
       <find>Push</find>
       <find>except</find>
       <find>plot</find>
@@ -224,6 +232,7 @@
       <find>self.ch</find>
       <find>testInformation</find>
       <find>draw</find>
+      <find>power</find>
     </findStrings>
     <replaceStrings>
       <replace>self.blocks</replace>
@@ -233,6 +242,7 @@
       <replace>.setValidator(QIntValidator())</replace>
       <replace>grid_info</replace>
       <replace>grid_info.</replace>
+      <replace>self.power</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -304,13 +314,8 @@
         <option value="$PROJECT_DIR$/tests/TestCoders.py" />
         <option value="$PROJECT_DIR$/src/GUI/controller/TestCascadeCoderController.py" />
         <option value="$PROJECT_DIR$/src/coders/convolutional/CoderForPacket.py" />
-        <option value="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
-        <option value="$PROJECT_DIR$/src/coders/abstractCoder.py" />
         <option value="$PROJECT_DIR$/src/coders/interleaver/Interleaver.py" />
-        <option value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
-        <option value="$PROJECT_DIR$/src/coders/linear/ReedMuller.py" />
         <option value="$PROJECT_DIR$/src/coders/exeption.py" />
-        <option value="$PROJECT_DIR$/src/coders/linear/hemming.py" />
         <option value="$PROJECT_DIR$/src/GUI/windows/AboutCoderWindow.py" />
         <option value="$PROJECT_DIR$/src/GUI/windows/MainWindow.py" />
         <option value="$PROJECT_DIR$/src/GUI/controller/TestCoderController.py" />
@@ -319,11 +324,16 @@
         <option value="$PROJECT_DIR$/src/channel/cascade.py" />
         <option value="$PROJECT_DIR$/src/GUI/graphics.py" />
         <option value="$PROJECT_DIR$/src/GUI/controller/AboutCoderController.py" />
-        <option value="$PROJECT_DIR$/src/coders/fountain/LubyTransform.py" />
-        <option value="$PROJECT_DIR$/src/GUI/controller/MainController.py" />
-        <option value="$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py" />
-        <option value="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" />
         <option value="$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py" />
+        <option value="$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py" />
+        <option value="$PROJECT_DIR$/src/GUI/controller/MainController.py" />
+        <option value="$PROJECT_DIR$/src/coders/abstractCoder.py" />
+        <option value="$PROJECT_DIR$/src/coders/linear/hemming.py" />
+        <option value="$PROJECT_DIR$/src/coders/fountain/LubyTransform.py" />
+        <option value="$PROJECT_DIR$/src/coders/cyclical/Coder.py" />
+        <option value="$PROJECT_DIR$/src/coders/convolutional/Coder.py" />
+        <option value="$PROJECT_DIR$/src/coders/linear/ReedMuller.py" />
+        <option value="$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py" />
       </list>
     </option>
   </component>
@@ -431,6 +441,34 @@
               <item name="Root" type="cbb8eebc:String" user="Root" />
               <item name="TestKursach" type="cbb8eebc:String" user="TestKursach" />
               <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="coders" type="cbb8eebc:String" user="coders" />
+              <item name="convolutional" type="cbb8eebc:String" user="convolutional" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="TestKursach" type="cbb8eebc:String" user="TestKursach" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="coders" type="cbb8eebc:String" user="coders" />
+              <item name="cyclical" type="cbb8eebc:String" user="cyclical" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="TestKursach" type="cbb8eebc:String" user="TestKursach" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="coders" type="cbb8eebc:String" user="coders" />
+              <item name="fountain" type="cbb8eebc:String" user="fountain" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="TestKursach" type="cbb8eebc:String" user="TestKursach" />
+              <item name="src" type="cbb8eebc:String" user="src" />
+              <item name="coders" type="cbb8eebc:String" user="coders" />
+              <item name="linear" type="cbb8eebc:String" user="linear" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="TestKursach" type="cbb8eebc:String" user="TestKursach" />
+              <item name="src" type="cbb8eebc:String" user="src" />
               <item name="GUI" type="cbb8eebc:String" user="GUI" />
             </path>
             <path>
@@ -470,6 +508,7 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="run.code.analysis.last.selected.profile" value="aDefault" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -808,13 +847,6 @@
       <option name="presentableId" value="Default" />
       <updated>1490813097617</updated>
     </task>
-    <task id="LOCAL-00056" summary="создан прототп LDPC кодера">
-      <created>1508080361649</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1508080361650</updated>
-    </task>
     <task id="LOCAL-00057" summary="переделан вид графика">
       <created>1508089799462</created>
       <option name="number" value="00057" />
@@ -1151,7 +1183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1510945559898</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="добавлены проверки на ввод символов">
+      <created>1510986275796</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1510986275796</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1207,6 +1246,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822478" sideWeight="0.4892905" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32822478" sideWeight="0.48661312" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19678715" sideWeight="0.491453" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12851405" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32694763" sideWeight="0.46251673" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24899599" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1263,7 +1303,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="дописан циклический декодер" />
     <MESSAGE value="small refactor" />
     <MESSAGE value="simple checkpoint" />
     <MESSAGE value="added ui" />
@@ -1288,7 +1327,8 @@
     <MESSAGE value="исправлен баг с проверкой на коректность каскада" />
     <MESSAGE value="исправлен баг связанный с отображением информации о кодерах" />
     <MESSAGE value="добавлена вспомогательная информация о кодерах" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавлена вспомогательная информация о кодерах" />
+    <MESSAGE value="добавлены проверки на ввод символов" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлены проверки на ввод символов" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1322,34 +1362,14 @@
           <option name="timeStamp" value="246" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/GUI/controller/TestCoderController.py</url>
-          <line>172</line>
-          <option name="timeStamp" value="300" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/coders/convolutional/Coder.py</url>
           <line>26</line>
           <option name="timeStamp" value="313" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/coders/convolutional/Coder.py</url>
-          <line>35</line>
+          <line>36</line>
           <option name="timeStamp" value="314" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/GUI/controller/MainController.py</url>
-          <line>120</line>
-          <option name="timeStamp" value="316" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/channel/channel.py</url>
-          <line>84</line>
-          <option name="timeStamp" value="320" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/GUI/controller/AboutCoderController.py</url>
-          <line>25</line>
-          <option name="timeStamp" value="322" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/GUI/controller/MainController.py</url>
@@ -1357,9 +1377,19 @@
           <option name="timeStamp" value="323" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/coders/fountain/LubyTransform.py</url>
-          <line>19</line>
-          <option name="timeStamp" value="324" />
+          <url>file://$PROJECT_DIR$/src/GUI/controller/TestCoderController.py</url>
+          <line>172</line>
+          <option name="timeStamp" value="327" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/GUI/controller/AboutCoderController.py</url>
+          <line>10</line>
+          <option name="timeStamp" value="329" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py</url>
+          <line>28</line>
+          <option name="timeStamp" value="330" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -1372,7 +1402,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="325" />
+      <option name="time" value="332" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="tests">
@@ -1533,57 +1563,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="123" column="29" lean-forward="false" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/coders/interleaver/Interleaver.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="8" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/convolutional/Coder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/convolutional/CoderForPacket.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="28" lean-forward="false" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#16#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1671,32 +1655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/abstractCoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="51" column="8" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/channel/channel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="158" column="0" lean-forward="false" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/linear/hemming.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="87" column="0" lean-forward="false" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/channel/cascade.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="37">
@@ -1731,14 +1689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/controller/AboutCoderController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="37" column="67" lean-forward="false" selection-start-line="37" selection-start-column="67" selection-end-line="37" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2017.2/system/python_stubs/-1120166012/PyQt5/QtWidgets/QMainWindow.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -1757,60 +1707,148 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/coders/fountain/LubyTransform.py">
+    <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="32" column="86" lean-forward="false" selection-start-line="32" selection-start-column="86" selection-end-line="32" selection-end-column="86" />
+        <state relative-caret-position="425">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TestCoders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="87" column="45" lean-forward="false" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/channel/channel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/controller/MainController.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="859">
-          <caret line="96" column="70" lean-forward="true" selection-start-line="96" selection-start-column="70" selection-end-line="96" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/controller/TestCoderController.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-714">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="972">
+          <caret line="179" column="0" lean-forward="false" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCoderWindow.py">
+    <entry file="file://$PROJECT_DIR$/src/coders/convolutional/CoderForPacket.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="16" selection-end-column="62" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/linear/hemming.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/abstractCoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/fountain/LubyTransform.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="38" column="73" lean-forward="false" selection-start-line="38" selection-start-column="73" selection-end-line="38" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/cyclical/Coder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/controller/AboutCoderController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/controller/MainController.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/convolutional/Coder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="31" column="73" lean-forward="false" selection-start-line="31" selection-start-column="73" selection-end-line="31" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/windows/TestCascadeCoderWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        <state relative-caret-position="204">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/coders/linear/ReedMuller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="47" column="74" lean-forward="false" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/windows/AddCoderWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="87" column="76" lean-forward="true" selection-start-line="87" selection-start-column="76" selection-end-line="87" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

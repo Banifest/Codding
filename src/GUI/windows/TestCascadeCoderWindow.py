@@ -44,9 +44,11 @@ class TestCascadeCoderWindow(QWidget):
 
         self.count_test_text_box.setValidator(QIntValidator())
 
-        self.is_interleaver_first.stateChanged.connect(lambda val: self.first_length_text_box.setEnabled
-        (self.first_length_text_box.isEnabled() ^ 1))
-        self.is_interleaver_second.stateChanged.connect(lambda val: self.second_length_text_box.setEnabled
-        (self.second_length_text_box.isEnabled() ^ 1))
+        self.is_interleaver_first.stateChanged.connect(
+                lambda val: self.first_length_text_box.setEnabled(self.first_length_text_box.isEnabled() ^ 1)
+                )
+        self.is_interleaver_second.stateChanged.connect(
+                lambda val: self.second_length_text_box.setEnabled(self.second_length_text_box.isEnabled() ^ 1)
+                )
 
         self.show()

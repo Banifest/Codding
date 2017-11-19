@@ -27,14 +27,16 @@ class Coder(abstractCoder.AbstractCoder):
         # Генерация блоков сочетаний
         setCombinationBlocks: set = set()
         while len(setCombinationBlocks) < self.countCodingBlocks:
-            setCombinationBlocks.add(randomGenerator.getrandbits(self.countBlocks))
-            setCombinationBlocks = setCombinationBlocks - {0}
             if 2 ** self.countBlocks - 1 == len(setCombinationBlocks):
                 raise CodingException("Не возможно содат кодер с заданными параметрами")
+            setCombinationBlocks.add(randomGenerator.getrandbits(self.countBlocks))
+            setCombinationBlocks = setCombinationBlocks - {0}
+
 
         self.blocks: list = list(setCombinationBlocks)
         self.lengthInformation = length_information
         self.lengthAdditional = size_block * count_coding_blocks - length_information
+        self.lengthTotal = self.lengthInformation + self.lengthAdditional
 
     def Encoding(self, information: list):
         log.info("Кодирование пакета {0} фонтанным LT-кодером".format(information))
@@ -55,8 +57,6 @@ class Coder(abstractCoder.AbstractCoder):
             answer.append(IntToBitList(value, self.sizeBlock))
 
         return [y for x in answer for y in x]
-
-
 
     def Decoding(self, information: list):
         """
@@ -108,10 +108,10 @@ class Coder(abstractCoder.AbstractCoder):
         return [y for x in answer for y in x]
 
     def get_redundancy(self) -> float:
-        pass
+        return super().get_redundancy()
 
     def get_speed(self) -> float:
-        pass
+        return super().get_speed()
 
     def try_normalization(self, bit_list: list) -> list:
-        pass
+        return super().try_normalization()
