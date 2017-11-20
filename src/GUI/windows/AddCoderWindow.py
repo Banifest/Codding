@@ -19,7 +19,7 @@ class AddCoderWindow(QWidget):
     secondCoderRadioButton: QRadioButton
 
     def __init__(self, controller):
-        super().__init__()
+        super().__init__(flags=0)
 
         log.debug("Создание окна добавления кодера")
         self.controller = controller
@@ -85,10 +85,12 @@ class AddCoderWindow(QWidget):
             self.grid_coder_options.addWidget(self.countBlocksTextBox, 4, 1)
         elif text == 'Рида-Маллера':
             self.grid_coder_options.addWidget(QLabel("Размер пакета"), 2, 0)
+            self.sizePackageTextBox = QLineEdit("3")
             self.grid_coder_options.addWidget(self.sizePackageTextBox, 2, 1)
 
             # я не знаю как корректно описать это поле
             self.grid_coder_options.addWidget(QLabel("Степень кодера"), 3, 0)
+            self.powerReedMullerTextBox = QLineEdit("1")
             self.grid_coder_options.addWidget(self.powerReedMullerTextBox, 3, 1)
         elif text == 'Сверточный для пакетов':
             self.grid_coder_options.addWidget(QLabel("Список полиномов"), 3, 0)
@@ -96,5 +98,8 @@ class AddCoderWindow(QWidget):
             self.grid_coder_options.addWidget(self.listPolynomialTextBox, 3, 1)
             self.grid_coder_options.addWidget(QLabel("Количество регистров памяти"), 4, 0)
             self.grid_coder_options.addWidget(self.countMemoryRegistersTextBox, 4, 1)
+            self.sizePackageTextBox = QLineEdit("Длина блока")
+            self.sizePackageTextBox = QLineEdit("2")
+            self.grid_coder_options.addWidget(self.sizePackageTextBox, 2, 1)
 
         self.submit_button.setDisabled(text == 'Выбор кодера')

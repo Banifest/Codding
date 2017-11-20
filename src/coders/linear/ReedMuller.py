@@ -14,7 +14,7 @@ class Coder(abstractCoder.AbstractCoder):
         return super().get_speed()
 
     def try_normalization(self, bit_list: list) -> list:
-        return super().try_normalization()
+        return super().try_normalization(bit_list)
 
     name = "Рида-Миллера"
 
@@ -26,7 +26,7 @@ class Coder(abstractCoder.AbstractCoder):
 
     def __init__(self, power: int, r: int):
         self.r = r
-        self.power = int(round(np.log2(power) + 0.5))
+        self.power = power
 
         init_matrix: list = [IntToBitList((2 ** (2 ** self.power)) - 1)]
         if r > 0:
@@ -54,8 +54,8 @@ class Coder(abstractCoder.AbstractCoder):
         self.lengthAdditional = self.lengthTotal - self.lengthInformation
 
     def Encoding(self, information: list):
+        information[0] = 0
         return [x % 2 for x in (np.matrix(information) * self.matrix_G).tolist()[0]]
-        pass
 
     def Decoding(self, information: list):
         def vec_xor(a, b): return [a[i] ^ b[i] for i in range(len(a))]

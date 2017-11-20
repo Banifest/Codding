@@ -23,7 +23,7 @@ from coders.linear.ReedMuller import Coder as ReedMullerCoder
 from coders.linear.hemming import Coder as HemmingCoder
 
 
-# noinspection PyAttributeOutsideInit
+# noinspection PyAttributeOutsideInit,PyCallByClass
 class MainController:
     _mainWindow: MainWindow = None
     _addCoderWindow: AddCoderWindow = None
@@ -43,6 +43,7 @@ class MainController:
         self._mainWindow = MainWindow(self)
         App.exec()
 
+    # noinspection PyArgumentList
     def set_coder(self):
         coder_name = self._addCoderWindow.choose_comboBox.currentText()
         try:
@@ -77,7 +78,7 @@ class MainController:
                         1,
                         int(len(StrListToList(self._addCoderWindow.listPolynomialTextBox.text()))),
                         int(self._addCoderWindow.countMemoryRegistersTextBox.text()),
-                        int(self._addCoderWindow.powerReedMullerTextBox.text())
+                        int(self._addCoderWindow.sizePackageTextBox.text())
                         )
 
             if self._addCoderWindow.first_coder_radio_button.isChecked():
@@ -93,6 +94,7 @@ class MainController:
                                 QMessageBox.Ok
                                 )
 
+    # noinspection PyArgumentList
     def set_test_coder_window(self):
         if self.currentCoder is not None:
             self._testSimpleCoderController = TestCoderController(self)
@@ -107,6 +109,7 @@ class MainController:
     def set_create_coder_window(self):
         self._addCoderWindow = AddCoderWindow(self)
 
+    # noinspection PyArgumentList
     def set_test_cascade_coder_window(self):
         if self.firstCoderForCascade is not None and self.secondCoderForCascade is not None:
             self._testCascadeCoderController = TestCascadeCoderController(self)
@@ -117,6 +120,7 @@ class MainController:
                                 "Не были созданы кодеры",
                                 QMessageBox.Ok)
 
+    # noinspection PyArgumentList
     def set_about_coder_dialog(self):
         if self.currentCoder is not None:
             self._dialogAboutCoderController = AboutCoderController(self)

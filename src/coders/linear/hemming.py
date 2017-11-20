@@ -11,7 +11,7 @@ class Coder(abstractCoder.AbstractCoder):
     name = "Хемминга"
 
     def try_normalization(self, bit_list: list) -> list:
-        return super().try_normalization()
+        return super().try_normalization(bit_list)
 
     def get_redundancy(self) -> float:
         return super().get_redundancy()

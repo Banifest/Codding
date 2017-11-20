@@ -46,4 +46,4 @@ class Coder(abstractCoder.AbstractCoder):
         return super().get_speed()
 
     def try_normalization(self, bit_list: list) -> list:
-        return super().try_normalization()
+        return super().try_normalization(bit_list)

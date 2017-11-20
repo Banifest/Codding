@@ -81,7 +81,7 @@ class Channel:
 
         return self.information
 
-    def transfer_one_step(self, information: list) -> list:
+    def transfer_one_step(self, information: list) -> int:
         log.info("Производиться передача последовательности битов - {0}".format(information))
         now_information: list = information
         status: int = 0
@@ -95,7 +95,8 @@ class Channel:
 
             now_information = self.gen_interference(now_information, self.noiseProbability)
 
-            if help_information != now_information: status = 1
+            if help_information != now_information:
+                status = 1
 
             if self.interleaver: now_information = self.interleaver.reestablish(now_information)
 
@@ -162,7 +163,7 @@ class Channel:
         return self.information
 
     @staticmethod
-    def gen_interference(information: list, straight: Optional[float]) -> list:
+    def gen_interference(information: list, straight: float = None) -> list:
         """
         Генерация помех с задданной вероятностью
         :param information: list Информация, представленная в виде массива битов

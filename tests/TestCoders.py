@@ -121,9 +121,9 @@ class TestCyclicalCoder(unittest.TestCase):
 
 class TestReedMullerCoder(unittest.TestCase):
     def test_init(self):
-        test_coder = ReedMullerCoder(3, 2)
+        test_coder = ReedMullerCoder(3, 1)
 
-        code = [1, 1, 1, 1, 1]
+        code = [0, 0, 1, 1]
 
         enc_code = test_coder.Encoding(code)
         print(enc_code)

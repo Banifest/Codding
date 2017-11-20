@@ -21,7 +21,7 @@ class Coder(abstractCoder.AbstractCoder):
         self.sizeBlock = size_block
         self.blocks = []
         self.countCodingBlocks = count_coding_blocks
-        self.countBlocks = ((length_information - 1) // self.sizeBlock) + 1  # целочисленное деление с округлением вверх
+        self.countBlocks = int(round(length_information + 0.5))  # целочисленное деление с округлением вверх
 
         randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
         # Генерация блоков сочетаний
@@ -114,4 +114,4 @@ class Coder(abstractCoder.AbstractCoder):
         return super().get_speed()
 
     def try_normalization(self, bit_list: list) -> list:
-        return super().try_normalization()
+        return super().try_normalization(bit_list)

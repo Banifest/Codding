@@ -37,7 +37,7 @@ class Coder(abstractCoder.AbstractCoder):
         return 1 / self.countRegisters
 
     def get_redundancy(self):
-        return self.countOutput * 100
+        return self.countOutput
 
     def DoStep(self, informationBit: int) -> list:
         log.debug("Шаг при кодировании бита - {0}".format(informationBit))
