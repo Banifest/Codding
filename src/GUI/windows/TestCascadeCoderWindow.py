@@ -32,7 +32,7 @@ class TestCascadeCoderWindow(QWidget):
 
     def __init__(self, controller):
         log.debug("Создание окна тестирования кодера")
-        super().__init__(super, 0)
+        super().__init__()
 
         uic.loadUi(r'src\GUI\UI\test_cascade_coder.ui', self)
         self.controller = controller

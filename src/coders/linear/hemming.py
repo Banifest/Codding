@@ -40,13 +40,14 @@ class Coder(abstractCoder.AbstractCoder):
 
             while count < self.lengthTotal:
                 for y in range(1 << x):
-                    temp.append(1) if flag == True else temp.append(0)
+                    temp.append(1) if flag else temp.append(0)
                     count += 1
                     if count >= self.lengthTotal:
                         break
                 flag: bool = not flag
             self._matrixTransformation.append(temp)
         self._matrixTransformation = np.transpose(np.array(self._matrixTransformation))
+        print(self.to_json())
 
     def get_speed(self) -> float:
         return float(self.lengthInformation) / float(self.lengthTotal)
@@ -110,3 +111,10 @@ class Coder(abstractCoder.AbstractCoder):
                 step += 1
             count += 1
         return answer
+
+    def to_json(self):
+        return {'name'                   : self.name,
+                'length information word': self.lengthInformation,
+                'length additional bits' : self.lengthAdditional,
+                'length coding word'     : self.lengthTotal,
+                'matrix of generating'   : self._matrixTransformation.tolist()}

@@ -119,6 +119,7 @@ class TestCyclicalCoder(unittest.TestCase):
         test_coder.Decoding(code)
 
 
+
 class TestReedMullerCoder(unittest.TestCase):
     def test_init(self):
         test_coder = ReedMullerCoder(3, 1)

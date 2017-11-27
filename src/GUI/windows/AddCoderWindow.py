@@ -19,7 +19,7 @@ class AddCoderWindow(QWidget):
     secondCoderRadioButton: QRadioButton
 
     def __init__(self, controller):
-        super().__init__(flags=0)
+        super().__init__()
 
         log.debug("Создание окна добавления кодера")
         self.controller = controller

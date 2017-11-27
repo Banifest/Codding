@@ -4,6 +4,9 @@ from src.logger import log
 
 
 class Coder(abstractCoder.AbstractCoder):
+    def to_json(self) -> str:
+        return {}
+
     def try_normalization(self, bit_list: list) -> list:
         return bit_list
 

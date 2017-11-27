@@ -65,3 +65,7 @@ class AbstractCoder:
             raise CodingException("Невозможно привести информационное слово с большей длиной к меньшему")
         else:
             return (self.lengthInformation - len(bit_list)) * [0] + bit_list
+
+    @abstractmethod
+    def to_json(self) -> str:
+        return {}

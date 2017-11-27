@@ -1,3 +1,4 @@
+import json
 import os
 
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -73,10 +74,14 @@ class TestCoderController:
                                       "Последняя попытка\n",
                                       "Успешно переданно (пакет не исказился) - {0}\n"
                                       "Успешно исправленно паккетов - {1}\n"
-                                      "Переданно с ошибкой - {2}\n".
+                                      "Переданно с ошибкой - {2}\n"
+                                      "Успешно битов передано - {3}\n"
+                                      "Некорректные биты - {4}".
                                       format(self._threadClass.successfullyPackage,
                                              self._threadClass.repairPackage,
-                                             self._threadClass.badPackage + self._threadClass.invisiblePackage),
+                                             self._threadClass.badPackage + self._threadClass.invisiblePackage,
+                                             self._threadClass.countCorrectBit,
+                                             self._threadClass.countErrorBit),
                                       QMessageBox.Ok | QMessageBox.Open,
                                       QMessageBox.Ok)
         if msg == QMessageBox.Open:
@@ -101,10 +106,15 @@ class TestCoder(QThread):
 
     def __init__(self, test_window: QWidget, currentCoder: AbstractCoder, lastResult: str):
         super(TestCoder, self).__init__(None)
+
         self.successfullyPackage = 0
         self.badPackage = 0
         self.repairPackage = 0
         self.invisiblePackage = 0
+
+        self.countCorrectBit = 0
+        self.countErrorBit = 0
+
         self.lastResult = lastResult
         self.currentCoder = currentCoder
         self.noiseChance = float(test_window.noise_text_box.text())
@@ -133,21 +143,25 @@ class TestCoder(QThread):
         information: list = IntToBitList(self.information)
 
         log.debug("Начало цикла тестов")
-        writer = open("lastInformation.txt", "w")
+        json_information = {'coder': self.channel.coder.to_json(), 'tests': []}
         for x in range(self.countTest):
-            status: int = self.channel.transfer_one_step(information)
-            if status == 0:
+            status: [int, int, int] = self.channel.transfer_one_step(information)
+            if status[0] == 0:
                 self.successfullyPackage += 1
-            elif status == 1:
+            elif status[0] == 1:
                 self.repairPackage += 1
-            elif status == 2:
+            elif status[0] == 2:
                 self.badPackage += 1
             else:
                 self.invisiblePackage += 1
-            writer.write(self.channel.information)
+            json_information['tests'].append({x: {'correct bits': status[1], 'error bits': status[2]}})
+            self.countCorrectBit += status[1]
+            self.countErrorBit += status[2]
             progress += step
             self.lastResult += self.channel.information
             self.stepFinished.emit(int(progress))
+
+        open('lastResult.json', "w").write(json.dumps(json_information, ensure_ascii=False))
 
     def auto_test(self):
         log.debug("Кнопка авто-тестирования нажата")
@@ -162,12 +176,15 @@ class TestCoder(QThread):
             self.badPackage = 0
             self.repairPackage = 0
             self.invisiblePackage = 0
+            self.countErrorBit = 0
+            self.countCorrectBit = 0
             status += step
 
             self.channel.noiseProbability = x
             self.one_test()
 
-            draw_data.append([self.successfullyPackage, self.repairPackage, self.badPackage, self.invisiblePackage])
+            draw_data.append([self.successfullyPackage, self.repairPackage, self.badPackage, self.invisiblePackage,
+                              self.countCorrectBit, self.countErrorBit])
             self.autoStepFinished.emit(int(status))
 
         self.autoStepFinished.emit(100)

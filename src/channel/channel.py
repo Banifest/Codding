@@ -1,4 +1,5 @@
 import random
+from math import ceil
 from typing import Optional, Union
 
 from coders.abstractCoder import AbstractCoder
@@ -81,46 +82,71 @@ class Channel:
 
         return self.information
 
-    def transfer_one_step(self, information: list) -> int:
-        log.info("Производиться передача последовательности битов - {0}".format(information))
-        now_information: list = information
-        status: int = 0
-        normalization_information = self.coder.try_normalization(information)
-        try:
-            now_information = self.coder.Encoding(normalization_information)
+    def transfer_one_step(self, information: list) -> [int, int]:
+        #  Разбиение на пакеты
+        total_bits = len(information)
+        success_bits = 0
+        drop_bits = 0
+        package_list = []
+        for x in range(int(ceil(len(information) / self.coder.lengthInformation))):
+            package_list.append(information[self.coder.lengthInformation * x:min(self.coder.lengthInformation * (x + 1),
+                                                                                 len(information))])
 
-            if self.interleaver: now_information = self.interleaver.shuffle(now_information)
+        package_status: int = 0
+        for x in package_list:
+            now_information: list = x.copy()
+            log.info("Производиться передача последовательности битов - {0}".format(now_information))
+            status: int = 0
+            normalization_information = self.coder.try_normalization(now_information)
+            try:
+                now_information = self.coder.Encoding(normalization_information)
 
-            help_information = now_information
+                if self.interleaver:
+                    now_information = self.interleaver.shuffle(now_information)
 
-            now_information = self.gen_interference(now_information, self.noiseProbability)
+                help_information = now_information
 
-            if help_information != now_information:
-                status = 1
+                now_information = self.gen_interference(now_information, self.noiseProbability)
 
-            if self.interleaver: now_information = self.interleaver.reestablish(now_information)
+                if help_information != now_information:
+                    status = 1
 
-            now_information = self.coder.Decoding(now_information)
-        except CodingException as err:
-            status = 2
-            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
-            self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
-        except:
-            status = 2
-            log.info("В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
-            self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
-        else:
-            if now_information == normalization_information:
-                if status != 1: status = 0
-                log.info("Пакет {0} был успешно передан".format(information))
-                self.information = "Пакет был успешно передан\n"
+                if self.interleaver:
+                    now_information = self.interleaver.reestablish(now_information)
+
+                now_information = self.coder.Decoding(now_information)
+
+
+            except CodingException as err:
+                status = 2
+                log.info(
+                        "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
+                self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
+            except:
+                status = 2
+                log.info(
+                        "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
+                self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
             else:
-                status = 3
-                log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
-                        now_information))
-                self.information = "Пакет при передаче был повреждён и не подлежит "\
-                                   "востановлению\n"
-        return status
+                if now_information == normalization_information:
+                    if status != 1: status = 0
+                    log.info("Пакет {0} был успешно передан".format(information))
+                    self.information = "Пакет был успешно передан\n"
+                else:
+                    status = 3
+                    log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
+                            now_information))
+                    self.information = "Пакет при передаче был повреждён и не подлежит "\
+                                       "востановлению\n"
+            current_step_success_bits = sum([1 if now_information[x] == normalization_information[x] else 0
+                                             for x in range(len(now_information))])
+            success_bits += current_step_success_bits
+            drop_bits += len(normalization_information) - current_step_success_bits
+            if status > 1:
+                package_status = 2
+            elif status == 1 and package_status != 2:
+                package_status = 1
+        return [package_status, success_bits, drop_bits]
 
     def get_transfer_one_step(self, information: list) -> Union[list, int]:
         log.info("Производиться передача последовательности битов - {0}".format(information))

@@ -1,64 +1,42 @@
 import matplotlib.pyplot as plt
-from brewer2mpl import brewer2mpl
-from matplotlib import rcParams
 
 
 # noinspection SpellCheckingInspection
-def init_graphics():
-    # colorbrewer2 Dark2 qualitative color table
-    dark2_colors = brewer2mpl.get_map('Dark2', 'Qualitative', 7).mpl_colors
-
-    rcParams['figure.figsize'] = (10, 6)
-    rcParams['figure.dpi'] = 150
-    rcParams['axes.color_cycle'] = dark2_colors
-    rcParams['lines.linewidth'] = 2
-    rcParams["axes.facecolor"] = 'white'
-    rcParams['font.size'] = 14
-    rcParams['patch.edgecolor'] = 'white'
-    rcParams['patch.facecolor'] = dark2_colors[0]
-    rcParams['font.family'] = 'StixGeneral'
+# def init_graphics():
+#     dark2_colors = brewer2mpl.get_map('Dark2', 'Qualitative', 7).mpl_colors
+#
+#     rcParams['figure.figsize'] = (10, 6)
+#     rcParams['figure.dpi'] = 150
+#     rcParams['axes.color_cycle'] = dark2_colors
+#     rcParams['lines.linewidth'] = 2
+#     rcParams["axes.facecolor"] = 'white'
+#     rcParams['font.size'] = 14
+#     rcParams['patch.edgecolor'] = 'white'
+#     rcParams['patch.facecolor'] = dark2_colors[0]
+#     rcParams['font.family'] = 'StixGeneral'
 
 
 def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1):
-    init_graphics()
-
-    def remove_border(axes=None, top=False, right=False, left=True, bottom=True):
-        ax = axes or plt.gca()
-        ax.spines['top'].set_visible(top)
-        ax.spines['right'].set_visible(right)
-        ax.spines['left'].set_visible(left)
-        ax.spines['bottom'].set_visible(bottom)
-
-        ax.yaxis.set_ticks_position('none')
-        ax.xaxis.set_ticks_position('none')
-
-        if top:
-            ax.xaxis.tick_top()
-        if bottom:
-            ax.xaxis.tick_bottom()
-        if left:
-            ax.yaxis.tick_left()
-        if right:
-            ax.yaxis.tick_right()
-
-    # df2 = DataFrame(draw_information,
-    #                columns=["Без искажений", "Исправленные ошибки", "Обнаруженные ошибки", "Необнаруженные ошибки"])
-    # df2.plot(kind='bar', stacked=True)
-
+    plt.style.use('ggplot')
     plt.legend()
-    plt.xlabel("Шанс на искажение бита информации, P*10^-1")
-    plt.ylabel("Количество успешно пройденных тестов")
-    plt.plot([x[0] + x[1] for x in draw_information],
+    plt.ylim([0.0000001, 1])
+    plt.xlim([0, 20])
+    plt.semilogy(True)
+    plt.ylabel("Шанс на искажение бита информации, P*10^-1")
+    plt.xlabel("Мошность передатчика в Дб")
+
+    print([x[5] / (x[4] + x[5]) + 0.00001 for x in draw_information])
+    plt.plot(range(20)[::-1],
+             [x[5] / (x[4] + x[5]) + 0.0000001 for x in draw_information],
              label="Кодер типа {0}\n"
                    "Скорость кодера {1}"
              .format(coder_name, str(coder_speed)))
+    #    plt.plot([x[0] + x[1] for x in draw_information])
     plt.show()
 
 
 def draw_plot_pie(draw_information: list):
     import matplotlib.pyplot as plt
-
-    init_graphics()
 
     fig = plt.figure()
     sumResult: int = sum(draw_information)

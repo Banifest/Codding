@@ -1,3 +1,4 @@
+from math import ceil
 from typing import Optional
 
 from coders.interleaver import Interleaver
@@ -27,22 +28,33 @@ class Cascade(channel.Channel):
         self.secondInterleaver = secondInterleaver if secondInterleaver is not None else None
 
     def transfer_one_step(self, information: list) -> int:
-        self.coder = self.secondCoder
-        normalization_information = self.firstCoder.try_normalization(information)
+        #  Разбиение на пакеты
+        package_list = []
+        for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
+            package_list.append(
+                    information[self.firstCoder.lengthInformation * x:min(self.firstCoder.lengthInformation * (x + 1),
+                                                                          len(information))])
 
-        now_information: list = self.firstCoder.Encoding(normalization_information)
+        package_status: int = 0
+        for x in package_list:
+            self.coder = self.secondCoder
+            normalization_information = self.firstCoder.try_normalization(x)
 
-        if self.secondInterleaver is not None:
-            now_information = self.secondInterleaver.Shuffle(now_information)
+            now_information: list = self.firstCoder.Encoding(normalization_information)
 
-        status: list = self.get_transfer_one_step(now_information)
+            if self.secondInterleaver is not None:
+                now_information = self.secondInterleaver.Shuffle(now_information)
 
-        # обрезка добавленных битов для нормализации
-        now_information = status[0][-len(now_information):]
+            status: list = self.get_transfer_one_step(now_information)
 
-        if self.secondInterleaver is not None:
-            now_information = self.secondInterleaver.Reestablish(now_information)
+            # обрезка добавленных битов для нормализации
+            now_information = status[0][-len(now_information):]
 
-        now_information = self.firstCoder.Decoding(now_information)
+            if self.secondInterleaver is not None:
+                now_information = self.secondInterleaver.Reestablish(now_information)
 
-        return 0 if BitListToInt(now_information) == BitListToInt(normalization_information) else 2
+            now_information = self.firstCoder.Decoding(now_information)
+
+            if BitListToInt(now_information) != BitListToInt(normalization_information):
+                return 2
+        return 0
