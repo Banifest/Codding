@@ -10,7 +10,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>191</width>
-                <height>192</height>
+                <height>215</height>
             </rect>
         </property>
         <property name="sizePolicy">
@@ -28,7 +28,7 @@
         <property name="maximumSize">
             <size>
                 <width>291</width>
-                <height>192</height>
+                <height>215</height>
             </size>
         </property>
         <property name="focusPolicy">
@@ -130,6 +130,7 @@
             <addaction name="action_test_simple_coder"/>
             <addaction name="action_test_cascade_coder"/>
             <addaction name="action_about_coder"/>
+            <addaction name="action_import_from_json"/>
         </widget>
         <action name="action_create_new_coder">
             <property name="checkable">
@@ -213,6 +214,14 @@
             </property>
             <property name="shortcut">
                 <string>Ctrl+Shift+H</string>
+            </property>
+        </action>
+        <action name="action_import_from_json">
+            <property name="text">
+                <string>Импорт из json</string>
+            </property>
+            <property name="shortcut">
+                <string>Ctrl+I</string>
             </property>
         </action>
     </widget>
