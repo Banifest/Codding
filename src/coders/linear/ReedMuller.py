@@ -115,3 +115,11 @@ class Coder(abstractCoder.AbstractCoder):
         result_voice[0] = 0 if sum(decoding_information) < 5 else 1
 
         return result_voice
+
+    def to_json(self) -> dict:
+        return {'name'                   : self.name,
+                'length information word': self.lengthInformation,
+                'length additional bits' : self.lengthAdditional,
+                'length coding word'     : self.lengthTotal,
+                'matrix of generating'   : self.matrix_G.tolist(),
+                'speed'                  : self.get_speed()}

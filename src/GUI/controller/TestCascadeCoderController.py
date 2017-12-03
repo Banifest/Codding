@@ -16,7 +16,9 @@ class TestCascadeCoderController(TestCoderController):
                                              self._mainController.currentCoder,
                                              self._lastResult,
                                              self._mainController.firstCoderForCascade,
-                                             self._mainController.secondCoderForCascade)
+                                             self._mainController.secondCoderForCascade,
+                                             start=self.start,
+                                             finish=self.finish)
 
     def enable_disable_widget(self, param: bool):
         super().enable_disable_widget(param)
@@ -30,10 +32,11 @@ class TestCascadeCoderController(TestCoderController):
 
 class TestCascadeCoder(TestCoder):
     def __init__(self, test_window: QWidget, currentCoder: AbstractCoder, lastResult: str,
-                 firstCoder: AbstractCoder, secondCoder: AbstractCoder):
-        super().__init__(test_window, currentCoder, lastResult)
+                 firstCoder: AbstractCoder, secondCoder: AbstractCoder,
+                 start: float, finish: float):
+        super().__init__(test_window, currentCoder, lastResult, start, finish)
 
-        self.speed = firstCoder.get_speed() * secondCoder.get_speed()
+        self.coderSpeed = firstCoder.get_speed() * secondCoder.get_speed()
         self.coderName = 'Каскадный кодер из: {0} и {1}'.format(firstCoder.name, secondCoder.name)
         self.channel = Cascade(
                 firstCoder,
@@ -47,4 +50,10 @@ class TestCascadeCoder(TestCoder):
                 if test_window.is_interleaver_second.isChecked() else None)
 
     def run(self):
+        self.information_dict['is_cascade'] = True
+        self.information_dict['coder'] = {'first_coder' : self.channel.firstCoder.to_json(),
+                                          'second_coder': self.channel.secondCoder.to_json(),
+                                          'name'        : self.coderName,
+                                          'speed'       : self.coderSpeed
+                                          }
         super().run()

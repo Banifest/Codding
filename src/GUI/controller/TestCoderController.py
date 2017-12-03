@@ -58,8 +58,8 @@ class TestCoderController:
             self.enable_disable_widget(False)
             self._threadClass.set_auto(param)
 
-            self._threadClass.autoStepFinished.connect(lambda val: self._testCoderWindow.auto_test.setValue(val))
-            self._threadClass.stepFinished.connect(lambda val: self._testCoderWindow.single_test.setValue(val))
+            self._threadClass.autoStepFinished.connect(self._testCoderWindow.auto_test.setValue)
+            self._threadClass.stepFinished.connect(self._testCoderWindow.single_test.setValue)
             self._threadClass.ended.connect(lambda: self.enable_disable_widget(True))
             self._threadClass.notCorrect.connect(self.coders_correct_warning)
             self._threadClass.start()
@@ -145,7 +145,7 @@ class TestCoder(QThread):
         self.noiseChance = float(test_window.noise_text_box.text())
         self.countTest = int(test_window.count_test_text_box.text())
         self.information = int(test_window.information_text_box.text())
-        self.speed = self.currentCoder.get_speed()
+        self.coderSpeed = self.currentCoder.get_speed()
         self.coderName = self.currentCoder.name
 
         self.channel = Channel(
@@ -155,6 +155,9 @@ class TestCoder(QThread):
                 False,
                 Interleaver.Interleaver(int(test_window.first_length_text_box.text()))
                 if test_window.is_interleaver_first.isChecked() else None)
+
+        self.information_dict['is_cascade'] = False
+        self.information_dict['coder'] = self.channel.coder.to_json()
 
     def __del__(self):
         self.wait()
@@ -191,12 +194,12 @@ class TestCoder(QThread):
 
     def auto_test(self):
         log.debug("Кнопка авто-тестирования нажата")
-        status: float = 0
         start: float = self.start_t
         finish: float = self.finish_t
 
         if finish - start <= 0:
             self.notCorrect.emit()
+            return
         step: float = (finish - start) / 20
 
         self.information_dict['auto_test_information'] = {'start': start, 'finish': finish, 'step': step}
@@ -239,7 +242,6 @@ class TestCoder(QThread):
 
     def run(self):
         try:
-            self.information_dict['coder'] = self.channel.coder.to_json()
             if self.is_auto:
                 self.information_dict['single_test'] = False
                 self.auto_test()

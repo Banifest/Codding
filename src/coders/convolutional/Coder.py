@@ -4,12 +4,6 @@ from src.logger import log
 
 
 class Coder(abstractCoder.AbstractCoder):
-    def to_json(self) -> str:
-        return {}
-
-    def try_normalization(self, bit_list: list) -> list:
-        return bit_list
-
     name = "Сверточный"
 
     countPolynomials: int = 0
@@ -18,6 +12,7 @@ class Coder(abstractCoder.AbstractCoder):
     countOutput: int = 0
     countRegisters: int = 0
     register: int = 0
+    is_div_into_package = False
 
     graph: list = []
 
@@ -141,3 +136,17 @@ class Coder(abstractCoder.AbstractCoder):
                 minCost = x[0]
                 minAnswer = x[1]
         return minAnswer
+
+    def try_normalization(self, bit_list: list) -> list:
+        return bit_list
+
+    def to_json(self) -> dict:
+        return {'name'               : self.name,
+                'count inputs'       : self.countInput,
+                'count polynomials'  : self.countPolynomials,
+                'list of polynomials': self.listPolynomials,
+                'count of outputs'   : self.countOutput,
+                'count of registers' : self.countRegisters,
+                'graph'              : self.graph,
+                'speed'              : self.get_speed()
+                }

@@ -32,7 +32,6 @@ class Coder(abstractCoder.AbstractCoder):
             setCombinationBlocks.add(randomGenerator.getrandbits(self.countBlocks))
             setCombinationBlocks = setCombinationBlocks - {0}
 
-
         self.blocks: list = list(setCombinationBlocks)
         self.lengthInformation = length_information
         self.lengthAdditional = size_block * count_coding_blocks - length_information
@@ -115,3 +114,10 @@ class Coder(abstractCoder.AbstractCoder):
 
     def try_normalization(self, bit_list: list) -> list:
         return super().try_normalization(bit_list)
+
+    def to_json(self) -> dict:
+        return {'name'                   : self.name,
+                'length information word': self.lengthInformation,
+                'length additional bits' : self.lengthAdditional,
+                'length coding word'     : self.lengthTotal,
+                'speed'                  : self.get_speed()}

@@ -5,12 +5,12 @@ from src.coders.exeption import CodingException
 
 class AbstractCoder:
     __metaclass__ = ABCMeta
-
     name: str = ""
     coding_information: int = 0
-    count_additional: int = 0
+    countAdditional: int = 0
     lengthTotal: int = 0
     lengthInformation: int = 0
+    is_div_into_package = True
 
     @abstractmethod
     def Encoding(self, information: int or list) -> list:
@@ -39,14 +39,14 @@ class AbstractCoder:
         Returns:
             redundancy information for this coder
         """
-        return self.count_additional / self.lengthInformation
+        return self.countAdditional / self.lengthInformation
 
     @abstractmethod
     def get_speed(self) -> float:
         """
-        Method for get speed coder
+        Method for get coderSpeed coder
         Returns:
-            float speed coder
+            float coderSpeed coder
         """
         return self.lengthInformation / self.lengthTotal
 
@@ -67,5 +67,5 @@ class AbstractCoder:
             return (self.lengthInformation - len(bit_list)) * [0] + bit_list
 
     @abstractmethod
-    def to_json(self) -> str:
+    def to_json(self) -> dict:
         return {}

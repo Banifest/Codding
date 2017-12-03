@@ -112,7 +112,7 @@ class Coder(abstractCoder.AbstractCoder):
             count += 1
         return answer
 
-    def to_json(self):
+    def to_json(self) -> dict:
         return {'name'                   : self.name,
                 'length information word': self.lengthInformation,
                 'length additional bits' : self.lengthAdditional,

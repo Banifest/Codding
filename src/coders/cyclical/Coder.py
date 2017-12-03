@@ -31,9 +31,9 @@ class Coder(abstractCoder.AbstractCoder):
         for x in range(len(self.polynomial)):
             if sum([int(x) % 2 for x in syndrome]) != 0:
                 arr_error: list = [int(x) % 2 for x in syndrome]
-                for x in range(len(arr_error)):
-                    if arr_error[x] != 0:
-                        information[x] ^= 1
+                for iter in range(len(arr_error)):
+                    if arr_error[iter] != 0:
+                        information[iter] ^= 1
             else:
                 break
 
@@ -47,3 +47,11 @@ class Coder(abstractCoder.AbstractCoder):
 
     def try_normalization(self, bit_list: list) -> list:
         return super().try_normalization(bit_list)
+
+    def to_json(self) -> dict:
+        return {'name'                   : self.name,
+                'length information word': self.lengthInformation,
+                'length additional bits' : self.lengthAdditional,
+                'length coding word'     : self.lengthTotal,
+                'polynomial'             : [int(x) for x in self.polynomial],
+                'speed'                  : self.get_speed()}

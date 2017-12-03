@@ -27,15 +27,16 @@ class Cascade(channel.Channel):
 
         self.secondInterleaver = secondInterleaver if secondInterleaver is not None else None
 
-    def transfer_one_step(self, information: list) -> int:
+    def transfer_one_step(self, information: list) -> [int, int, int]:
         #  Разбиение на пакеты
         package_list = []
-        for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
-            package_list.append(
+        if self.coder.is_div_into_package:
+            for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
+                package_list.append(
                     information[self.firstCoder.lengthInformation * x:min(self.firstCoder.lengthInformation * (x + 1),
                                                                           len(information))])
 
-        package_status: int = 0
+        status: list = []
         for x in package_list:
             self.coder = self.secondCoder
             normalization_information = self.firstCoder.try_normalization(x)
@@ -56,5 +57,5 @@ class Cascade(channel.Channel):
             now_information = self.firstCoder.Decoding(now_information)
 
             if BitListToInt(now_information) != BitListToInt(normalization_information):
-                return 2
-        return 0
+                return [2, status[1], status[2]]
+        return [1, status[1], status[2]]

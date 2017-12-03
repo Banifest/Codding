@@ -6,8 +6,8 @@
             <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>419</width>
-                <height>299</height>
+                <width>436</width>
+                <height>308</height>
             </rect>
         </property>
         <property name="windowTitle">
@@ -23,19 +23,19 @@
                 <rect>
                     <x>4</x>
                     <y>0</y>
-                    <width>411</width>
-                    <height>291</height>
+                    <width>428</width>
+                    <height>306</height>
                 </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout">
-                <item row="2" column="0">
-                    <widget class="QCheckBox" name="is_interleaver_first">
+                <item row="9" column="0" colspan="2">
+                    <widget class="QPushButton" name="begin_test_button">
                         <property name="text">
-                            <string>Первый перемежитель</string>
+                            <string>Тест по заданным параметрам</string>
                         </property>
                     </widget>
                 </item>
-                <item row="9" column="0" colspan="2">
+                <item row="12" column="0" colspan="3">
                     <widget class="QPushButton" name="get_last_result_button">
                         <property name="enabled">
                             <bool>false</bool>
@@ -45,21 +45,14 @@
                         </property>
                     </widget>
                 </item>
-                <item row="2" column="1">
-                    <widget class="QCheckBox" name="is_interleaver_second">
-                        <property name="text">
-                            <string>Второй перемежитель</string>
+                <item row="10" column="0" colspan="3">
+                    <widget class="QProgressBar" name="single_test">
+                        <property name="value">
+                            <number>0</number>
                         </property>
                     </widget>
                 </item>
-                <item row="4" column="1">
-                    <widget class="QLineEdit" name="information_text_box">
-                        <property name="text">
-                            <string>10</string>
-                        </property>
-                    </widget>
-                </item>
-                <item row="0" column="0">
+                <item row="0" column="0" colspan="2">
                     <widget class="QLabel" name="label">
                         <property name="text">
                             <string>Вероятность искажения информации</string>
@@ -69,17 +62,14 @@
                         </property>
                     </widget>
                 </item>
-                <item row="4" column="0">
-                    <widget class="QLabel" name="label_3">
-                        <property name="text">
-                            <string>Передаваемая информация</string>
-                        </property>
-                        <property name="textFormat">
-                            <enum>Qt::AutoText</enum>
+                <item row="11" column="0" colspan="3">
+                    <widget class="QProgressBar" name="auto_test">
+                        <property name="value">
+                            <number>0</number>
                         </property>
                     </widget>
                 </item>
-                <item row="1" column="0">
+                <item row="1" column="0" colspan="2">
                     <widget class="QLabel" name="label_2">
                         <property name="text">
                             <string>Количество передач при тестировании</string>
@@ -89,7 +79,7 @@
                         </property>
                     </widget>
                 </item>
-                <item row="0" column="1">
+                <item row="0" column="2">
                     <widget class="QLineEdit" name="noise_text_box">
                         <property name="inputMask">
                             <string/>
@@ -99,52 +89,7 @@
                         </property>
                     </widget>
                 </item>
-                <item row="7" column="0" colspan="2">
-                    <widget class="QProgressBar" name="single_test">
-                        <property name="value">
-                            <number>0</number>
-                        </property>
-                    </widget>
-                </item>
-                <item row="6" column="0">
-                    <widget class="QPushButton" name="begin_test_button">
-                        <property name="text">
-                            <string>Тест по заданным параметрам</string>
-                        </property>
-                    </widget>
-                </item>
-                <item row="6" column="1">
-                    <widget class="QPushButton" name="begin_auto_test_button">
-                        <property name="text">
-                            <string>Автоматическое тестирование</string>
-                        </property>
-                    </widget>
-                </item>
-                <item row="8" column="0" colspan="2">
-                    <widget class="QProgressBar" name="auto_test">
-                        <property name="value">
-                            <number>0</number>
-                        </property>
-                    </widget>
-                </item>
-                <item row="1" column="1">
-                    <widget class="QLineEdit" name="count_test_text_box">
-                        <property name="text">
-                            <string>1000</string>
-                        </property>
-                    </widget>
-                </item>
-                <item row="3" column="0">
-                    <widget class="QLineEdit" name="first_length_text_box">
-                        <property name="enabled">
-                            <bool>false</bool>
-                        </property>
-                        <property name="placeholderText">
-                            <string>Длина расскидывания</string>
-                        </property>
-                    </widget>
-                </item>
-                <item row="3" column="1">
+                <item row="3" column="2">
                     <widget class="QLineEdit" name="second_length_text_box">
                         <property name="enabled">
                             <bool>false</bool>
@@ -154,8 +99,110 @@
                         </property>
                     </widget>
                 </item>
+                <item row="5" column="1">
+                    <widget class="QDoubleSpinBox" name="noise_start">
+                        <property name="locale">
+                            <locale language="C" country="AnyCountry"/>
+                        </property>
+                        <property name="decimals">
+                            <number>1</number>
+                        </property>
+                        <property name="minimum">
+                            <double>1.000000000000000</double>
+                        </property>
+                        <property name="maximum">
+                            <double>50.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                            <double>0.100000000000000</double>
+                        </property>
+                    </widget>
+                </item>
+                <item row="1" column="2">
+                    <widget class="QLineEdit" name="count_test_text_box">
+                        <property name="text">
+                            <string>1000</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="9" column="2">
+                    <widget class="QPushButton" name="begin_auto_test_button">
+                        <property name="text">
+                            <string>Автоматическое тестирование</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="4" column="2">
+                    <widget class="QLineEdit" name="information_text_box">
+                        <property name="text">
+                            <string>10</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="2" column="2">
+                    <widget class="QCheckBox" name="is_interleaver_second">
+                        <property name="text">
+                            <string>Второй перемежитель</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="5" column="0">
+                    <widget class="QLabel" name="label_4">
+                        <property name="text">
+                            <string>Шум</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="3" column="0" colspan="2">
+                    <widget class="QLineEdit" name="first_length_text_box">
+                        <property name="enabled">
+                            <bool>false</bool>
+                        </property>
+                        <property name="placeholderText">
+                            <string>Длина расскидывания</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="2" column="0" colspan="2">
+                    <widget class="QCheckBox" name="is_interleaver_first">
+                        <property name="text">
+                            <string>Первый перемежитель</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="4" column="0" colspan="2">
+                    <widget class="QLabel" name="label_3">
+                        <property name="text">
+                            <string>Передаваемая информация</string>
+                        </property>
+                        <property name="textFormat">
+                            <enum>Qt::AutoText</enum>
+                        </property>
+                    </widget>
+                </item>
+                <item row="5" column="2">
+                    <widget class="QDoubleSpinBox" name="noise_finish">
+                        <property name="locale">
+                            <locale language="C" country="AnyCountry"/>
+                        </property>
+                        <property name="decimals">
+                            <number>1</number>
+                        </property>
+                        <property name="minimum">
+                            <double>1.000000000000000</double>
+                        </property>
+                        <property name="maximum">
+                            <double>50.000000000000000</double>
+                        </property>
+                        <property name="singleStep">
+                            <double>0.100000000000000</double>
+                        </property>
+                    </widget>
+                </item>
             </layout>
         </widget>
+        <zorder>gridLayoutWidget</zorder>
+        <zorder>label_4</zorder>
     </widget>
     <resources>
         <include location="../../../Resources/img/img.qrc"/>
