@@ -123,3 +123,6 @@ src/coders/linear/__pycache__/hemming.cpython-36.pyc
 log.txt
 /.idea/
 lastInformation.txt
+/.idea/encodings.xml
+lastResult.json
+/.idea/workspace.xml

@@ -2,25 +2,25 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-from GUI.controller.AboutCoderController import AboutCoderController
-from GUI.controller.TestCascadeCoderController import TestCascadeCoderController
-from GUI.controller.TestCoderController import TestCoderController
-from GUI.windows.AboutCoderWindow import AboutCoderWindow
-from GUI.windows.AddCoderWindow import AddCoderWindow
-from GUI.windows.MainWindow import MainWindow
-from GUI.windows.TestCascadeCoderWindow import TestCascadeCoderWindow
-from GUI.windows.TestCoderWindow import TestCoderWindow
-from coders.abstractCoder import AbstractCoder
+from src.GUI.controller.AboutCoderController import AboutCoderController
+from src.GUI.controller.TestCascadeCoderController import TestCascadeCoderController
+from src.GUI.controller.TestCoderController import TestCoderController
+from src.GUI.windows.AboutCoderWindow import AboutCoderWindow
+from src.GUI.windows.AddCoderWindow import AddCoderWindow
+from src.GUI.windows.MainWindow import MainWindow
+from src.GUI.windows.TestCascadeCoderWindow import TestCascadeCoderWindow
+from src.GUI.windows.TestCoderWindow import TestCoderWindow
+from src.coders.abstractCoder import AbstractCoder
 # noinspection PyAttributeOutsideInit
-from coders.casts import StrListToList
+from src.coders.casts import StrListToList
 # noinspection PyAttributeOutsideInit
-from coders.convolutional.Coder import Coder as ConvolutionalCoder
-from coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
-from coders.cyclical.Coder import Coder as CyclicalCoder
+from src.coders.convolutional.Coder import Coder as ConvolutionalCoder
+from src.coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
+from src.coders.cyclical.Coder import Coder as CyclicalCoder
 # noinspection PyAttributeOutsideInit,PyAttributeOutsideInit
-from coders.fountain.LubyTransform import Coder as LubyTransform
-from coders.linear.ReedMuller import Coder as ReedMullerCoder
-from coders.linear.hemming import Coder as HemmingCoder
+from src.coders.fountain.LubyTransform import Coder as LubyTransform
+from src.coders.linear.ReedMuller import Coder as ReedMullerCoder
+from src.coders.linear.hemming import Coder as HemmingCoder
 
 
 # noinspection PyAttributeOutsideInit,PyCallByClass

@@ -2,10 +2,10 @@ import random
 from math import ceil
 from typing import Optional, Union
 
-from coders.abstractCoder import AbstractCoder
-from coders.interleaver import Interleaver
+from src.coders.abstractCoder import AbstractCoder
 from src.coders.casts import BitListToInt
 from src.coders.exeption import CodingException
+from src.coders.interleaver import Interleaver
 from src.logger import log
 
 

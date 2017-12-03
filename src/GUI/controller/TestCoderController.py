@@ -4,14 +4,14 @@ import os
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QMessageBox, QWidget
 
-from GUI.graphics import draw_graphic, draw_plot_pie
-from GUI.windows.TestCoderWindow import TestCoderWindow
-# noinspection PyAttributeOutsideInit
-from coders.abstractCoder import AbstractCoder
-from coders.casts import IntToBitList
-from coders.exeption import CodingException
-from coders.interleaver import Interleaver
+from src.GUI.graphics import draw_graphic, draw_plot_pie
+from src.GUI.windows.TestCoderWindow import TestCoderWindow
 from src.channel.channel import Channel
+# noinspection PyAttributeOutsideInit
+from src.coders.abstractCoder import AbstractCoder
+from src.coders.casts import IntToBitList
+from src.coders.exeption import CodingException
+from src.coders.interleaver import Interleaver
 from src.logger import log
 
 
@@ -19,6 +19,15 @@ class TestCoderController:
     _testCoderWindow: TestCoderWindow
     _mainController: None
     _lastResult: str = ""
+
+    start: float = 1
+    finish: float = 1
+
+    def set_start(self, value):
+        self.start = float(value)
+
+    def set_finish(self, value):
+        self.finish = float(value)
 
     def __init__(self, _main_controller):
         self._mainController = _main_controller
@@ -40,7 +49,8 @@ class TestCoderController:
     # необходимо для наследования
     # noinspection PyAttributeOutsideInit
     def set_thread_class(self):
-        self._threadClass = TestCoder(self._testCoderWindow, self._mainController.currentCoder, self._lastResult)
+        self._threadClass = TestCoder(self._testCoderWindow, self._mainController.currentCoder, self._lastResult,
+                                      start=self.start, finish=self.finish)
 
     def starting_test(self, param: bool):
         try:
@@ -91,11 +101,19 @@ class TestCoderController:
 
 
 class TestCoder(QThread):
+    TRANSFER_STR = {
+        0: 'success',
+        1: 'repair',
+        2: 'error',
+        3: 'error'
+        }
+
     stepFinished = pyqtSignal('int')
     autoStepFinished = pyqtSignal('int')
     ended = pyqtSignal()
     notCorrect = pyqtSignal()
 
+    information_dict = {}
     noiseChance: float = 0
     countTest: int = 1
     information: int = 1
@@ -104,16 +122,23 @@ class TestCoder(QThread):
     is_interleaver: bool = False
     first_length_interleaver: int = 1
 
-    def __init__(self, test_window: QWidget, currentCoder: AbstractCoder, lastResult: str):
+    start_t: float = 0
+    finish_t: float = 20
+
+    successfullyPackage = 0
+    badPackage = 0
+    repairPackage = 0
+    invisiblePackage = 0
+
+    countCorrectBit = 0
+    countErrorBit = 0
+
+    def __init__(self, test_window: QWidget, currentCoder: AbstractCoder, lastResult: str,
+                 start: float = 0, finish: float = 20):
         super(TestCoder, self).__init__(None)
 
-        self.successfullyPackage = 0
-        self.badPackage = 0
-        self.repairPackage = 0
-        self.invisiblePackage = 0
-
-        self.countCorrectBit = 0
-        self.countErrorBit = 0
+        self.start_t = start
+        self.finish_t = finish
 
         self.lastResult = lastResult
         self.currentCoder = currentCoder
@@ -137,13 +162,13 @@ class TestCoder(QThread):
     def set_auto(self, flag: bool):
         self.is_auto = flag
 
-    def one_test(self):
+    def one_test(self) -> list:
         progress = 0.0
         step = 100.0 / self.countTest
         information: list = IntToBitList(self.information)
 
         log.debug("Начало цикла тестов")
-        json_information = {'coder': self.channel.coder.to_json(), 'tests': []}
+        case_information = []
         for x in range(self.countTest):
             status: [int, int, int] = self.channel.transfer_one_step(information)
             if status[0] == 0:
@@ -154,50 +179,75 @@ class TestCoder(QThread):
                 self.badPackage += 1
             else:
                 self.invisiblePackage += 1
-            json_information['tests'].append({x: {'correct bits': status[1], 'error bits': status[2]}})
+            case_information.append({x: {'correct bits': status[1], 'error bits': status[2],
+                                         'status'      : self.TRANSFER_STR[status[0]]}})
             self.countCorrectBit += status[1]
             self.countErrorBit += status[2]
             progress += step
             self.lastResult += self.channel.information
             self.stepFinished.emit(int(progress))
 
-        open('lastResult.json', "w").write(json.dumps(json_information, ensure_ascii=False))
+        return case_information
 
     def auto_test(self):
         log.debug("Кнопка авто-тестирования нажата")
         status: float = 0
-        start: int = 0
-        finish: int = 20
-        step: float = 100 / (finish - start)
+        start: float = self.start_t
+        finish: float = self.finish_t
 
-        draw_data: list = []
-        for x in range(start, finish):
+        if finish - start <= 0:
+            self.notCorrect.emit()
+        step: float = (finish - start) / 20
+
+        self.information_dict['auto_test_information'] = {'start': start, 'finish': finish, 'step': step}
+        self.information_dict['test_cases'] = []
+        draw_data: list = []  # информация для построения графика
+
+        progress: int = 0
+        for x in [start + x * step for x in range(20)]:
+            test_case_info = {}
+
             self.successfullyPackage = 0
             self.badPackage = 0
             self.repairPackage = 0
             self.invisiblePackage = 0
             self.countErrorBit = 0
             self.countCorrectBit = 0
-            status += step
+            progress += 5
 
-            self.channel.noiseProbability = x
-            self.one_test()
+            self.channel.noiseProbability = 100 * (1 / (x + 1))
+            test_case_info['case'] = self.one_test()
 
+            test_case_info['successfully_package_count'] = self.successfullyPackage + self.repairPackage
+            test_case_info['bad_package_count'] = self.badPackage + self.invisiblePackage
+            test_case_info['correct_bit_count'] = self.countCorrectBit
+            test_case_info['error_bit_count'] = self.countErrorBit
+
+            self.information_dict['test_cases'].append(test_case_info)
             draw_data.append([self.successfullyPackage, self.repairPackage, self.badPackage, self.invisiblePackage,
                               self.countCorrectBit, self.countErrorBit])
-            self.autoStepFinished.emit(int(status))
+            self.autoStepFinished.emit(int(progress))
 
+        self.information_dict['draw_information'] = draw_data
         self.autoStepFinished.emit(100)
         if self.is_auto:
-            draw_graphic(draw_data, self.coderName, self.speed)
+            draw_graphic(self.information_dict['draw_information'],
+                         self.information_dict['coder']['name'],
+                         coder_speed=self.information_dict['coder']['speed'],
+                         start=self.information_dict['auto_test_information']['start'],
+                         finish=self.information_dict['auto_test_information']['finish'])
 
     def run(self):
         try:
+            self.information_dict['coder'] = self.channel.coder.to_json()
             if self.is_auto:
+                self.information_dict['single_test'] = False
                 self.auto_test()
             else:
-                self.one_test()
+                self.information_dict['single_test'] = True
+                self.information_dict['test'] = self.one_test()
 
+            open('lastResult.json', "w").write(json.dumps(self.information_dict, ensure_ascii=False))
             self.stepFinished.emit(100)
             self.ended.emit()
             log.debug("Конец цикла тестов")

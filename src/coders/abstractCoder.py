@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-from coders.exeption import CodingException
+from src.coders.exeption import CodingException
 
 
 class AbstractCoder:

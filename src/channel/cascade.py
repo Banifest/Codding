@@ -1,10 +1,10 @@
 from math import ceil
 from typing import Optional
 
-from coders.interleaver import Interleaver
 from src.channel import channel
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt
+from src.coders.interleaver import Interleaver
 
 
 class Cascade(channel.Channel):

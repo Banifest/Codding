@@ -117,4 +117,5 @@ class Coder(abstractCoder.AbstractCoder):
                 'length information word': self.lengthInformation,
                 'length additional bits' : self.lengthAdditional,
                 'length coding word'     : self.lengthTotal,
-                'matrix of generating'   : self._matrixTransformation.tolist()}
+                'matrix of generating'   : self._matrixTransformation.tolist(),
+                'speed'                  : self.get_speed()}

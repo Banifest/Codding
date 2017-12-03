@@ -1,6 +1,6 @@
 from math import log2
 
-from coders.convolutional.Coder import Coder
+from src.coders.convolutional.Coder import Coder
 
 
 class ConvolutionalCoderForPacket(Coder):

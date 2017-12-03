@@ -1,30 +1,15 @@
 import matplotlib.pyplot as plt
 
 
-# noinspection SpellCheckingInspection
-# def init_graphics():
-#     dark2_colors = brewer2mpl.get_map('Dark2', 'Qualitative', 7).mpl_colors
-#
-#     rcParams['figure.figsize'] = (10, 6)
-#     rcParams['figure.dpi'] = 150
-#     rcParams['axes.color_cycle'] = dark2_colors
-#     rcParams['lines.linewidth'] = 2
-#     rcParams["axes.facecolor"] = 'white'
-#     rcParams['font.size'] = 14
-#     rcParams['patch.edgecolor'] = 'white'
-#     rcParams['patch.facecolor'] = dark2_colors[0]
-#     rcParams['font.family'] = 'StixGeneral'
-
-
-def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1):
+def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1, start: float = 1, finish: int = 20):
     plt.style.use('ggplot')
     plt.legend()
     plt.ylim([0.0000001, 1.1])
-    plt.xlim([0, 20])
+    plt.xlim([start, finish])
     plt.semilogy(True)
-    plt.ylabel("Шанс на искажение бита информации, P*10^-1")
+    plt.ylabel("Вероятность потерь информации, P*10^-1")
     plt.xlabel("Мошность передатчика в Дб")
-    plt.plot(range(20)[::-1],
+    plt.plot(  # range(20)[::-1],
              [x[5] / (x[4] + x[5]) + 0.0000001 for x in draw_information],
              label="Кодер типа {0}\n"
                    "Скорость кодера {1}"

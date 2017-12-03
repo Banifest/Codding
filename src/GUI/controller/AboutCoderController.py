@@ -1,4 +1,4 @@
-from GUI.windows.AboutCoderWindow import AboutCoderWindow
+from src.GUI.windows.AboutCoderWindow import AboutCoderWindow
 
 
 class AboutCoderController:

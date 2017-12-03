@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QWidget
 
-from GUI.controller.TestCoderController import TestCoder, TestCoderController
-from channel.cascade import Cascade
-from coders.abstractCoder import AbstractCoder
-from coders.interleaver import Interleaver
+from src.GUI.controller.TestCoderController import TestCoder, TestCoderController
+from src.channel.cascade import Cascade
+from src.coders.abstractCoder import AbstractCoder
+from src.coders.interleaver import Interleaver
 
 
 class TestCascadeCoderController(TestCoderController):

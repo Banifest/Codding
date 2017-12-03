@@ -2,8 +2,8 @@ import itertools
 
 import numpy as np
 
-from coders import abstractCoder
-from coders.casts import BitListToInt, IntToBitList
+from src.coders import abstractCoder
+from src.coders.casts import BitListToInt, IntToBitList
 
 
 class Coder(abstractCoder.AbstractCoder):

@@ -1,4 +1,4 @@
-from GUI.controller.MainController import MainController
+from src.GUI.controller.MainController import MainController
 
 from src.logger import log
 
