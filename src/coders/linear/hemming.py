@@ -47,7 +47,6 @@ class Coder(abstractCoder.AbstractCoder):
                 flag: bool = not flag
             self._matrixTransformation.append(temp)
         self._matrixTransformation = np.transpose(np.array(self._matrixTransformation))
-        print(self.to_json())
 
     def get_speed(self) -> float:
         return float(self.lengthInformation) / float(self.lengthTotal)

@@ -15,7 +15,6 @@ def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1, st
              label="Кодер типа {0}\n"
                    "Скорость кодера {1}"
              .format(coder_name, str(coder_speed)))
-    print([x[2] / (x[0] + x[1] + x[2]) + 0.0000001 for x in draw_information])
     plt.plot([start + x * step for x in range(20)],
              [x[2] / (x[0] + x[1] + x[2]) + 0.0000001 for x in draw_information])
     plt.show()
