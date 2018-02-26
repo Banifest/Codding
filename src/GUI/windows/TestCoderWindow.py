@@ -10,7 +10,7 @@ class TestCoderWindow(QWidget):
         log.debug("Создание окна тестирования кодера")
         super().__init__()
         self.controller = controller
-        uic.loadUi(r'src\GUI\UI\test_simple_coder.ui', self)
+        uic.loadUi(r'.\src\GUI\UI\test_simple_coder.ui', self)
 
         self.controller.set_window(self)
         self.begin_test_button.clicked.connect(lambda: self.controller.starting_test(False))

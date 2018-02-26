@@ -249,7 +249,7 @@ class TestCoder(QThread):
                 self.information_dict['single_test'] = True
                 self.information_dict['test'] = self.one_test()
 
-            open('lastResult.json', "w").write(json.dumps(self.information_dict, ensure_ascii=False))
+            open('lastResult.json', "w", encoding='UTF-8').write(json.dumps(self.information_dict, ensure_ascii=False))
             self.stepFinished.emit(100)
             self.ended.emit()
             log.debug("Конец цикла тестов")

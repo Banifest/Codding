@@ -2,7 +2,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 
 # noinspection PyUnresolvedReferences
-import Resources.img_rc
+import resources.img_rc
 from src.logger import log
 
 
@@ -12,7 +12,7 @@ class MainWindow(QMainWindow):
 
         super(MainWindow, self).__init__()
         self.controller = controller
-        uic.loadUi(r'src\GUI\UI\main_window.ui', self)
+        uic.loadUi(r'.\src\GUI\UI\main_window.ui', self)
 
         self.action_create_new_coder.triggered.connect(self.controller.set_create_coder_window)
         self.action_test_simple_coder.triggered.connect(self.controller.set_test_coder_window)

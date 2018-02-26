@@ -1,7 +1,7 @@
 import json
 import sys
 
-from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMessageBox, QFileDialog
 
 from src.GUI.controller.AboutCoderController import AboutCoderController
 from src.GUI.controller.TestCascadeCoderController import TestCascadeCoderController
@@ -134,12 +134,14 @@ class MainController:
                                 QMessageBox.Ok)
 
     def import_from_json(self):
-        info = json.loads(open(QFileDialog.getOpenFileName(filter="*.json", parent=self._mainWindow)[0], "r").read())
-        draw_graphic(info['draw_information'],
-                     info['coder']['name'],
-                     coder_speed=info['coder']['speed'],
-                     start=info['auto_test_information']['start'],
-                     finish=info['auto_test_information']['finish'])
+        filePath = QFileDialog.getOpenFileName(filter="*.json", parent=self._mainWindow)[0]
+        if filePath != '':
+            info = json.loads(open(filePath, "r").read())
+            draw_graphic(info['draw_information'],
+                         info['coder']['name'],
+                         coder_speed=info['coder']['speed'],
+                         start=info['auto_test_information']['start'],
+                         finish=info['auto_test_information']['finish'])
 
 
     def del_add_coder_window(self):
