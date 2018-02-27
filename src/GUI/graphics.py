@@ -8,7 +8,7 @@ def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1, st
     plt.xlim([start, finish])
     plt.semilogy(True)
     plt.ylabel("Вероятность потерь информации, P*10^-1")
-    plt.xlabel("Мошность передатчика, Дб")
+    plt.xlabel("Мощность передатчика, Дб")
     step: float = (finish - start) / 20
     plt.plot([start + x * step for x in range(20)],
              [x[5] / (x[4] + x[5]) + 0.0000001 for x in draw_information],
