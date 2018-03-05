@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>827</width>
-    <height>590</height>
+    <height>703</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>80</x>
       <y>0</y>
       <width>571</width>
-      <height>541</height>
+      <height>572</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="actionVerLayout">
@@ -32,10 +32,31 @@
      </property>
      <item>
       <layout class="QGridLayout" name="firstCoderGrid">
+       <item row="4" column="1">
+        <widget class="QSpinBox" name="lenSecondInterEdit">
+         <property name="maximum">
+          <number>99999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QSpinBox" name="lenFirstInterEdit">
+         <property name="maximum">
+          <number>99999</number>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="descFirstCoderLabel">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;First coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_37">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Interleaver setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
@@ -49,8 +70,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>567</width>
-            <height>92</height>
+            <width>281</width>
+            <height>127</height>
            </rect>
           </property>
           <attribute name="label">
@@ -91,8 +112,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>567</width>
-            <height>92</height>
+            <width>281</width>
+            <height>127</height>
            </rect>
           </property>
           <attribute name="label">
@@ -162,8 +183,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>567</width>
-            <height>92</height>
+            <width>281</width>
+            <height>127</height>
            </rect>
           </property>
           <attribute name="label">
@@ -187,7 +208,7 @@
             <rect>
              <x>150</x>
              <y>0</y>
-             <width>161</width>
+             <width>121</width>
              <height>20</height>
             </rect>
            </property>
@@ -213,7 +234,7 @@
             <rect>
              <x>150</x>
              <y>30</y>
-             <width>161</width>
+             <width>121</width>
              <height>22</height>
             </rect>
            </property>
@@ -230,8 +251,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>567</width>
-            <height>82</height>
+            <width>281</width>
+            <height>127</height>
            </rect>
           </property>
           <attribute name="label">
@@ -337,35 +358,31 @@
          </widget>
         </widget>
        </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QGridLayout" name="secondCoderGrid">
-       <item row="0" column="0">
-        <widget class="QLabel" name="descSecondCoderLabel">
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_38">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Second coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Interleaver setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QToolBox" name="toolBox_2">
+       <item row="1" column="1">
+        <widget class="QToolBox" name="toolBox_3">
          <property name="currentIndex">
-          <number>1</number>
+          <number>3</number>
          </property>
-         <widget class="QWidget" name="hemming_2">
+         <widget class="QWidget" name="hemming_3">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>567</width>
-            <height>92</height>
+            <width>280</width>
+            <height>127</height>
            </rect>
           </property>
           <attribute name="label">
            <string>Hemming</string>
           </attribute>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="label_21">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -378,7 +395,7 @@
             <string>Size of packege</string>
            </property>
           </widget>
-          <widget class="QSpinBox" name="sizePackHemEdit_2">
+          <widget class="QSpinBox" name="sizePackHemEdit2">
            <property name="geometry">
             <rect>
              <x>100</x>
@@ -395,19 +412,19 @@
            </property>
           </widget>
          </widget>
-         <widget class="QWidget" name="cyclical_2">
+         <widget class="QWidget" name="cyclical_3">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>567</width>
-            <height>83</height>
+            <width>280</width>
+            <height>127</height>
            </rect>
           </property>
           <attribute name="label">
            <string>Cyclical</string>
           </attribute>
-          <widget class="QLabel" name="label_12">
+          <widget class="QLabel" name="label_22">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -420,7 +437,7 @@
             <string>Size of packege</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_13">
+          <widget class="QLabel" name="label_23">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -433,7 +450,7 @@
             <string>Cyclic Polynomial</string>
            </property>
           </widget>
-          <widget class="QSpinBox" name="sizePackCycEdit_2">
+          <widget class="QSpinBox" name="sizePackCycEdit2">
            <property name="geometry">
             <rect>
              <x>120</x>
@@ -449,7 +466,7 @@
             <number>120</number>
            </property>
           </widget>
-          <widget class="QSpinBox" name="poliCycEdit_2">
+          <widget class="QSpinBox" name="poliCycEdit2">
            <property name="geometry">
             <rect>
              <x>120</x>
@@ -466,19 +483,19 @@
            </property>
           </widget>
          </widget>
-         <widget class="QWidget" name="convolution_2">
+         <widget class="QWidget" name="convolution_3">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>567</width>
-            <height>92</height>
+            <width>280</width>
+            <height>127</height>
            </rect>
           </property>
           <attribute name="label">
            <string>Convolutional</string>
           </attribute>
-          <widget class="QLabel" name="label_14">
+          <widget class="QLabel" name="label_24">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -491,12 +508,12 @@
             <string>List of polynomials</string>
            </property>
           </widget>
-          <widget class="QLineEdit" name="listConvEdit_2">
+          <widget class="QLineEdit" name="listConvEdit2">
            <property name="geometry">
             <rect>
              <x>150</x>
              <y>0</y>
-             <width>161</width>
+             <width>121</width>
              <height>20</height>
             </rect>
            </property>
@@ -504,7 +521,7 @@
             <string>3, 5, 7</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_15">
+          <widget class="QLabel" name="label_25">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -517,12 +534,12 @@
             <string>Count register of memory</string>
            </property>
           </widget>
-          <widget class="QSpinBox" name="countRegConvEdit_2">
+          <widget class="QSpinBox" name="countRegConvEdit2">
            <property name="geometry">
             <rect>
              <x>150</x>
              <y>30</y>
-             <width>161</width>
+             <width>121</width>
              <height>22</height>
             </rect>
            </property>
@@ -534,19 +551,19 @@
            </property>
           </widget>
          </widget>
-         <widget class="QWidget" name="fountain_2">
+         <widget class="QWidget" name="fountain_3">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>567</width>
-            <height>92</height>
+            <width>280</width>
+            <height>127</height>
            </rect>
           </property>
           <attribute name="label">
            <string>Fountain</string>
           </attribute>
-          <widget class="QLabel" name="label_16">
+          <widget class="QLabel" name="label_26">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -559,7 +576,7 @@
             <string>Size of package</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_17">
+          <widget class="QLabel" name="label_27">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -572,7 +589,7 @@
             <string>Size of block</string>
            </property>
           </widget>
-          <widget class="QLabel" name="label_18">
+          <widget class="QLabel" name="label_28">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -585,7 +602,7 @@
             <string>Count of blocks</string>
            </property>
           </widget>
-          <widget class="QSpinBox" name="sizePackFounEdit_2">
+          <widget class="QSpinBox" name="sizePackFounEdit2">
            <property name="geometry">
             <rect>
              <x>110</x>
@@ -604,7 +621,7 @@
             <number>10</number>
            </property>
           </widget>
-          <widget class="QSpinBox" name="sizeBlockFounEdit_2">
+          <widget class="QSpinBox" name="sizeBlockFounEdit2">
            <property name="geometry">
             <rect>
              <x>110</x>
@@ -620,7 +637,7 @@
             <number>10</number>
            </property>
           </widget>
-          <widget class="QSpinBox" name="countBlockFounEdit_2">
+          <widget class="QSpinBox" name="countBlockFounEdit2">
            <property name="geometry">
             <rect>
              <x>110</x>
@@ -637,6 +654,27 @@
            </property>
           </widget>
          </widget>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="descSecondCoderLabel_2">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Second coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="interFirstCheckBox">
+         <property name="text">
+          <string>On/off</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QCheckBox" name="interSecondCheckBox">
+         <property name="text">
+          <string>On/off</string>
+         </property>
         </widget>
        </item>
       </layout>
@@ -684,6 +722,23 @@
          <property name="singleStep">
           <double>0.100000000000000</double>
          </property>
+         <property name="value">
+          <double>2.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>Information for test:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2" colspan="2">
+        <widget class="QLineEdit" name="informationEdit">
+         <property name="text">
+          <string>985</string>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
@@ -705,6 +760,20 @@
          </property>
         </widget>
        </item>
+       <item row="6" column="0" colspan="4">
+        <widget class="QProgressBar" name="single_test">
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="4">
+        <widget class="QProgressBar" name="auto_test">
+         <property name="value">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="2">
         <widget class="QLabel" name="endNoiseLable">
          <property name="text">
@@ -712,31 +781,55 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QLabel" name="label_11">
+       <item row="5" column="2" colspan="2">
+        <widget class="QPushButton" name="startTestsCascadeCoderButton">
          <property name="text">
-          <string>Information for test:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2" colspan="2">
-        <widget class="QLineEdit" name="informationEdit">
-         <property name="text">
-          <string>985</string>
+          <string>Start tests</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0" colspan="2">
         <widget class="QLabel" name="label_19">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Тестирование первого кодера&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Test first coder&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
        </item>
        <item row="3" column="2" colspan="2">
         <widget class="QLabel" name="label_20">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Тестирование каскада кодеров&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Test coders cascade&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2" colspan="2">
+        <widget class="QPushButton" name="startSingleCascadeCoderButton">
+         <property name="text">
+          <string>Start single test</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QPushButton" name="startSingleFirstCoderButton">
+         <property name="text">
+          <string>Start single test</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="2">
+        <widget class="QPushButton" name="startTestsFirstCoderButton">
+         <property name="text">
+          <string>Start tests</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" colspan="4">
+        <widget class="QPushButton" name="pushButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Display last test result</string>
          </property>
         </widget>
        </item>

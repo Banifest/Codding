@@ -4,6 +4,8 @@ import sys
 from PyQt5.QtWidgets import QApplication, QMessageBox, QFileDialog
 
 from src.GUI.controller.AboutCoderController import AboutCoderController
+from src.GUI.controller.FirstCoderController import FirstCoderController
+from src.GUI.controller.SecondCoderController import SecondCoderController
 from src.GUI.controller.TestCascadeCoderController import TestCascadeCoderController
 from src.GUI.controller.TestCoderController import TestCoderController
 from src.GUI.graphics import draw_graphic
@@ -26,7 +28,7 @@ from src.coders.linear.hemming import Coder as HemmingCoder
 
 
 # noinspection PyAttributeOutsideInit,PyCallByClass
-class MainController:
+class MainController(FirstCoderController, SecondCoderController):
     _mainWindow: MainWindow = None
     _addCoderWindow: AddCoderWindow = None
     _testCascadeCoderController: TestCascadeCoderController = None
