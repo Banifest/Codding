@@ -36,15 +36,16 @@ class TestCoderController:
         self._testCoderWindow = testCoderWindow
 
     def enable_disable_widget(self, param: bool):
-        self._testCoderWindow.get_last_result_button.setEnabled(param)
-        self._testCoderWindow.noise_text_box.setEnabled(param)
-        self._testCoderWindow.count_test_text_box.setEnabled(param)
-        self._testCoderWindow.is_interleaver_first.setEnabled(param)
-        self._testCoderWindow.information_text_box.setEnabled(param)
-        self._testCoderWindow.begin_test_button.setEnabled(param)
-        self._testCoderWindow.begin_auto_test_button.setEnabled(param)
-        if self._testCoderWindow.first_length_text_box.isEnabled():
-            self._testCoderWindow.first_length_text_box.setEnabled(param)
+        pass
+        # self._testCoderWindow.get_last_result_button.setEnabled(param)
+        # self._testCoderWindow.noise_text_box.setEnabled(param)
+        # self._testCoderWindow.count_test_text_box.setEnabled(param)
+        # self._testCoderWindow.is_interleaver_first.setEnabled(param)
+        # self._testCoderWindow.information_text_box.setEnabled(param)
+        # self._testCoderWindow.begin_test_button.setEnabled(param)
+        # self._testCoderWindow.begin_auto_test_button.setEnabled(param)
+        # if self._testCoderWindow.first_length_text_box.isEnabled():
+        #     self._testCoderWindow.first_length_text_box.setEnabled(param)
 
     # необходимо для наследования
     # noinspection PyAttributeOutsideInit
@@ -64,14 +65,14 @@ class TestCoderController:
             self._threadClass.notCorrect.connect(self.coders_correct_warning)
             self._threadClass.start()
         except:
-            QMessageBox.warning(self._testCoderWindow,
+            QMessageBox.warning(None,
                                 "Проверте параметры на корректность информации",
                                 "Ошибочно заполнены поля параметров",
                                 QMessageBox.Ok,
                                 QMessageBox.Ok)
 
     def coders_correct_warning(self):
-        QMessageBox.warning(self._testCoderWindow,
+        QMessageBox.warning(None,
                             "Длина кодовых слов не согласована",
                             "Длина кодовых слов не согласована. Возможно указан слишком большой массив информации"
                             " или первый и второй кодеры не возможно поставить в каскад",
@@ -80,7 +81,7 @@ class TestCoderController:
         self.enable_disable_widget(True)
 
     def get_last_result(self):
-        msg = QMessageBox.information(self._testCoderWindow,
+        msg = QMessageBox.information(None,
                                       "Последняя попытка\n",
                                       "Успешно переданно (пакет не исказился) - {0}\n"
                                       "Успешно исправленно паккетов - {1}\n"
@@ -182,7 +183,8 @@ class TestCoder(QThread):
                 self.badPackage += 1
             else:
                 self.invisiblePackage += 1
-            case_information.append({x: {'correct bits': status[1], 'error bits': status[2],
+            case_information.append({x: {'correct bits': status[1],
+                                         'error bits': status[2],
                                          'status'      : self.TRANSFER_STR[status[0]]}})
             self.countCorrectBit += status[1]
             self.countErrorBit += status[2]

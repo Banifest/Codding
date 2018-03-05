@@ -51,9 +51,10 @@ class TestCascadeCoder(TestCoder):
 
     def run(self):
         self.information_dict['is_cascade'] = True
-        self.information_dict['coder'] = {'first_coder' : self.channel.firstCoder.to_json(),
-                                          'second_coder': self.channel.secondCoder.to_json(),
-                                          'name'        : self.coderName,
-                                          'speed'       : self.coderSpeed
-                                          }
         super().run()
+        self.information_dict['coder'] = {
+            'first_coder': self.channel.firstCoder.to_json(),
+            'second_coder': self.channel.secondCoder.to_json(),
+            'name': self.coderName,
+            'speed': self.coderSpeed
+        }

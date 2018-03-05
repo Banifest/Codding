@@ -61,9 +61,9 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QToolBox" name="toolBox">
+        <widget class="QToolBox" name="firstCoderSetting">
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="hemming">
           <property name="geometry">
@@ -366,9 +366,9 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QToolBox" name="toolBox_3">
+        <widget class="QToolBox" name="secondCoderSetting">
          <property name="currentIndex">
-          <number>3</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="hemming_3">
           <property name="geometry">
@@ -657,7 +657,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLabel" name="descSecondCoderLabel_2">
+        <widget class="QLabel" name="descSecondCoderSetting">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Second coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
