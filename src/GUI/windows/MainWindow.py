@@ -26,6 +26,9 @@ class MainWindow(QMainWindow):
         self.sizeBlockFounEdit.valueChanged.connect(self.controller.set_fou_size_block)
         self.countBlockFounEdit.valueChanged.connect(self.controller.set_fou_count_block)
 
+        self.interFirstCheckBox.stateChanged.connect(
+                lambda val: self.lenFirstInterEdit.setEnabled(self.lenFirstInterEdit.isEnabled() ^ 1)
+                )
         self.lenFirstInterEdit.valueChanged.connect(self.controller.set_interleaver)
 
         # Second coder description
@@ -41,6 +44,9 @@ class MainWindow(QMainWindow):
         self.sizeBlockFounEdit2.valueChanged.connect(self.controller.set_fou_size_block2)
         self.countBlockFounEdit2.valueChanged.connect(self.controller.set_fou_count_block2)
 
+        self.interSecondCheckBox.stateChanged.connect(
+                lambda val: self.lenSecondInterEdit.setEnabled(self.lenSecondInterEdit.isEnabled() ^ 1)
+        )
         self.lenSecondInterEdit.valueChanged.connect(self.controller.set_interleaver2)
 
         # self.action_create_new_coder.triggered.connect(self.controller.set_create_coder_window)
