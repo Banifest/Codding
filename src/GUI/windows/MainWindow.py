@@ -53,16 +53,15 @@ class MainWindow(QMainWindow):
 
         self.secondCoderSetting.currentChanged.connect(self.controller.secondCoderParams.set_coder_type)
 
-        # self.action_create_new_coder.triggered.connect(self.controller.set_create_coder_window)
-        # self.action_test_simple_coder.triggered.connect(self.controller.set_test_coder_window)
-        # self.action_test_cascade_coder.triggered.connect(self.controller.set_test_cascade_coder_window)
-        # self.action_about_coder.triggered.connect(self.controller.set_about_coder_dialog)
         # self.action_import_from_json.triggered.connect(self.controller.import_from_json)
 
-        self.startSingleFirstCoderButton.clicked.connect(self.controller.firstCoderParams.create_coder)
-        self.show()
+        self.noiseStartEdit.valueChanged.connect(self.controller.testParams.set_noise_start)
+        self.noiseFinishEdit.valueChanged.connect(self.controller.testParams.set_noise_end)
+        self.countTestEdit.valueChanged.connect(self.controller.testParams.set_count_test)
+        self.informationEdit.textChanged.connect(self.controller.testParams.set_test_info)
 
-    def closeEvent(self, *args, **kwargs):
-        self.controller.del_add_coder_window()
-        self.controller.del_test_simple_coder_window()
-        self.controller.del_test_cascade_coder_window()
+        self.controller.testParams.set_single_progress(self.singleProgress)
+        self.controller.testParams.set_auto_progress(self.autoProgress)
+
+        self.startSingleFirstCoderButton.clicked.connect(self.controller.testParams.start_first_single_test)
+        self.show()

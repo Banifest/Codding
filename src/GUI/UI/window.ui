@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>827</width>
-    <height>703</height>
+    <width>573</width>
+    <height>601</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>0</x>
       <y>0</y>
       <width>571</width>
-      <height>572</height>
+      <height>582</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="actionVerLayout">
@@ -32,14 +32,14 @@
      </property>
      <item>
       <layout class="QGridLayout" name="firstCoderGrid">
-       <item row="4" column="1">
+       <item row="5" column="1">
         <widget class="QSpinBox" name="lenSecondInterEdit">
          <property name="maximum">
           <number>99999</number>
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QSpinBox" name="lenFirstInterEdit">
          <property name="maximum">
           <number>99999</number>
@@ -53,7 +53,7 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_37">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Interleaver setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -71,7 +71,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-            <height>127</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -113,7 +113,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-            <height>127</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -184,7 +184,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-            <height>127</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -252,7 +252,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-            <height>127</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -358,7 +358,7 @@
          </widget>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="3" column="1">
         <widget class="QLabel" name="label_38">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Interleaver setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -376,7 +376,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>127</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -418,7 +418,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>127</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -489,7 +489,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>127</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -557,7 +557,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>127</height>
+            <height>69</height>
            </rect>
           </property>
           <attribute name="label">
@@ -663,21 +663,55 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QCheckBox" name="interFirstCheckBox">
          <property name="text">
           <string>On/off</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="4" column="1">
         <widget class="QCheckBox" name="interSecondCheckBox">
          <property name="text">
           <string>On/off</string>
          </property>
         </widget>
        </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="Line" name="line_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_39">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Test&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QGridLayout" name="testCoderGrid">
@@ -761,14 +795,14 @@
         </widget>
        </item>
        <item row="6" column="0" colspan="4">
-        <widget class="QProgressBar" name="single_test">
+        <widget class="QProgressBar" name="singleProgress">
          <property name="value">
           <number>0</number>
          </property>
         </widget>
        </item>
        <item row="7" column="0" colspan="4">
-        <widget class="QProgressBar" name="auto_test">
+        <widget class="QProgressBar" name="autoProgress">
          <property name="value">
           <number>0</number>
          </property>

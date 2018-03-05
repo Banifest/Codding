@@ -7,6 +7,7 @@ from src.GUI.controller.AboutCoderController import AboutCoderController
 from src.GUI.controller.CoderController import CoderParams
 from src.GUI.controller.TestCascadeCoderController import TestCascadeCoderController
 from src.GUI.controller.TestCoderController import TestCoderController
+from src.GUI.controller.TestController import TestController
 from src.GUI.graphics import draw_graphic
 from src.GUI.windows.AboutCoderWindow import AboutCoderWindow
 from src.GUI.windows.AddCoderWindow import AddCoderWindow
@@ -27,9 +28,10 @@ from src.coders.linear.hemming import Coder as HemmingCoder
 
 
 # noinspection PyAttributeOutsideInit,PyCallByClass
-class MainController:
+class MainController(TestCoderController):
     firstCoderParams: CoderParams
     secondCoderParams: CoderParams
+    testParams: TestController
 
     _mainWindow: MainWindow = None
     _addCoderWindow: AddCoderWindow = None
@@ -47,6 +49,8 @@ class MainController:
     def __init__(self):
         self.firstCoderParams = CoderParams()
         self.secondCoderParams = CoderParams()
+        self.testParams = TestController(self.firstCoderParams,
+                                         self.secondCoderParams)
 
         app = QApplication(sys.argv)
         self._mainWindow = MainWindow(self)
