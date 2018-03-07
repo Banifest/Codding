@@ -64,4 +64,5 @@ class MainWindow(QMainWindow):
         self.controller.testParams.set_auto_progress(self.autoProgress)
 
         self.startSingleFirstCoderButton.clicked.connect(self.controller.testParams.start_first_single_test)
+        self.startTestsFirstCoderButton.clicked.connect(self.controller.testParams.start_first_test_cycle)
         self.show()

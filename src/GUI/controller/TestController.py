@@ -69,7 +69,17 @@ class TestController:
             self._threadClass.start()
         except:
             pass
-        pass
+
+    def start_first_test_cycle(self):
+        self._firstCoderParams.create_coder()
+        try:
+            self.set_thread_class()
+            self._threadClass.set_auto(True)
+            self._threadClass.stepFinished.connect(self._singleProgress.setValue)
+            self._threadClass.autoStepFinished.connect(self._autoProgress.setValue)
+            self._threadClass.start()
+        except:
+            pass
 
 
 class TestCoder(QThread):
