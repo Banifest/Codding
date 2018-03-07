@@ -65,4 +65,6 @@ class MainWindow(QMainWindow):
 
         self.startSingleFirstCoderButton.clicked.connect(self.controller.testParams.start_first_single_test)
         self.startTestsFirstCoderButton.clicked.connect(self.controller.testParams.start_first_test_cycle)
+        self.startSingleCascadeCoderButton.clicked.connect(self.controller.testParams.start_cascade_single_test)
+        self.startTestsCascadeCoderButton.clicked.connect(self.controller.testParams.start_cascade_test_cycle)
         self.show()

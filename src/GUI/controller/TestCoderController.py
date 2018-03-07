@@ -259,3 +259,33 @@ class TestCoder(QThread):
 
         except CodingException as err:
             self.notCorrect.emit()
+
+
+class TestCascadeCoder(TestCoder):
+    def __init__(self, test_window: QWidget, currentCoder: AbstractCoder, lastResult: str,
+                 firstCoder: AbstractCoder, secondCoder: AbstractCoder,
+                 start: float, finish: float):
+        super().__init__(test_window, currentCoder, lastResult, start, finish)
+
+        self.coderSpeed = firstCoder.get_speed() * secondCoder.get_speed()
+        self.coderName = 'Каскадный кодер из: {0} и {1}'.format(firstCoder.name, secondCoder.name)
+        self.channel = Cascade(
+                firstCoder,
+                secondCoder,
+                self.noiseChance,
+                self.countTest,
+                False,
+                Interleaver.Interleaver(int(test_window.first_length_text_box.text()))
+                if test_window.is_interleaver_first.isChecked() else None,
+                Interleaver.Interleaver(int(test_window.second_length_text_box.text()))
+                if test_window.is_interleaver_second.isChecked() else None)
+
+    def run(self):
+        self.information_dict['is_cascade'] = True
+        super().run()
+        self.information_dict['coder'] = {
+            'first_coder': self.channel.firstCoder.to_json(),
+            'second_coder': self.channel.secondCoder.to_json(),
+            'name': self.coderName,
+            'speed': self.coderSpeed
+        }

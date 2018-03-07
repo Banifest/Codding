@@ -1,86 +1,17 @@
 import json
 
 from PyQt5.QtCore import pyqtSignal, QThread
-from PyQt5.QtWidgets import QProgressBar
+from PyQt5.QtWidgets import QProgressBar, QWidget
 
 from src.GUI.controller import CoderController
 from src.GUI.graphics import draw_graphic
+from src.channel.cascade import Cascade
 from src.channel.channel import Channel
 from src.coders.abstractCoder import AbstractCoder
 from src.coders.casts import IntToBitList
 from src.coders.exeption import CodingException
 from src.coders.interleaver.Interleaver import Interleaver
 from src.logger import log
-
-
-class TestController:
-    _firstCoderParams: CoderController
-    _secondCoderParams: CoderController
-
-    _singleProgress: QProgressBar
-    _autoProgress: QProgressBar
-
-    noiseStart: float = 1.0
-    noiseEnd: float = 2.0
-    countTest: int = 100
-    testInfo: int = 985
-
-    _test_type: int = 0
-
-    def __init__(self,
-                 first_coder_params: CoderController,
-                 second_coder_params: CoderController,
-                 ):
-        self._firstCoderParams = first_coder_params
-        self._secondCoderParams = second_coder_params
-
-    def set_single_progress(self, single_progress: QProgressBar) -> None:
-        self._singleProgress = single_progress
-
-    def set_auto_progress(self, auto_progress: QProgressBar) -> None:
-        self._autoProgress = auto_progress
-
-    def set_noise_start(self, value: float) -> None:
-        self.noiseStart = value
-
-    def set_noise_end(self, value: float) -> None:
-        self.noiseEnd = value
-
-    def set_count_test(self, value: int) -> None:
-        self.countTest = value
-
-    def set_test_info(self, value: int) -> None:
-        self.testInfo = value
-
-    def set_thread_class(self):
-        self._threadClass = TestCoder(self.noiseStart,
-                                      self.countTest,
-                                      self.testInfo,
-                                      self._firstCoderParams.coder,
-                                      '',
-                                      start=self.noiseStart,
-                                      finish=self.noiseEnd)
-
-    def start_first_single_test(self):
-        self._firstCoderParams.create_coder()
-        try:
-            self.set_thread_class()
-            self._threadClass.stepFinished.connect(self._singleProgress.setValue)
-            self._threadClass.start()
-        except:
-            pass
-
-    def start_first_test_cycle(self):
-        self._firstCoderParams.create_coder()
-        try:
-            self.set_thread_class()
-            self._threadClass.set_auto(True)
-            self._threadClass.stepFinished.connect(self._singleProgress.setValue)
-            self._threadClass.autoStepFinished.connect(self._autoProgress.setValue)
-            self._threadClass.start()
-        except:
-            pass
-
 
 class TestCoder(QThread):
     TRANSFER_STR = {
@@ -244,3 +175,151 @@ class TestCoder(QThread):
 
         except CodingException as err:
             self.notCorrect.emit()
+
+
+class TestCascadeCoder(TestCoder):
+    def __init__(self,
+                 noise_chance: float,
+                 count_test: float,
+                 test_info: int,
+                 current_coder: AbstractCoder,
+                 first_coder: AbstractCoder,
+                 second_coder: AbstractCoder,
+                 last_result: str,
+                 start: float = 0,
+                 finish: float = 20
+                 ):
+        super().__init__(noise_chance,
+                         count_test,
+                         test_info,
+                         current_coder,
+                         last_result,
+                         start,
+                         finish)
+
+        self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
+        self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
+        self.channel = Cascade(
+                first_coder,
+                second_coder,
+                self.noiseChance,
+                self.countTest,
+                False,
+                None,
+                None)
+
+    def run(self):
+        self.information_dict['is_cascade'] = True
+        super().run()
+        self.information_dict['coder'] = {
+            'first_coder': self.channel.firstCoder.to_json(),
+            'second_coder': self.channel.secondCoder.to_json(),
+            'name': self.coderName,
+            'speed': self.coderSpeed
+        }
+
+
+class TestController:
+    _firstCoderParams: CoderController
+    _secondCoderParams: CoderController
+
+    _firstThreadClass: TestCoder
+    _cascadeThreadClass: TestCascadeCoder
+
+    _singleProgress: QProgressBar
+    _autoProgress: QProgressBar
+
+    noiseStart: float = 1.0
+    noiseEnd: float = 2.0
+    countTest: int = 100
+    testInfo: int = 985
+
+    _test_type: int = 0
+
+    def __init__(self,
+                 first_coder_params: CoderController,
+                 second_coder_params: CoderController,
+                 ):
+        self._firstCoderParams = first_coder_params
+        self._secondCoderParams = second_coder_params
+
+    def set_single_progress(self, single_progress: QProgressBar) -> None:
+        self._singleProgress = single_progress
+
+    def set_auto_progress(self, auto_progress: QProgressBar) -> None:
+        self._autoProgress = auto_progress
+
+    def set_noise_start(self, value: float) -> None:
+        self.noiseStart = value
+
+    def set_noise_end(self, value: float) -> None:
+        self.noiseEnd = value
+
+    def set_count_test(self, value: int) -> None:
+        self.countTest = value
+
+    def set_test_info(self, value: int) -> None:
+        self.testInfo = value
+
+    def set_first_coder_thread_class(self):
+        self._firstThreadClass = TestCoder(self.noiseStart,
+                                           self.countTest,
+                                           self.testInfo,
+                                           self._firstCoderParams.coder,
+                                           '',
+                                           start=self.noiseStart,
+                                           finish=self.noiseEnd)
+
+    def set_cascade_coder_thread_class(self):
+        self._cascadeThreadClass = TestCascadeCoder(
+                self.noiseStart,
+                self.countTest,
+                self.testInfo,
+                self._firstCoderParams.coder,
+                self._firstCoderParams.coder,
+                self._secondCoderParams.coder,
+                '',
+                self.noiseStart,
+                self.noiseEnd
+        )
+
+    def start_first_single_test(self):
+        self._firstCoderParams.create_coder()
+        try:
+            self.set_first_coder_thread_class()
+            self._firstThreadClass.stepFinished.connect(self._singleProgress.setValue)
+            self._firstThreadClass.start()
+        except:
+            pass
+
+    def start_first_test_cycle(self):
+        self._firstCoderParams.create_coder()
+        try:
+            self.set_first_coder_thread_class()
+            self._firstThreadClass.set_auto(True)
+            self._firstThreadClass.stepFinished.connect(self._singleProgress.setValue)
+            self._firstThreadClass.autoStepFinished.connect(self._autoProgress.setValue)
+            self._firstThreadClass.start()
+        except:
+            pass
+
+    def start_cascade_single_test(self):
+        self._firstCoderParams.create_coder()
+        self._secondCoderParams.create_coder()
+        try:
+            self.set_cascade_coder_thread_class()
+            self._cascadeThreadClass.stepFinished.connect(self._singleProgress.setValue)
+            self._cascadeThreadClass.start()
+        except:
+            pass
+
+    def start_cascade_test_cycle(self):
+        self._firstCoderParams.create_coder()
+        try:
+            self.set_cascade_coder_thread_class()
+            self._cascadeThreadClass.set_auto(True)
+            self._cascadeThreadClass.stepFinished.connect(self._singleProgress.setValue)
+            self._cascadeThreadClass.autoStepFinished.connect(self._autoProgress.setValue)
+            self._cascadeThreadClass.start()
+        except:
+            pass
