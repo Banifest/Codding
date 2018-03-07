@@ -5,40 +5,19 @@ from PyQt5.QtWidgets import QApplication, QMessageBox, QFileDialog
 
 from src.GUI.controller.AboutCoderController import AboutCoderController
 from src.GUI.controller.CoderController import CoderParams
-from src.GUI.controller.TestCascadeCoderController import TestCascadeCoderController
-from src.GUI.controller.TestCoderController import TestCoderController
 from src.GUI.controller.TestController import TestController
 from src.GUI.graphics import draw_graphic
 from src.GUI.windows.AboutCoderWindow import AboutCoderWindow
-from src.GUI.windows.AddCoderWindow import AddCoderWindow
 from src.GUI.windows.MainWindow import MainWindow
-from src.GUI.windows.TestCascadeCoderWindow import TestCascadeCoderWindow
-from src.GUI.windows.TestCoderWindow import TestCoderWindow
 from src.coders.abstractCoder import AbstractCoder
-# noinspection PyAttributeOutsideInit
-from src.coders.casts import StrListToList
-# noinspection PyAttributeOutsideInit
-from src.coders.convolutional.Coder import Coder as ConvolutionalCoder
-from src.coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
-from src.coders.cyclical.Coder import Coder as CyclicalCoder
-# noinspection PyAttributeOutsideInit,PyAttributeOutsideInit
-from src.coders.fountain.LubyTransform import Coder as LubyTransform
-from src.coders.linear.ReedMuller import Coder as ReedMullerCoder
-from src.coders.linear.hemming import Coder as HemmingCoder
 
 
-# noinspection PyAttributeOutsideInit,PyCallByClass
-class MainController(TestCoderController):
+class MainController:
     firstCoderParams: CoderParams
     secondCoderParams: CoderParams
     testParams: TestController
 
     _mainWindow: MainWindow = None
-    _addCoderWindow: AddCoderWindow = None
-    _testCascadeCoderController: TestCascadeCoderController = None
-    _testSimpleCoderController: TestCoderController = None
-    _testCascadeCoderWindow: TestCascadeCoderWindow = None
-    _testSimpleCoderWindow: TestCoderWindow = None
     _dialogAboutCoderController: AboutCoderController = None
     _dialogAboutCoderWindow: AboutCoderWindow = None
 
