@@ -1,5 +1,3 @@
-from PyQt5.QtWidgets import QProgressBar
-
 from src.GUI.controller import CoderController
 from src.GUI.controller.ThreadControllers import TestCoder, TestCascadeCoder
 
@@ -10,9 +8,6 @@ class TestController:
 
     _firstThreadClass: TestCoder
     _cascadeThreadClass: TestCascadeCoder
-
-    _singleProgress: QProgressBar
-    _autoProgress: QProgressBar
 
     noiseStart: float = 1.0
     noiseEnd: float = 2.0
@@ -27,12 +22,6 @@ class TestController:
                  ):
         self._firstCoderParams = first_coder_params
         self._secondCoderParams = second_coder_params
-
-    def set_single_progress(self, single_progress: QProgressBar) -> None:
-        self._singleProgress = single_progress
-
-    def set_auto_progress(self, auto_progress: QProgressBar) -> None:
-        self._autoProgress = auto_progress
 
     def set_noise_start(self, value: float) -> None:
         self.noiseStart = value
@@ -72,7 +61,6 @@ class TestController:
         self._firstCoderParams.create_coder()
         try:
             self.set_first_coder_thread_class()
-            self._firstThreadClass.stepFinished.connect(self._singleProgress.setValue)
             self._firstThreadClass.start()
         except:
             pass
@@ -82,29 +70,24 @@ class TestController:
         try:
             self.set_first_coder_thread_class()
             self._firstThreadClass.set_auto(True)
-            self._firstThreadClass.stepFinished.connect(self._singleProgress.setValue)
-            self._firstThreadClass.autoStepFinished.connect(self._autoProgress.setValue)
             self._firstThreadClass.start()
         except:
             pass
 
     def start_cascade_single_test(self):
         self._firstCoderParams.create_coder()
-        self._secondCoderParams.create_coder()
         try:
             self.set_cascade_coder_thread_class()
-            self._cascadeThreadClass.stepFinished.connect(self._singleProgress.setValue)
             self._cascadeThreadClass.start()
         except:
             pass
 
     def start_cascade_test_cycle(self):
         self._firstCoderParams.create_coder()
+        self._secondCoderParams.create_coder()
         try:
             self.set_cascade_coder_thread_class()
             self._cascadeThreadClass.set_auto(True)
-            self._cascadeThreadClass.stepFinished.connect(self._singleProgress.setValue)
-            self._cascadeThreadClass.autoStepFinished.connect(self._autoProgress.setValue)
             self._cascadeThreadClass.start()
         except:
             pass

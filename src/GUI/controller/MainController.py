@@ -45,16 +45,3 @@ class MainController:
                          coder_speed=info['coder']['speed'],
                          start=info['auto_test_information']['start'],
                          finish=info['auto_test_information']['finish'])
-
-
-    def del_add_coder_window(self):
-        if self._addCoderWindow is not None:
-            del self._addCoderWindow
-
-    def del_test_simple_coder_window(self):
-        if self._testSimpleCoderWindow is not None:
-            del self._testSimpleCoderWindow
-
-    def del_test_cascade_coder_window(self):
-        if self._testCascadeCoderWindow is not None:
-            del self._testCascadeCoderWindow

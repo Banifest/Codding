@@ -1,7 +1,7 @@
 import json
 
 from PyQt5.QtCore import pyqtSignal, QThread
-
+from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import draw_graphic
 from src.channel.cascade import Cascade
 from src.channel.channel import Channel
@@ -18,11 +18,6 @@ class TestCoder(QThread):
         2: 'error',
         3: 'error'
     }
-
-    stepFinished = pyqtSignal('int')
-    autoStepFinished = pyqtSignal('int')
-    ended = pyqtSignal()
-    notCorrect = pyqtSignal()
 
     information_dict = {}
     noiseChance: float = 0
@@ -105,7 +100,7 @@ class TestCoder(QThread):
             self.countErrorBit += status[2]
             progress += step
             self.lastResult += self.channel.information
-            self.stepFinished.emit(int(progress))
+            globalSignals.stepFinished.emit(int(progress))
 
         return case_information
 
@@ -115,7 +110,7 @@ class TestCoder(QThread):
         finish: float = self.finish_t
 
         if finish - start <= 0:
-            self.notCorrect.emit()
+            globalSignals.notCorrect.emit()
             return
         step: float = (finish - start) / 20
 
@@ -146,10 +141,10 @@ class TestCoder(QThread):
             self.information_dict['test_cases'].append(test_case_info)
             draw_data.append([self.successfullyPackage, self.repairPackage, self.badPackage, self.invisiblePackage,
                               self.countCorrectBit, self.countErrorBit])
-            self.autoStepFinished.emit(int(progress))
+            globalSignals.autoStepFinished.emit(int(progress))
 
         self.information_dict['draw_information'] = draw_data
-        self.autoStepFinished.emit(100)
+        globalSignals.autoStepFinished.emit(100)
         if self.is_auto:
             draw_graphic(self.information_dict['draw_information'],
                          self.information_dict['coder']['name'],
@@ -167,12 +162,12 @@ class TestCoder(QThread):
                 self.information_dict['test'] = self.one_test()
 
             open('lastResult.json', "w", encoding='UTF-8').write(json.dumps(self.information_dict, ensure_ascii=False))
-            self.stepFinished.emit(100)
-            self.ended.emit()
+            globalSignals.stepFinished.emit(100)
+            globalSignals.ended.emit()
             log.debug("Конец цикла тестов")
 
         except CodingException as err:
-            self.notCorrect.emit()
+            globalSignals.notCorrect.emit()
 
 
 class TestCascadeCoder(TestCoder):
