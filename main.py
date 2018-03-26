@@ -4,11 +4,11 @@ from src.logger import log
 
 if __name__ == '__main__':
     try:
-        log.info("Начало работы программы")
+        log.info("Start program")
         controller = MainController()
-        log.info("Конец работы программы")
+        log.info("End program")
     except Exception as e:
         print(e)
-        log.critical("Необработанное исключение")
+        log.critical("Unhandled exception")
 else:
     raise Exception("Невозможен import данного файла:(")

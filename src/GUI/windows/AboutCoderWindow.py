@@ -7,7 +7,7 @@ class AboutCoderWindow(QDialog):
         super(AboutCoderWindow, self).__init__()
         self.controller = controller
         self.controller._dialogAboutCoder = self
-        uic.loadUi(r'src\GUI\UI\about_coder_dialog.ui', self)
+        uic.loadUi(r'.\src\GUI\UI\about_coder_dialog.ui', self)
 
         self.first_coder_button.clicked.connect(self.controller.redraw_dialog_info)
         self.second_coder_button.clicked.connect(self.controller.redraw_dialog_info)

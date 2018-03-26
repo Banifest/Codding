@@ -30,7 +30,7 @@ class Cascade(channel.Channel):
     def transfer_one_step(self, information: list) -> [int, int, int]:
         #  Разбиение на пакеты
         package_list = []
-        if self.coder.is_div_into_package:
+        if self.firstCoder.is_div_into_package:
             for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
                 package_list.append(
                     information[self.firstCoder.lengthInformation * x:min(self.firstCoder.lengthInformation * (x + 1),

@@ -23,7 +23,7 @@ class AddCoderWindow(QWidget):
 
         log.debug("Создание окна добавления кодера")
         self.controller = controller
-        loadUi(r'src\GUI\UI\adding_coder.ui', self)
+        loadUi(r'.\src\GUI\UI\adding_coder.ui', self)
 
         self.sizePackageTextBox: QLineEdit = QLineEdit("120")
         self.listPolynomialTextBox: QLineEdit = QLineEdit()
