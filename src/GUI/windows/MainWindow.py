@@ -58,12 +58,10 @@ class MainWindow(QMainWindow):
         self.noiseFinishEdit.valueChanged.connect(self.controller.testParams.set_noise_end)
         self.countTestEdit.valueChanged.connect(self.controller.testParams.set_count_test)
         self.informationEdit.textChanged.connect(self.controller.testParams.set_test_info)
+        self.cascadeModeComboBox.activated[str].connect(self.controller.testParams.set_mode_cascade)
 
         globalSignals.stepFinished.connect(self.singleProgress.setValue)
         globalSignals.autoStepFinished.connect(self.autoProgress.setValue)
-
-        #self.controller.testParams.set_single_progress(self.singleProgress)
-        #self.controller.testParams.set_auto_progress(self.autoProgress)
 
         self.startSingleFirstCoderButton.clicked.connect(self.controller.testParams.start_first_single_test)
         self.startTestsFirstCoderButton.clicked.connect(self.controller.testParams.start_first_test_cycle)

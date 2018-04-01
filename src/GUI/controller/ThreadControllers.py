@@ -23,6 +23,7 @@ class TestCoder(QThread):
     noiseChance: float = 0
     countTest: int = 1
     information: int = 1
+    mode: int = 0
     currentCoder: AbstractCoder
     is_auto: bool = False
     is_interleaver: bool = False
@@ -180,7 +181,8 @@ class TestCascadeCoder(TestCoder):
                  second_coder: AbstractCoder,
                  last_result: str,
                  start: float = 0,
-                 finish: float = 20
+                 finish: float = 20,
+                 mode: int = 0
                  ):
         super().__init__(noise_chance,
                          count_test,
@@ -199,7 +201,9 @@ class TestCascadeCoder(TestCoder):
                 self.countTest,
                 False,
                 None,
-                None)
+                None,
+                mode
+        )
 
     def run(self):
         self.information_dict['is_cascade'] = True

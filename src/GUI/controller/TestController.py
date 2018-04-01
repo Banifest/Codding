@@ -13,6 +13,7 @@ class TestController:
     noiseEnd: float = 2.0
     countTest: int = 100
     testInfo: int = 985
+    mode: int = 0
 
     _test_type: int = 0
 
@@ -35,6 +36,12 @@ class TestController:
     def set_test_info(self, value: int) -> None:
         self.testInfo = value
 
+    def set_mode_cascade(self, value: str) -> None:
+        if value == 'First':
+            self.mode = 0
+        elif value == 'Second':
+            self.mode = 1
+
     def set_first_coder_thread_class(self):
         self._firstThreadClass = TestCoder(self.noiseStart,
                                            self.countTest,
@@ -54,7 +61,8 @@ class TestController:
                 self._secondCoderParams.coder,
                 '',
                 self.noiseStart,
-                self.noiseEnd
+                self.noiseEnd,
+                self.mode
         )
 
     def start_first_single_test(self):
