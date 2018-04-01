@@ -12,50 +12,79 @@ class Cascade(channel.Channel):
     firstInterleaver: Interleaver.Interleaver
     secondCoder: abstractCoder.AbstractCoder
     secondInterleaver: Interleaver.Interleaver = None
+    mode: int = 0
 
     def __init__(self,
-                 firstCoder: abstractCoder.AbstractCoder,
-                 secondCoder: abstractCoder.AbstractCoder,
-                 noiseProbability: int or float,
-                 countCyclical: Optional[int],
+                 first_coder: abstractCoder.AbstractCoder,
+                 second_coder: abstractCoder.AbstractCoder,
+                 noise_probability: int or float,
+                 count_cyclical: Optional[int],
                  duplex: Optional[bool],
-                 firstInterleaver: Optional[Interleaver.Interleaver],
-                 secondInterleaver: Interleaver.Interleaver or None):
-        super().__init__(None, noiseProbability, countCyclical, duplex, firstInterleaver)
-        self.firstCoder = firstCoder
-        self.secondCoder = secondCoder
+                 first_interleaver: Optional[Interleaver.Interleaver],
+                 second_interleaver: Interleaver.Interleaver or None,
+                 mode: int = 0):
+        super().__init__(None, noise_probability, count_cyclical, duplex, first_interleaver)
+        self.firstCoder = first_coder
+        self.secondCoder = second_coder
+        self.mode = mode
 
-        self.secondInterleaver = secondInterleaver if secondInterleaver is not None else None
+        self.firstInterleaver = first_interleaver if first_interleaver is not None else None
+        self.secondInterleaver = second_interleaver if second_interleaver is not None else None
 
     def transfer_one_step(self, information: list) -> [int, int, int]:
-        #  Разбиение на пакеты
-        package_list = []
-        if self.firstCoder.is_div_into_package:
-            for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
-                package_list.append(
-                    information[self.firstCoder.lengthInformation * x:min(self.firstCoder.lengthInformation * (x + 1),
-                                                                          len(information))])
+        if self.mode == 0:
+            #  Разделение на пакеты
+            package_list = []
+            if self.firstCoder.is_div_into_package:
+                for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
+                    package_list.append(
+                        information[self.firstCoder.lengthInformation * x:min(self.firstCoder.lengthInformation * (x + 1),
+                                                                              len(information))])
 
-        status: list = []
-        for x in package_list:
-            self.coder = self.secondCoder
-            normalization_information = self.firstCoder.try_normalization(x)
+            status: list = []
+            for x in package_list:
+                self.coder = self.secondCoder
+                normalization_information = self.firstCoder.try_normalization(x)
 
-            now_information: list = self.firstCoder.Encoding(normalization_information)
+                now_information: list = self.firstCoder.Encoding(normalization_information)
+
+                if self.secondInterleaver is not None:
+                    now_information = self.secondInterleaver.shuffle(now_information)
+
+                status: list = self.get_transfer_one_step(now_information)
+
+                # обрезка добавленных битов для нормализации
+                now_information = status[0][-len(now_information):]
+
+                if self.secondInterleaver is not None:
+                    now_information = self.secondInterleaver.reestablish(now_information)
+
+                now_information = self.firstCoder.Decoding(now_information)
+
+                if BitListToInt(now_information) != BitListToInt(normalization_information):
+                    return [2, status[1], status[2]]
+            return [1, status[1], status[2]]
+        elif self.mode == 1:
+            first_coder_information: list = self.firstCoder.Encoding(information)
+            if self.firstInterleaver is not None:
+                first_coder_information = self.firstInterleaver.shuffle(first_coder_information)
+
+            second_coder_information: list = self.firstCoder.Encoding(information)
+            if self.secondInterleaver is not None:
+                second_coder_information = self.secondInterleaver.shuffle(second_coder_information)
+
+            status: list = self.get_transfer_one_step(first_coder_information + second_coder_information)
+
+            if self.firstInterleaver is not None:
+                first_coder_information = self.firstInterleaver.reestablish(first_coder_information)
 
             if self.secondInterleaver is not None:
-                now_information = self.secondInterleaver.Shuffle(now_information)
+                second_coder_information = self.secondInterleaver.reestablish(second_coder_information)
 
-            status: list = self.get_transfer_one_step(now_information)
-
-            # обрезка добавленных битов для нормализации
-            now_information = status[0][-len(now_information):]
-
-            if self.secondInterleaver is not None:
-                now_information = self.secondInterleaver.Reestablish(now_information)
-
-            now_information = self.firstCoder.Decoding(now_information)
-
-            if BitListToInt(now_information) != BitListToInt(normalization_information):
+            first_coder_information = self.firstCoder.Decoding(first_coder_information)
+            second_coder_information = self.secondCoder.Decoding(second_coder_information)
+            if BitListToInt(first_coder_information) != BitListToInt(first_coder_information)\
+                    and BitListToInt(second_coder_information) != BitListToInt(second_coder_information):
                 return [2, status[1], status[2]]
-        return [1, status[1], status[2]]
+            else:
+                return [1, status[1], status[2]]
