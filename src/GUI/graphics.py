@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 
 
 def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1, start: float = 1, finish: int = 20):
     plt.style.use('ggplot')
-    plt.legend()
+    quantity_right_bits = mpatches.Patch(color='blue', label='Соотношение правильных символов в пакете')
+    quantity_right_packages = mpatches.Patch(color='purple', label='Соотношение полностью правильных пакетов')
+    plt.legend(handles=[quantity_right_bits, quantity_right_packages])
     plt.ylim([0.0000001, 1.1])
     plt.xlim([start, finish])
     plt.semilogy(True)
