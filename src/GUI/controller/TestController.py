@@ -5,6 +5,9 @@ from src.GUI.controller.ThreadControllers import TestCoder, TestCascadeCoder
 
 
 class TestController:
+    """
+    Class provide functionality for control testing process
+    """
     _firstCoderParams: CoderController
     _secondCoderParams: CoderController
 

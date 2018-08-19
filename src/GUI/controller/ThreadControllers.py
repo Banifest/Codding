@@ -3,6 +3,8 @@
 import json
 
 from PyQt5.QtCore import pyqtSignal, QThread
+from PyQt5.QtWidgets import QMessageBox
+
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import draw_graphic
 from src.channel.cascade import Cascade
