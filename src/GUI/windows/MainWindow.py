@@ -1,3 +1,5 @@
+# coding=utf-8
+# coding=utf-8
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 from src.GUI.globals_signals import globalSignals

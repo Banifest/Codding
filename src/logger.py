@@ -1,8 +1,17 @@
+# coding=utf-8
+# coding=utf-8
 import logging
 import os
 
 
 class Logger(logging.Logger):
+    @classattru
+
+
+    @classmethod
+    def getInstance(cls):
+        Logger()
+
     def __init__(self):
         super().__init__("AppLogger")
         self.setLevel("DEBUG")

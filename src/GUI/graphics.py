@@ -1,3 +1,4 @@
+# coding=utf-8
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
@@ -26,10 +27,10 @@ def draw_graphic(draw_information: list, coder_name: str = "", coder_speed=1, st
 def draw_plot_pie(draw_information: list):
     import matplotlib.pyplot as plt
     fig = plt.figure()
-    sumResult: int = sum(draw_information)
+    sum_result: int = sum(draw_information)
     plt.pie(draw_information,
-            labels=["Без искажений\n{0}%".format(int(draw_information[0] / sumResult * 100)),
-                    "Исправленные ошибки\n{0}%".format(int(draw_information[1] / sumResult * 100)),
-                    "Ошибки\n{0}%".format(int(draw_information[2] / sumResult * 100))])
+            labels=["Без искажений\n{0}%".format(int(draw_information[0] / sum_result * 100)),
+                    "Исправленные ошибки\n{0}%".format(int(draw_information[1] / sum_result * 100)),
+                    "Ошибки\n{0}%".format(int(draw_information[2] / sum_result * 100))])
     plt.title("Информация о последнем тесте")
     plt.show()

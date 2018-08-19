@@ -1,7 +1,9 @@
+# coding=utf-8
+# coding=utf-8
 import json
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMessageBox, QFileDialog
+from PyQt5.QtWidgets import QApplication, QFileDialog
 
 from src.GUI.controller.AboutCoderController import AboutCoderController
 from src.GUI.controller.CoderController import CoderParams
@@ -34,7 +36,6 @@ class MainController:
         app = QApplication(sys.argv)
         self._mainWindow = MainWindow(self)
         app.exec()
-
 
     def import_from_json(self):
         filePath = QFileDialog.getOpenFileName(filter="*.json", parent=self._mainWindow)[0]

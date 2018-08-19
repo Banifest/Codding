@@ -1,3 +1,5 @@
+# coding=utf-8
+# coding=utf-8
 from src.GUI.controller import CoderController
 from src.GUI.controller.ThreadControllers import TestCoder, TestCascadeCoder
 

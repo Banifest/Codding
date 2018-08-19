@@ -1,3 +1,5 @@
+# coding=utf-8
+# coding=utf-8
 from PyQt5.QtCore import QRegExp
 from PyQt5.QtGui import QIntValidator, QRegExpValidator
 from PyQt5.QtWidgets import QLabel, QLineEdit, QRadioButton, QWidget

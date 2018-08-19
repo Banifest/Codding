@@ -1,3 +1,5 @@
+# coding=utf-8
+# coding=utf-8
 def IntToBitList(num: int, size: int = None, rev: bool = False) -> list:
     it: int = 1
     answer: list = []

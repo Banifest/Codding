@@ -1,3 +1,5 @@
+# coding=utf-8
+# coding=utf-8
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList, cycle_shift_list
 from src.logger import log

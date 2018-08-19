@@ -1,3 +1,5 @@
+# coding=utf-8
+# coding=utf-8
 from src.GUI.controller.MainController import MainController
 
 from src.logger import log

@@ -1,3 +1,5 @@
+# coding=utf-8
+# coding=utf-8
 import json
 
 from PyQt5.QtCore import pyqtSignal, QThread
@@ -75,9 +77,17 @@ class TestCoder(QThread):
         self.wait()
 
     def set_auto(self, flag: bool):
+        """
+        Method provide functionality for change flag for automatic
+        :return:
+        """
         self.is_auto = flag
 
     def one_test(self) -> list:
+        """
+        Method provide functionality for processing single test case
+        :return:
+        """
         progress = 0.0
         step = 100.0 / self.countTest
         information: list = IntToBitList(self.information)
