@@ -5,12 +5,10 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
 
-from src.GUI.controller.AboutCoderController import AboutCoderController
 from src.GUI.controller.CoderController import CoderParams
 from src.GUI.controller.TestController import TestController
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import draw_graphic
-from src.GUI.windows.AboutCoderWindow import AboutCoderWindow
 from src.GUI.windows.MainWindow import MainWindow
 from src.coders.abstractCoder import AbstractCoder
 
@@ -21,8 +19,6 @@ class MainController:
     testParams: TestController
 
     _mainWindow: MainWindow = None
-    _dialogAboutCoderController: AboutCoderController = None
-    _dialogAboutCoderWindow: AboutCoderWindow = None
 
     currentCoder: AbstractCoder = None
     firstCoderForCascade: AbstractCoder = None
@@ -39,18 +35,21 @@ class MainController:
         app.exec()
 
     def error_handle(self):
-        QMessageBox.warning(None,
-                            "Поля заполнены не верной информацией",
-                            "Поля заполнены не верной информацией",
-                            QMessageBox.Ok
-                            )
+        QMessageBox.warning(
+            None,
+            "Поля заполнены не верной информацией",
+            "Поля заполнены не верной информацией",
+            QMessageBox.Ok
+        )
 
     def import_from_json(self):
-        filePath = QFileDialog.getOpenFileName(filter="*.json", parent=self._mainWindow)[0]
-        if filePath != '':
-            info = json.loads(open(filePath, "r").read())
-            draw_graphic(info['draw_information'],
-                         info['coder']['name'],
-                         coder_speed=info['coder']['speed'],
-                         start=info['auto_test_information']['start'],
-                         finish=info['auto_test_information']['finish'])
+        file_path = QFileDialog.getOpenFileName(filter="*.json", parent=self._mainWindow)[0]
+        if file_path != '':
+            info = json.loads(open(file_path, "r").read())
+            draw_graphic(
+                info['draw_information'],
+                info['coder']['name'],
+                coder_speed=info['coder']['speed'],
+                start=info['auto_test_information']['start'],
+                finish=info['auto_test_information']['finish']
+            )

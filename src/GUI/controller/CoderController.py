@@ -4,10 +4,10 @@ from PyQt5.QtWidgets import QMessageBox
 
 from src.coders.abstractCoder import AbstractCoder
 from src.coders.casts import StrListToList
-from src.coders.linear.hemming import Coder as Hemming
-from src.coders.cyclical.Coder import Coder as Cyclical
 from src.coders.convolutional.Coder import Coder as Convolutional
+from src.coders.cyclical.Coder import Coder as Cyclical
 from src.coders.fountain.LubyTransform import Coder as LubyTransform
+from src.coders.linear.hemming import Coder as Hemming
 
 
 class CoderParams:
@@ -97,8 +97,9 @@ class CoderParams:
             #             int(self._addCoderWindow.sizePackageTextBox.text())
             #     )
         except:
-            QMessageBox.warning(None,
-                                "Поля заполнены не верной информацией",
-                                "Поля заполнены не верной информацией",
-                                QMessageBox.Ok
-                                )
+            QMessageBox.warning(
+                None,
+                "Поля заполнены не верной информацией",
+                "Поля заполнены не верной информацией",
+                QMessageBox.Ok
+            )

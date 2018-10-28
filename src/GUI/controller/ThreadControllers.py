@@ -2,8 +2,7 @@
 # coding=utf-8
 import json
 
-from PyQt5.QtCore import pyqtSignal, QThread
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtCore import QThread
 
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import draw_graphic
@@ -66,11 +65,12 @@ class TestCoder(QThread):
         self.coderName = self.currentCoder.name
 
         self.channel = Channel(
-                self.currentCoder,
-                self.noiseChance,
-                self.countTest,
-                False,
-                None)
+            self.currentCoder,
+            self.noiseChance,
+            self.countTest,
+            False,
+            None
+        )
 
         self.information_dict['is_cascade'] = False
         self.information_dict['coder'] = self.channel.coder.to_json()
