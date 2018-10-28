@@ -4,8 +4,8 @@ from src.helper.error.exception.ApplicationException import ApplicationException
 
 
 class GraphicalException(ApplicationException):
-    _message = EnumExceptionStandardMessage.GRAPHICAL_EXCEPTION
-    _long_message = EnumExceptionStandardMessage.GRAPHICAL_EXCEPTION
+    _message = EnumExceptionStandardMessage.GRAPHICAL_EXCEPTION.value
+    _long_message = EnumExceptionStandardMessage.GRAPHICAL_EXCEPTION.value
 
     def show_message_box(self):
         ErrorHandler().gui_message_box(rcx_exception=self)

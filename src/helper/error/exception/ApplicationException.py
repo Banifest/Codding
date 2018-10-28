@@ -3,8 +3,8 @@ from src.helper.error.EnumMessageType import EnumMessageType
 
 
 class ApplicationException(Exception):
-    _message: str = EnumExceptionStandardMessage.APPLICATION_EXCEPTION
-    _long_message: str = EnumExceptionStandardMessage.APPLICATION_EXCEPTION
+    _message: str = EnumExceptionStandardMessage.APPLICATION_EXCEPTION.value
+    _long_message: str = EnumExceptionStandardMessage.APPLICATION_EXCEPTION.value
     _message_type: EnumMessageType = EnumMessageType.ERROR
 
     def __init__(self, message: str = "", long_message: str = "",
