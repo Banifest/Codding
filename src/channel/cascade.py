@@ -16,15 +16,17 @@ class Cascade(channel.Channel):
     secondInterleaver: Interleaver.Interleaver = None
     mode: int = 0
 
-    def __init__(self,
-                 first_coder: abstractCoder.AbstractCoder,
-                 second_coder: abstractCoder.AbstractCoder,
-                 noise_probability: int or float,
-                 count_cyclical: Optional[int],
-                 duplex: Optional[bool],
-                 first_interleaver: Optional[Interleaver.Interleaver],
-                 second_interleaver: Interleaver.Interleaver or None,
-                 mode: int = 0):
+    def __init__(
+            self,
+            first_coder: abstractCoder.AbstractCoder,
+            second_coder: abstractCoder.AbstractCoder,
+            noise_probability: int or float,
+            count_cyclical: Optional[int],
+            duplex: Optional[bool],
+            first_interleaver: Optional[Interleaver.Interleaver],
+            second_interleaver: Interleaver.Interleaver or None,
+            mode: int = 0
+    ):
         super().__init__(None, noise_probability, count_cyclical, duplex, first_interleaver)
         self.firstCoder = first_coder
         self.secondCoder = second_coder
@@ -40,8 +42,9 @@ class Cascade(channel.Channel):
             if self.firstCoder.is_div_into_package:
                 for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
                     package_list.append(
-                        information[self.firstCoder.lengthInformation * x:min(self.firstCoder.lengthInformation * (x + 1),
-                                                                              len(information))])
+                        information[
+                        self.firstCoder.lengthInformation * x:min(self.firstCoder.lengthInformation * (x + 1),
+                                                                  len(information))])
 
             status: list = []
             for x in package_list:
@@ -85,7 +88,7 @@ class Cascade(channel.Channel):
 
             first_coder_information = self.firstCoder.Decoding(first_coder_information)
             second_coder_information = self.secondCoder.Decoding(second_coder_information)
-            if BitListToInt(first_coder_information) != BitListToInt(first_coder_information)\
+            if BitListToInt(first_coder_information) != BitListToInt(first_coder_information) \
                     and BitListToInt(second_coder_information) != BitListToInt(second_coder_information):
                 return [2, status[1], status[2]]
             else:

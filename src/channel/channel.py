@@ -20,66 +20,70 @@ class Channel:
 
     countSuccessfullyMessage: int
 
-    def __init__(self, coder: AbstractCoder or None, noiseProbability: int or float,
-                 countCyclical: Optional[int],
+    def __init__(self, coder: AbstractCoder or None, noise_probability: int or float,
+                 count_cyclical: Optional[int],
                  duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
         log.debug("Создание канала связи")
         self.coder: AbstractCoder = coder
-        if noiseProbability is not None: self.noiseProbability = noiseProbability
-        if countCyclical is not None: self.countCyclical = countCyclical
-        if duplex is not None: self.duplex = duplex
-        if interleaver is not None: self.interleaver = interleaver
+        if noise_probability is not None:
+            self.noiseProbability = noise_probability
+        if count_cyclical is not None:
+            self.countCyclical = count_cyclical
+        if duplex is not None:
+            self.duplex = duplex
+        if interleaver is not None:
+            self.interleaver = interleaver
         log.debug("Канал создан")
 
     def __str__(self) -> str:
-        return "Вероятность ошибки в канале - {0}.\n"\
-               "Является ли канал двухсторонним - {1}.\n"\
-               "Используеммый кодер:\n {2}."\
-               "Используется ли перемежитель на данном канале связи - {3}.\n"\
-               "Количество циклов передачи пакета - {4}\n"\
+        return "Вероятность ошибки в канале - {0}.\n" \
+               "Является ли канал двухсторонним - {1}.\n" \
+               "Используеммый кодер:\n {2}." \
+               "Используется ли перемежитель на данном канале связи - {3}.\n" \
+               "Количество циклов передачи пакета - {4}\n" \
                "Информация о последней передаче:\n{5}".format(
-                self.noiseProbability,
-                "Да" if self.duplex else "Нет",
-                str(self.coder),
-                "Нет" if not self.interleaver else "Да",
-                self.countCyclical,
-                self.information
-                )
+            self.noiseProbability,
+            "Да" if self.duplex else "Нет",
+            str(self.coder),
+            "Нет" if not self.interleaver else "Да",
+            self.countCyclical,
+            self.information
+        )
 
     def transfer(self, information: list) -> str:
-        countSuccessfully: int = 0
-        self.information += "Начата циклическая передача пакета ({0}).\n Количество передач {1}.\n".\
+        count_successfully: int = 0
+        self.information += "Начата циклическая передача пакета ({0}).\n Количество передач {1}.\n". \
             format(information, self.countCyclical)
 
         for x in range(self.countCyclical):
             try:
-                nowInformation: list = information
-                nowInformation = self.coder.Encoding(nowInformation)
+                now_information: list = information
+                now_information = self.coder.Encoding(now_information)
                 if self.interleaver:
-                    nowInformation = self.interleaver.shuffle(nowInformation)
+                    now_information = self.interleaver.shuffle(now_information)
 
-                nowInformation = self.gen_interference(nowInformation)
+                now_information = self.gen_interference(now_information)
 
                 if self.interleaver:
-                    nowInformation = self.interleaver.reestablish(nowInformation)
+                    now_information = self.interleaver.reestablish(now_information)
 
-                nowInformation = self.coder.Decoding(nowInformation)
+                now_information = self.coder.Decoding(now_information)
             except CodingException as err:
-                self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит "\
+                self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
                                     "востановлению\n".format(x)
             else:
-                if nowInformation == information:
-                    countSuccessfully += 1
+                if now_information == information:
+                    count_successfully += 1
                     self.information += "Пакет при передаче попыткой под номером {0} был успешно передан\n".format(x)
                 else:
-                    self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит "\
+                    self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
                                         "востановлению\n".format(x)
 
-        self.information += "Циклическая передача пакета ({0}) завершена.\n"\
-                            "Всего попыток передать пакет {1}.\n"\
-                            "Количство успешно переданных пакетов {2}.\n"\
-                            "Количество неудачно переданных пакетов {3}.\n".\
-            format(information, self.countCyclical, countSuccessfully, self.countCyclical - countSuccessfully)
+        self.information += "Циклическая передача пакета ({0}) завершена.\n" \
+                            "Всего попыток передать пакет {1}.\n" \
+                            "Количство успешно переданных пакетов {2}.\n" \
+                            "Количество неудачно переданных пакетов {3}.\n". \
+            format(information, self.countCyclical, count_successfully, self.countCyclical - count_successfully)
 
         return self.information
 
@@ -119,15 +123,15 @@ class Channel:
                     now_information = self.interleaver.reestablish(now_information)
 
                 now_information = self.coder.Decoding(now_information)
-            except CodingException as err:
+            except CodingException as rcx_coding:
                 status = 2
                 log.info(
-                        "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
+                    "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
                 self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
             except:
                 status = 2
                 log.info(
-                        "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
+                    "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
                 self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
             else:
                 if now_information == normalization_information:
@@ -137,8 +141,8 @@ class Channel:
                 else:
                     status = 3
                     log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
-                            now_information))
-                    self.information = "Пакет при передаче был повреждён и не подлежит "\
+                        now_information))
+                    self.information = "Пакет при передаче был повреждён и не подлежит " \
                                        "востановлению\n"
             current_step_success_bits = sum([1 if now_information[x] == normalization_information[x] else 0
                                              for x in range(len(now_information))])
@@ -179,12 +183,12 @@ class Channel:
         except CodingException as err:
             status = 2
             log.info(
-                    "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
+                "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         except:
             status = 2
             log.info(
-                    "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
+                "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
             if now_information == normalization_information:
@@ -194,8 +198,8 @@ class Channel:
             else:
                 status = 3
                 log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
-                        now_information))
-                self.information = "Пакет при передаче был повреждён и не подлежит "\
+                    now_information))
+                self.information = "Пакет при передаче был повреждён и не подлежит " \
                                    "востановлению\n"
         current_step_success_bits = sum([1 if now_information[x] == normalization_information[x] else 0
                                          for x in range(len(now_information))])
