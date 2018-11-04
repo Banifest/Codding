@@ -6,8 +6,8 @@ from PyQt5.QtCore import QThread
 
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import draw_graphic
-from src.channel.cascade import Cascade
-from src.channel.channel import Channel
+from src.channel.cascadecodec import CascadeCodec
+from src.channel.codec import Codec
 from src.coders.abstractCoder import AbstractCoder
 from src.coders.casts import IntToBitList
 from src.coders.exeption import CodingException
@@ -64,7 +64,7 @@ class TestCoder(QThread):
         self.coderSpeed = self.currentCoder.get_speed()
         self.coderName = self.currentCoder.name
 
-        self.channel = Channel(
+        self.channel = Codec(
             self.currentCoder,
             self.noiseChance,
             self.countTest,
@@ -206,7 +206,7 @@ class TestCascadeCoder(TestCoder):
 
         self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
         self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
-        self.channel = Cascade(
+        self.channel = CascadeCodec(
                 first_coder,
                 second_coder,
                 self.noiseChance,

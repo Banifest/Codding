@@ -3,13 +3,13 @@
 from math import ceil
 from typing import Optional
 
-from src.channel import channel
+from src.channel import codec, chanel
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt
 from src.coders.interleaver import Interleaver
 
 
-class Cascade(channel.Channel):
+class CascadeCodec(codec.Codec):
     firstCoder: abstractCoder.AbstractCoder
     firstInterleaver: Interleaver.Interleaver
     secondCoder: abstractCoder.AbstractCoder
@@ -43,8 +43,10 @@ class Cascade(channel.Channel):
                 for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
                     package_list.append(
                         information[
-                        self.firstCoder.lengthInformation * x:min(self.firstCoder.lengthInformation * (x + 1),
-                                                                  len(information))])
+                        self.firstCoder.lengthInformation * x: min(
+                            self.firstCoder.lengthInformation * (x + 1), len(information)
+                        )
+                        ])
 
             status: list = []
             for x in package_list:
@@ -78,7 +80,7 @@ class Cascade(channel.Channel):
             if self.secondInterleaver is not None:
                 second_coder_information = self.secondInterleaver.shuffle(second_coder_information)
 
-            status: list = self.get_transfer_one_step(first_coder_information + second_coder_information)
+            status: list = chanel.Chanel().gen_interference(first_coder_information + second_coder_information)
 
             if self.firstInterleaver is not None:
                 first_coder_information = self.firstInterleaver.reestablish(first_coder_information)

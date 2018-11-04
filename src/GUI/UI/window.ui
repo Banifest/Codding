@@ -856,7 +856,7 @@
        <item row="3" column="0" colspan="2">
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Cascade mode:</string>
+             <string>CascadeCodec mode:</string>
          </property>
         </widget>
        </item>

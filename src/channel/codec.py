@@ -4,25 +4,35 @@ import random
 from math import ceil
 from typing import Optional, Union
 
+from src.channel import chanel
 from src.coders.abstractCoder import AbstractCoder
 from src.coders.exeption import CodingException
 from src.coders.interleaver import Interleaver
 from src.logger import log
 
 
-class Channel:
-    noiseProbability: int = 0  # вероятность ошибки
+class Codec:
+    # Вероятность ошибки
+    noiseProbability: int = 0
+    # Количество циклов
     countCyclical: int = 1
     duplex: bool = False
+    # Информация о процессе передачи информации
+    # TODO Пересмотреть и переделать концепт хранения информации о канале
     information: str = ""
     coder: AbstractCoder
     interleaver: Interleaver.Interleaver = False
-
     countSuccessfullyMessage: int
 
-    def __init__(self, coder: AbstractCoder or None, noise_probability: int or float,
-                 count_cyclical: Optional[int],
-                 duplex: Optional[bool], interleaver: Optional[Interleaver.Interleaver]):
+    def __init__(
+            self,
+            coder: Optional[AbstractCoder],
+            noise_probability: Union[int, float],
+            count_cyclical: Optional[int],
+            duplex: Optional[bool],
+            interleaver: Optional[Interleaver.Interleaver]
+    ):
+
         log.debug("Создание канала связи")
         self.coder: AbstractCoder = coder
         if noise_probability is not None:
@@ -62,7 +72,7 @@ class Channel:
                 if self.interleaver:
                     now_information = self.interleaver.shuffle(now_information)
 
-                now_information = self.gen_interference(now_information)
+                now_information = chanel.Chanel().gen_interference(now_information)
 
                 if self.interleaver:
                     now_information = self.interleaver.reestablish(now_information)
@@ -87,8 +97,9 @@ class Channel:
 
         return self.information
 
-    def transfer_one_step(self, information: list) -> [int, int]:
+    def transfer_one_step(self, information: list) -> [int, int, int]:
         #  Разбиение на пакеты
+        # TODO Пересмотреть разбиение на пакеты, совсем шатко сейчас работает
         success_bits = 0
         drop_bits = 0
         package_list = []
@@ -114,7 +125,7 @@ class Channel:
 
                 help_information = now_information
 
-                now_information = self.gen_interference(now_information, self.noiseProbability)
+                now_information = chanel.Chanel().gen_interference(now_information, self.noiseProbability)
 
                 if help_information != now_information:
                     status = 1
@@ -154,7 +165,7 @@ class Channel:
                 package_status = 1
         return [package_status, success_bits, drop_bits]
 
-    def get_transfer_one_step(self, information: list) -> Union[list, int]:
+    def get_transfer_one_step(self, information: list) -> [list, int, int]:
         success_bits = 0
         drop_bits = 0
         package_status = 0
@@ -171,7 +182,7 @@ class Channel:
 
             help_information = now_information
 
-            now_information = self.gen_interference(now_information, self.noiseProbability)
+            now_information = chanel.Chanel().gen_interference(now_information, self.noiseProbability)
 
             if help_information != now_information:
                 status = 1
@@ -225,7 +236,7 @@ class Channel:
         """
         log.debug("Симуляция шума на канале с вероятностью {0}".format(straight))
 
-        randomGenerator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
+        random_generator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
 
         count_change_bit: int = int(len(information) * straight / 100)  # кол-во ошибок на канале
         if count_change_bit == 0 and straight != 0:
@@ -233,7 +244,7 @@ class Channel:
         changes_bits: set = set()  # множество битов которые будут измененны
 
         while len(changes_bits) < count_change_bit:  # собираем номеров множество неповторяющихся битов
-            changes_bits.add(randomGenerator.randint(0, len(information) - 1))
+            changes_bits.add(random_generator.randint(0, len(information) - 1))
 
         changes_bits: list = list(changes_bits)  # преобразуем в список
         answer: list = information.copy()
