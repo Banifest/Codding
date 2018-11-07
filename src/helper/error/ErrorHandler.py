@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import QWidget, QMessageBox
 from src.helper.error.exception.ApplicationException import ApplicationException
 
 
+# noinspection PyMethodMayBeStatic
+# Disable for singleton classes
 class ErrorHandler:
     __ref_instance = None
 
