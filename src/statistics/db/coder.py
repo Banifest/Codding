@@ -37,8 +37,12 @@ class Coder(Entity):
         self._connection.query("""
             DELETE FROM Coder
             WHERE guid = {0}
-              AND coder_description, type_of_coder, coder_speed, len_input_information, len_additional_information, interleaver)
-            VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6});
+              AND coder_description = {1}}
+              AND type_of_coder = {2}}
+              AND coder_speed = {3}
+              AND len_input_information = {4}
+              AND len_additional_information = {5}
+              AND interleaver = {6};
         """.format(
             self.guid,
             self.coder_description,
