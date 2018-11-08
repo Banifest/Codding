@@ -1,11 +1,13 @@
-from src.statistics.db.connector import Connector
+from postgresql.driver.pq3 import Connector
+
+from src.statistics.db.connector import Connector as Conn
 
 
 class Entity:
-    _connection = Connector().get_connection()
+    _connection: Connector = Conn().get_connection()
 
     def __init__(self):
-        _connection = Connector().get_connection()
+        _connection = Conn().get_connection()
 
     def create(self):
         pass
