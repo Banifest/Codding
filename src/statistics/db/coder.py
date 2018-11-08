@@ -20,10 +20,38 @@ class Coder(Entity):
     interleaver: bool
 
     def create(self):
-        pass
+        self._connection.query("""
+                    INSERT INTO Coder(guid, coder_description, type_of_coder, coder_speed, len_input_information, len_additional_information, interleaver)
+                    VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6});
+                """.format(
+            self.guid,
+            self.coder_description,
+            self.type_of_coder,
+            self.coder_speed,
+            self.len_input_information,
+            self.len_additional_information,
+            self.interleaver
+        ))
 
     def delete(self):
-        pass
+        self._connection.query("""
+            DELETE FROM Coder
+            WHERE guid = {0}
+              AND coder_description, type_of_coder, coder_speed, len_input_information, len_additional_information, interleaver)
+            VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6});
+        """.format(
+            self.guid,
+            self.coder_description,
+            self.type_of_coder,
+            self.coder_speed,
+            self.len_input_information,
+            self.len_additional_information,
+            self.interleaver
+        ))
 
     def read(self):
+        self._prepare_selection_statement()
+
+    def save(self):
         pass
+

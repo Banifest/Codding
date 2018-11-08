@@ -1,6 +1,7 @@
 from typing import Optional
 
 import postgresql
+from postgresql import driver
 
 
 class Connector:
@@ -12,7 +13,8 @@ class Connector:
         if cls.__ref_instance is None:
             cls.__ref_instance = cls.__init__()
 
-    def get_connection(self, login: Optional[str] = "postgres", password: Optional[str] = "admin"):
+    def get_connection(self, login: Optional[str] = "postgres", password: Optional[str] = "admin") \
+            -> driver.pq3.Connector:
         if self._connection is None:
             self._connection = postgresql.open('pq://{0}:{1}@localhost:5433/postgres'.format(
                 login,

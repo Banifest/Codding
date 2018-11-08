@@ -11,7 +11,7 @@ class CaseResult(Entity):
     quantity_changed_bit: int
 
     def create(self):
-        pass
+        self._connection.query()
 
     def delete(self):
         pass
