@@ -31,7 +31,7 @@ class Coder(Entity):
             len_additional_information,
             interleaver
     ):
-        super()
+        super().__init__()
         self.guid = guid
         self.coder_description = coder_description
         self.type_of_coder = type_of_coder
@@ -40,46 +40,38 @@ class Coder(Entity):
         self.len_additional_information = len_additional_information
         self.interleaver = interleaver
 
-
     def create(self):
-        self._connection.query("""
-                    INSERT INTO {7}(guid, coder_description, type_of_coder, coder_speed, len_input_information, len_additional_information, interleaver)
-                    VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6});
-                """.format(
-            self.guid,
-            self.coder_description,
-            self.type_of_coder,
-            self.coder_speed,
-            self.len_input_information,
-            self.len_additional_information,
-            self.interleaver,
-            Coder.TABLE_NAME
-        ))
+        self._connection.query(f"""
+                    INSERT INTO "Coder"(
+                        "GUID", 
+                        description, 
+                        coder_type, 
+                        coder_speed, 
+                        input_length, 
+                        additional_length, 
+                        interleaver
+                    )  VALUES (
+                    {self.guid}, 
+                    {self.coder_description}, 
+                    {self.type_of_coder}, {self.coder_speed}, 
+                    {self.len_input_information}, 
+                    {self.len_additional_information}, 
+                    {self.interleaver}
+                    )
+                """)
 
     def delete(self):
-        self._connection.query("""
-            DELETE FROM {7}
-            WHERE guid = {0}
-              AND coder_description = {1}}
-              AND type_of_coder = {2}}
-              AND coder_speed = {3}
-              AND len_input_information = {4}
-              AND len_additional_information = {5}
-              AND interleaver = {6};
-        """.format(
-            self.guid,
-            self.coder_description,
-            self.type_of_coder,
-            self.coder_speed,
-            self.len_input_information,
-            self.len_additional_information,
-            self.interleaver,
-            Coder.TABLE_NAME
-        ))
+        self._connection.query(f"""
+            DELETE FROM "Coder"
+            WHERE "GUID" = {self.guid}
+              AND description = {self.coder_description}
+              AND coder_type = {self.type_of_coder}
+              AND coder_speed = {self.coder_speed}
+              AND input_length = {self.len_input_information}
+              AND additional_length = {self.len_additional_information}
+              AND interleaver = {self.interleaver};
+        """)
 
     def read(self) -> list:
         return self._prepare_selection_statement(Coder.TABLE_NAME)
-
-    def save(self):
-        pass
 

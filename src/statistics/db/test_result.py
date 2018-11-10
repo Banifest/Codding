@@ -1,26 +1,52 @@
 from enum import Enum, auto
-from uuid import UUID
 
+from src.statistics.db.coder import Coder
 from src.statistics.db.entity import Entity
 
 
 class TestResult(Entity):
+    TABLE_NAME: str = "TestResult"
+
     class NoisesType(Enum):
         SINGLE = auto()
         BLOCK = auto()
 
     timestamp: int
-    cascade: bool
-    first_coder: UUID
-    second_coder: UUID
+    flg_cascade: bool
+    first_coder: Coder
+    second_coder: Coder
     type_of_noise: NoisesType
     noise: float
 
     def create(self):
-        pass
+        self._connection.query(f"""
+                            INSERT INTO "TestResult"(
+                                "Timestamp", 
+                                first_coder, 
+                                second_coder, 
+                                flg_cascade, 
+                                noise_type, 
+                                noise
+                            )  VALUES (
+                            {self.timestamp}, 
+                            {self.first_coder.guid}, 
+                            {self.second_coder.guid}, 
+                            {self.flg_cascade}, 
+                            {self.type_of_noise}, 
+                            {self.noise}
+                            )
+                        """)
 
     def delete(self):
-        pass
+        self._connection.query(f"""
+            DELETE FROM "TestResult"
+            WHERE "Timestamp" = {self.timestamp}
+              AND first_coder = {self.first_coder.guid}
+              AND second_coder  = {self.second_coder.guid}
+              AND flg_cascade = {self.flg_cascade}
+              AND noise_type  = {self.type_of_noise}
+              AND noise  = {self.noise};
+        """)
 
     def read(self):
-        pass
+        return self._prepare_selection_statement(TestResult.TABLE_NAME)

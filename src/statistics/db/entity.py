@@ -28,7 +28,5 @@ class Entity:
     def read(self):
         pass
 
-    @abstractmethod
     def save(self):
-        pass
-
+        self._connection.commit()
