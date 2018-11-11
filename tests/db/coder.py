@@ -4,7 +4,7 @@ from uuid import UUID
 from src.statistics.db.coder import Coder
 
 
-class MyTestCase(unittest.TestCase):
+class CoderTest(unittest.TestCase):
 
     def test_create(self):
         coder = Coder(

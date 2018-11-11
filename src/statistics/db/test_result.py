@@ -18,6 +18,24 @@ class TestResult(Entity):
     type_of_noise: NoisesType
     noise: float
 
+    def __init__(
+            self,
+            timestamp,
+            flg_cascade,
+            first_coder,
+            second_coder,
+            type_of_noise,
+            noise
+    ):
+        super().__init__()
+
+        self.timestamp = timestamp
+        self.flg_cascade = flg_cascade
+        self.first_coder = first_coder
+        self.second_coder = second_coder
+        self.type_of_noise = type_of_noise
+        self.noise = noise
+
     def create(self):
         self._connection.query(f"""
                             INSERT INTO "TestResult"(
@@ -29,8 +47,8 @@ class TestResult(Entity):
                                 noise
                             )  VALUES (
                             {self.timestamp}, 
-                            {self.first_coder.guid}, 
-                            {self.second_coder.guid}, 
+                            '{self.first_coder.guid}', 
+                            '{self.second_coder.guid}', 
                             {self.flg_cascade}, 
                             {self.type_of_noise}, 
                             {self.noise}
@@ -40,12 +58,7 @@ class TestResult(Entity):
     def delete(self):
         self._connection.query(f"""
             DELETE FROM "TestResult"
-            WHERE "Timestamp" = {self.timestamp}
-              AND first_coder = {self.first_coder.guid}
-              AND second_coder  = {self.second_coder.guid}
-              AND flg_cascade = {self.flg_cascade}
-              AND noise_type  = {self.type_of_noise}
-              AND noise  = {self.noise};
+            WHERE "Timestamp" = {self.timestamp};
         """)
 
     def read(self) -> list:

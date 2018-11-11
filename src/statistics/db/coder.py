@@ -64,13 +64,7 @@ class Coder(Entity):
     def delete(self):
         self._connection.query(f"""
             DELETE FROM "Coder"
-            WHERE "GUID" = {self.guid}
-              AND description = {self.coder_description}
-              AND coder_type = {self.type_of_coder}
-              AND coder_speed = {self.coder_speed}
-              AND input_length = {self.len_input_information}
-              AND additional_length = {self.len_additional_information}
-              AND interleaver = {self.interleaver};
+            WHERE "GUID" = {self.guid};
         """)
 
     def read(self) -> list:
