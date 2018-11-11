@@ -48,5 +48,8 @@ class TestResult(Entity):
               AND noise  = {self.noise};
         """)
 
-    def read(self):
-        return self._prepare_selection_statement(TestResult.TABLE_NAME)
+    def read(self) -> list:
+        return self._connection.query(f"""
+        SELECT *
+        FROM {TestResult.TABLE_NAME};        
+    """)

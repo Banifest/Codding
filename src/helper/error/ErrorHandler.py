@@ -1,19 +1,13 @@
 from PyQt5.QtWidgets import QWidget, QMessageBox
 
 from src.helper.error.exception.ApplicationException import ApplicationException
+# noinspection PyMethodMayBeStatic
+# Disable for singleton classes
+from src.helper.pattern.singleton import Singleton
 
 
 # noinspection PyMethodMayBeStatic
-# Disable for singleton classes
-class ErrorHandler:
-    __ref_instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if cls.__ref_instance is None:
-            cls.__ref_instance = cls.__init__()
-
-        return cls.__ref_instance
-
+class ErrorHandler(metaclass=Singleton):
     def __init__(self):
         pass
 

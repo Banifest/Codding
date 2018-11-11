@@ -42,5 +42,8 @@ class CaseResult(Entity):
               AND count_changed_bits  = {self.quantity_changed_bit};
         """)
 
-    def read(self):
-        return self._prepare_selection_statement(CaseResult.TABLE_NAME)
+    def read(self) -> list:
+        return self._connection.query(f"""
+        SELECT *
+        FROM {CaseResult.TABLE_NAME};        
+    """)

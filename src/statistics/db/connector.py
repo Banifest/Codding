@@ -3,15 +3,16 @@ from typing import Optional
 import postgresql
 from postgresql import driver
 
+from src.helper.pattern.singleton import Singleton
 
-class Connector:
+
+class Connector(metaclass=Singleton):
     __ref_instance = None
     # Connection
     _connection = None
 
-    def __new__(cls, *args, **kwargs):
-        if cls.__ref_instance is None:
-            cls.__ref_instance = cls.__init__()
+    def __init__(self):
+        pass
 
     def get_connection(self, login: Optional[str] = "postgres", password: Optional[str] = "admin") \
             -> driver.pq3.Connector:

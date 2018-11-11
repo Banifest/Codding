@@ -23,13 +23,13 @@ class Coder(Entity):
 
     def __init__(
             self,
-            guid,
-            coder_description,
-            type_of_coder,
-            coder_speed,
-            len_input_information,
-            len_additional_information,
-            interleaver
+            guid: UUID,
+            coder_description: str,
+            type_of_coder: CodersType,
+            coder_speed: int,
+            len_input_information: int,
+            len_additional_information: int,
+            interleaver: bool
     ):
         super().__init__()
         self.guid = guid
@@ -51,9 +51,10 @@ class Coder(Entity):
                         additional_length, 
                         interleaver
                     )  VALUES (
-                    {self.guid}, 
-                    {self.coder_description}, 
-                    {self.type_of_coder}, {self.coder_speed}, 
+                    '{self.guid}',
+                    '{self.coder_description}', 
+                    {self.type_of_coder.value}, 
+                    {self.coder_speed}, 
                     {self.len_input_information}, 
                     {self.len_additional_information}, 
                     {self.interleaver}
@@ -73,5 +74,7 @@ class Coder(Entity):
         """)
 
     def read(self) -> list:
-        return self._prepare_selection_statement(Coder.TABLE_NAME)
-
+        return self._connection.query(f"""
+        SELECT *
+        FROM {Coder.TABLE_NAME};        
+    """)
