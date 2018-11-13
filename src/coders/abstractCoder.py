@@ -3,11 +3,13 @@
 from abc import ABCMeta, abstractmethod
 
 from src.coders.exeption import CodingException
+from src.statistics.db.coder import Coder
 
 
 class AbstractCoder:
     __metaclass__ = ABCMeta
     name: str = ""
+    type_of_coder: Coder.CodersType
     coding_information: int = 0
     countAdditional: int = 0
     lengthTotal: int = 0

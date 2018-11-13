@@ -7,10 +7,12 @@ import numpy as np
 from src.coders import abstractCoder
 from src.coders.casts import *
 from src.logger import log
+from src.statistics.db.coder import Coder
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Хемминга"
+    type_of_coder = Coder.CodersType.HEMMING
 
     def try_normalization(self, bit_list: list) -> list:
         return super().try_normalization(bit_list)
@@ -114,9 +116,11 @@ class Coder(abstractCoder.AbstractCoder):
         return answer
 
     def to_json(self) -> dict:
-        return {'name'                   : self.name,
-                'length information word': self.lengthInformation,
-                'length additional bits' : self.lengthAdditional,
-                'length coding word'     : self.lengthTotal,
-                'matrix of generating'   : self._matrixTransformation.tolist(),
-                'speed'                  : self.get_speed()}
+        return {
+            'name': self.name,
+            'length information word': self.lengthInformation,
+            'length additional bits': self.lengthAdditional,
+            'length coding word': self.lengthTotal,
+            'matrix of generating': self._matrixTransformation.tolist(),
+            'speed': self.get_speed()
+        }

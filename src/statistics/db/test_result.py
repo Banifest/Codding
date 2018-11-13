@@ -46,11 +46,11 @@ class TestResult(Entity):
                                 noise_type, 
                                 noise
                             )  VALUES (
-                            {self.timestamp}, 
+                            '{self.timestamp}', 
                             '{self.first_coder.guid}', 
                             '{self.second_coder.guid}', 
                             {self.flg_cascade}, 
-                            {self.type_of_noise}, 
+                            {self.type_of_noise.value}, 
                             {self.noise}
                             )
                         """)

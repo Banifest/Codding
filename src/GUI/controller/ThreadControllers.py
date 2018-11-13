@@ -1,6 +1,5 @@
 # coding=utf-8
 # coding=utf-8
-import json
 
 from PyQt5.QtCore import QThread
 
@@ -12,6 +11,7 @@ from src.coders.abstractCoder import AbstractCoder
 from src.coders.casts import IntToBitList
 from src.coders.exeption import CodingException
 from src.logger import log
+from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class TestCoder(QThread):
@@ -159,11 +159,13 @@ class TestCoder(QThread):
         self.information_dict['draw_information'] = draw_data
         globalSignals.autoStepFinished.emit(100)
         if self.is_auto:
-            draw_graphic(self.information_dict['draw_information'],
-                         self.information_dict['coder']['name'],
-                         coder_speed=self.information_dict['coder']['speed'],
-                         start=self.information_dict['auto_test_information']['start'],
-                         finish=self.information_dict['auto_test_information']['finish'])
+            draw_graphic(
+                self.information_dict['draw_information'],
+                self.information_dict['coder']['name'],
+                coder_speed=self.information_dict['coder']['speed'],
+                start=self.information_dict['auto_test_information']['start'],
+                finish=self.information_dict['auto_test_information']['finish']
+            )
 
     def run(self):
         try:
@@ -174,7 +176,12 @@ class TestCoder(QThread):
                 self.information_dict['single_test'] = True
                 self.information_dict['test'] = self.one_test()
 
-            open('lastResult.json', "w", encoding='UTF-8').write(json.dumps(self.information_dict, ensure_ascii=False))
+            # Сохраненение в JSON
+            TestResultSerializer().serialize_to_json(self.information_dict)
+            # Созранение в базе данных
+            if not self.information_dict['is_cascade']:
+                TestResultSerializer().serialize_to_db(self.information_dict, self.currentCoder)
+
             globalSignals.stepFinished.emit(100)
             globalSignals.ended.emit()
             log.debug("Конец цикла тестов")
@@ -207,22 +214,28 @@ class TestCascadeCoder(TestCoder):
         self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
         self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
         self.channel = CascadeCodec(
-                first_coder,
-                second_coder,
-                self.noiseChance,
-                self.countTest,
-                False,
-                None,
-                None,
-                mode
+            first_coder,
+            second_coder,
+            self.noiseChance,
+            self.countTest,
+            False,
+            None,
+            None,
+            mode
         )
 
     def run(self):
         self.information_dict['is_cascade'] = True
-        super().run()
         self.information_dict['coder'] = {
             'first_coder': self.channel.firstCoder.to_json(),
             'second_coder': self.channel.secondCoder.to_json(),
             'name': self.coderName,
             'speed': self.coderSpeed
         }
+        super().run()
+        if self.information_dict['is_cascade']:
+            TestResultSerializer().serialize_to_db(
+                self.information_dict,
+                self.channel.firstCoder,
+                self.channel.secondCoder
+            )

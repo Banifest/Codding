@@ -17,6 +17,17 @@ class CoderTest(unittest.TestCase):
             interleaver=True
         )
         coder.create()
+
+        coder = Coder(
+            guid=UUID('{ba9763d0c10045a4b9511bf2df9302b2}'),
+            coder_description='test',
+            type_of_coder=Coder.CodersType.HEMMING,
+            coder_speed=1,
+            len_input_information=1,
+            len_additional_information=1,
+            interleaver=True
+        )
+        coder.create()
         coder.save()
         pass
 

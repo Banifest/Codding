@@ -30,6 +30,7 @@ class MainController:
         self.testParams = TestController(self.firstCoderParams,
                                          self.secondCoderParams)
         globalSignals.notCorrect.connect(self.error_handle)
+        globalSignals.ended.connect(self.finished_test_cycles)
         app = QApplication(sys.argv)
         self._mainWindow = MainWindow(self)
         app.exec()
@@ -53,3 +54,6 @@ class MainController:
                 start=info['auto_test_information']['start'],
                 finish=info['auto_test_information']['finish']
             )
+
+    def finished_test_cycles(self):
+        pass

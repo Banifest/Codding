@@ -22,3 +22,6 @@ class Connector(metaclass=Singleton):
                 password
             ))
         return self._connection
+
+    def save(self):
+        self._connection.query("COMMIT")

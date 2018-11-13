@@ -12,7 +12,7 @@ class TestResultTest(unittest.TestCase):
     def test_create(self):
         first = uuid.uuid4()
         second = uuid.uuid4()
-        coder = Coder(
+        f_coder = Coder(
             guid=first,
             coder_description='test',
             type_of_coder=Coder.CodersType.HEMMING,
@@ -21,8 +21,8 @@ class TestResultTest(unittest.TestCase):
             len_additional_information=1,
             interleaver=True
         )
-        coder.create()
-        coder = Coder(
+        f_coder.create()
+        s_coder = Coder(
             guid=second,
             coder_description='test',
             type_of_coder=Coder.CodersType.HEMMING,
@@ -31,15 +31,15 @@ class TestResultTest(unittest.TestCase):
             len_additional_information=1,
             interleaver=True
         )
-        coder.create()
+        s_coder.create()
 
         l_timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 
         test_result = TestResult(
             timestamp=l_timestamp,
             flg_cascade=False,
-            first_coder=first,
-            second_coder=second,
+            first_coder=f_coder,
+            second_coder=s_coder,
             type_of_noise=TestResult.NoisesType.SINGLE,
             noise=1.1
         )
