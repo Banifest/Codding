@@ -6,10 +6,12 @@ from src.coders import abstractCoder
 from src.coders.casts import BitListToInt, BitListToIntList, IntToBitList
 from src.coders.exeption import CodingException
 from src.logger import log
+from src.statistics.db.coder_entry import CoderEntry
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Фонтанный"
+    type_of_coder = CoderEntry.CodersType.FOUNTAIN
 
     countCodingBlocks: int  # количество блоков информации
     countBlocks: int  # количество блоков сочетаний

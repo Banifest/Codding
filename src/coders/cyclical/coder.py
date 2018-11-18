@@ -8,11 +8,13 @@ from numpy.polynomial import polynomial as plm
 from src.coders import abstractCoder
 from src.coders.casts import IntToBitList
 from src.logger import log
+from src.statistics.db.coder_entry import CoderEntry
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Циклический"
     polynomial: plm.Polynomial
+    type_of_coder = CoderEntry.CodersType.CYCLICAL
     matrix_G: np.matrix  # порождающая матрица
     matrix_H: np.matrix  # проверочная матрицал
 

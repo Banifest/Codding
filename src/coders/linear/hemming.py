@@ -13,14 +13,13 @@ from src.statistics.db.coder_entry import CoderEntry
 class Coder(abstractCoder.AbstractCoder):
     name = "Хемминга"
     type_of_coder = CoderEntry.CodersType.HEMMING
+    _matrixTransformation: list = []
 
     def try_normalization(self, bit_list: list) -> list:
         return super().try_normalization(bit_list)
 
     def get_redundancy(self) -> float:
         return super().get_redundancy()
-
-    _matrixTransformation: list = []
 
     def __init__(self, length_information: int):
         log.debug("Создание кодера хемминга")

@@ -18,8 +18,13 @@ class Coder(abstractCoder.AbstractCoder):
 
     graph: list = []
 
-    def __init__(self, list_polynomials: list, count_input: int, count_output: int,
-                 count_register: int):
+    def __init__(
+            self,
+            list_polynomials: list,
+            count_input: int,
+            count_output: int,
+            count_register: int
+    ):
         log.debug("Создание свёрточного кодера ....")
         self.countInput = count_input
         self.countOutput = count_output
