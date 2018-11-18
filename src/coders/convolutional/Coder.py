@@ -3,10 +3,12 @@
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList, cycle_shift_list
 from src.logger import log
+from src.statistics.db.coder_entry import CoderEntry
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Сверточный"
+    type_of_coder = CoderEntry.CodersType.CONVOLUTION
 
     countPolynomials: int = 0
     listPolynomials: list = []
@@ -36,7 +38,7 @@ class Coder(abstractCoder.AbstractCoder):
         self.lengthInformation = 1
         self.lengthAdditional = self.lengthTotal - self.lengthInformation
 
-        self.graph = self.GetGraph()
+        self.graph = self.get_graph()
 
     def get_speed(self) -> float:
         return 1 / self.countRegisters
@@ -44,25 +46,25 @@ class Coder(abstractCoder.AbstractCoder):
     def get_redundancy(self):
         return self.countOutput
 
-    def DoStep(self, informationBit: int) -> list:
-        log.debug("Шаг при кодировании бита - {0}".format(informationBit))
+    def do_step(self, information_bit: int) -> list:
+        log.debug("Шаг при кодировании бита - {0}".format(information_bit))
         self.register <<= 1
 
         # зануление старшего бита
         self.register = self.register & ((1 << (self.countRegisters + 1)) - 1)
-        self.register += informationBit
+        self.register += information_bit
 
         answer = []
         power = 0
         for count in range(self.countPolynomials):
-            addedBit = 0
+            added_bit = 0
             for x in IntToBitList(self.listPolynomials[count] & self.register):
-                addedBit ^= x
-            answer.append(addedBit % 2)
+                added_bit ^= x
+            answer.append(added_bit % 2)
             power += 1
         return answer
 
-    def GetGraph(self) -> list:
+    def get_graph(self) -> list:
         """
         Формирует список представляющий граф переходов, где каждая вершина
         [
@@ -77,83 +79,84 @@ class Coder(abstractCoder.AbstractCoder):
             edge: list = IntToBitList(x, self.countRegisters)
             edge = cycle_shift_list(edge)
             edge[0] = 0
-            vertex.append([BitListToInt(edge), self.DoStep(0)])
+            vertex.append([BitListToInt(edge), self.do_step(0)])
             self.register = x
             edge[0] = 1
-            vertex.append([BitListToInt(edge), self.DoStep(1)])
+            vertex.append([BitListToInt(edge), self.do_step(1)])
             answer.append(vertex)
 
         self.register = 0
         return answer
 
-
     def Encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} свёрточным кодером".format(information))
         answer: list = []
-        nowVertex: int = 0  # текущая вершина
+
+        # текущая вершина
+        current_vertex: int = 0
         for nowBit in information:
-            answer.append(self.graph[nowVertex][nowBit][1])
-            nowVertex = self.graph[nowVertex][nowBit][0]
+            answer.append(self.graph[current_vertex][nowBit][1])
+            current_vertex = self.graph[current_vertex][nowBit][0]
 
         answer = [y for x in answer for y in x]
         return answer
 
-
     def Decoding(self, information: list):
         log.info("Декодирование пакета {0} свёрточным декодером по максимуму правдоподобия".format(information))
-        lastStep: list = []  # Информация об предыдущем шаге
-        nowStep: list = []  # Информация о текущем шаге
-        infoAboutVertex: list = []  # информация о вершине
+        last_step: list = []  # Информация об предыдущем шаге
+        now_step: list = []  # Информация о текущем шаге
+        info_about_vertex: list = []  # информация о вершине
         travel: list = []  # путь для текущей вершины
-        costTravel: int = 0  # стоимость для текущего пути
+        cost_travel: int = 0  # стоимость для текущего пути
 
-        infoDividedIntoSteps: list = []  # информация поделенная на шаги
+        info_divided_into_steps: list = []  # информация поделенная на шаги
         for x in range(0, len(information), self.countOutput):
             count: int = 0
-            tempList: list = []
+            temp_list: list = []
             while count < self.countOutput:
-                tempList.append(information[x + count])
+                temp_list.append(information[x + count])
                 count += 1
-            infoDividedIntoSteps.append(tempList)
+            info_divided_into_steps.append(temp_list)
 
-        lastStep = nowStep = [[0, []]] + [[99999, []] for x in
-                                          range(2 ** self.countRegisters - 1)]  # заполняет первый шаг
+        last_step = now_step = [[0, []]] + [[99999, []] for x in
+                                            range(2 ** self.countRegisters - 1)]  # заполняет первый шаг
 
-        for x in infoDividedIntoSteps:
-            nowStep = [[99999, []] for x in range(2 ** self.countRegisters)]
+        for x in info_divided_into_steps:
+            now_step = [[99999, []] for x in range(2 ** self.countRegisters)]
             number: int = 0
-            for infoAboutVertex in lastStep:
-                vertexStep: int = self.graph[number][0][0]  # вершина перехода
+            for info_about_vertex in last_step:
+                vertex_step: int = self.graph[number][0][0]  # вершина перехода
                 distance: int = GetHemmingDistance(x, self.graph[number][0][1])
-                if nowStep[vertexStep][0] > lastStep[number][0] + distance:
-                    nowStep[vertexStep] = [infoAboutVertex[0] + distance, infoAboutVertex[1] + [0]]
+                if now_step[vertex_step][0] > last_step[number][0] + distance:
+                    now_step[vertex_step] = [info_about_vertex[0] + distance, info_about_vertex[1] + [0]]
 
-                vertexStep: int = self.graph[number][1][0]  # вершина перехода
+                vertex_step: int = self.graph[number][1][0]  # вершина перехода
                 distance: int = GetHemmingDistance(x, self.graph[number][1][1])
-                if nowStep[vertexStep][0] > lastStep[number][0] + distance:
-                    nowStep[vertexStep] = [infoAboutVertex[0] + distance, infoAboutVertex[1] + [1]]
+                if now_step[vertex_step][0] > last_step[number][0] + distance:
+                    now_step[vertex_step] = [info_about_vertex[0] + distance, info_about_vertex[1] + [1]]
 
                 number += 1
-            lastStep = nowStep
+            last_step = now_step
 
-        minAnswer: list = []
-        minCost: int = 999999
-        for x in lastStep:
-            if minCost > x[0]:
-                minCost = x[0]
-                minAnswer = x[1]
-        return minAnswer
+        min_answer: list = []
+        min_cost: int = 999999
+        for x in last_step:
+            if min_cost > x[0]:
+                min_cost = x[0]
+                min_answer = x[1]
+        return min_answer
 
     def try_normalization(self, bit_list: list) -> list:
         return bit_list
 
     def to_json(self) -> dict:
-        return {'name'               : self.name,
-                'count inputs'       : self.countInput,
-                'count polynomials'  : self.countPolynomials,
-                'list of polynomials': self.listPolynomials,
-                'count of outputs'   : self.countOutput,
-                'count of registers' : self.countRegisters,
-                'graph'              : self.graph,
-                'speed'              : self.get_speed()
-                }
+        return {
+            'name': self.name,
+            'count inputs': self.countInput,
+            'count polynomials': self.countPolynomials,
+            'list of polynomials': self.listPolynomials,
+            'count of outputs': self.countOutput,
+            'count of registers': self.countRegisters,
+            'graph': self.graph,
+            'speed': self.get_speed()
+        }
