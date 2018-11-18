@@ -7,12 +7,12 @@ import numpy as np
 from src.coders import abstractCoder
 from src.coders.casts import *
 from src.logger import log
-from src.statistics.db.coder import Coder
+from src.statistics.db.coder_entry import CoderEntry
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Хемминга"
-    type_of_coder = Coder.CodersType.HEMMING
+    type_of_coder = CoderEntry.CodersType.HEMMING
 
     def try_normalization(self, bit_list: list) -> list:
         return super().try_normalization(bit_list)

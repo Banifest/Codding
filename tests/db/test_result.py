@@ -4,7 +4,7 @@ import unittest
 import uuid
 
 from src.statistics.db.case_result import CaseResult
-from src.statistics.db.coder import Coder
+from src.statistics.db.coder_entry import CoderEntry
 from src.statistics.db.test_result import TestResult
 
 
@@ -12,20 +12,20 @@ class TestResultTest(unittest.TestCase):
     def test_create(self):
         first = uuid.uuid4()
         second = uuid.uuid4()
-        f_coder = Coder(
+        f_coder = CoderEntry(
             guid=first,
             coder_description='test',
-            type_of_coder=Coder.CodersType.HEMMING,
+            type_of_coder=CoderEntry.CodersType.HEMMING,
             coder_speed=1,
             len_input_information=1,
             len_additional_information=1,
             interleaver=True
         )
         f_coder.create()
-        s_coder = Coder(
+        s_coder = CoderEntry(
             guid=second,
             coder_description='test',
-            type_of_coder=Coder.CodersType.HEMMING,
+            type_of_coder=CoderEntry.CodersType.HEMMING,
             coder_speed=1,
             len_input_information=1,
             len_additional_information=1,

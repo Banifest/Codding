@@ -1,6 +1,6 @@
 from enum import Enum, auto
 
-from src.statistics.db.coder import Coder
+from src.statistics.db.coder_entry import CoderEntry
 from src.statistics.db.entity import Entity
 
 
@@ -13,8 +13,8 @@ class TestResult(Entity):
 
     timestamp: int
     flg_cascade: bool
-    first_coder: Coder
-    second_coder: Coder
+    first_coder: CoderEntry
+    second_coder: CoderEntry
     type_of_noise: NoisesType
     noise: float
 
