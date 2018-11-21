@@ -23,6 +23,7 @@ class CaseResultEntity(Entity):
             quantity_repair_bit: int,
             quantity_changed_bit: int
     ):
+        super().__init__()
         self.guid = guid
         self.test_timestamp = test_timestamp
         self.quantity_correct_bit = quantity_correct_bit
@@ -41,7 +42,7 @@ class CaseResultEntity(Entity):
                                 count_changed_bits
                             )  VALUES (
                             '{self.guid}', 
-                            '{self.test_timestamp}', 
+                            '{self.test_timestamp.timestamp()}', 
                             {self.quantity_correct_bit}, 
                             {self.quantity_incorrect_bit}, 
                             {self.quantity_repair_bit}, 
