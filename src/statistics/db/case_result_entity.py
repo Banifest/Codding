@@ -1,12 +1,14 @@
+# coding=utf-8
+from datetime import datetime
 from uuid import UUID
 
 from src.statistics.db.entity import Entity
 
 
-class CaseResult(Entity):
+class CaseResultEntity(Entity):
     TABLE_NAME: str = "CaseResultTest"
     guid: UUID
-    test_timestamp: int
+    test_timestamp: datetime
     quantity_correct_bit: int
     quantity_incorrect_bit: int
     quantity_repair_bit: int
@@ -14,12 +16,12 @@ class CaseResult(Entity):
 
     def __init__(
             self,
-            guid,
-            test_timestamp,
-            quantity_correct_bit,
-            quantity_incorrect_bit,
-            quantity_repair_bit,
-            quantity_changed_bit
+            guid: UUID,
+            test_timestamp: datetime,
+            quantity_correct_bit: int,
+            quantity_incorrect_bit: int,
+            quantity_repair_bit: int,
+            quantity_changed_bit: int
     ):
         self.guid = guid
         self.test_timestamp = test_timestamp
@@ -55,6 +57,6 @@ class CaseResult(Entity):
 
     def read(self) -> list:
         return self._connection.query(f"""
-        SELECT *
-        FROM {CaseResult.TABLE_NAME};        
-    """)
+                    SELECT *
+                    FROM {CaseResultEntity.TABLE_NAME};        
+                """)

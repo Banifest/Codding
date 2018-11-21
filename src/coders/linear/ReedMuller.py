@@ -55,11 +55,11 @@ class Coder(abstractCoder.AbstractCoder):
         self.lengthTotal = len(self.matrix_G.tolist()[0])
         self.lengthAdditional = self.lengthTotal - self.lengthInformation
 
-    def Encoding(self, information: list):
+    def encoding(self, information: list):
         information[0] = 0
         return [x % 2 for x in (np.matrix(information) * self.matrix_G).tolist()[0]]
 
-    def Decoding(self, information: list):
+    def decoding(self, information: list):
         def vec_xor(a, b): return [a[i] ^ b[i] for i in range(len(a))]
 
         def vec_mul(a, b): return [a[i] & b[i] for i in range(len(a))]

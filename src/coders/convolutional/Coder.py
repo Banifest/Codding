@@ -3,12 +3,12 @@
 from src.coders import abstractCoder
 from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList, cycle_shift_list
 from src.logger import log
-from src.statistics.db.coder_entry import CoderEntry
+from src.statistics.db.coder_entity import coder_entity
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Сверточный"
-    type_of_coder = CoderEntry.CodersType.CONVOLUTION
+    type_of_coder = coder_entity.CodersType.CONVOLUTION
 
     countPolynomials: int = 0
     listPolynomials: list = []
@@ -88,7 +88,7 @@ class Coder(abstractCoder.AbstractCoder):
         self.register = 0
         return answer
 
-    def Encoding(self, information: list) -> list:
+    def encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} свёрточным кодером".format(information))
         answer: list = []
 
@@ -101,7 +101,7 @@ class Coder(abstractCoder.AbstractCoder):
         answer = [y for x in answer for y in x]
         return answer
 
-    def Decoding(self, information: list):
+    def decoding(self, information: list):
         log.info("Декодирование пакета {0} свёрточным декодером по максимуму правдоподобия".format(information))
         last_step: list = []  # Информация об предыдущем шаге
         now_step: list = []  # Информация о текущем шаге

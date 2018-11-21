@@ -7,12 +7,12 @@ import numpy as np
 from src.coders import abstractCoder
 from src.coders.casts import *
 from src.logger import log
-from src.statistics.db.coder_entry import CoderEntry
+from src.statistics.db.coder_entity import coder_entity
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Хемминга"
-    type_of_coder = CoderEntry.CodersType.HEMMING
+    type_of_coder = coder_entity.CodersType.HEMMING
     _matrixTransformation: list = []
 
     def try_normalization(self, bit_list: list) -> list:
@@ -54,7 +54,7 @@ class Coder(abstractCoder.AbstractCoder):
     def get_speed(self) -> float:
         return float(self.lengthInformation) / float(self.lengthTotal)
 
-    def Encoding(self, information: list) -> list:
+    def encoding(self, information: list) -> list:
         log.info("Кодирование пакета {0} кодером хемминга".format(information))
         list_encoding_information: list = information
         list_encoding_information.reverse()
@@ -81,7 +81,7 @@ class Coder(abstractCoder.AbstractCoder):
             answer[(1 << x) - 1] = backup_info[x]
         return answer
 
-    def Decoding(self, information: list) -> list:
+    def decoding(self, information: list) -> list:
         log.info("Декодирование пакета {0} декодером хемминга".format(information))
 
         code = np.transpose(np.array([[x] for x in information]))

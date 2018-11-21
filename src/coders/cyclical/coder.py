@@ -8,13 +8,13 @@ from numpy.polynomial import polynomial as plm
 from src.coders import abstractCoder
 from src.coders.casts import IntToBitList
 from src.logger import log
-from src.statistics.db.coder_entry import CoderEntry
+from src.statistics.db.coder_entity import coder_entity
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Циклический"
     polynomial: plm.Polynomial
-    type_of_coder = CoderEntry.CodersType.CYCLICAL
+    type_of_coder = coder_entity.CodersType.CYCLICAL
     matrix_G: np.matrix  # порождающая матрица
     matrix_H: np.matrix  # проверочная матрицал
 
@@ -26,11 +26,11 @@ class Coder(abstractCoder.AbstractCoder):
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
         self.polynomial = plm.Polynomial(IntToBitList(polynomial, rev=True))
 
-    def Encoding(self, information: list):
+    def encoding(self, information: list):
         mod: plm.Polynomial = plm.Polynomial([0] * self.lengthAdditional + information) % self.polynomial
         return [int(x) % 2 for x in mod] + [0] * (self.lengthAdditional - len(mod)) + information
 
-    def Decoding(self, information: list):
+    def decoding(self, information: list):
         syndrome: plm.Polynomial = plm.Polynomial(information) % self.polynomial
         for x in range(len(self.polynomial)):
             if sum([int(x) % 2 for x in syndrome]) != 0:

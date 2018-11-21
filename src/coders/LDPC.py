@@ -1,5 +1,4 @@
 # coding=utf-8
-# coding=utf-8
 import numpy as np
 
 from src.coders import abstractCoder
@@ -31,10 +30,10 @@ class Coder(abstractCoder.AbstractCoder):
         np.array()
 
 
-    def Encoding(self, information: list) -> list:
+    def encoding(self, information: list) -> list:
 
         pass
 
 
-    def Decoding(self, information: list) -> list:
+    def decoding(self, information: list) -> list:
         pass

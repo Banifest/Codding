@@ -1,10 +1,11 @@
+# coding=utf-8
 from enum import Enum, auto
 
-from src.statistics.db.coder_entry import CoderEntry
+from src.statistics.db.coder_entity import coder_entity
 from src.statistics.db.entity import Entity
 
 
-class TestResult(Entity):
+class TestResultEntity(Entity):
     TABLE_NAME: str = "TestResult"
 
     class NoisesType(Enum):
@@ -13,16 +14,16 @@ class TestResult(Entity):
 
     timestamp: int
     flg_cascade: bool
-    first_coder: CoderEntry
-    second_coder: CoderEntry
+    first_coder: coder_entity
+    second_coder: coder_entity
     type_of_noise: NoisesType
     noise: float
 
     def __init__(
             self,
             timestamp,
-            flg_cascade,
-            first_coder,
+            flg_cascade: bool,
+            first_coder: coder_entity,
             second_coder,
             type_of_noise,
             noise
@@ -64,5 +65,5 @@ class TestResult(Entity):
     def read(self) -> list:
         return self._connection.query(f"""
         SELECT *
-        FROM {TestResult.TABLE_NAME};        
+        FROM {TestResultEntity.TABLE_NAME};        
     """)

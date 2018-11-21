@@ -68,7 +68,7 @@ class Codec:
         for x in range(self.countCyclical):
             try:
                 now_information: list = information
-                now_information = self.coder.Encoding(now_information)
+                now_information = self.coder.encoding(now_information)
                 if self.interleaver:
                     now_information = self.interleaver.shuffle(now_information)
 
@@ -77,7 +77,7 @@ class Codec:
                 if self.interleaver:
                     now_information = self.interleaver.reestablish(now_information)
 
-                now_information = self.coder.Decoding(now_information)
+                now_information = self.coder.decoding(now_information)
             except CodingException as err:
                 self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
                                     "востановлению\n".format(x)
@@ -118,7 +118,7 @@ class Codec:
             status: int = 0
             normalization_information = self.coder.try_normalization(now_information)
             try:
-                now_information = self.coder.Encoding(normalization_information)
+                now_information = self.coder.encoding(normalization_information)
 
                 if self.interleaver:
                     now_information = self.interleaver.shuffle(now_information)
@@ -133,7 +133,7 @@ class Codec:
                 if self.interleaver:
                     now_information = self.interleaver.reestablish(now_information)
 
-                now_information = self.coder.Decoding(now_information)
+                now_information = self.coder.decoding(now_information)
             except CodingException as rcx_coding:
                 status = 2
                 log.info(
@@ -175,7 +175,7 @@ class Codec:
         status: int = 0
         normalization_information = self.coder.try_normalization(now_information)
         try:
-            now_information = self.coder.Encoding(normalization_information)
+            now_information = self.coder.encoding(normalization_information)
 
             if self.interleaver:
                 now_information = self.interleaver.shuffle(now_information)
@@ -190,7 +190,7 @@ class Codec:
             if self.interleaver:
                 now_information = self.interleaver.reestablish(now_information)
 
-            now_information = self.coder.Decoding(now_information)
+            now_information = self.coder.decoding(now_information)
         except CodingException as err:
             status = 2
             log.info(

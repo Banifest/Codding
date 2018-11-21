@@ -53,7 +53,7 @@ class CascadeCodec(codec.Codec):
                 self.coder = self.secondCoder
                 normalization_information = self.firstCoder.try_normalization(x)
 
-                now_information: list = self.firstCoder.Encoding(normalization_information)
+                now_information: list = self.firstCoder.encoding(normalization_information)
 
                 if self.secondInterleaver is not None:
                     now_information = self.secondInterleaver.shuffle(now_information)
@@ -66,17 +66,17 @@ class CascadeCodec(codec.Codec):
                 if self.secondInterleaver is not None:
                     now_information = self.secondInterleaver.reestablish(now_information)
 
-                now_information = self.firstCoder.Decoding(now_information)
+                now_information = self.firstCoder.decoding(now_information)
 
                 if BitListToInt(now_information) != BitListToInt(normalization_information):
                     return [2, status[1], status[2]]
             return [1, status[1], status[2]]
         elif self.mode == 1:
-            first_coder_information: list = self.firstCoder.Encoding(information)
+            first_coder_information: list = self.firstCoder.encoding(information)
             if self.firstInterleaver is not None:
                 first_coder_information = self.firstInterleaver.shuffle(first_coder_information)
 
-            second_coder_information: list = self.firstCoder.Encoding(information)
+            second_coder_information: list = self.firstCoder.encoding(information)
             if self.secondInterleaver is not None:
                 second_coder_information = self.secondInterleaver.shuffle(second_coder_information)
 
@@ -88,8 +88,8 @@ class CascadeCodec(codec.Codec):
             if self.secondInterleaver is not None:
                 second_coder_information = self.secondInterleaver.reestablish(second_coder_information)
 
-            first_coder_information = self.firstCoder.Decoding(first_coder_information)
-            second_coder_information = self.secondCoder.Decoding(second_coder_information)
+            first_coder_information = self.firstCoder.decoding(first_coder_information)
+            second_coder_information = self.secondCoder.decoding(second_coder_information)
             if BitListToInt(first_coder_information) != BitListToInt(first_coder_information) \
                     and BitListToInt(second_coder_information) != BitListToInt(second_coder_information):
                 return [2, status[1], status[2]]

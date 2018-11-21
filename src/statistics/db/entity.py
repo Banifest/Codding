@@ -1,3 +1,4 @@
+# coding=utf-8
 from abc import abstractmethod
 
 from postgresql.driver.pq3 import Connector

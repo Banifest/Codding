@@ -11,5 +11,5 @@ setup(
     license='MIT',
     author='Aliaksandr Martyniuk',
     author_email='banifest@gmail.com',
-    description='Diploma'
+    description='Diploma', install_requires=['sqlalchemy']
 )

@@ -5,10 +5,10 @@ import uuid
 from src.coders.abstractCoder import AbstractCoder
 from src.helper.pattern.singleton import Singleton
 # noinspection PyMethodMayBeStatic
-from src.statistics.db.case_result import CaseResult
-from src.statistics.db.coder_entry import CoderEntry
+from src.statistics.db.case_result_entity import CaseResultEntity
+from src.statistics.db.coder_entity import coder_entity
 from src.statistics.db.connector import Connector
-from src.statistics.db.test_result import TestResult
+from src.statistics.db.test_result_entity import TestResultEntity
 
 
 # noinspection PyMethodMayBeStatic
@@ -17,7 +17,7 @@ class TestResultSerializer(metaclass=Singleton):
     def serialize_to_db(self, test_result: dict, first_coder: AbstractCoder, second_coder: AbstractCoder = None):
         # Создание первого кодера
         first_coder_guid = uuid.uuid4()
-        first_coder_entity = CoderEntry(
+        first_coder_entity = coder_entity(
             guid=first_coder_guid,
             coder_description='test',
             type_of_coder=first_coder.type_of_coder,
@@ -31,7 +31,7 @@ class TestResultSerializer(metaclass=Singleton):
         second_coder_entity = None
         if test_result['is_cascade']:
             second_coder_guid = uuid.uuid4()
-            second_coder_entity = CoderEntry(
+            second_coder_entity = coder_entity(
                 guid=second_coder_guid,
                 coder_description=second_coder.name,
                 type_of_coder=second_coder.type_of_coder,
@@ -45,18 +45,18 @@ class TestResultSerializer(metaclass=Singleton):
         for result_iter in test_result['test_cases']:
             timestamp = str(datetime.datetime.now())
 
-            TestResult(
+            TestResultEntity(
                 timestamp=timestamp,
                 flg_cascade=test_result['is_cascade'],
                 first_coder=first_coder_entity,
                 second_coder=second_coder_entity,
-                type_of_noise=TestResult.NoisesType.SINGLE,
+                type_of_noise=TestResultEntity.NoisesType.SINGLE,
                 noise=10
             ).create()
 
             quantity_test: int = 0
             for case_iter in result_iter['case']:
-                CaseResult(
+                CaseResultEntity(
                     guid=uuid.uuid4(),
                     test_timestamp=timestamp,
                     quantity_correct_bit=case_iter[quantity_test]['correct bits'],

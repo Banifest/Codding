@@ -1,10 +1,11 @@
+# coding=utf-8
 from enum import Enum, auto
 from uuid import UUID
 
 from src.statistics.db.entity import Entity
 
 
-class CoderEntry(Entity):
+class coder_entity(Entity):
     TABLE_NAME: str = "Coder"
 
     class CodersType(Enum):

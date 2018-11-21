@@ -3,13 +3,13 @@
 from abc import ABCMeta, abstractmethod
 
 from src.coders.exeption import CodingException
-from src.statistics.db.coder_entry import CoderEntry
+from src.statistics.db.coder_entity import coder_entity
 
 
 class AbstractCoder:
     __metaclass__ = ABCMeta
     name: str = ""
-    type_of_coder: CoderEntry.CodersType
+    type_of_coder: coder_entity.CodersType
     coding_information: int = 0
     countAdditional: int = 0
     lengthTotal: int = 0
@@ -17,7 +17,7 @@ class AbstractCoder:
     is_div_into_package = True
 
     @abstractmethod
-    def Encoding(self, information: int or list) -> list:
+    def encoding(self, information: int or list) -> list:
         """
         Args:
             information: list of bits for encoding
@@ -27,7 +27,7 @@ class AbstractCoder:
         pass
 
     @abstractmethod
-    def Decoding(self, information: list) -> list:
+    def decoding(self, information: list) -> list:
         """
         Args:
             information: list of bits for decoding

@@ -6,12 +6,12 @@ from src.coders import abstractCoder
 from src.coders.casts import BitListToInt, BitListToIntList, IntToBitList
 from src.coders.exeption import CodingException
 from src.logger import log
-from src.statistics.db.coder_entry import CoderEntry
+from src.statistics.db.coder_entity import coder_entity
 
 
 class Coder(abstractCoder.AbstractCoder):
     name = "Фонтанный"
-    type_of_coder = CoderEntry.CodersType.FOUNTAIN
+    type_of_coder = coder_entity.CodersType.FOUNTAIN
 
     countCodingBlocks: int  # количество блоков информации
     countBlocks: int  # количество блоков сочетаний
@@ -41,7 +41,7 @@ class Coder(abstractCoder.AbstractCoder):
         self.lengthAdditional = size_block * count_coding_blocks - length_information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
 
-    def Encoding(self, information: list):
+    def encoding(self, information: list):
         log.info("Кодирование пакета {0} фонтанным LT-кодером".format(information))
         combinationBlocks: list = []
         information = [0] * abs(len(information) - self.lengthInformation) + information  # добавление 0 битов вначало
@@ -61,7 +61,7 @@ class Coder(abstractCoder.AbstractCoder):
 
         return [y for x in answer for y in x]
 
-    def Decoding(self, information: list):
+    def decoding(self, information: list):
         """
         Декодер LT-фонтанного кода с заранее установленным генератором случайных чисел
         :param information: list Закодированная информация, представленная в виде массива битов
