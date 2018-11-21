@@ -24,8 +24,8 @@ class TestResultEntity(Entity):
             timestamp,
             flg_cascade: bool,
             first_coder: coder_entity,
-            second_coder,
-            type_of_noise,
+            second_coder: coder_entity,
+            type_of_noise: NoisesType,
             noise
     ):
         super().__init__()

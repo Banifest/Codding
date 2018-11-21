@@ -12,5 +12,5 @@ setup(
     license='MIT',
     author='Aliaksandr Martyniuk',
     author_email='banifest@gmail.com',
-    description='Diploma', install_requires=['sqlalchemy']
+    description='Diploma', install_requires=['sqlalchemy', 'alembic']
 )

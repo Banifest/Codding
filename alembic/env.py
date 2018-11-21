@@ -7,6 +7,8 @@ from sqlalchemy import engine_from_config, pool
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
+from statistics.db.table.statmetadata import StatMetaData
+
 config = context.config
 
 # Interpret the config file for Python logging.
@@ -17,7 +19,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = StatMetaData
 
 
 # other values from the config, defined by the needs of env.py,
