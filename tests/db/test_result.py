@@ -1,3 +1,4 @@
+# coding=utf-8
 import datetime
 import time
 import unittest
@@ -33,7 +34,7 @@ class TestResultTest(unittest.TestCase):
         )
         s_coder.create()
 
-        l_timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+        l_timestamp = datetime.datetime.fromtimestamp(time.time())
 
         test_result = TestResultEntity(
             timestamp=l_timestamp,
