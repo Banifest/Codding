@@ -43,15 +43,17 @@ class Connector(metaclass=Singleton):
         """
         if self._engine is None:
             self._engine = create_engine(
-                "postgres://{0}:{1}@ec2-54-246-85-234.eu-west-1.compute.amazonaws.com:5432/d32aj68h32vv4c".format(
+                # "postgres://{0}:{1}@ec2-54-246-85-234.eu-west-1.compute.amazonaws.com:5432/d32aj68h32vv4c".format(
+                "postgres://{0}:{1}@localhost:5433/postgres".format(
                     login,
                     password
-                ),
-                connect_args={
-                    'sslmode': 'require'
-                }
+                ), echo=True
+                # ,
+                # connect_args={
+                #    'sslmode': 'require'
+                # }
             )
-            return self._engine
+        return self._engine
 
     def save(self):
         self._connection.query("COMMIT")

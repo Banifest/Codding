@@ -7,7 +7,7 @@ from sqlalchemy import engine_from_config, pool
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-from statistics.db.table.statmetadata import StatMetaData
+from src.statistics.db.table.statmetadata import StatMetaData
 
 config = context.config
 
