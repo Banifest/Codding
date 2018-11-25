@@ -1,14 +1,14 @@
 # coding=utf-8
 # coding=utf-8
-from src.coders import abstractCoder
+from src.coders import abstract_coder
 from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList, cycle_shift_list
 from src.logger import log
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 
 
-class Coder(abstractCoder.AbstractCoder):
+class Coder(abstract_coder.AbstractCoder):
     name = "Сверточный"
-    type_of_coder = coder_entity.CodersType.CONVOLUTION
+    type_of_coder = CoderEntity.CodersType.CONVOLUTION
 
     countPolynomials: int = 0
     listPolynomials: list = []

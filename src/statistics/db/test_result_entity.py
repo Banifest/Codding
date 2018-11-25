@@ -1,7 +1,7 @@
 # coding=utf-8
 from enum import Enum, auto
 
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 from src.statistics.db.entity import Entity
 
 
@@ -14,8 +14,8 @@ class TestResultEntity(Entity):
 
     timestamp: int
     flg_cascade: bool
-    first_coder: coder_entity
-    second_coder: coder_entity
+    first_coder: CoderEntity
+    second_coder: CoderEntity
     type_of_noise: NoisesType
     noise: float
 
@@ -23,8 +23,8 @@ class TestResultEntity(Entity):
             self,
             timestamp,
             flg_cascade: bool,
-            first_coder: coder_entity,
-            second_coder: coder_entity,
+            first_coder: CoderEntity,
+            second_coder: CoderEntity,
             type_of_noise: NoisesType,
             noise
     ):

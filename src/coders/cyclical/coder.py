@@ -5,16 +5,16 @@ import math
 import numpy as np
 from numpy.polynomial import polynomial as plm
 
-from src.coders import abstractCoder
+from src.coders import abstract_coder
 from src.coders.casts import IntToBitList
 from src.logger import log
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 
 
-class Coder(abstractCoder.AbstractCoder):
+class Coder(abstract_coder.AbstractCoder):
     name = "Циклический"
     polynomial: plm.Polynomial
-    type_of_coder = coder_entity.CodersType.CYCLICAL
+    type_of_coder = CoderEntity.CodersType.CYCLICAL
     matrix_G: np.matrix  # порождающая матрица
     matrix_H: np.matrix  # проверочная матрицал
 

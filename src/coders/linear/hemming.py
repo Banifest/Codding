@@ -4,15 +4,15 @@ import math
 
 import numpy as np
 
-from src.coders import abstractCoder
+from src.coders import abstract_coder
 from src.coders.casts import *
 from src.logger import log
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 
 
-class Coder(abstractCoder.AbstractCoder):
+class Coder(abstract_coder.AbstractCoder):
     name = "Хемминга"
-    type_of_coder = coder_entity.CodersType.HEMMING
+    type_of_coder = CoderEntity.CodersType.HEMMING
     _matrixTransformation: list = []
 
     def try_normalization(self, bit_list: list) -> list:

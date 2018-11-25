@@ -7,7 +7,7 @@ from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import draw_graphic
 from src.channel.cascadecodec import CascadeCodec
 from src.channel.codec import Codec
-from src.coders.abstractCoder import AbstractCoder
+from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import IntToBitList
 from src.coders.exeption import CodingException
 from src.logger import log
@@ -106,9 +106,13 @@ class TestCoder(QThread):
                 self.badPackage += 1
             else:
                 self.invisiblePackage += 1
-            case_information.append({x: {'correct bits': status[1],
-                                         'error bits': status[2],
-                                         'status': self.TRANSFER_STR[status[0]]}})
+            case_information.append({
+                x: {
+                    'correct bits': status[1],
+                    'error bits': status[2],
+                    'status': self.TRANSFER_STR[status[0]]
+                }
+            })
             self.countCorrectBit += status[1]
             self.countErrorBit += status[2]
             progress += step

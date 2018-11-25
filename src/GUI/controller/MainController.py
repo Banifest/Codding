@@ -10,7 +10,7 @@ from src.GUI.controller.TestController import TestController
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import draw_graphic
 from src.GUI.windows.MainWindow import MainWindow
-from src.coders.abstractCoder import AbstractCoder
+from src.coders.abstract_coder import AbstractCoder
 
 
 class MainController:

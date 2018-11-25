@@ -1,17 +1,17 @@
 # coding=utf-8
 from uuid import UUID
 
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 
 
-class CoderHemmingEntity(coder_entity):
+class CoderEntity(CoderEntity):
     matrix_of_transformation: list
 
     def __init__(
             self,
             guid: UUID,
             coder_description: str,
-            type_of_coder: coder_entity.CodersType,
+            type_of_coder: CoderEntity.CodersType,
             coder_speed: int,
             len_input_information: int,
             len_additional_information: int,

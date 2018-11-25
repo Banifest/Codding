@@ -5,7 +5,7 @@ import unittest
 import uuid
 
 from src.statistics.db.case_result_entity import CaseResultEntity
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 from src.statistics.db.test_result_entity import TestResultEntity
 
 
@@ -13,20 +13,20 @@ class TestResultTest(unittest.TestCase):
     def test_create(self):
         first = uuid.uuid4()
         second = uuid.uuid4()
-        f_coder = coder_entity(
+        f_coder = CoderEntity(
             guid=first,
             coder_description='test',
-            type_of_coder=coder_entity.CodersType.HEMMING,
+            type_of_coder=CoderEntity.CodersType.HEMMING,
             coder_speed=1,
             len_input_information=1,
             len_additional_information=1,
             interleaver=True
         )
         f_coder.create()
-        s_coder = coder_entity(
+        s_coder = CoderEntity(
             guid=second,
             coder_description='test',
-            type_of_coder=coder_entity.CodersType.HEMMING,
+            type_of_coder=CoderEntity.CodersType.HEMMING,
             coder_speed=1,
             len_input_information=1,
             len_additional_information=1,

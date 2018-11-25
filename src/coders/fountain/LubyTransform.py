@@ -2,16 +2,16 @@
 # coding=utf-8
 import random
 
-from src.coders import abstractCoder
+from src.coders import abstract_coder
 from src.coders.casts import BitListToInt, BitListToIntList, IntToBitList
 from src.coders.exeption import CodingException
 from src.logger import log
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 
 
-class Coder(abstractCoder.AbstractCoder):
+class Coder(abstract_coder.AbstractCoder):
     name = "Фонтанный"
-    type_of_coder = coder_entity.CodersType.FOUNTAIN
+    type_of_coder = CoderEntity.CodersType.FOUNTAIN
 
     countCodingBlocks: int  # количество блоков информации
     countBlocks: int  # количество блоков сочетаний

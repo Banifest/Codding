@@ -4,22 +4,22 @@ from math import ceil
 from typing import Optional
 
 from src.channel import codec, chanel
-from src.coders import abstractCoder
+from src.coders import abstract_coder
 from src.coders.casts import BitListToInt
 from src.coders.interleaver import Interleaver
 
 
 class CascadeCodec(codec.Codec):
-    firstCoder: abstractCoder.AbstractCoder
+    firstCoder: abstract_coder.AbstractCoder
     firstInterleaver: Interleaver.Interleaver
-    secondCoder: abstractCoder.AbstractCoder
+    secondCoder: abstract_coder.AbstractCoder
     secondInterleaver: Interleaver.Interleaver = None
     mode: int = 0
 
     def __init__(
             self,
-            first_coder: abstractCoder.AbstractCoder,
-            second_coder: abstractCoder.AbstractCoder,
+            first_coder: abstract_coder.AbstractCoder,
+            second_coder: abstract_coder.AbstractCoder,
             noise_probability: int or float,
             count_cyclical: Optional[int],
             duplex: Optional[bool],

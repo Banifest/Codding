@@ -2,16 +2,16 @@
 import unittest
 from uuid import UUID
 
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 
 
 class CoderTest(unittest.TestCase):
 
     def test_create(self):
-        coder = coder_entity(
+        coder = CoderEntity(
             guid=UUID('{ba9763d0c10045a4b9511bf2df9302b2}'),
             coder_description='test',
-            type_of_coder=coder_entity.CodersType.HEMMING,
+            type_of_coder=CoderEntity.CodersType.HEMMING,
             coder_speed=1,
             len_input_information=1,
             len_additional_information=1,
@@ -19,10 +19,10 @@ class CoderTest(unittest.TestCase):
         )
         coder.create()
 
-        coder = coder_entity(
+        coder = CoderEntity(
             guid=UUID('{ba9763d0c10045a4b9511bf2df9302b2}'),
             coder_description='test',
-            type_of_coder=coder_entity.CodersType.HEMMING,
+            type_of_coder=CoderEntity.CodersType.HEMMING,
             coder_speed=1,
             len_input_information=1,
             len_additional_information=1,

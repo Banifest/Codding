@@ -1,10 +1,10 @@
 # coding=utf-8
 import numpy as np
 
-from src.coders import abstractCoder
+from src.coders import abstract_coder
 
 
-class Coder(abstractCoder.AbstractCoder):
+class Coder(abstract_coder.AbstractCoder):
     """
     Для хранения матриц большого размера будем использовать граф
     где columns список верхних вершин, а lines нижних. В каждом элементе

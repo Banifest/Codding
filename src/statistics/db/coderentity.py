@@ -5,7 +5,7 @@ from uuid import UUID
 from src.statistics.db.entity import Entity
 
 
-class coder_entity(Entity):
+class CoderEntity(Entity):
     TABLE_NAME: str = "Coder"
 
     class CodersType(Enum):

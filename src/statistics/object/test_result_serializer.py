@@ -2,11 +2,11 @@ import datetime
 import json
 import uuid
 
-from src.coders.abstractCoder import AbstractCoder
+from src.coders.abstract_coder import AbstractCoder
 from src.helper.pattern.singleton import Singleton
 # noinspection PyMethodMayBeStatic
 from src.statistics.db.case_result_entity import CaseResultEntity
-from src.statistics.db.coder_entity import coder_entity
+from src.statistics.db.coderentity import CoderEntity
 from src.statistics.db.connector import Connector
 from src.statistics.db.test_result_entity import TestResultEntity
 
@@ -17,7 +17,7 @@ class TestResultSerializer(metaclass=Singleton):
     def serialize_to_db(self, test_result: dict, first_coder: AbstractCoder, second_coder: AbstractCoder = None):
         # Создание первого кодера
         first_coder_guid = uuid.uuid4()
-        first_coder_entity = coder_entity(
+        first_coder_entity = CoderEntity(
             guid=first_coder_guid,
             coder_description='test',
             type_of_coder=first_coder.type_of_coder,
@@ -31,7 +31,7 @@ class TestResultSerializer(metaclass=Singleton):
         second_coder_entity = None
         if test_result['is_cascade']:
             second_coder_guid = uuid.uuid4()
-            second_coder_entity = coder_entity(
+            second_coder_entity = CoderEntity(
                 guid=second_coder_guid,
                 coder_description=second_coder.name,
                 type_of_coder=second_coder.type_of_coder,

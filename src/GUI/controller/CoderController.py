@@ -2,7 +2,7 @@
 # coding=utf-8
 from PyQt5.QtWidgets import QMessageBox
 
-from src.coders.abstractCoder import AbstractCoder
+from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import StrListToList
 from src.coders.convolutional.Coder import Coder as Convolutional
 from src.coders.cyclical.coder import Coder as Cyclical
