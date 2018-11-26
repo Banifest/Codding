@@ -97,11 +97,13 @@ class Codec:
 
         return self.information
 
-    def transfer_one_step(self, information: list) -> [int, int, int]:
+    def transfer_one_step(self, information: list) -> [int, int, int, int, int]:
         #  Разбиение на пакеты
         # TODO Пересмотреть разбиение на пакеты, совсем шатко сейчас работает
         success_bits = 0
         drop_bits = 0
+        repair_bits = 0
+        change_bits = 0
         package_list = []
         if self.coder.is_div_into_package:
             for x in range(int(ceil(len(information) / self.coder.lengthInformation))):
@@ -163,11 +165,13 @@ class Codec:
                 package_status = 2
             elif status == 1 and package_status != 2:
                 package_status = 1
-        return [package_status, success_bits, drop_bits]
+        return [package_status, success_bits, drop_bits, repair_bits, change_bits]
 
-    def get_transfer_one_step(self, information: list) -> [list, int, int]:
+    def get_transfer_one_step(self, information: list) -> [list, int, int, int, int]:
         success_bits = 0
         drop_bits = 0
+        repair_bits = 0
+        change_bits = 0
         package_status = 0
         now_information = information.copy()
 
@@ -220,7 +224,7 @@ class Codec:
             package_status = 2
         elif status == 1 and package_status != 2:
             package_status = 1
-        return [now_information, success_bits, drop_bits]
+        return [now_information, success_bits, drop_bits, repair_bits, change_bits]
 
     def get_information_about_last_transfer(self):
         return self.information

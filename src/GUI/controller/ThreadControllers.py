@@ -97,7 +97,7 @@ class TestCoder(QThread):
         log.debug("Начало цикла тестов")
         case_information = []
         for x in range(self.countTest):
-            status: [int, int, int] = self.channel.transfer_one_step(information)
+            status: [int, int, int, int, int] = self.channel.transfer_one_step(information)
             if status[0] == 0:
                 self.successfullyPackage += 1
             elif status[0] == 1:
@@ -110,6 +110,8 @@ class TestCoder(QThread):
                 x: {
                     'correct bits': status[1],
                     'error bits': status[2],
+                    'repair bits': status[3],
+                    'change bits': status[4],
                     'status': self.TRANSFER_STR[status[0]]
                 }
             })

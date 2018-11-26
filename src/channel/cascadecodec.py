@@ -69,8 +69,8 @@ class CascadeCodec(codec.Codec):
                 now_information = self.firstCoder.decoding(now_information)
 
                 if BitListToInt(now_information) != BitListToInt(normalization_information):
-                    return [2, status[1], status[2]]
-            return [1, status[1], status[2]]
+                    return [2, status[1], status[2], status[3], status[4]]
+            return [1, status[1], status[2], status[3], status[4]]
         elif self.mode == 1:
             first_coder_information: list = self.firstCoder.encoding(information)
             if self.firstInterleaver is not None:
@@ -92,6 +92,6 @@ class CascadeCodec(codec.Codec):
             second_coder_information = self.secondCoder.decoding(second_coder_information)
             if BitListToInt(first_coder_information) != BitListToInt(first_coder_information) \
                     and BitListToInt(second_coder_information) != BitListToInt(second_coder_information):
-                return [2, status[1], status[2]]
+                return [2, status[1], status[2], status[3], status[4]]
             else:
-                return [1, status[1], status[2]]
+                return [1, status[1], status[2], status[3], status[4]]

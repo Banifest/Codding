@@ -7,7 +7,7 @@ from src.statistics.db.table.statmetadata import StatMetaData
 coder_table = Table(
     'coder',
     StatMetaData().get_metadata(),
-    Column('guid', UUID, primary_key=True),
+    Column('guid', UUID(as_uuid=True), primary_key=True),
     Column('coder_type', Integer),
     Column('coder_speed', Float),
     Column('input_length', Integer),
