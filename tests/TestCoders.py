@@ -2,12 +2,12 @@
 # coding=utf-8
 import unittest
 
-from src.coders.convolutional.Coder import Coder as ConvolutionalCoder
-from src.coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
+from src.coders.convolutional.coder import Coder as ConvolutionalCoder
+from src.coders.convolutional.coder_for_packet import ConvolutionalCoderForPacket
 from src.coders.cyclical.coder import Coder as CyclicalCoder
-from src.coders.fountain.LubyTransform import Coder as LubyTransformCoder
-from src.coders.linear.ReedMuller import Coder as ReedMullerCoder
+from src.coders.fountain.luby_transform import Coder as LubyTransformCoder
 from src.coders.linear.hamming import Coder as hammingCoder
+from src.coders.linear.reed_muller import Coder as ReedMullerCoder
 
 
 class TestConvolutionalCoder(unittest.TestCase):

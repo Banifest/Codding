@@ -22,7 +22,7 @@ class Connector(metaclass=Singleton):
             # "089bf6255905ba11b1fb462a2d0177204a3b6d6f93c7fb989a721b6686d26a1b"
     ):
         """
-        Method for getting connection to remote database Heroku
+        Method for getting connection to native(remote) database
         :param login: login for user of database
         :param password: password for user of database
         :return: Connection object

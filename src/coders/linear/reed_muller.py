@@ -33,22 +33,22 @@ class Coder(abstract_coder.AbstractCoder):
         init_matrix: list = [IntToBitList((2 ** (2 ** self.power)) - 1)]
         if r > 0:
             self.vectors = np.matrix(
-                    [IntToBitList(x, size=self.power, rev=False) for x in range(2 ** self.power)]).T.tolist()
+                [IntToBitList(x, size=self.power) for x in range(2 ** self.power)]).T.tolist()
             init_matrix += self.vectors
-            matrix_int_G1 = [BitListToInt(x) for x in init_matrix[1:]]
+            matrix_int_g1 = [BitListToInt(x) for x in init_matrix[1:]]
             self.vectors_rise = [[x] for x in range(1, self.power + 1)]
 
         for x in range(r - 1):
             comb: list = list(itertools.combinations(range(self.power), x + 2))
 
-            new_matrix_G: list = []
+            new_matrix_g: list = []
             self.vectors_rise += comb
             for x in comb:
-                val: int = matrix_int_G1[x[0]]
+                val: int = matrix_int_g1[x[0]]
                 for y in x:
-                    val &= matrix_int_G1[y]
-                new_matrix_G.append(IntToBitList(val, size=1 << self.power))
-            init_matrix += new_matrix_G
+                    val &= matrix_int_g1[y]
+                new_matrix_g.append(IntToBitList(val, size=1 << self.power))
+            init_matrix += new_matrix_g
 
         self.matrix_G = np.matrix(init_matrix)
         self.lengthInformation = len(self.matrix_G.tolist())

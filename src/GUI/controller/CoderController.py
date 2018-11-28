@@ -4,9 +4,9 @@ from PyQt5.QtWidgets import QMessageBox
 
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import StrListToList
-from src.coders.convolutional.Coder import Coder as Convolutional
+from src.coders.convolutional.coder import Coder as Convolutional
 from src.coders.cyclical.coder import Coder as Cyclical
-from src.coders.fountain.LubyTransform import Coder as LubyTransform
+from src.coders.fountain.luby_transform import Coder as LubyTransform
 from src.coders.linear.hamming import Coder as Hamming
 
 

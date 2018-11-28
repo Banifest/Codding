@@ -1,18 +1,8 @@
 # coding=utf-8
-import uuid
 
 from sqlalchemy import MetaData
 
 from src.helper.pattern.singleton import Singleton
-
-
-def process_result_value(self, value, dialect):
-    if value is None:
-        return value
-    else:
-        if not isinstance(value, uuid.UUID):
-            value = uuid.UUID(value)
-        return value
 
 
 class StatMetaData(metaclass=Singleton):

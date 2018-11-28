@@ -1,4 +1,5 @@
-from src.helper.error.EnumExceptionStandardMessage import EnumExceptionStandardMessage
+# coding=utf-8
+from src.helper.error.enum_exception_standard_message import EnumExceptionStandardMessage
 from src.helper.error.exception.GUI.GraphicalException import GraphicalException
 
 

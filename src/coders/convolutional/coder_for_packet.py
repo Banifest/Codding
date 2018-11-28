@@ -2,7 +2,7 @@
 # coding=utf-8
 from math import log2
 
-from src.coders.convolutional.Coder import Coder
+from src.coders.convolutional.coder import Coder
 
 
 class ConvolutionalCoderForPacket(Coder):

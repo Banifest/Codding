@@ -1,3 +1,4 @@
+# coding=utf-8
 from PyQt5.QtWidgets import QWidget, QMessageBox
 
 from src.helper.error.exception.ApplicationException import ApplicationException
