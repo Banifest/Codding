@@ -7,12 +7,12 @@ import numpy as np
 from src.coders import abstract_coder
 from src.coders.casts import *
 from src.logger import log
-from src.statistics.db.coderentity import CoderEntity
+from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
     name = "Хемминга"
-    type_of_coder = CoderEntity.CodersType.HEMMING
+    type_of_coder = EnumCodersType.hamming
     _matrixTransformation: list = []
 
     def try_normalization(self, bit_list: list) -> list:
@@ -115,6 +115,7 @@ class Coder(abstract_coder.AbstractCoder):
         return answer
 
     def to_json(self) -> dict:
+        # noinspection PyUnresolvedReferences
         return {
             'name': self.name,
             'length information word': self.lengthInformation,

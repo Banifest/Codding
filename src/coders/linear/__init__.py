@@ -1,3 +1,3 @@
 # coding=utf-8
 # coding=utf-8
-import src.coders.linear.hemming
+import src.coders.linear.hamming

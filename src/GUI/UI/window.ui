@@ -65,7 +65,7 @@
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="hemming">
+            <widget class="QWidget" name="hamming">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -75,7 +75,7 @@
            </rect>
           </property>
           <attribute name="label">
-           <string>Hemming</string>
+              <string>hamming</string>
           </attribute>
           <widget class="QLabel" name="label">
            <property name="geometry">
@@ -363,7 +363,7 @@
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="hemming_3">
+            <widget class="QWidget" name="hamming_3">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -373,7 +373,7 @@
            </rect>
           </property>
           <attribute name="label">
-           <string>Hemming</string>
+              <string>hamming</string>
           </attribute>
           <widget class="QLabel" name="label_21">
            <property name="geometry">

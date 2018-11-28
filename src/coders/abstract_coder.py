@@ -3,13 +3,13 @@
 from abc import ABCMeta, abstractmethod
 
 from src.coders.exeption import CodingException
-from src.statistics.db.coderentity import CoderEntity
+from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class AbstractCoder:
     __metaclass__ = ABCMeta
     name: str = ""
-    type_of_coder: CoderEntity.CodersType
+    type_of_coder: EnumCodersType
     coding_information: int = 0
     countAdditional: int = 0
     lengthTotal: int = 0

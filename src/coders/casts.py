@@ -55,7 +55,7 @@ def cycle_shift_list(num: list, right: bool = True, count: int = 1):
         return num[count:] + num[:count]
 
 
-def GetHemmingDistance(first: list, second: list) -> int:
+def GethammingDistance(first: list, second: list) -> int:
     answer: int = 0
     if len(first) != len(second):
         raise Exception("Списки должны быть одинаковой длины")

@@ -8,13 +8,13 @@ from numpy.polynomial import polynomial as plm
 from src.coders import abstract_coder
 from src.coders.casts import IntToBitList
 from src.logger import log
-from src.statistics.db.coderentity import CoderEntity
+from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
     name = "Циклический"
     polynomial: plm.Polynomial
-    type_of_coder = CoderEntity.CodersType.CYCLICAL
+    type_of_coder = EnumCodersType.CYCLICAL
     matrix_G: np.matrix  # порождающая матрица
     matrix_H: np.matrix  # проверочная матрицал
 

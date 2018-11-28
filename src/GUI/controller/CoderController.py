@@ -7,7 +7,7 @@ from src.coders.casts import StrListToList
 from src.coders.convolutional.Coder import Coder as Convolutional
 from src.coders.cyclical.coder import Coder as Cyclical
 from src.coders.fountain.LubyTransform import Coder as LubyTransform
-from src.coders.linear.hemming import Coder as Hemming
+from src.coders.linear.hamming import Coder as Hamming
 
 
 class CoderParams:
@@ -64,7 +64,7 @@ class CoderParams:
     def create_coder(self):
         try:
             if self._coder_type == 0:
-                self.coder = Hemming(self._hemSizePack)
+                self.coder = Hamming(self._hemSizePack)
             elif self._coder_type == 1:
                 self.coder = Cyclical(
                         int(self._cycSizePack),
@@ -97,7 +97,7 @@ class CoderParams:
             #             int(self._addCoderWindow.sizePackageTextBox.text())
             #     )
         except:
-            QMessageBox.warning(
+            QMessageBox().warning(
                 None,
                 "Поля заполнены не верной информацией",
                 "Поля заполнены не верной информацией",

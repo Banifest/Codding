@@ -7,7 +7,7 @@ from src.coders.convolutional.CoderForPacket import ConvolutionalCoderForPacket
 from src.coders.cyclical.coder import Coder as CyclicalCoder
 from src.coders.fountain.LubyTransform import Coder as LubyTransformCoder
 from src.coders.linear.ReedMuller import Coder as ReedMullerCoder
-from src.coders.linear.hemming import Coder as HemmingCoder
+from src.coders.linear.hamming import Coder as hammingCoder
 
 
 class TestConvolutionalCoder(unittest.TestCase):
@@ -37,28 +37,28 @@ class TestConvolutionalCoder(unittest.TestCase):
         # так как d(min)=4, кодер не может исправить однозначно 3 подряд идущие ошибки
 
 
-class TestHemmingCoder(unittest.TestCase):
+class TesthammingCoder(unittest.TestCase):
     def test_init(self):
-        first_coder: HemmingCoder = HemmingCoder(4)
+        first_coder: hammingCoder = hammingCoder(4)
         self.assertTrue(first_coder.lengthTotal == 7)
         self.assertTrue(first_coder.lengthInformation == 4)
         self.assertTrue(first_coder.lengthAdditional == 3)
 
-        second_coder = HemmingCoder(8)
+        second_coder = hammingCoder(8)
         self.assertTrue(second_coder.lengthInformation == 8)
         self.assertTrue(second_coder.lengthTotal == 12)
         self.assertTrue(second_coder.lengthAdditional == 4)
 
-        third_coder = HemmingCoder(15)
+        third_coder = hammingCoder(15)
         self.assertTrue(third_coder.lengthTotal == 20)
         self.assertTrue(third_coder.lengthInformation == 15)
         self.assertTrue(third_coder.lengthAdditional == 5)
 
     def test_coder(self):
-        test_coder: HemmingCoder = HemmingCoder(4)
+        test_coder: hammingCoder = hammingCoder(4)
         self.assertTrue([1, 0, 1, 0] == test_coder.decoding(test_coder.encoding([1, 0, 1, 0])))
 
-        test_coder: HemmingCoder = HemmingCoder(10)
+        test_coder: hammingCoder = hammingCoder(10)
         self.assertTrue([1, 0, 1, 0, 1, 1, 1, 1, 1, 0] == test_coder.decoding(
                 test_coder.encoding([1, 0, 1, 0, 1, 1, 1, 1, 1, 0, ])))
 

@@ -118,7 +118,7 @@ src/coders/convolutional/__pycache__/
 src/coders/cyclical/__pycache__/
 src/coders/fountain/__pycache__/
 src/coders/interleaver/__pycache__/
-src/coders/linear/__pycache__/hemming.cpython-36.pyc
+src/coders/linear/__pycache__/hamming.cpython-36.pyc
 /.idea
 log.txt
 /.idea/

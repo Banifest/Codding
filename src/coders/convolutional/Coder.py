@@ -1,14 +1,14 @@
 # coding=utf-8
 # coding=utf-8
 from src.coders import abstract_coder
-from src.coders.casts import BitListToInt, GetHemmingDistance, IntToBitList, cycle_shift_list
+from src.coders.casts import BitListToInt, GethammingDistance, IntToBitList, cycle_shift_list
 from src.logger import log
-from src.statistics.db.coderentity import CoderEntity
+from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
     name = "Сверточный"
-    type_of_coder = CoderEntity.CodersType.CONVOLUTION
+    type_of_coder = EnumCodersType.CONVOLUTION
 
     countPolynomials: int = 0
     listPolynomials: list = []
@@ -126,12 +126,12 @@ class Coder(abstract_coder.AbstractCoder):
             number: int = 0
             for info_about_vertex in last_step:
                 vertex_step: int = self.graph[number][0][0]  # вершина перехода
-                distance: int = GetHemmingDistance(x, self.graph[number][0][1])
+                distance: int = GethammingDistance(x, self.graph[number][0][1])
                 if now_step[vertex_step][0] > last_step[number][0] + distance:
                     now_step[vertex_step] = [info_about_vertex[0] + distance, info_about_vertex[1] + [0]]
 
                 vertex_step: int = self.graph[number][1][0]  # вершина перехода
-                distance: int = GetHemmingDistance(x, self.graph[number][1][1])
+                distance: int = GethammingDistance(x, self.graph[number][1][1])
                 if now_step[vertex_step][0] > last_step[number][0] + distance:
                     now_step[vertex_step] = [info_about_vertex[0] + distance, info_about_vertex[1] + [1]]
 
