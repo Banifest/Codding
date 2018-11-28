@@ -1,7 +1,7 @@
 # coding=utf-8
 from PyQt5.QtWidgets import QWidget, QMessageBox
 
-from src.helper.error.exception.ApplicationException import ApplicationException
+from src.helper.error.exception.application_exception import ApplicationException
 # noinspection PyMethodMayBeStatic
 # Disable for singleton classes
 from src.helper.pattern.singleton import Singleton

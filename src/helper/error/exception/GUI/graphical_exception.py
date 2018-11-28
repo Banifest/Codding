@@ -1,7 +1,7 @@
 # coding=utf-8
 from src.helper.error.enum_exception_standard_message import EnumExceptionStandardMessage
 from src.helper.error.error_handler import ErrorHandler
-from src.helper.error.exception.ApplicationException import ApplicationException
+from src.helper.error.exception.application_exception import ApplicationException
 
 
 class GraphicalException(ApplicationException):
