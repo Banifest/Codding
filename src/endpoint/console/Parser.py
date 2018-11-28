@@ -31,6 +31,11 @@ class Parser(metaclass=Singleton):
             required=False,
             help="""Coder mode(s - codec contain only one coder, c - codec contain cascade from two coders )"""
         )
+        self._argument_parser.add_argument_group(
+            "-nt", "--noises_type",
+            required=False,
+            help="""Type of noises(s - for single noise type(Gauss noise) or p - for packages error)"""
+        )
 
         self._arguments = vars(self._argument_parser.parse_args())
 
