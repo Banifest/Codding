@@ -5,6 +5,7 @@ from math import ceil
 from typing import Optional, Union
 
 from src.channel import chanel
+from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.exeption import CodingException
 from src.coders.interleaver import Interleaver
@@ -97,7 +98,7 @@ class Codec:
 
         return self.information
 
-    def transfer_one_step(self, information: list) -> [int, int, int, int, int]:
+    def transfer_one_step(self, information: list) -> [EnumPackageTransferResult, int, int, int, int]:
         #  Разбиение на пакеты
         # TODO Пересмотреть разбиение на пакеты, совсем шатко сейчас работает
         success_bits = 0
@@ -113,7 +114,7 @@ class Codec:
         else:
             package_list = [information.copy()]
 
-        package_status: int = 0
+        package_status: EnumPackageTransferResult = EnumPackageTransferResult.SUCCESS
         for x in package_list:
             now_information: list = x.copy()
             log.info("Производиться передача последовательности битов - {0}".format(now_information))
@@ -162,12 +163,12 @@ class Codec:
             success_bits += current_step_success_bits
             drop_bits += len(normalization_information) - current_step_success_bits
             if status > 1:
-                package_status = 2
-            elif status == 1 and package_status != 2:
-                package_status = 1
+                package_status = EnumPackageTransferResult.ERROR
+            elif status == 1 and package_status != EnumPackageTransferResult.ERROR:
+                package_status = EnumPackageTransferResult.REPAIR
         return [package_status, success_bits, drop_bits, repair_bits, change_bits]
 
-    def get_transfer_one_step(self, information: list) -> [list, int, int, int, int]:
+    def get_transfer_one_step(self, information: list) -> list:
         success_bits = 0
         drop_bits = 0
         repair_bits = 0

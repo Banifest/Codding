@@ -7,6 +7,7 @@ from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import draw_graphic
 from src.channel.cascadecodec import CascadeCodec
 from src.channel.codec import Codec
+from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import IntToBitList
 from src.coders.exeption import CodingException
@@ -97,7 +98,7 @@ class TestCoder(QThread):
         log.debug("Начало цикла тестов")
         case_information = []
         for x in range(self.countTest):
-            status: [int, int, int, int, int] = self.channel.transfer_one_step(information)
+            status: [EnumPackageTransferResult, int, int, int, int] = self.channel.transfer_one_step(information)
             if status[0] == 0:
                 self.successfullyPackage += 1
             elif status[0] == 1:
@@ -112,7 +113,7 @@ class TestCoder(QThread):
                     'error bits': status[2],
                     'repair bits': status[3],
                     'change bits': status[4],
-                    'status': self.TRANSFER_STR[status[0]]
+                    'status': status[0].value
                 }
             })
             self.countCorrectBit += status[1]
