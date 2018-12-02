@@ -99,11 +99,11 @@ class TestCoder(QThread):
         case_information = []
         for x in range(self.countTest):
             status: [EnumPackageTransferResult, int, int, int, int] = self.channel.transfer_one_step(information)
-            if status[0] == 0:
+            if status[0] == EnumPackageTransferResult.SUCCESS:
                 self.successfullyPackage += 1
-            elif status[0] == 1:
+            elif status[0] == EnumPackageTransferResult.REPAIR:
                 self.repairPackage += 1
-            elif status[0] == 2:
+            elif status[0] == EnumPackageTransferResult.ERROR:
                 self.badPackage += 1
             else:
                 self.invisiblePackage += 1

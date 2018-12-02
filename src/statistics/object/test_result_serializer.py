@@ -42,7 +42,27 @@ class TestResultSerializer(metaclass=Singleton):
                 description=second_coder.name
             ))
 
-        current_noise: float = test_result["auto_test_information"]["start"]
+        # TODO необходимо разделить на объекты
+        if "auto_test_information" in test_result:
+            current_noise: float = test_result["auto_test_information"]["start"]
+        else:
+            return
+            # TODO необходимо добавить для одиновного теста логику
+        #            quantity_test: int = 0
+        #            current_noise: float = 1
+        #            timestamp = str(datetime.datetime.now())
+        #            for case_iter in test_result["test"]:
+        #                connection.execute(case_table.insert().values(
+        #                    guid=uuid.uuid4(),
+        #                    test_timestamp=timestamp,
+        #                    count_correct_bits=case_iter[quantity_test]['correct bits'],
+        #                    count_incorrect_bits=case_iter[quantity_test]['error bits'],
+        #                    count_repair_bits=case_iter[quantity_test]['repair bits'],
+        #                    count_changed_bits=case_iter[quantity_test]['change bits']
+        #                ))
+        #
+        #                quantity_test += 1
+
         for result_iter in test_result['test_cases']:
             timestamp = str(datetime.datetime.now())
 
@@ -56,15 +76,6 @@ class TestResultSerializer(metaclass=Singleton):
             ))
             current_noise += test_result["auto_test_information"]["step"]
 
-            # TestResultEntity(
-            #     timestamp=timestamp,
-            #     flg_cascade=test_result['is_cascade'],
-            #     first_coder=first_coder_guid,
-            #     second_coder=second_coder_entity,
-            #     type_of_noise=TestResultEntity.NoisesType.SINGLE,
-            #     noise=10
-            # ).create()
-
             quantity_test: int = 0
             for case_iter in result_iter['case']:
                 connection.execute(case_table.insert().values(
@@ -75,14 +86,7 @@ class TestResultSerializer(metaclass=Singleton):
                     count_repair_bits=case_iter[quantity_test]['repair bits'],
                     count_changed_bits=case_iter[quantity_test]['change bits']
                 ))
-                # CaseResultEntity(
-                #     guid=uuid.uuid4(),
-                #     test_timestamp=timestamp,
-                #     quantity_correct_bit=case_iter[quantity_test]['correct bits'],
-                #     quantity_incorrect_bit=case_iter[quantity_test]['error bits'],
-                #     quantity_repair_bit=1,
-                #     quantity_changed_bit=1
-                # ).create()
+
                 quantity_test += 1
 
     def serialize_to_json(self, test_result: dict, file_name: str = "lastResult.json") -> None:

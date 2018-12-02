@@ -3,7 +3,7 @@ from enum import Enum, auto
 
 
 class EnumCodersType(Enum):
-    hamming = auto()
+    HAMMING = auto()
     CYCLICAL = auto()
     CONVOLUTION = auto()
     FOUNTAIN = auto()

@@ -8,11 +8,22 @@ from src.coders import abstract_coder
 from src.coders.casts import *
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
+import math
+
+import numpy as np
+
+from src.coders import abstract_coder
+from src.coders.casts import *
+from src.logger import log
+from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
+    def get_coder_parameters(self):
+        pass
+
     name = "Хемминга"
-    type_of_coder = EnumCodersType.hamming
+    type_of_coder = EnumCodersType.HAMMING
     _matrixTransformation: list = []
 
     def try_normalization(self, bit_list: list) -> list:

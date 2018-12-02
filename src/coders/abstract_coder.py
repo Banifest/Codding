@@ -3,11 +3,11 @@
 from abc import ABCMeta, abstractmethod
 
 from src.coders.exeption import CodingException
+from src.endpoint.console.iconsolecoder import IConsoleCoder
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
-class AbstractCoder:
-    __metaclass__ = ABCMeta
+class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
     name: str = ""
     type_of_coder: EnumCodersType
     coding_information: int = 0

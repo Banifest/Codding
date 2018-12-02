@@ -9,6 +9,9 @@ from src.coders.casts import BitListToInt, IntToBitList
 
 
 class Coder(abstract_coder.AbstractCoder):
+    def get_coder_parameters(self):
+        pass
+
     def get_redundancy(self) -> float:
         return super().get_redundancy()
 

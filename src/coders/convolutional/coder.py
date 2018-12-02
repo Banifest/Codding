@@ -7,6 +7,9 @@ from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
+    def get_coder_parameters(self):
+        pass
+
     name = "Сверточный"
     type_of_coder = EnumCodersType.CONVOLUTION
 
