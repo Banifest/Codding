@@ -5,8 +5,8 @@ from channel.enum_bit_transfer_result import EnumBitTransferResult
 from src.channel import chanel
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
-from src.coders.exeption import CodingException
 from src.coders.interleaver import Interleaver
+from src.helper.error.exception.CoddingException import CoddingException
 from src.logger import log
 
 
@@ -45,19 +45,20 @@ class Codec:
         log.debug("Канал создан")
 
     def __str__(self) -> str:
-        return "Вероятность ошибки в канале - {0}.\n" \
-               "Является ли канал двухсторонним - {1}.\n" \
-               "Используеммый кодер:\n {2}." \
-               "Используется ли перемежитель на данном канале связи - {3}.\n" \
-               "Количество циклов передачи пакета - {4}\n" \
-               "Информация о последней передаче:\n{5}".format(
-            self.noiseProbability,
-            "Да" if self.duplex else "Нет",
-            str(self.coder),
-            "Да" if self.interleaver else "Нет",
-            self.countCyclical,
-            self.information
-        )
+        return \
+            "Вероятность ошибки в канале - {0}.\n" \
+            "Является ли канал двухсторонним - {1}.\n" \
+            "Используеммый кодер:\n {2}." \
+            "Используется ли перемежитель на данном канале связи - {3}.\n" \
+            "Количество циклов передачи пакета - {4}\n" \
+            "Информация о последней передаче:\n{5}".format(
+                self.noiseProbability,
+                "Да" if self.duplex else "Нет",
+                str(self.coder),
+                "Да" if self.interleaver else "Нет",
+                self.countCyclical,
+                self.information
+            )
 
     def transfer(self, information: list) -> str:
         count_successfully: int = 0
@@ -77,7 +78,7 @@ class Codec:
                     now_information = self.interleaver.reestablish(now_information)
 
                 now_information = self.coder.decoding(now_information)
-            except CodingException as err:
+            except CoddingException:
                 self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
                                     "востановлению\n".format(number_of_cycle)
             else:
@@ -134,7 +135,7 @@ class Codec:
                     current_information = self.interleaver.reestablish(current_information)
 
                 current_information = self.coder.decoding(current_information)
-            except CodingException as rcx_coding:
+            except CoddingException:
                 status = EnumBitTransferResult.ERROR
                 log.info(
                     "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(current_information))
@@ -171,11 +172,9 @@ class Codec:
         drop_bits: int = 0
         repair_bits: int = 0
         change_bits: int = 0
-        package_status: EnumPackageTransferResult = EnumPackageTransferResult.SUCCESS
         now_information: List[int] = information.copy()
 
         log.info("Производиться передача последовательности битов - {0}".format(now_information))
-        status: int = EnumBitTransferResult.SUCCESS
         normalization_information: List[int] = self.coder.try_normalization(now_information)
         try:
             now_information = self.coder.encoding(normalization_information)
@@ -183,35 +182,25 @@ class Codec:
             if self.interleaver:
                 now_information = self.interleaver.shuffle(now_information)
 
-            help_information = now_information
-
             now_information = chanel.Chanel().gen_interference(now_information, self.noiseProbability)
-
-            if help_information != now_information:
-                status = EnumBitTransferResult.REPAIR
 
             if self.interleaver:
                 now_information = self.interleaver.reestablish(now_information)
 
             now_information = self.coder.decoding(now_information)
-        except CodingException as err:
-            status = EnumBitTransferResult.ERROR
+        except CoddingException:
             log.info(
                 "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         except:
-            status = EnumBitTransferResult.ERROR
             log.info(
                 "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
             if now_information == normalization_information:
-                if status != EnumBitTransferResult.REPAIR:
-                    status = EnumBitTransferResult.SUCCESS
                 log.info("Пакет {0} был успешно передан".format(information))
                 self.information = "Пакет был успешно передан\n"
             else:
-                status = EnumBitTransferResult.SHADOW
                 log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
                     now_information))
                 self.information = "Пакет при передаче был повреждён и не подлежит " \
@@ -220,10 +209,6 @@ class Codec:
                                          for x in range(len(now_information))])
         success_bits += current_step_success_bits
         drop_bits += len(normalization_information) - current_step_success_bits
-        if status == EnumBitTransferResult.ERROR or status == EnumBitTransferResult.SHADOW:
-            package_status = EnumPackageTransferResult.ERROR
-        elif status == EnumBitTransferResult.REPAIR and package_status != EnumPackageTransferResult.ERROR:
-            package_status = EnumPackageTransferResult.REPAIR
         return [now_information, success_bits, drop_bits, repair_bits, change_bits]
 
     def get_information_about_last_transfer(self):

@@ -2,8 +2,8 @@
 # coding=utf-8
 from abc import ABCMeta, abstractmethod
 
-from src.coders.exeption import CodingException
 from src.endpoint.console.iconsolecoder import IConsoleCoder
+from src.helper.error.exception.CoddingException import CoddingException
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
@@ -70,7 +70,7 @@ class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
 
         """
         if len(bit_list) > self.lengthInformation:
-            raise CodingException("Невозможно привести информационное слово с большей длиной к меньшему")
+            raise CoddingException()
         else:
             return (self.lengthInformation - len(bit_list)) * [0] + bit_list
 

@@ -11,7 +11,7 @@ from src.channel.codec import Codec
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import int_to_bit_list
-from src.coders.exeption import CodingException
+from src.helper.error.exception.CoddingException import CoddingException
 from src.logger import log
 from src.statistics.object.test_result_serializer import TestResultSerializer
 
@@ -189,7 +189,7 @@ class TestCoder(QThread):
             globalSignals.ended.emit()
             log.debug("Конец цикла тестов")
 
-        except CodingException as err:
+        except CoddingException:
             globalSignals.notCorrect.emit()
 
 
@@ -215,7 +215,7 @@ class TestCascadeCoder(TestCoder):
                          finish)
 
         self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
-        self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder._name, second_coder._name)
+        self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
         self.channel = CascadeCodec(
             first_coder,
             second_coder,
