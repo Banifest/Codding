@@ -1,3 +1,4 @@
+# coding=utf-8
 import datetime
 import json
 import uuid
@@ -25,7 +26,7 @@ class TestResultSerializer(metaclass=Singleton):
             additional_length=first_coder.countAdditional,
             # TODO add interleaver determining
             interleaver=False,
-            description=first_coder.name
+            description=first_coder._name
         ))
 
         second_coder_guid = None
@@ -39,7 +40,7 @@ class TestResultSerializer(metaclass=Singleton):
                 additional_length=second_coder.countAdditional,
                 # TODO add interleaver determining
                 interleaver=False,
-                description=second_coder.name
+                description=second_coder._name
             ))
 
         # TODO необходимо разделить на объекты

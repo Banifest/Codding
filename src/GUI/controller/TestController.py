@@ -1,6 +1,6 @@
 # coding=utf-8
 # coding=utf-8
-from src.GUI.controller import CoderController
+from GUI.controller.coder_controller import CoderController
 from src.GUI.controller.ThreadControllers import TestCoder, TestCascadeCoder
 
 
@@ -15,17 +15,18 @@ class TestController:
     _cascadeThreadClass: TestCascadeCoder
 
     noiseStart: float = 1.0
-    noiseEnd: float = 2.0
+    noiseEnd: float = 10.0
     countTest: int = 100
     testInfo: int = 985
     mode: int = 0
 
     _test_type: int = 0
 
-    def __init__(self,
-                 first_coder_params: CoderController,
-                 second_coder_params: CoderController,
-                 ):
+    def __init__(
+            self,
+            first_coder_params: CoderController,
+            second_coder_params: CoderController,
+    ):
         self._firstCoderParams = first_coder_params
         self._secondCoderParams = second_coder_params
 
@@ -48,26 +49,28 @@ class TestController:
             self.mode = 1
 
     def set_first_coder_thread_class(self):
-        self._firstThreadClass = TestCoder(self.noiseStart,
-                                           self.countTest,
-                                           self.testInfo,
-                                           self._firstCoderParams.coder,
-                                           '',
-                                           start=self.noiseStart,
-                                           finish=self.noiseEnd)
+        self._firstThreadClass = TestCoder(
+            noise_chance=self.noiseStart,
+            count_test=self.countTest,
+            test_info=self.testInfo,
+            current_coder=self._firstCoderParams.coder,
+            last_result='',
+            start=self.noiseStart,
+            finish=self.noiseEnd
+        )
 
     def set_cascade_coder_thread_class(self):
         self._cascadeThreadClass = TestCascadeCoder(
-                self.noiseStart,
-                self.countTest,
-                self.testInfo,
-                self._firstCoderParams.coder,
-                self._firstCoderParams.coder,
-                self._secondCoderParams.coder,
-                '',
-                self.noiseStart,
-                self.noiseEnd,
-                self.mode
+            noise_chance=self.noiseStart,
+            count_test=self.countTest,
+            test_info=self.testInfo,
+            current_coder=self._firstCoderParams.coder,
+            first_coder=self._firstCoderParams.coder,
+            second_coder=self._secondCoderParams.coder,
+            last_result='',
+            start=self.noiseStart,
+            finish=self.noiseEnd,
+            mode=self.mode
         )
 
     def start_first_single_test(self):

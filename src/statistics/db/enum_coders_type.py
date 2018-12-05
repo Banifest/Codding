@@ -1,9 +1,10 @@
 # coding=utf-8
-from enum import Enum, auto
+from enum import Enum
 
 
 class EnumCodersType(Enum):
-    HAMMING = auto()
-    CYCLICAL = auto()
-    CONVOLUTION = auto()
-    FOUNTAIN = auto()
+    ABSTRACT = -1
+    HAMMING = 0
+    CYCLICAL = 1
+    CONVOLUTION = 2
+    FOUNTAIN = 3

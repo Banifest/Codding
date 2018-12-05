@@ -6,7 +6,7 @@ from typing import Optional
 from src.channel import codec, chanel
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders import abstract_coder
-from src.coders.casts import BitListToInt
+from src.coders.casts import bit_list_to_int
 from src.coders.interleaver import Interleaver
 
 
@@ -69,7 +69,7 @@ class CascadeCodec(codec.Codec):
 
                 now_information = self.firstCoder.decoding(now_information)
 
-                if BitListToInt(now_information) != BitListToInt(normalization_information):
+                if bit_list_to_int(now_information) != bit_list_to_int(normalization_information):
                     return [EnumPackageTransferResult.ERROR, status[1], status[2], status[3], status[4]]
             return [EnumPackageTransferResult.REPAIR, status[1], status[2], status[3], status[4]]
         elif self.mode == 1:
@@ -91,8 +91,8 @@ class CascadeCodec(codec.Codec):
 
             first_coder_information = self.firstCoder.decoding(first_coder_information)
             second_coder_information = self.secondCoder.decoding(second_coder_information)
-            if BitListToInt(first_coder_information) != BitListToInt(first_coder_information) \
-                    and BitListToInt(second_coder_information) != BitListToInt(second_coder_information):
+            if bit_list_to_int(first_coder_information) != bit_list_to_int(first_coder_information) \
+                    and bit_list_to_int(second_coder_information) != bit_list_to_int(second_coder_information):
                 return [EnumPackageTransferResult.ERROR, status[1], status[2], status[3], status[4]]
             else:
                 return [EnumPackageTransferResult.REPAIR, status[1], status[2], status[3], status[4]]

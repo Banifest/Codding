@@ -1,3 +1,4 @@
+# coding=utf-8
 from typing import Optional, List
 
 from src.coders.abstract_coder import AbstractCoder
@@ -35,7 +36,7 @@ class TestResult:
         self.list_case_result = list_case_result
 
 
-class StatisticCollect:
+class StatisticCollector:
     flg_cascade: bool
     first_coder: AbstractCoder
     second_coder: Optional[AbstractCoder]

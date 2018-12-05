@@ -1,8 +1,7 @@
 # coding=utf-8
-# coding=utf-8
 import random
 from math import ceil
-from typing import Optional, Union
+from typing import Optional, Union, List
 
 from src.channel import chanel
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
@@ -169,12 +168,12 @@ class Codec:
         return [package_status, success_bits, drop_bits, repair_bits, change_bits]
 
     def get_transfer_one_step(self, information: list) -> list:
-        success_bits = 0
-        drop_bits = 0
-        repair_bits = 0
-        change_bits = 0
-        package_status = 0
-        now_information = information.copy()
+        success_bits: int = 0
+        drop_bits: int = 0
+        repair_bits: int = 0
+        change_bits: int = 0
+        package_status: int = 0
+        now_information: List[int] = information.copy()
 
         log.info("Производиться передача последовательности битов - {0}".format(now_information))
         status: int = 0

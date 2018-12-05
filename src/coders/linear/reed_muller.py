@@ -5,7 +5,7 @@ import itertools
 import numpy as np
 
 from src.coders import abstract_coder
-from src.coders.casts import BitListToInt, IntToBitList
+from src.coders.casts import bit_list_to_int, int_to_bit_list
 
 
 class Coder(abstract_coder.AbstractCoder):
@@ -21,7 +21,7 @@ class Coder(abstract_coder.AbstractCoder):
     def try_normalization(self, bit_list: list) -> list:
         return super().try_normalization(bit_list)
 
-    name = "Рида-Миллера"
+    _name = "Рида-Миллера"
 
     matrix_G: np.matrix
     vectors: list
@@ -33,12 +33,12 @@ class Coder(abstract_coder.AbstractCoder):
         self.r = r
         self.power = power
 
-        init_matrix: list = [IntToBitList((2 ** (2 ** self.power)) - 1)]
+        init_matrix: list = [int_to_bit_list((2 ** (2 ** self.power)) - 1)]
         if r > 0:
             self.vectors = np.matrix(
-                [IntToBitList(x, size=self.power) for x in range(2 ** self.power)]).T.tolist()
+                [int_to_bit_list(x, size=self.power) for x in range(2 ** self.power)]).T.tolist()
             init_matrix += self.vectors
-            matrix_int_g1 = [BitListToInt(x) for x in init_matrix[1:]]
+            matrix_int_g1 = [bit_list_to_int(x) for x in init_matrix[1:]]
             self.vectors_rise = [[x] for x in range(1, self.power + 1)]
 
         for x in range(r - 1):
@@ -50,7 +50,7 @@ class Coder(abstract_coder.AbstractCoder):
                 val: int = matrix_int_g1[x[0]]
                 for y in x:
                     val &= matrix_int_g1[y]
-                new_matrix_g.append(IntToBitList(val, size=1 << self.power))
+                new_matrix_g.append(int_to_bit_list(val, size=1 << self.power))
             init_matrix += new_matrix_g
 
         self.matrix_G = np.matrix(init_matrix)
@@ -91,7 +91,7 @@ class Coder(abstract_coder.AbstractCoder):
                 orthogonal_vec_num: int = 0
 
                 val_vector_mul = vec_gen(1, len(information))  # заглушка состоящая из одних единиц, нужна для умножения
-                for option in IntToBitList(options_mul, size=len(orthogonal_vectors)):
+                for option in int_to_bit_list(options_mul, size=len(orthogonal_vectors)):
                     if option:
                         val_vector_mul = vec_mul(val_vector_mul, orthogonal_vectors[orthogonal_vec_num])
                     else:

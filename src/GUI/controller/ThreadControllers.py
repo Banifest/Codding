@@ -1,29 +1,23 @@
 # coding=utf-8
 # coding=utf-8
+from typing import Dict
 
 from PyQt5.QtCore import QThread
 
 from src.GUI.globals_signals import globalSignals
-from src.GUI.graphics import draw_graphic
+from src.GUI.graphics import GraphicController
 from src.channel.cascadecodec import CascadeCodec
 from src.channel.codec import Codec
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
-from src.coders.casts import IntToBitList
+from src.coders.casts import int_to_bit_list
 from src.coders.exeption import CodingException
 from src.logger import log
 from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class TestCoder(QThread):
-    TRANSFER_STR = {
-        0: 'success',
-        1: 'repair',
-        2: 'error',
-        3: 'error'
-    }
-
-    information_dict = {}
+    information_dict: Dict = {}
     noiseChance: float = 0
     countTest: int = 1
     information: int = 1
@@ -44,15 +38,17 @@ class TestCoder(QThread):
     countCorrectBit = 0
     countErrorBit = 0
 
-    def __init__(self,
-                 noise_chance: float,
-                 count_test: float,
-                 test_info: int,
-                 current_coder: AbstractCoder,
-                 last_result: str,
-                 start: float = 0,
-                 finish: float = 20):
-        super(TestCoder, self).__init__(None)
+    def __init__(
+            self,
+            noise_chance: float,
+            count_test: float,
+            test_info: int,
+            current_coder: AbstractCoder,
+            last_result: str,
+            start: float = 0,
+            finish: float = 20
+    ):
+        super(TestCoder, self).__init__()
 
         self.start_t = start
         self.finish_t = finish
@@ -63,7 +59,7 @@ class TestCoder(QThread):
         self.countTest = count_test
         self.information = test_info
         self.coderSpeed = self.currentCoder.get_speed()
-        self.coderName = self.currentCoder.name
+        self.coderName = self.currentCoder._name
 
         self.channel = Codec(
             self.currentCoder,
@@ -93,7 +89,7 @@ class TestCoder(QThread):
         """
         progress = 0.0
         step = 100.0 / self.countTest
-        information: list = IntToBitList(self.information)
+        information: list = int_to_bit_list(self.information)
 
         log.debug("Начало цикла тестов")
         case_information = []
@@ -166,7 +162,7 @@ class TestCoder(QThread):
         self.information_dict['draw_information'] = draw_data
         globalSignals.autoStepFinished.emit(100)
         if self.is_auto:
-            draw_graphic(
+            GraphicController().draw_graphic(
                 self.information_dict['draw_information'],
                 self.information_dict['coder']['name'],
                 coder_speed=self.information_dict['coder']['speed'],
@@ -219,7 +215,7 @@ class TestCascadeCoder(TestCoder):
                          finish)
 
         self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
-        self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
+        self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder._name, second_coder._name)
         self.channel = CascadeCodec(
             first_coder,
             second_coder,

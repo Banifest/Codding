@@ -1,13 +1,6 @@
 # coding=utf-8
 # coding=utf-8
-import math
 
-import numpy as np
-
-from src.coders import abstract_coder
-from src.coders.casts import *
-from src.logger import log
-from src.statistics.db.enum_coders_type import EnumCodersType
 import math
 
 import numpy as np
@@ -22,7 +15,7 @@ class Coder(abstract_coder.AbstractCoder):
     def get_coder_parameters(self):
         pass
 
-    name = "Хемминга"
+    _name = "Хемминга"
     type_of_coder = EnumCodersType.HAMMING
     _matrixTransformation: list = []
 
@@ -99,14 +92,14 @@ class Coder(abstract_coder.AbstractCoder):
         answer: list = []
         status: list = list((np.dot(code, self._matrixTransformation) % 2)[0])
         status.reverse()
-        status: int = BitListToInt(status)
+        status: int = bit_list_to_int(status)
         if status != 0:
             log.debug("Обнаруженна(ы) ошибка(и)")
 
             if len(code[0]) > status - 1:
                 code[0][status - 1] = (code[0][status - 1] + 1) % 2
                 old_status = status
-                status = BitListToInt(list((np.dot(code, self._matrixTransformation) % 2)[0]))
+                status = bit_list_to_int(list((np.dot(code, self._matrixTransformation) % 2)[0]))
 
                 if status != 0:
                     log.debug("Не удалось успешно исправить обнаруженные ошибки")

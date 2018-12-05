@@ -1,16 +1,16 @@
 # coding=utf-8
-# coding=utf-8
 from PyQt5.QtWidgets import QMessageBox
 
 from src.coders.abstract_coder import AbstractCoder
-from src.coders.casts import StrListToList
+from src.coders.casts import str_list_to_list
 from src.coders.convolutional.coder import Coder as Convolutional
 from src.coders.cyclical.coder import Coder as Cyclical
 from src.coders.fountain.luby_transform import Coder as LubyTransform
 from src.coders.linear.hamming import Coder as Hamming
+from statistics.db.enum_coders_type import EnumCodersType
 
 
-class CoderParams:
+class CoderController:
     _coder_type: int = 0
     coder: AbstractCoder
 
@@ -63,21 +63,21 @@ class CoderParams:
 
     def create_coder(self):
         try:
-            if self._coder_type == 0:
+            if self._coder_type == EnumCodersType.HAMMING.value:
                 self.coder = Hamming(self._hemSizePack)
-            elif self._coder_type == 1:
+            elif self._coder_type == EnumCodersType.CYCLICAL.value:
                 self.coder = Cyclical(
                         int(self._cycSizePack),
                         int(self._cycPoly)
                 )
-            elif self._coder_type == 2:
+            elif self._coder_type == EnumCodersType.CONVOLUTION.value:
                 self.coder = Convolutional(
-                        StrListToList(self._conListPoly),
+                    str_list_to_list(self._conListPoly),
                         1,
-                        int(len(StrListToList(self._conListPoly))),
+                    int(len(str_list_to_list(self._conListPoly))),
                         self._conCountReg
                 )
-            elif self._coder_type == 3:
+            elif self._coder_type == EnumCodersType.FOUNTAIN.value:
                 self.coder = LubyTransform(
                         int(self._fouSizeBlock),
                         int(self._fouCountBlock),
@@ -90,9 +90,9 @@ class CoderParams:
             #     )
             # elif self._coder_type == 'Сверточный для пакетов':
             #     self.currentCoder = ConvolutionalCoderForPacket(
-            #             StrListToList(self._addCoderWindow.listPolynomialTextBox.text()),
+            #             str_list_to_list(self._addCoderWindow.listPolynomialTextBox.text()),
             #             1,
-            #             int(len(StrListToList(self._addCoderWindow.listPolynomialTextBox.text()))),
+            #             int(len(str_list_to_list(self._addCoderWindow.listPolynomialTextBox.text()))),
             #             int(self._addCoderWindow.countMemoryRegistersTextBox.text()),
             #             int(self._addCoderWindow.sizePackageTextBox.text())
             #     )

@@ -5,17 +5,17 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
 
-from src.GUI.controller.CoderController import CoderParams
 from src.GUI.controller.TestController import TestController
+from src.GUI.controller.coder_controller import CoderController
 from src.GUI.globals_signals import globalSignals
-from src.GUI.graphics import draw_graphic
+from src.GUI.graphics import GraphicController
 from src.GUI.windows.MainWindow import MainWindow
 from src.coders.abstract_coder import AbstractCoder
 
 
 class MainController:
-    firstCoderParams: CoderParams
-    secondCoderParams: CoderParams
+    firstCoderParams: CoderController
+    secondCoderParams: CoderController
     testParams: TestController
 
     _mainWindow: MainWindow = None
@@ -25,8 +25,8 @@ class MainController:
     secondCoderForCascade: AbstractCoder = None
 
     def __init__(self):
-        self.firstCoderParams = CoderParams()
-        self.secondCoderParams = CoderParams()
+        self.firstCoderParams = CoderController()
+        self.secondCoderParams = CoderController()
         self.testParams = TestController(self.firstCoderParams,
                                          self.secondCoderParams)
         globalSignals.notCorrect.connect(self.error_handle)
@@ -36,7 +36,7 @@ class MainController:
         app.exec()
 
     def error_handle(self):
-        QMessageBox.warning(
+        QMessageBox().warning(
             None,
             "Поля заполнены не верной информацией",
             "Поля заполнены не верной информацией",
@@ -46,8 +46,8 @@ class MainController:
     def import_from_json(self):
         file_path = QFileDialog.getOpenFileName(filter="*.json", parent=self._mainWindow)[0]
         if file_path != '':
-            info = json.loads(open(file_path, "r").read())
-            draw_graphic(
+            info = json.loads(open(file_path).read())
+            GraphicController().draw_graphic(
                 info['draw_information'],
                 info['coder']['name'],
                 coder_speed=info['coder']['speed'],

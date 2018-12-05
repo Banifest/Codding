@@ -6,7 +6,7 @@ from src.coders.convolutional.coder import Coder
 
 
 class ConvolutionalCoderForPacket(Coder):
-    name = "Сверточный для пакетов"
+    _name = "Сверточный для пакетов"
 
     def __init__(self, list_polynomials: list, count_input: int, count_output: int,
                  count_register: int, count_control_bits: int):

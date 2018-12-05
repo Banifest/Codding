@@ -6,7 +6,7 @@ import numpy as np
 from numpy.polynomial import polynomial as plm
 
 from src.coders import abstract_coder
-from src.coders.casts import IntToBitList
+from src.coders.casts import int_to_bit_list
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
 
@@ -15,7 +15,7 @@ class Coder(abstract_coder.AbstractCoder):
     def get_coder_parameters(self):
         pass
 
-    name = "Циклический"
+    _name = "Циклический"
     polynomial: plm.Polynomial
     type_of_coder = EnumCodersType.CYCLICAL
     matrix_G: np.matrix  # порождающая матрица
@@ -27,7 +27,7 @@ class Coder(abstract_coder.AbstractCoder):
         self.lengthInformation = information_length
         self.lengthAdditional = int(math.log2(polynomial))
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
-        self.polynomial = plm.Polynomial(IntToBitList(polynomial, rev=True))
+        self.polynomial = plm.Polynomial(int_to_bit_list(polynomial, rev=True))
 
     def encoding(self, information: list):
         mod: plm.Polynomial = plm.Polynomial([0] * self.lengthAdditional + information) % self.polynomial

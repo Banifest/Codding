@@ -8,13 +8,17 @@ from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
-    name: str = ""
+    _name: str = ""
     type_of_coder: EnumCodersType
     coding_information: int = 0
     countAdditional: int = 0
     lengthTotal: int = 0
     lengthInformation: int = 0
     is_div_into_package = True
+
+    @property
+    def name(self):
+        return self._name
 
     @abstractmethod
     def encoding(self, information: int or list) -> list:
@@ -73,3 +77,10 @@ class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
     @abstractmethod
     def to_json(self) -> dict:
         return {}
+
+    @abstractmethod
+    def get_coder_parameters(self):
+        """
+        Get Abstract interfaces for getting parameter coder
+        """
+        pass

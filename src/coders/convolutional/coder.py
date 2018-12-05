@@ -1,16 +1,13 @@
 # coding=utf-8
 # coding=utf-8
 from src.coders import abstract_coder
-from src.coders.casts import BitListToInt, GethammingDistance, IntToBitList, cycle_shift_list
+from src.coders.casts import bit_list_to_int, get_hamming_distance, int_to_bit_list, cycle_shift_list
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
-    def get_coder_parameters(self):
-        pass
-
-    name = "Сверточный"
+    _name = "Сверточный"
     type_of_coder = EnumCodersType.CONVOLUTION
 
     countPolynomials: int = 0
@@ -54,14 +51,14 @@ class Coder(abstract_coder.AbstractCoder):
         self.register <<= 1
 
         # зануление старшего бита
-        self.register = self.register & ((1 << (self.countRegisters + 1)) - 1)
+        self.register &= (1 << (self.countRegisters + 1)) - 1
         self.register += information_bit
 
         answer = []
         power = 0
         for count in range(self.countPolynomials):
             added_bit = 0
-            for x in IntToBitList(self.listPolynomials[count] & self.register):
+            for x in int_to_bit_list(self.listPolynomials[count] & self.register):
                 added_bit ^= x
             answer.append(added_bit % 2)
             power += 1
@@ -79,13 +76,13 @@ class Coder(abstract_coder.AbstractCoder):
         for x in range(2 ** self.countRegisters):
             vertex: list = []
             self.register = x
-            edge: list = IntToBitList(x, self.countRegisters)
+            edge: list = int_to_bit_list(x, self.countRegisters)
             edge = cycle_shift_list(edge)
             edge[0] = 0
-            vertex.append([BitListToInt(edge), self.do_step(0)])
+            vertex.append([bit_list_to_int(edge), self.do_step(0)])
             self.register = x
             edge[0] = 1
-            vertex.append([BitListToInt(edge), self.do_step(1)])
+            vertex.append([bit_list_to_int(edge), self.do_step(1)])
             answer.append(vertex)
 
         self.register = 0
@@ -129,12 +126,12 @@ class Coder(abstract_coder.AbstractCoder):
             number: int = 0
             for info_about_vertex in last_step:
                 vertex_step: int = self.graph[number][0][0]  # вершина перехода
-                distance: int = GethammingDistance(x, self.graph[number][0][1])
+                distance: int = get_hamming_distance(x, self.graph[number][0][1])
                 if now_step[vertex_step][0] > last_step[number][0] + distance:
                     now_step[vertex_step] = [info_about_vertex[0] + distance, info_about_vertex[1] + [0]]
 
                 vertex_step: int = self.graph[number][1][0]  # вершина перехода
-                distance: int = GethammingDistance(x, self.graph[number][1][1])
+                distance: int = get_hamming_distance(x, self.graph[number][1][1])
                 if now_step[vertex_step][0] > last_step[number][0] + distance:
                     now_step[vertex_step] = [info_about_vertex[0] + distance, info_about_vertex[1] + [1]]
 
@@ -154,7 +151,7 @@ class Coder(abstract_coder.AbstractCoder):
 
     def to_json(self) -> dict:
         return {
-            'name': self.name,
+            'name': self._name,
             'count inputs': self.countInput,
             'count polynomials': self.countPolynomials,
             'list of polynomials': self.listPolynomials,
@@ -163,3 +160,6 @@ class Coder(abstract_coder.AbstractCoder):
             'graph': self.graph,
             'speed': self.get_speed()
         }
+
+    def get_coder_parameters(self):
+        pass
