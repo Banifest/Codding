@@ -1,14 +1,33 @@
+# coding=utf-8
 import random
-from typing import Union, Optional
+from math import ceil
+from typing import Union, Optional, List
 
+from helper.pattern.singleton import Singleton
 from src.logger import log
 
 
-class Chanel:
+class Chanel(metaclass=Singleton):
     __straight: float = 10.0
+    __package_len: int
 
-    def __init__(self, straight: Optional[Union[float, int]] = None):
-        self.__straight = straight
+    def __init__(
+            self,
+            straight: Optional[Union[float, int]] = None,
+    ):
+        if straight is not None:
+            self.__straight = straight
+
+    # noinspection PyMethodMayBeStatic
+    def divide_on_blocks(self, information: list, block_len: int) -> List[list]:
+        if len(information) >= block_len:
+            return [information]
+
+        blocks: list = []
+        for number_of_block in range(ceil(block_len / len(information))):
+            blocks.append(information[number_of_block * block_len: (number_of_block + 1) * block_len])
+
+        return blocks
 
     def gen_interference(self, information: list, straight: float = None) -> list:
         """
