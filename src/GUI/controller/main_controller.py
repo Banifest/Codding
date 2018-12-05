@@ -5,11 +5,11 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QMessageBox
 
-from src.GUI.controller.TestController import TestController
 from src.GUI.controller.coder_controller import CoderController
+from src.GUI.controller.test_controller import TestController
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import GraphicController
-from src.GUI.windows.MainWindow import MainWindow
+from src.GUI.windows.main_window import MainWindow
 from src.coders.abstract_coder import AbstractCoder
 
 
@@ -27,8 +27,10 @@ class MainController:
     def __init__(self):
         self.firstCoderParams = CoderController()
         self.secondCoderParams = CoderController()
-        self.testParams = TestController(self.firstCoderParams,
-                                         self.secondCoderParams)
+        self.testParams = TestController(
+            self.firstCoderParams,
+            self.secondCoderParams
+        )
         globalSignals.notCorrect.connect(self.error_handle)
         globalSignals.ended.connect(self.finished_test_cycles)
         app = QApplication(sys.argv)

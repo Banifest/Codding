@@ -2,10 +2,10 @@
 import argparse
 from typing import Optional
 
+from helper.error.exception.parameters_parse_exception import ParametersParseException
 from src.endpoint.console.codec_parser import CodecParser
 from src.endpoint.console.coder_parser import CoderParser
 from src.endpoint.console.enum_app_mode import EnumAppMode
-from src.helper.error.exception.GUI.parameters_parse_exception import ParametersParseException
 from src.helper.pattern.singleton import Singleton
 
 

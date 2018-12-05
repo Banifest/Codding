@@ -2,8 +2,8 @@
 # coding=utf-8
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
+
 from src.GUI.globals_signals import globalSignals
-import resources.img_rc
 from src.logger import log
 
 

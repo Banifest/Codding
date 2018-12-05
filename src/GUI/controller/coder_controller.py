@@ -1,12 +1,12 @@
 # coding=utf-8
-from PyQt5.QtWidgets import QMessageBox
-
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import str_list_to_list
 from src.coders.convolutional.coder import Coder as Convolutional
 from src.coders.cyclical.coder import Coder as Cyclical
 from src.coders.fountain.luby_transform import Coder as LubyTransform
 from src.coders.linear.hamming import Coder as Hamming
+from src.helper.error.error_handler import ErrorHandler
+from src.helper.error.exception.GUI.setting_exception import SettingException
 from statistics.db.enum_coders_type import EnumCodersType
 
 
@@ -67,21 +67,21 @@ class CoderController:
                 self.coder = Hamming(self._hemSizePack)
             elif self._coder_type == EnumCodersType.CYCLICAL.value:
                 self.coder = Cyclical(
-                        int(self._cycSizePack),
-                        int(self._cycPoly)
+                    int(self._cycSizePack),
+                    int(self._cycPoly)
                 )
             elif self._coder_type == EnumCodersType.CONVOLUTION.value:
                 self.coder = Convolutional(
                     str_list_to_list(self._conListPoly),
-                        1,
+                    1,
                     int(len(str_list_to_list(self._conListPoly))),
-                        self._conCountReg
+                    self._conCountReg
                 )
             elif self._coder_type == EnumCodersType.FOUNTAIN.value:
                 self.coder = LubyTransform(
-                        int(self._fouSizeBlock),
-                        int(self._fouCountBlock),
-                        int(self._fouSizePack)
+                    int(self._fouSizeBlock),
+                    int(self._fouCountBlock),
+                    int(self._fouSizePack)
                 )
             # elif self._coder_type == 'Рида-Маллера':
             #     self.currentCoder = ReedMullerCoder(
@@ -96,10 +96,5 @@ class CoderController:
             #             int(self._addCoderWindow.countMemoryRegistersTextBox.text()),
             #             int(self._addCoderWindow.sizePackageTextBox.text())
             #     )
-        except:
-            QMessageBox().warning(
-                None,
-                "Поля заполнены не верной информацией",
-                "Поля заполнены не верной информацией",
-                QMessageBox.Ok
-            )
+        except SettingException as rcx_setting:
+            ErrorHandler().gui_message_box(rcx_exception=rcx_setting)

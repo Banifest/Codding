@@ -1,5 +1,5 @@
 # coding=utf-8
-from src.GUI.controller.MainController import MainController
+from src.GUI.controller.main_controller import MainController
 from src.endpoint.console.app_parser import AppParser
 from src.endpoint.console.enum_app_mode import EnumAppMode
 from src.logger import log

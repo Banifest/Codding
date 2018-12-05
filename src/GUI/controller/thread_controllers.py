@@ -59,7 +59,7 @@ class TestCoder(QThread):
         self.countTest = count_test
         self.information = test_info
         self.coderSpeed = self.currentCoder.get_speed()
-        self.coderName = self.currentCoder._name
+        self.coderName = self.currentCoder.name
 
         self.channel = Codec(
             self.currentCoder,

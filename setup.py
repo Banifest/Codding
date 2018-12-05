@@ -8,9 +8,9 @@ setup(
               'src.coders.cyclical', 'src.coders.fountain', 'src.coders.interleaver', 'src.coders.convolutional',
               'src.helper', 'src.helper.error', 'src.helper.error.exception', 'src.helper.error.exception.GUI',
               'src.channel', 'tests'],
-    url='',
+    url='http://github.com/banifest/codding',
     license='MIT',
     author='Aliaksandr Martyniuk',
     author_email='banifest@gmail.com',
-    description='Diploma', install_requires=['sqlalchemy', 'alembic', 'matplotlib', 'PyQt5', 'numpy']
+    description='Diploma', install_requires=['sqlalchemy', 'alembic', 'matplotlib', 'PyQt5', 'numpy', 'psycopg2']
 )

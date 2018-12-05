@@ -1,7 +1,9 @@
 # coding=utf-8
 # coding=utf-8
 from GUI.controller.coder_controller import CoderController
-from src.GUI.controller.ThreadControllers import TestCoder, TestCascadeCoder
+from src.GUI.controller.thread_controllers import TestCoder, TestCascadeCoder
+from src.helper.error.error_handler import ErrorHandler
+from src.helper.error.exception.application_exception import ApplicationException
 
 
 class TestController:
@@ -14,13 +16,12 @@ class TestController:
     _firstThreadClass: TestCoder
     _cascadeThreadClass: TestCascadeCoder
 
+    # TODO Why not constant?
     noiseStart: float = 1.0
     noiseEnd: float = 10.0
     countTest: int = 100
     testInfo: int = 985
     mode: int = 0
-
-    _test_type: int = 0
 
     def __init__(
             self,
@@ -78,8 +79,8 @@ class TestController:
         try:
             self.set_first_coder_thread_class()
             self._firstThreadClass.start()
-        except:
-            pass
+        except ApplicationException as rcx_app_exception:
+            ErrorHandler().gui_message_box(rcx_exception=rcx_app_exception)
 
     def start_first_test_cycle(self):
         self._firstCoderParams.create_coder()
@@ -87,16 +88,16 @@ class TestController:
             self.set_first_coder_thread_class()
             self._firstThreadClass.set_auto(True)
             self._firstThreadClass.start()
-        except:
-            pass
+        except ApplicationException as rcx_app_exception:
+            ErrorHandler().gui_message_box(rcx_exception=rcx_app_exception)
 
     def start_cascade_single_test(self):
         self._firstCoderParams.create_coder()
         try:
             self.set_cascade_coder_thread_class()
             self._cascadeThreadClass.start()
-        except:
-            pass
+        except ApplicationException as rcx_app_exception:
+            ErrorHandler().gui_message_box(rcx_exception=rcx_app_exception)
 
     def start_cascade_test_cycle(self):
         self._firstCoderParams.create_coder()
@@ -105,5 +106,5 @@ class TestController:
             self.set_cascade_coder_thread_class()
             self._cascadeThreadClass.set_auto(True)
             self._cascadeThreadClass.start()
-        except:
-            pass
+        except ApplicationException as rcx_app_exception:
+            ErrorHandler().gui_message_box(rcx_exception=rcx_app_exception)

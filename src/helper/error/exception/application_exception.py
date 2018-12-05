@@ -8,8 +8,12 @@ class ApplicationException(Exception):
     _long_message: str = EnumExceptionStandardMessage.APPLICATION_EXCEPTION.value
     _message_type: EnumMessageType = EnumMessageType.ERROR
 
-    def __init__(self, message: str = "", long_message: str = "",
-                 message_type: EnumMessageType = EnumMessageType.ERROR):
+    def __init__(
+            self,
+            message: str = "",
+            long_message: str = "",
+            message_type: EnumMessageType = EnumMessageType.ERROR
+    ):
         self._message = message
         if long_message == "":
             self._long_message = message

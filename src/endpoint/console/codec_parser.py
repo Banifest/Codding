@@ -2,8 +2,8 @@
 import argparse
 from typing import Optional
 
+from helper.error.exception.parameters_parse_exception import ParametersParseException
 from src.channel.enum_codec_type import EnumCodecType
-from src.helper.error.exception.GUI.parameters_parse_exception import ParametersParseException
 from src.helper.pattern.singleton import Singleton
 
 
