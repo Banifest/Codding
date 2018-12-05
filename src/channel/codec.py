@@ -64,7 +64,7 @@ class Codec:
         self.information += "Начата циклическая передача пакета ({0}).\n Количество передач {1}.\n". \
             format(information, self.countCyclical)
 
-        for x in range(self.countCyclical):
+        for number_of_cycle in range(self.countCyclical):
             try:
                 now_information: list = information
                 now_information = self.coder.encoding(now_information)
@@ -79,14 +79,15 @@ class Codec:
                 now_information = self.coder.decoding(now_information)
             except CodingException as err:
                 self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
-                                    "востановлению\n".format(x)
+                                    "востановлению\n".format(number_of_cycle)
             else:
                 if now_information == information:
                     count_successfully += 1
-                    self.information += "Пакет при передаче попыткой под номером {0} был успешно передан\n".format(x)
+                    self.information += "Пакет при передаче попыткой под номером {0} был успешно передан\n".format(
+                        number_of_cycle)
                 else:
                     self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
-                                        "востановлению\n".format(x)
+                                        "востановлению\n".format(number_of_cycle)
 
         self.information += "Циклическая передача пакета ({0}) завершена.\n" \
                             "Всего попыток передать пакет {1}.\n" \
