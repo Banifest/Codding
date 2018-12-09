@@ -19,7 +19,7 @@ class CoderController:
     _cycSizePack: int = 120
     _cycPoly: int = 13
 
-    _conListPoly: str = [3, 5, 7]
+    _conListPoly: str = "3, 5, 7"
     _conCountReg: int = 3
 
     _fouSizePack: int = 30

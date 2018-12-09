@@ -40,7 +40,7 @@ class TestResultSerializer(metaclass=Singleton):
                 additional_length=second_coder.countAdditional,
                 # TODO add interleaver determining
                 interleaver=False,
-                description=second_coder._name
+                description=second_coder.name
             ))
 
         # TODO необходимо разделить на объекты

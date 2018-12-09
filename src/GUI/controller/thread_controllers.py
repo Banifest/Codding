@@ -11,7 +11,7 @@ from src.channel.codec import Codec
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import int_to_bit_list
-from src.helper.error.exception.CoddingException import CoddingException
+from src.helper.error.exception.codding_exception import CoddingException
 from src.logger import log
 from src.statistics.object.test_result_serializer import TestResultSerializer
 

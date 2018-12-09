@@ -3,7 +3,7 @@
 from abc import ABCMeta, abstractmethod
 
 from src.endpoint.console.iconsolecoder import IConsoleCoder
-from src.helper.error.exception.CoddingException import CoddingException
+from src.helper.error.exception.codding_exception import CoddingException
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 

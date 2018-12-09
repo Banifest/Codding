@@ -4,7 +4,7 @@ import random
 
 from src.coders import abstract_coder
 from src.coders.casts import bit_list_to_int, bit_list_to_int_list, int_to_bit_list
-from src.helper.error.exception.CoddingException import CoddingException
+from src.helper.error.exception.codding_exception import CoddingException
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
 

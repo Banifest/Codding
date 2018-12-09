@@ -6,7 +6,7 @@ from src.channel.enum_bit_transfer_result import EnumBitTransferResult
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver import Interleaver
-from src.helper.error.exception.CoddingException import CoddingException
+from src.helper.error.exception.codding_exception import CoddingException
 from src.logger import log
 
 

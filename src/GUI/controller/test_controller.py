@@ -41,7 +41,10 @@ class TestController:
         self.countTest = value
 
     def set_test_info(self, value: int) -> None:
-        self.testInfo = value
+        try:
+            self.testInfo = int(value)
+        except ValueError as rcx_value_error:
+            pass
 
     def set_mode_cascade(self, value: str) -> None:
         if value == 'First':
