@@ -7,6 +7,9 @@ from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class CoderParser(metaclass=Singleton):
+    """
+    TODO
+    """
     _argument_parser = argparse.ArgumentParser()
     _arguments: None
     _subparsers: None
@@ -40,5 +43,10 @@ class CoderParser(metaclass=Singleton):
 
         self._arguments = vars(self._argument_parser.parse_args())
 
+    @property
     def get_argument_parser(self) -> argparse.ArgumentParser:
+        """
+        TODO
+        :return:
+        """
         return self._argument_parser

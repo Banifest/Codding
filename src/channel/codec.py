@@ -1,8 +1,8 @@
 # coding=utf-8
 from typing import Optional, Union, List
 
-from channel.enum_bit_transfer_result import EnumBitTransferResult
 from src.channel import chanel
+from src.channel.enum_bit_transfer_result import EnumBitTransferResult
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver import Interleaver

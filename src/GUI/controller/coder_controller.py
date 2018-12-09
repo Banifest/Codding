@@ -7,7 +7,7 @@ from src.coders.fountain.luby_transform import Coder as LubyTransform
 from src.coders.linear.hamming import Coder as Hamming
 from src.helper.error.error_handler import ErrorHandler
 from src.helper.error.exception.GUI.setting_exception import SettingException
-from statistics.db.enum_coders_type import EnumCodersType
+from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class CoderController:

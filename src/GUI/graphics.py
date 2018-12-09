@@ -2,10 +2,13 @@
 import matplotlib.patches as matches
 import matplotlib.pyplot as plt
 
-from helper.pattern.singleton import Singleton
+from src.helper.pattern.singleton import Singleton
 
 
 class GraphicController(metaclass=Singleton):
+    """
+    TODO
+    """
     # noinspection SpellCheckingInspection
     result_graphic_type: str = "ggplot"
     from_y_limit: float = 0.000000001
@@ -22,11 +25,19 @@ class GraphicController(metaclass=Singleton):
             start: float = 1,
             finish: int = 20
     ):
+        """
+        TODO
+        :param draw_information:
+        :param coder_name:
+        :param coder_speed:
+        :param start:
+        :param finish:
+        """
         plt.style.use(self.result_graphic_type)
         quantity_right_bits = matches.Patch(color='blue', label='Соотношение правильных символов в пакете')
         quantity_right_packages = matches.Patch(color='purple', label='Соотношение полностью правильных пакетов')
         plt.legend(handles=[quantity_right_bits, quantity_right_packages])
-        plt.ylim([self.from_y_limit, self.to_y_limit])
+        plt.ylim([self.to_y_limit, self.from_y_limit])
         plt.xlim([start, finish])
         plt.semilogy(True)
         plt.ylabel("Вероятность потерь информации, P*10^-1")
@@ -42,8 +53,11 @@ class GraphicController(metaclass=Singleton):
         plt.show()
 
     def draw_plot_pie(self, draw_information: list):
-        import matplotlib.pyplot as plt
-        fig = plt.figure()
+        """
+        TODO
+        :param draw_information:
+        """
+        plt.figure()
         sum_result: int = sum(draw_information)
         plt.pie(draw_information,
                 labels=["Без искажений\n{0}%".format(int(draw_information[0] / sum_result * 100)),

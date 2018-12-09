@@ -2,12 +2,15 @@
 import argparse
 from typing import Optional
 
-from helper.error.exception.parameters_parse_exception import ParametersParseException
 from src.channel.enum_codec_type import EnumCodecType
+from src.helper.error.exception.parameters_parse_exception import ParametersParseException
 from src.helper.pattern.singleton import Singleton
 
 
 class CodecParser(metaclass=Singleton):
+    """
+    TODO
+    """
     _argument_parser = argparse.ArgumentParser()
     _arguments: None
     _subparsers: None
@@ -56,6 +59,10 @@ class CodecParser(metaclass=Singleton):
 
     @property
     def get_codec_type(self) -> EnumCodecType:
+        """
+        TODO
+        :return:
+        """
         codec_type: Optional[str] = self._arguments["codec"]
 
         if codec_type is None or codec_type == EnumCodecType.SINGLE.value:
@@ -66,4 +73,8 @@ class CodecParser(metaclass=Singleton):
             raise ParametersParseException(long_message="""Unknown codec type""")
 
     def get_argument_parser(self) -> argparse.ArgumentParser:
+        """
+        TODO
+        :return:
+        """
         return self._argument_parser

@@ -3,7 +3,7 @@
 import logging
 import os
 
-from helper.pattern.singleton import Singleton
+from src.helper.pattern.singleton import Singleton
 
 
 class Logger(logging.Logger, metaclass=Singleton):

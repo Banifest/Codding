@@ -3,11 +3,14 @@ import random
 from math import ceil
 from typing import Union, Optional, List
 
-from helper.pattern.singleton import Singleton
+from src.helper.pattern.singleton import Singleton
 from src.logger import log
 
 
 class Chanel(metaclass=Singleton):
+    """
+    Chanel
+    """
     __straight: float = 10.0
     __package_len: int
 
@@ -20,6 +23,12 @@ class Chanel(metaclass=Singleton):
 
     # noinspection PyMethodMayBeStatic
     def divide_on_blocks(self, information: list, block_len: int) -> List[list]:
+        """
+
+        :param information:
+        :param block_len:
+        :return:
+        """
         if len(information) >= block_len:
             return [information]
 

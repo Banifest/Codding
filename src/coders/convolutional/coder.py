@@ -7,8 +7,12 @@ from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
+    """
+    TODO
+    """
     _name = "Сверточный"
     type_of_coder = EnumCodersType.CONVOLUTION
+    __MAX_STEPS: int = 99999999999
 
     countPolynomials: int = 0
     listPolynomials: list = []
@@ -41,12 +45,25 @@ class Coder(abstract_coder.AbstractCoder):
         self.graph = self.get_graph()
 
     def get_speed(self) -> float:
+        """
+        TODO
+        :return:
+        """
         return 1 / self.countRegisters
 
     def get_redundancy(self):
+        """
+        TODO
+        :return:
+        """
         return self.countOutput
 
     def do_step(self, information_bit: int) -> list:
+        """
+        TODO
+        :param information_bit:
+        :return:
+        """
         log.debug("Шаг при кодировании бита - {0}".format(information_bit))
         self.register <<= 1
 
@@ -68,8 +85,8 @@ class Coder(abstract_coder.AbstractCoder):
         """
         Формирует список представляющий граф переходов, где каждая вершина
         [
-        [номер вершины в которую переходим, [биты которые соответвуют переходу]],
-        ...
+            [номер вершины в которую переходим, [биты которые соответвуют переходу]],
+            ...
         ]
         """
         answer: list = []
@@ -89,6 +106,11 @@ class Coder(abstract_coder.AbstractCoder):
         return answer
 
     def encoding(self, information: list) -> list:
+        """
+        TODO
+        :param information:
+        :return:
+        """
         log.info("Кодирование пакета {0} свёрточным кодером".format(information))
         answer: list = []
 
@@ -102,6 +124,11 @@ class Coder(abstract_coder.AbstractCoder):
         return answer
 
     def decoding(self, information: list):
+        """
+        TODO
+        :param information:
+        :return:
+        """
         log.info("Декодирование пакета {0} свёрточным декодером по максимуму правдоподобия".format(information))
         last_step: list = []  # Информация об предыдущем шаге
         now_step: list = []  # Информация о текущем шаге
@@ -118,11 +145,11 @@ class Coder(abstract_coder.AbstractCoder):
                 count += 1
             info_divided_into_steps.append(temp_list)
 
-        last_step = now_step = [[0, []]] + [[99999, []] for x in
+        last_step = now_step = [[0, []]] + [[self.__MAX_STEPS, []] for x in
                                             range(2 ** self.countRegisters - 1)]  # заполняет первый шаг
 
         for x in info_divided_into_steps:
-            now_step = [[99999, []] for x in range(2 ** self.countRegisters)]
+            now_step = [[self.__MAX_STEPS, []] for x in range(2 ** self.countRegisters)]
             number: int = 0
             for info_about_vertex in last_step:
                 vertex_step: int = self.graph[number][0][0]  # вершина перехода
@@ -139,7 +166,7 @@ class Coder(abstract_coder.AbstractCoder):
             last_step = now_step
 
         min_answer: list = []
-        min_cost: int = 999999
+        min_cost: int = self.__MAX_STEPS
         for x in last_step:
             if min_cost > x[0]:
                 min_cost = x[0]
@@ -147,9 +174,18 @@ class Coder(abstract_coder.AbstractCoder):
         return min_answer
 
     def try_normalization(self, bit_list: list) -> list:
+        """
+        TODO
+        :param bit_list:
+        :return:
+        """
         return bit_list
 
     def to_json(self) -> dict:
+        """
+        TODO
+        :return:
+        """
         return {
             'name': self._name,
             'count inputs': self.countInput,
@@ -162,4 +198,7 @@ class Coder(abstract_coder.AbstractCoder):
         }
 
     def get_coder_parameters(self):
+        """
+        TODO
+        """
         pass

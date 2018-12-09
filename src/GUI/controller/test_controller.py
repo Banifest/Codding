@@ -1,6 +1,6 @@
 # coding=utf-8
 # coding=utf-8
-from GUI.controller.coder_controller import CoderController
+from src.GUI.controller.coder_controller import CoderController
 from src.GUI.controller.thread_controllers import TestCoder, TestCascadeCoder
 from src.helper.error.error_handler import ErrorHandler
 from src.helper.error.exception.application_exception import ApplicationException
