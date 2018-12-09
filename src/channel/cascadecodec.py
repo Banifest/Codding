@@ -1,6 +1,5 @@
 # coding=utf-8
 # coding=utf-8
-from math import ceil
 from typing import Optional
 
 from src.channel import codec, chanel
@@ -39,15 +38,10 @@ class CascadeCodec(codec.Codec):
     def transfer_one_step(self, information: list) -> [int, int, int]:
         if self.mode == 0:
             #  Разделение на пакеты
-            package_list = []
-            if self.firstCoder.is_div_into_package:
-                for x in range(int(ceil(len(information) / self.firstCoder.lengthInformation))):
-                    package_list.append(
-                        information[
-                        self.firstCoder.lengthInformation * x: min(
-                            self.firstCoder.lengthInformation * (x + 1), len(information)
-                        )
-                        ])
+            package_list = chanel.Chanel().divide_on_blocks(
+                information=information,
+                block_len=self.firstCoder.lengthInformation
+            )
 
             status: list = []
             for x in package_list:

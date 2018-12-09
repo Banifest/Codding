@@ -2,6 +2,7 @@
 # coding=utf-8
 import logging
 import os
+import uuid
 
 from src.helper.pattern.singleton import Singleton
 
@@ -11,9 +12,11 @@ class Logger(logging.Logger, metaclass=Singleton):
         super().__init__("AppLogger")
         self.setLevel("DEBUG")
 
-        if os.path.exists("log.txt"):
-            os.remove("log.txt")
-        handler = logging.FileHandler("log.txt", encoding='UTF-8')
+        log_guid = uuid.uuid4()
+
+        if os.path.exists("log/log{0}.txt".format(log_guid)):
+            os.remove("log/log{0}.txt".format(log_guid))
+        handler = logging.FileHandler("log/log{0}.txt".format(log_guid), encoding='UTF-8')
 
         handler.setLevel("DEBUG")
         handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))

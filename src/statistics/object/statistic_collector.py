@@ -20,6 +20,12 @@ class CaseResult:
 
 
 class TestResult:
+    list_case_result: List[CaseResult]
+    first_coder: AbstractCoder
+    second_coder: Optional[AbstractCoder]
+    noise_type: int
+    noise: float
+    flg_cascade: bool
 
     def __init__(
             self,
@@ -27,10 +33,12 @@ class TestResult:
             first_coder: AbstractCoder,
             second_coder: Optional[AbstractCoder],
             noise_type: int,
+            noise: float,
             flg_cascade: bool
     ):
         self.flg_cascade = flg_cascade
         self.noise_type = noise_type
+        self.noise = noise
         self.second_coder = second_coder
         self.first_coder = first_coder
         self.list_case_result = list_case_result
@@ -41,3 +49,15 @@ class StatisticCollector:
     first_coder: AbstractCoder
     second_coder: Optional[AbstractCoder]
     test_result: TestResult
+
+    def __init__(
+            self,
+            flg_cascade: bool,
+            first_coder: AbstractCoder,
+            second_coder: Optional[AbstractCoder],
+            test_result: TestResult
+    ) -> None:
+        self.flg_cascade = flg_cascade
+        self.first_coder = first_coder
+        self.second_coder = second_coder
+        self.test_result = test_result

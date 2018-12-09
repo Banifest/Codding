@@ -1,6 +1,6 @@
 # coding=utf-8
 # coding=utf-8
-from typing import Dict
+from typing import Dict, List
 
 from PyQt5.QtCore import QThread
 
@@ -13,6 +13,7 @@ from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import int_to_bit_list
 from src.helper.error.exception.codding_exception import CoddingException
 from src.logger import log
+from src.statistics.object.statistic_collector import CaseResult, TestResult
 from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
@@ -90,6 +91,7 @@ class TestCoder(QThread):
         progress = 0.0
         step = 100.0 / self.countTest
         information: list = int_to_bit_list(self.information)
+        case_result_list: List[CaseResult] = []
 
         log.debug("Начало цикла тестов")
         case_information = []
@@ -117,6 +119,22 @@ class TestCoder(QThread):
             progress += step
             self.lastResult += self.channel.information
             globalSignals.stepFinished.emit(int(progress))
+
+            case_result_list.append(CaseResult(
+                successful_bits=status[1],
+                repair_bits=status[3],
+                changed_bits=status[4],
+                error_bits=status[2]
+            ))
+
+        TestResult(
+            list_case_result=case_result_list,
+            first_coder=self.currentCoder,
+            second_coder=None,
+            noise_type=1,
+            noise=self.channel.noiseProbability,
+            flg_cascade=True
+        )
 
         return case_information
 
