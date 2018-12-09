@@ -14,4 +14,4 @@ if __name__ == '__main__':
             print(e)
             log.critical("Unhandled exception")
 else:
-    raise Exception("Невозможен import данного файла:(")
+    raise Exception("Impossible import this file")
