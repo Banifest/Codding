@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>573</width>
-    <height>656</height>
+       <width>575</width>
+       <height>711</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>0</x>
       <y>0</y>
       <width>571</width>
-      <height>634</height>
+         <height>711</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="actionVerLayout">
@@ -71,7 +71,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-            <height>95</height>
+               <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -113,7 +113,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-            <height>95</height>
+               <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -184,7 +184,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-            <height>95</height>
+               <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -252,7 +252,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-            <height>95</height>
+               <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -369,7 +369,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>95</height>
+               <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -411,7 +411,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>95</height>
+               <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -482,7 +482,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>95</height>
+               <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -550,7 +550,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-            <height>95</height>
+               <height>147</height>
            </rect>
           </property>
           <attribute name="label">
@@ -702,64 +702,42 @@
      <item>
       <widget class="QLabel" name="label_39">
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt; font-weight:600;&quot;&gt;Test&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
+               font-size:11pt; font-weight:600;&quot;&gt;Test settings&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+           </string>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QGridLayout" name="testCoderGrid">
-       <item row="5" column="2" colspan="2">
-        <widget class="QLabel" name="label_20">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+                 <widget class="QLabel" name="noiseModeLayble">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Test coders cascade&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>Mode of noise:</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="0" colspan="2">
-        <widget class="QPushButton" name="startSingleFirstCoderButton">
+             <item>
+                 <widget class="QRadioButton" name="singleErrorModeRadio">
          <property name="text">
-          <string>Start single test</string>
+             <string>Single Mode</string>
+         </property>
+                     <property name="checked">
+                         <bool>true</bool>
          </property>
         </widget>
        </item>
-       <item row="6" column="2" colspan="2">
-        <widget class="QPushButton" name="startSingleCascadeCoderButton">
+             <item>
+                 <widget class="QRadioButton" name="packageErrorModeRadio">
          <property name="text">
-          <string>Start single test</string>
+             <string>Package Mode</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string>Count test:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0" colspan="4">
-        <widget class="QProgressBar" name="singleProgress">
-         <property name="value">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="0" colspan="4">
-        <widget class="QPushButton" name="pushButton">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Display last test result</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="beginNoiseLable">
-         <property name="text">
-          <string>Noise start:</string>
-         </property>
-        </widget>
-       </item>
+         </layout>
+     </item>
+        <item>
+            <layout class="QGridLayout" name="testCoderGrid">
        <item row="0" column="3">
         <widget class="QDoubleSpinBox" name="noiseFinishEdit">
          <property name="locale">
@@ -782,48 +760,10 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="2" colspan="2">
-        <widget class="QSpinBox" name="countTestEdit">
-         <property name="maximum">
-          <number>99999999</number>
-         </property>
-         <property name="value">
-          <number>100</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="QLabel" name="label_11">
-         <property name="text">
-          <string>Information for test:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="2" colspan="2">
-        <widget class="QPushButton" name="startTestsCascadeCoderButton">
-         <property name="text">
-          <string>Start tests</string>
-         </property>
-        </widget>
-       </item>
        <item row="9" column="0" colspan="4">
         <widget class="QProgressBar" name="autoProgress">
          <property name="value">
           <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2" colspan="2">
-        <widget class="QLineEdit" name="informationEdit">
-         <property name="text">
-          <string>985</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="endNoiseLable">
-         <property name="text">
-          <string>Noise end:</string>
          </property>
         </widget>
        </item>
@@ -867,6 +807,91 @@
          </property>
         </widget>
        </item>
+                <item row="5" column="2" colspan="2">
+                    <widget class="QLabel" name="label_20">
+                        <property name="text">
+                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
+                                style=&quot; font-weight:600;&quot;&gt;Test coders cascade&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                            </string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="8" column="0" colspan="4">
+                    <widget class="QProgressBar" name="singleProgress">
+                        <property name="value">
+                            <number>0</number>
+                        </property>
+                    </widget>
+                </item>
+                <item row="1" column="0" colspan="2">
+                    <widget class="QLabel" name="label_10">
+                        <property name="text">
+                            <string>Count test:</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="1" column="2" colspan="2">
+                    <widget class="QSpinBox" name="countTestEdit">
+                        <property name="maximum">
+                            <number>99999999</number>
+                        </property>
+                        <property name="value">
+                            <number>100</number>
+                        </property>
+                    </widget>
+                </item>
+                <item row="6" column="0" colspan="2">
+                    <widget class="QPushButton" name="startSingleFirstCoderButton">
+                        <property name="text">
+                            <string>Start single test</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="10" column="0" colspan="4">
+                    <widget class="QPushButton" name="pushButton">
+                        <property name="enabled">
+                            <bool>false</bool>
+                        </property>
+                        <property name="text">
+                            <string>Display last test result</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="6" column="2" colspan="2">
+                    <widget class="QPushButton" name="startSingleCascadeCoderButton">
+                        <property name="text">
+                            <string>Start single test</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="7" column="2" colspan="2">
+                    <widget class="QPushButton" name="startTestsCascadeCoderButton">
+                        <property name="text">
+                            <string>Start tests</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="2" column="0" colspan="2">
+                    <widget class="QLabel" name="label_11">
+                        <property name="text">
+                            <string>Information for test:</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="2" column="2" colspan="2">
+                    <widget class="QLineEdit" name="informationEdit">
+                        <property name="text">
+                            <string>985</string>
+                        </property>
+                    </widget>
+                </item>
+                <item row="0" column="2">
+                    <widget class="QLabel" name="endNoiseLable">
+                        <property name="text">
+                            <string>Noise end:</string>
+                        </property>
+                    </widget>
+                </item>
        <item row="3" column="2" colspan="2">
         <widget class="QComboBox" name="cascadeModeComboBox">
          <property name="editable">
@@ -884,6 +909,13 @@
          </item>
         </widget>
        </item>
+                <item row="0" column="0">
+                    <widget class="QLabel" name="beginNoiseLable">
+                        <property name="text">
+                            <string>Noise start:</string>
+                        </property>
+                    </widget>
+                </item>
       </layout>
      </item>
     </layout>
