@@ -3,6 +3,7 @@ import random
 from math import ceil
 from typing import Union, Optional, List
 
+from src.channel.ChanelException import ChanelException
 from src.helper.pattern.singleton import Singleton
 from src.logger import log
 
@@ -90,10 +91,31 @@ class Chanel(metaclass=Singleton):
 
         log.debug("Симуляция шума в виде пакета длинной {1} на канале с вероятностью {0}".
                   format(straight, length_of_block))
+        begin_package_straight: float = straight / length_of_block
+        # кол-во ошибочных пакетов на канале
+        count_error_package: int = int(len(information) / begin_package_straight)
+
+        if count_error_package * length_of_block >= len(information):
+            raise ChanelException(
+                message=ChanelException.PACKET_LENGTH_EXCEEDED,
+                long_message=ChanelException.PACKET_LENGTH_EXCEEDED
+            )
 
         # генератор случайных чисел
         random_generator: random.Random = random.Random(random.random() * 50)
-        begin_package_straight: float = straight / length_of_block
+        count_free_bits: int = len(information) - count_error_package * length_of_block
+        # множество битов которые будут измененны
+        changes_bits: list = []
+        for iterator in range(count_error_package):
+            count_pass_bits = random_generator.randint(0, count_free_bits)
+            if count_pass_bits != 0:
+                changes_bits += count_pass_bits * [0]
+            changes_bits += length_of_block * [1]
 
-        # кол-во ошибочных пакетов на канале
-        count_change_bit: int = int(len(information) * begin_package_straight / 100)
+        answer: list = information.copy()
+        # инвертирование битов
+        for bit_value in changes_bits:
+            answer[bit_value] ^= 1
+
+        log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(answer))
+        return answer
