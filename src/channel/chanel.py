@@ -74,3 +74,26 @@ class Chanel(metaclass=Singleton):
 
         log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(answer))
         return answer
+
+    def gen_package_interference(self, information: list, length_of_block: int, straight: float = None) -> list:
+        """
+        Генерация помех с задданной вероятностью
+        :param information: list Информация, представленная в виде массива битов
+        :param length_of_block:
+        :param straight: Optional[float] Вероятность помех принимает значения от 0.00 до 100.00, может быть опушенна,
+        в таком случае будет использоваться значение шума заданное в канале
+        :return: Искажённую информацию, представленную в виде массива битов
+        """
+
+        if straight is None:
+            straight = self.__straight
+
+        log.debug("Симуляция шума в виде пакета длинной {1} на канале с вероятностью {0}".
+                  format(straight, length_of_block))
+
+        # генератор случайных чисел
+        random_generator: random.Random = random.Random(random.random() * 50)
+        begin_package_straight: float = straight / length_of_block
+
+        # кол-во ошибочных пакетов на канале
+        count_change_bit: int = int(len(information) * begin_package_straight / 100)
