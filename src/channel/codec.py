@@ -1,19 +1,19 @@
 # coding=utf-8
 from typing import Optional, Union, List
 
+from channel.enum_noise_mode import EnumNoiseMode
 from src.channel import chanel
 from src.channel.enum_bit_transfer_result import EnumBitTransferResult
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver import Interleaver
 from src.helper.error.exception.codding_exception import CoddingException
+from src.helper.error.exception.parameters_parse_exception import ParametersParseException
 from src.logger import log
 
 
 class Codec:
-    # Вероятность ошибки
     noiseProbability: int = 0
-    # Количество циклов
     countCyclical: int = 1
     duplex: bool = False
     # Информация о процессе передачи информации
@@ -23,16 +23,28 @@ class Codec:
     interleaver: Interleaver.Interleaver = False
     countSuccessfullyMessage: int
 
+    # Package noise mode attr
+    noiseMode: EnumNoiseMode
+    noisePackageLength: int
+    isSplitPackage: bool
+
     def __init__(
             self,
             coder: Optional[AbstractCoder],
             noise_probability: Union[int, float],
             count_cyclical: Optional[int],
             duplex: Optional[bool],
-            interleaver: Optional[Interleaver.Interleaver]
+            interleaver: Optional[Interleaver.Interleaver],
+            noise_mode: EnumNoiseMode,
+            noise_package_length: int,
+            is_split_package: bool,
     ):
 
         log.debug("Создание канала связи")
+        self.noiseMode = noise_mode
+        self.noisePackageLength = noise_package_length
+        self.isSplitPackage = is_split_package
+
         self.coder: AbstractCoder = coder
         if noise_probability is not None:
             self.noiseProbability = noise_probability
@@ -72,7 +84,19 @@ class Codec:
                 if self.interleaver:
                     now_information = self.interleaver.shuffle(now_information)
 
-                now_information = chanel.Chanel().gen_interference(now_information)
+                if self.noiseMode == EnumNoiseMode.SINGLE:
+                    now_information = chanel.Chanel().gen_interference(now_information)
+                elif self.noiseMode == EnumNoiseMode.PACKAGE:
+                    now_information = chanel.Chanel().gen_package_interference(
+                        information=information,
+                        length_of_block=self.noisePackageLength,
+                        flg_split_package=self.isSplitPackage
+                    )
+                else:
+                    raise ParametersParseException(
+                        message=ParametersParseException.NOISE_MODE_UNDEFINED,
+                        long_message=ParametersParseException.NOISE_MODE_UNDEFINED
+                    )
 
                 if self.interleaver:
                     now_information = self.interleaver.reestablish(now_information)

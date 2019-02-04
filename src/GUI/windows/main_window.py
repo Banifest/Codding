@@ -55,8 +55,6 @@ class MainWindow(QMainWindow):
 
         self.secondCoderSetting.currentChanged.connect(self.controller.secondCoderParams.set_coder_type)
 
-        # self.action_import_from_json.triggered.connect(self.controller.import_from_json)
-
         self.noiseStartEdit.valueChanged.connect(self.controller.testParams.set_noise_start)
         self.noiseFinishEdit.valueChanged.connect(self.controller.testParams.set_noise_end)
         self.countTestEdit.valueChanged.connect(self.controller.testParams.set_count_test)

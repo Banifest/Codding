@@ -4,6 +4,7 @@ from typing import Dict, List
 
 from PyQt5.QtCore import QThread
 
+from channel.enum_noise_mode import EnumNoiseMode
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import GraphicController
 from src.channel.cascadecodec import CascadeCodec
@@ -39,6 +40,11 @@ class TestCoder(QThread):
     countCorrectBit = 0
     countErrorBit = 0
 
+    # Package noise mode attr
+    noiseMode: EnumNoiseMode
+    noisePackageLength: int
+    isSplitPackage: bool
+
     def __init__(
             self,
             noise_chance: float,
@@ -46,8 +52,11 @@ class TestCoder(QThread):
             test_info: int,
             current_coder: AbstractCoder,
             last_result: str,
+            noise_mode: EnumNoiseMode,
+            noise_package_length: int,
+            is_split_package: bool,
             start: float = 0,
-            finish: float = 20
+            finish: float = 20,
     ):
         super(TestCoder, self).__init__()
 
@@ -61,13 +70,17 @@ class TestCoder(QThread):
         self.information = test_info
         self.coderSpeed = self.currentCoder.get_speed()
         self.coderName = self.currentCoder.name
+        self.noiseMode = noise_mode
+        self.noisePackageLength = noise_package_length
+        self.isSplitPackage = is_split_package
 
         self.channel = Codec(
             self.currentCoder,
             self.noiseChance,
             self.countTest,
             False,
-            None
+            None,
+
         )
 
         self.information_dict['is_cascade'] = False
