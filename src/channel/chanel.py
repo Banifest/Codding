@@ -117,7 +117,7 @@ class Chanel(metaclass=Singleton):
         changes_bits: list = []
         for iterator in range(count_error_package):
             if flg_split_package:
-                # i should save bits for split package: count_free_bits - count of package - current step - 1
+                # we should save bits for split package: count_free_bits - count of package - current step - 1
                 count_save_bits: int = count_error_package - iterator - 1
                 count_pass_bits = random_generator.randint(1, count_free_bits - count_save_bits)
                 changes_bits += count_pass_bits * [0]

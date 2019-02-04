@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
        <width>575</width>
-       <height>711</height>
+       <height>734</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,7 +49,9 @@
        <item row="0" column="0">
         <widget class="QLabel" name="descFirstCoderLabel">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;First coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
+                 font-size:12pt; font-weight:600;&quot;&gt;First coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+             </string>
          </property>
         </widget>
        </item>
@@ -71,7 +73,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>147</height>
+               <height>117</height>
            </rect>
           </property>
           <attribute name="label">
@@ -113,7 +115,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>147</height>
+               <height>117</height>
            </rect>
           </property>
           <attribute name="label">
@@ -184,7 +186,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>147</height>
+               <height>117</height>
            </rect>
           </property>
           <attribute name="label">
@@ -252,7 +254,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>147</height>
+               <height>117</height>
            </rect>
           </property>
           <attribute name="label">
@@ -369,7 +371,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>147</height>
+               <height>117</height>
            </rect>
           </property>
           <attribute name="label">
@@ -411,7 +413,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>147</height>
+               <height>117</height>
            </rect>
           </property>
           <attribute name="label">
@@ -482,7 +484,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>147</height>
+               <height>117</height>
            </rect>
           </property>
           <attribute name="label">
@@ -550,7 +552,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>147</height>
+               <height>117</height>
            </rect>
           </property>
           <attribute name="label">
@@ -652,7 +654,9 @@
        <item row="0" column="1">
         <widget class="QLabel" name="descSecondCoderSetting">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Second coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
+                 font-size:11pt; font-weight:600;&quot;&gt;Second coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+             </string>
          </property>
         </widget>
        </item>
@@ -709,31 +713,69 @@
       </widget>
      </item>
      <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-                 <widget class="QLabel" name="noiseModeLayble">
-         <property name="text">
-             <string>Mode of noise:</string>
-         </property>
-        </widget>
-       </item>
+                 <layout class="QHBoxLayout" name="horizontalLayout">
+                     <item>
+                         <widget class="QLabel" name="noiseModeLable">
+                             <property name="text">
+                                 <string>Mode of noise:</string>
+                             </property>
+                         </widget>
+                     </item>
+                     <item>
+                         <widget class="QRadioButton" name="singleErrorModeRadio">
+                             <property name="text">
+                                 <string>Single Mode</string>
+                             </property>
+                             <property name="checked">
+                                 <bool>true</bool>
+                             </property>
+                         </widget>
+                     </item>
+                     <item>
+                         <widget class="QRadioButton" name="packageErrorModeRadio">
+                             <property name="text">
+                                 <string>Package Mode</string>
+                             </property>
+                         </widget>
+                     </item>
+                 </layout>
+             </item>
              <item>
-                 <widget class="QRadioButton" name="singleErrorModeRadio">
-         <property name="text">
-             <string>Single Mode</string>
-         </property>
-                     <property name="checked">
-                         <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-             <item>
-                 <widget class="QRadioButton" name="packageErrorModeRadio">
-         <property name="text">
-             <string>Package Mode</string>
-         </property>
-        </widget>
-       </item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_4">
+                     <item>
+                         <widget class="QLabel" name="noisePackageLengthLabel">
+                             <property name="text">
+                                 <string>Noise package length</string>
+                             </property>
+                         </widget>
+                     </item>
+                     <item>
+                         <widget class="QSpinBox" name="pakcageLengthSpinBox">
+                             <property name="enabled">
+                                 <bool>false</bool>
+                             </property>
+                             <property name="readOnly">
+                                 <bool>false</bool>
+                             </property>
+                             <property name="prefix">
+                                 <string/>
+                             </property>
+                         </widget>
+                     </item>
+                     <item>
+                         <widget class="QCheckBox" name="isSplitPackageCheckBox">
+                             <property name="enabled">
+                                 <bool>false</bool>
+                             </property>
+                             <property name="text">
+                                 <string>Is split packages non-damaged bit</string>
+                             </property>
+                         </widget>
+                     </item>
+                 </layout>
+             </item>
          </layout>
      </item>
         <item>
@@ -768,9 +810,11 @@
         </widget>
        </item>
        <item row="5" column="0" colspan="2">
-        <widget class="QLabel" name="label_19">
+           <widget class="QLabel" name="testFirstCoderLabel">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Test first coder&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
+                 font-weight:600;&quot;&gt;Single test of the firts coder&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+             </string>
          </property>
         </widget>
        </item>
@@ -794,7 +838,7 @@
         </widget>
        </item>
        <item row="3" column="0" colspan="2">
-        <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="cascadeCodecModeLabel">
          <property name="text">
              <string>CascadeCodec mode:</string>
          </property>
@@ -808,10 +852,10 @@
         </widget>
        </item>
                 <item row="5" column="2" colspan="2">
-                    <widget class="QLabel" name="label_20">
+                    <widget class="QLabel" name="testCascadeCodersLavel">
                         <property name="text">
                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
-                                style=&quot; font-weight:600;&quot;&gt;Test coders cascade&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                                style=&quot; font-weight:600;&quot;&gt;Test of the coder's cascade&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                             </string>
                         </property>
                     </widget>
@@ -824,7 +868,7 @@
                     </widget>
                 </item>
                 <item row="1" column="0" colspan="2">
-                    <widget class="QLabel" name="label_10">
+                    <widget class="QLabel" name="countTestLabel">
                         <property name="text">
                             <string>Count test:</string>
                         </property>
@@ -872,7 +916,7 @@
                     </widget>
                 </item>
                 <item row="2" column="0" colspan="2">
-                    <widget class="QLabel" name="label_11">
+                    <widget class="QLabel" name="informationTestLabel">
                         <property name="text">
                             <string>Information for test:</string>
                         </property>
@@ -924,5 +968,38 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+    <connections>
+        <connection>
+            <sender>packageErrorModeRadio</sender>
+            <signal>toggled(bool)</signal>
+            <receiver>pakcageLengthSpinBox</receiver>
+            <slot>setEnabled(bool)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>475</x>
+                    <y>405</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>428</x>
+                    <y>431</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>packageErrorModeRadio</sender>
+            <signal>toggled(bool)</signal>
+            <receiver>isSplitPackageCheckBox</receiver>
+            <slot>setEnabled(bool)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>475</x>
+                    <y>405</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>474</x>
+                    <y>431</y>
+                </hint>
+            </hints>
+        </connection>
+    </connections>
 </ui>
