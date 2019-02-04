@@ -3,7 +3,7 @@ import random
 from math import ceil
 from typing import Union, Optional, List
 
-from src.channel.ChanelException import ChanelException
+from src.channel.chanel_exception import ChanelException
 from src.helper.pattern.singleton import Singleton
 from src.logger import log
 

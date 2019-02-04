@@ -4,5 +4,6 @@ from src.helper.error.exception.application_exception import ApplicationExceptio
 
 
 class ParametersParseException(ApplicationException):
+    NOISE_MODE_UNDEFINED: str = 'Noise mode undefined'
     _message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value
     _long_message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value

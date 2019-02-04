@@ -1,5 +1,7 @@
 # coding=utf-8
 # coding=utf-8
+
+from channel.enum_noise_mode import EnumNoiseMode
 from src.GUI.controller.coder_controller import CoderController
 from src.GUI.controller.thread_controllers import TestCoder, TestCascadeCoder
 from src.helper.error.error_handler import ErrorHandler
@@ -23,6 +25,10 @@ class TestController:
     testInfo: int = 985
     mode: int = 0
 
+    noiseMode: EnumNoiseMode
+    noisePackageLength: int
+    isSplitPackage: bool
+
     def __init__(
             self,
             first_coder_params: CoderController,
@@ -30,6 +36,18 @@ class TestController:
     ):
         self._firstCoderParams = first_coder_params
         self._secondCoderParams = second_coder_params
+
+    def set_noise_mode(self, value: bool) -> None:
+        if value:
+            self.noiseMode = EnumNoiseMode.SINGLE
+        else:
+            self.noiseMode = EnumNoiseMode.PACKAGE
+
+    def set_noise_package_length(self, value: int) -> None:
+        self.noisePackageLength = value
+
+    def set_is_split_package(self, value: bool) -> None:
+        self.isSplitPackage = value
 
     def set_noise_start(self, value: float) -> None:
         self.noiseStart = value

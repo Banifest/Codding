@@ -3,6 +3,7 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 
+from GUI.windows.main_window_noise import main_window_noise
 from src.GUI.globals_signals import globalSignals
 from src.logger import log
 
@@ -69,4 +70,6 @@ class MainWindow(QMainWindow):
         self.startTestsFirstCoderButton.clicked.connect(self.controller.testParams.start_first_test_cycle)
         self.startSingleCascadeCoderButton.clicked.connect(self.controller.testParams.start_cascade_single_test)
         self.startTestsCascadeCoderButton.clicked.connect(self.controller.testParams.start_cascade_test_cycle)
+
+        main_window_noise(controller=controller, window=self)
         self.show()
