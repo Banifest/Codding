@@ -14,6 +14,9 @@ class Logger(logging.Logger, metaclass=Singleton):
 
         log_guid = uuid.uuid4()
 
+        if not os.path.exists("log/"):
+            os.makedirs("log")
+
         if os.path.exists("log/log{0}.txt".format(log_guid)):
             os.remove("log/log{0}.txt".format(log_guid))
         handler = logging.FileHandler("log/log{0}.txt".format(log_guid), encoding='UTF-8')
