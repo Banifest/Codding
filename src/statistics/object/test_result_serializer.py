@@ -26,7 +26,7 @@ class TestResultSerializer(metaclass=Singleton):
             additional_length=first_coder.countAdditional,
             # TODO add interleaver determining
             interleaver=False,
-            description=first_coder._name
+            description=first_coder.name
         ))
 
         second_coder_guid = None
