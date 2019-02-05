@@ -2,8 +2,8 @@
 
 
 def setup_main_window_noise(controller, window):
-    window.packageErrorModeRadio.toggled.connect(controller.testParams.set_noise_mode)
-    window.packageErrorModeRadio.toggled.emit(window.packageErrorModeRadio.isChecked())
+    window.singleErrorModeRadio.toggled.connect(controller.testParams.set_noise_mode)
+    window.singleErrorModeRadio.toggled.emit(window.singleErrorModeRadio.isChecked())
 
     window.pakcageLengthSpinBox.valueChanged.connect(controller.testParams.set_noise_package_length)
     window.pakcageLengthSpinBox.valueChanged.emit(window.pakcageLengthSpinBox.value())

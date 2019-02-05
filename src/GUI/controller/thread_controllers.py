@@ -19,6 +19,14 @@ from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class TestCoder(QThread):
+    class GlobalTestStatistic:
+        quantity_successful_package: int = 0
+        quantity_error_package: int = 0
+        quantity_repair_package: int = 0
+        quantity_shadow_package: int = 0
+        quantity_correct_bits: int = 0
+        quantity_error_bits: int = 0
+
     information_dict: Dict = {}
     noiseChance: float = 0
     countTest: int = 1
@@ -32,13 +40,7 @@ class TestCoder(QThread):
     start_t: float = 0
     finish_t: float = 20
 
-    successfullyPackage = 0
-    badPackage = 0
-    repairPackage = 0
-    invisiblePackage = 0
-
-    countCorrectBit = 0
-    countErrorBit = 0
+    globalTestStatistic: GlobalTestStatistic = GlobalTestStatistic()
 
     # Package noise mode attr
     noiseMode: EnumNoiseMode
@@ -113,13 +115,13 @@ class TestCoder(QThread):
         for x in range(self.countTest):
             transfer_statistic: Codec.TransferStatistic = self.channel.transfer_one_step(information)
             if transfer_statistic.result_status == EnumPackageTransferResult.SUCCESS:
-                self.successfullyPackage += 1
+                self.globalTestStatistic.quantity_successful_package += 1
             elif transfer_statistic.result_status == EnumPackageTransferResult.REPAIR:
-                self.repairPackage += 1
+                self.globalTestStatistic.quantity_repair_package += 1
             elif transfer_statistic.result_status == EnumPackageTransferResult.ERROR:
-                self.badPackage += 1
+                self.globalTestStatistic.quantity_error_package += 1
             else:
-                self.invisiblePackage += 1
+                self.globalTestStatistic.quantity_shadow_package += 1
             case_information.append({
                 x: {
                     'correct bits': transfer_statistic.quantity_successful_bits,
@@ -129,8 +131,8 @@ class TestCoder(QThread):
                     'status': transfer_statistic.result_status.value
                 }
             })
-            self.countCorrectBit += transfer_statistic.quantity_successful_bits
-            self.countErrorBit += transfer_statistic.quantity_error_bits
+            self.globalTestStatistic.quantity_correct_bits += transfer_statistic.quantity_successful_bits
+            self.globalTestStatistic.quantity_error_bits += transfer_statistic.quantity_error_bits
             progress += step
             self.lastResult += self.channel.information
             globalSignals.stepFinished.emit(int(progress))
@@ -171,25 +173,27 @@ class TestCoder(QThread):
         for x in [start + x * step for x in range(20)]:
             test_case_info = {}
 
-            self.successfullyPackage = 0
-            self.badPackage = 0
-            self.repairPackage = 0
-            self.invisiblePackage = 0
-            self.countErrorBit = 0
-            self.countCorrectBit = 0
             progress += 5
 
             self.channel.noiseProbability = 100 * (1 / (x + 1))
             test_case_info['case'] = self.one_test()
 
-            test_case_info['successfully_package_count'] = self.successfullyPackage + self.repairPackage
-            test_case_info['bad_package_count'] = self.badPackage + self.invisiblePackage
-            test_case_info['correct_bit_count'] = self.countCorrectBit
-            test_case_info['error_bit_count'] = self.countErrorBit
+            test_case_info['successfully_package_count'] = \
+                self.globalTestStatistic.quantity_successful_package + self.globalTestStatistic.quantity_repair_package
+            test_case_info['bad_package_count'] = \
+                self.globalTestStatistic.quantity_error_package + self.globalTestStatistic.quantity_shadow_package
+            test_case_info['correct_bit_count'] = self.globalTestStatistic.quantity_correct_bits
+            test_case_info['error_bit_count'] = self.globalTestStatistic.quantity_error_bits
 
             self.information_dict['test_cases'].append(test_case_info)
-            draw_data.append([self.successfullyPackage, self.repairPackage, self.badPackage, self.invisiblePackage,
-                              self.countCorrectBit, self.countErrorBit])
+            draw_data.append([
+                self.globalTestStatistic.quantity_successful_package,
+                self.globalTestStatistic.quantity_repair_package,
+                self.globalTestStatistic.quantity_error_package,
+                self.self.globalTestStatistic.quantity_shadow_package,
+                self.globalTestStatistic.quantity_correct_bits,
+                self.globalTestStatistic.quantity_error_bits
+            ])
             globalSignals.autoStepFinished.emit(int(progress))
 
         self.information_dict['draw_information'] = draw_data
@@ -234,30 +238,40 @@ class TestCascadeCoder(TestCoder):
                  current_coder: AbstractCoder,
                  first_coder: AbstractCoder,
                  second_coder: AbstractCoder,
+                 noise_mode: EnumNoiseMode,
+                 noise_package_length: int,
+                 is_split_package: bool,
                  last_result: str,
                  start: float = 0,
                  finish: float = 20,
                  mode: int = 0
                  ):
-        super().__init__(noise_chance,
-                         count_test,
-                         test_info,
-                         current_coder,
-                         last_result,
-                         start,
-                         finish)
+        super().__init__(
+            noise_chance=noise_chance,
+            count_test=count_test,
+            test_info=test_info,
+            current_coder=current_coder,
+            last_result=last_result,
+            start=start,
+            finish=finish,
+            noise_package_length=noise_package_length,
+            is_split_package=is_split_package,
+            noise_mode=noise_mode,
+        )
 
         self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
         self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
         self.channel = CascadeCodec(
-            first_coder,
-            second_coder,
-            self.noiseChance,
-            self.countTest,
-            False,
-            None,
-            None,
-            mode
+            first_coder=first_coder,
+            second_coder=second_coder,
+            noise_probability=self.noiseChance,
+            count_cyclical=self.countTest,
+            duplex=False,
+            first_interleaver=None,
+            second_interleaver=None,
+            noise_package_length=noise_package_length,
+            is_split_package=is_split_package,
+            noise_mode=noise_mode,
         )
 
     def run(self):

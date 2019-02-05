@@ -190,6 +190,8 @@ class Codec:
             elif status == EnumBitTransferResult.REPAIR \
                     and transfer_statistic.result_status != EnumPackageTransferResult.ERROR:
                 transfer_statistic.result_status = EnumPackageTransferResult.REPAIR
+            else:
+                transfer_statistic.result_status = status
         return transfer_statistic
 
     def get_transfer_one_step(self, information: list) -> TransferStatistic:

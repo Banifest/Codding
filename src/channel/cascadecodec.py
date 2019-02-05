@@ -87,29 +87,32 @@ class CascadeCodec(codec.Codec):
             return transfer_information
 
         elif self.mode == 1:
-            first_coder_information: list = self.firstCoder.encoding(information)
-            if self.firstInterleaver is not None:
-                first_coder_information = self.firstInterleaver.shuffle(first_coder_information)
-
-            second_coder_information: list = self.firstCoder.encoding(information)
-            if self.secondInterleaver is not None:
-                second_coder_information = self.secondInterleaver.shuffle(second_coder_information)
-
-                transfer_information = self._do_noise(information=first_coder_information + second_coder_information,
-                                                      noise_probability=self.noiseProbability)
-
-            if self.firstInterleaver is not None:
-                first_coder_information = self.firstInterleaver.reestablish(first_coder_information)
-
-            if self.secondInterleaver is not None:
-                second_coder_information = self.secondInterleaver.reestablish(second_coder_information)
-
-            first_coder_information = self.firstCoder.decoding(first_coder_information)
-            second_coder_information = self.secondCoder.decoding(second_coder_information)
-            if bit_list_to_int(first_coder_information) != bit_list_to_int(first_coder_information) \
-                    and bit_list_to_int(second_coder_information) != bit_list_to_int(second_coder_information):
-                return [EnumPackageTransferResult.ERROR, transfer_information[1], transfer_information[2],
-                        transfer_information[3], transfer_information[4]]
-            else:
-                return [EnumPackageTransferResult.REPAIR, transfer_information[1], transfer_information[2],
-                        transfer_information[3], transfer_information[4]]
+            # TODO разобраться для чего эта ветка
+            pass
+            # first_coder_information: list = self.firstCoder.encoding(information)
+            # if self.firstInterleaver is not None:
+            #     first_coder_information = self.firstInterleaver.shuffle(first_coder_information)
+            #
+            # second_coder_information: list = self.firstCoder.encoding(information)
+            # if self.secondInterleaver is not None:
+            #     second_coder_information = self.secondInterleaver.shuffle(second_coder_information)
+            #
+            # information_after_change = self._do_noise(information=first_coder_information + second_coder_information,
+            #                                       noise_probability=self.noiseProbability)
+            #
+            # if self.firstInterleaver is not None:
+            #     first_coder_information = self.firstInterleaver.reestablish(first_coder_information)
+            #
+            # if self.secondInterleaver is not None:
+            #     second_coder_information = self.secondInterleaver.reestablish(second_coder_information)
+            #
+            # first_coder_information = self.firstCoder.decoding(first_coder_information)
+            # second_coder_information = self.secondCoder.decoding(second_coder_information)
+            # if bit_list_to_int(first_coder_information) != bit_list_to_int(first_coder_information) \
+            #         and bit_list_to_int(second_coder_information) != bit_list_to_int(second_coder_information):
+            #
+            #     return [EnumPackageTransferResult.ERROR, transfer_information[1], transfer_information[2],
+            #             transfer_information[3], transfer_information[4]]
+            # else:
+            #     return [EnumPackageTransferResult.REPAIR, transfer_information[1], transfer_information[2],
+            #             transfer_information[3], transfer_information[4]]
