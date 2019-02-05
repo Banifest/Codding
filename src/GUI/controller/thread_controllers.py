@@ -80,7 +80,9 @@ class TestCoder(QThread):
             self.countTest,
             False,
             None,
-
+            noise_mode=noise_mode,
+            noise_package_length=noise_package_length,
+            is_split_package=is_split_package,
         )
 
         self.information_dict['is_cascade'] = False
@@ -101,50 +103,50 @@ class TestCoder(QThread):
         Method provide functionality for processing single test case
         :return:
         """
-        progress = 0.0
-        step = 100.0 / self.countTest
+        progress: float = 0.0
+        step: float = 100.0 / self.countTest
         information: list = int_to_bit_list(self.information)
         case_result_list: List[CaseResult] = []
 
         log.debug("Начало цикла тестов")
-        case_information = []
+        case_information: list = []
         for x in range(self.countTest):
-            status: [EnumPackageTransferResult, int, int, int, int] = self.channel.transfer_one_step(information)
-            if status[0] == EnumPackageTransferResult.SUCCESS:
+            transfer_statistic: Codec.TransferStatistic = self.channel.transfer_one_step(information)
+            if transfer_statistic.result_status == EnumPackageTransferResult.SUCCESS:
                 self.successfullyPackage += 1
-            elif status[0] == EnumPackageTransferResult.REPAIR:
+            elif transfer_statistic.result_status == EnumPackageTransferResult.REPAIR:
                 self.repairPackage += 1
-            elif status[0] == EnumPackageTransferResult.ERROR:
+            elif transfer_statistic.result_status == EnumPackageTransferResult.ERROR:
                 self.badPackage += 1
             else:
                 self.invisiblePackage += 1
             case_information.append({
                 x: {
-                    'correct bits': status[1],
-                    'error bits': status[2],
-                    'repair bits': status[3],
-                    'change bits': status[4],
-                    'status': status[0].value
+                    'correct bits': transfer_statistic.quantity_successful_bits,
+                    'error bits': transfer_statistic.quantity_error_bits,
+                    'repair bits': transfer_statistic.quantity_repair_bits,
+                    'change bits': transfer_statistic.quantity_changed_bits,
+                    'status': transfer_statistic.result_status.value
                 }
             })
-            self.countCorrectBit += status[1]
-            self.countErrorBit += status[2]
+            self.countCorrectBit += transfer_statistic.quantity_successful_bits
+            self.countErrorBit += transfer_statistic.quantity_error_bits
             progress += step
             self.lastResult += self.channel.information
             globalSignals.stepFinished.emit(int(progress))
 
             case_result_list.append(CaseResult(
-                successful_bits=status[1],
-                repair_bits=status[3],
-                changed_bits=status[4],
-                error_bits=status[2]
+                successful_bits=transfer_statistic.quantity_successful_bits,
+                repair_bits=transfer_statistic.quantity_repair_bits,
+                changed_bits=transfer_statistic.quantity_changed_bits,
+                error_bits=transfer_statistic.quantity_error_bits
             ))
 
         TestResult(
             list_case_result=case_result_list,
             first_coder=self.currentCoder,
             second_coder=None,
-            noise_type=1,
+            noise_type=self.noiseMode,
             noise=self.channel.noiseProbability,
             flg_cascade=True
         )

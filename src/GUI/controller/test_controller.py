@@ -78,7 +78,10 @@ class TestController:
             current_coder=self._firstCoderParams.coder,
             last_result='',
             start=self.noiseStart,
-            finish=self.noiseEnd
+            finish=self.noiseEnd,
+            noise_package_length=self.noisePackageLength,
+            noise_mode=self.noiseMode,
+            is_split_package=self.isSplitPackage,
         )
 
     def set_cascade_coder_thread_class(self):

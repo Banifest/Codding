@@ -28,6 +28,15 @@ class Codec:
     noisePackageLength: int
     isSplitPackage: bool
 
+    class TransferStatistic:
+        result_status: EnumPackageTransferResult = EnumPackageTransferResult.SUCCESS
+        quantity_successful_bits: int = 0
+        quantity_error_bits: int = 0
+        quantity_repair_bits: int = 0
+        quantity_shadow_bits: int = 0
+        quantity_changed_bits: int = 0
+        current_information_state: list = []
+
     def __init__(
             self,
             coder: Optional[AbstractCoder],
@@ -73,41 +82,30 @@ class Codec:
             )
 
     def transfer(self, information: list) -> str:
-        count_successfully: int = 0
+        transfer_statistic = Codec.TransferStatistic()
         self.information += "Начата циклическая передача пакета ({0}).\n Количество передач {1}.\n". \
             format(information, self.countCyclical)
 
         for number_of_cycle in range(self.countCyclical):
             try:
-                now_information: list = information
-                now_information = self.coder.encoding(now_information)
+                current_information_state: list = information
+                current_information_state = self.coder.encoding(current_information_state)
                 if self.interleaver:
-                    now_information = self.interleaver.shuffle(now_information)
+                    current_information_state = self.interleaver.shuffle(current_information_state)
 
-                if self.noiseMode == EnumNoiseMode.SINGLE:
-                    now_information = chanel.Chanel().gen_interference(now_information)
-                elif self.noiseMode == EnumNoiseMode.PACKAGE:
-                    now_information = chanel.Chanel().gen_package_interference(
-                        information=information,
-                        length_of_block=self.noisePackageLength,
-                        flg_split_package=self.isSplitPackage
-                    )
-                else:
-                    raise ParametersParseException(
-                        message=ParametersParseException.NOISE_MODE_UNDEFINED,
-                        long_message=ParametersParseException.NOISE_MODE_UNDEFINED
-                    )
+                    current_information_state = self._do_noise(information=current_information_state,
+                                                               noise_probability=self.noiseProbability)
 
                 if self.interleaver:
-                    now_information = self.interleaver.reestablish(now_information)
+                    current_information_state = self.interleaver.reestablish(current_information_state)
 
-                now_information = self.coder.decoding(now_information)
+                current_information_state = self.coder.decoding(current_information_state)
             except CoddingException:
                 self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
                                     "востановлению\n".format(number_of_cycle)
             else:
-                if now_information == information:
-                    count_successfully += 1
+                if current_information_state == information:
+                    transfer_statistic.quantity_successful_bits += 1
                     self.information += "Пакет при передаче попыткой под номером {0} был успешно передан\n".format(
                         number_of_cycle)
                 else:
@@ -118,16 +116,15 @@ class Codec:
                             "Всего попыток передать пакет {1}.\n" \
                             "Количство успешно переданных пакетов {2}.\n" \
                             "Количество неудачно переданных пакетов {3}.\n". \
-            format(information, self.countCyclical, count_successfully, self.countCyclical - count_successfully)
+            format(information, self.countCyclical, transfer_statistic.quantity_successful_bits,
+                   self.countCyclical - transfer_statistic.quantity_successful_bits)
 
         return self.information
 
-    def transfer_one_step(self, information: list) -> [EnumPackageTransferResult, int, int, int, int]:
+    def transfer_one_step(self, information: list) -> TransferStatistic:
+        transfer_statistic = Codec.TransferStatistic()
+
         #  Разбиение на пакеты
-        success_bits: int = 0
-        drop_bits: int = 0
-        repair_bits: int = 0
-        change_bits: int = 0
         if self.coder.is_div_into_package:
             block_list = chanel.Chanel().divide_on_blocks(
                 information=information,
@@ -136,7 +133,6 @@ class Codec:
         else:
             block_list = [information.copy()]
 
-        package_status: EnumPackageTransferResult = EnumPackageTransferResult.SUCCESS
         for block in block_list:
             current_information: List[int] = block.copy()
             log.info("Производиться передача последовательности битов - {0}".format(current_information))
@@ -150,7 +146,8 @@ class Codec:
 
                 help_information = current_information
 
-                current_information = chanel.Chanel().gen_interference(current_information, self.noiseProbability)
+                current_information = self._do_noise(information=current_information,
+                                                     noise_probability=self.noiseProbability)
 
                 if help_information != current_information:
                     status = EnumBitTransferResult.REPAIR
@@ -165,6 +162,7 @@ class Codec:
                     "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(current_information))
                 self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
             except:
+                # TODO исправить на явный перехват исключения и убрать эту заглушку
                 status = EnumBitTransferResult.ERROR
                 log.info(
                     "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(current_information))
@@ -181,59 +179,80 @@ class Codec:
                         current_information))
                     self.information = "Пакет при передаче был повреждён и не подлежит " \
                                        "востановлению\n"
+
             current_step_success_bits = sum([1 if current_information[x] == normalization_information[x] else 0
                                              for x in range(len(current_information))])
-            success_bits += current_step_success_bits
-            drop_bits += len(normalization_information) - current_step_success_bits
+            transfer_statistic.quantity_successful_bits += current_step_success_bits
+            transfer_statistic.quantity_error_bits += len(normalization_information) - current_step_success_bits
+
             if status == EnumBitTransferResult.ERROR or status == EnumBitTransferResult.SHADOW:
-                package_status = EnumPackageTransferResult.ERROR
-            elif status == EnumBitTransferResult.REPAIR and package_status != EnumPackageTransferResult.ERROR:
-                package_status = EnumPackageTransferResult.REPAIR
-        return [package_status, success_bits, drop_bits, repair_bits, change_bits]
+                transfer_statistic.result_status = EnumPackageTransferResult.ERROR
+            elif status == EnumBitTransferResult.REPAIR \
+                    and transfer_statistic.result_status != EnumPackageTransferResult.ERROR:
+                transfer_statistic.result_status = EnumPackageTransferResult.REPAIR
+        return transfer_statistic
 
-    def get_transfer_one_step(self, information: list) -> list:
-        success_bits: int = 0
-        drop_bits: int = 0
-        repair_bits: int = 0
-        change_bits: int = 0
-        now_information: List[int] = information.copy()
+    def get_transfer_one_step(self, information: list) -> TransferStatistic:
+        transfer_statistic = Codec.TransferStatistic()
+        current_information_state: List[int] = information.copy()
 
-        log.info("Производиться передача последовательности битов - {0}".format(now_information))
-        normalization_information: List[int] = self.coder.try_normalization(now_information)
+        log.info("Производиться передача последовательности битов - {0}".format(current_information_state))
+        normalization_information: List[int] = self.coder.try_normalization(current_information_state)
         try:
-            now_information = self.coder.encoding(normalization_information)
+            current_information_state = self.coder.encoding(normalization_information)
 
             if self.interleaver:
-                now_information = self.interleaver.shuffle(now_information)
+                current_information_state = self.interleaver.shuffle(current_information_state)
 
-            now_information = chanel.Chanel().gen_interference(now_information, self.noiseProbability)
+            current_information_state = self._do_noise(information=current_information_state,
+                                                       noise_probability=self.noiseProbability)
 
             if self.interleaver:
-                now_information = self.interleaver.reestablish(now_information)
+                current_information_state = self.interleaver.reestablish(current_information_state)
 
-            now_information = self.coder.decoding(now_information)
+            current_information_state = self.coder.decoding(current_information_state)
         except CoddingException:
             log.info(
-                "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
+                "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(
+                    current_information_state))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         except:
+            # TODO the same that and method below
             log.info(
-                "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(now_information))
+                "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(
+                    current_information_state))
             self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
         else:
-            if now_information == normalization_information:
+            if current_information_state == normalization_information:
                 log.info("Пакет {0} был успешно передан".format(information))
                 self.information = "Пакет был успешно передан\n"
             else:
                 log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
-                    now_information))
+                    current_information_state))
                 self.information = "Пакет при передаче был повреждён и не подлежит " \
                                    "востановлению\n"
-        current_step_success_bits = sum([1 if now_information[x] == normalization_information[x] else 0
-                                         for x in range(len(now_information))])
-        success_bits += current_step_success_bits
-        drop_bits += len(normalization_information) - current_step_success_bits
-        return [now_information, success_bits, drop_bits, repair_bits, change_bits]
+        current_step_success_bits = sum([1 if current_information_state[x] == normalization_information[x] else 0
+                                         for x in range(len(current_information_state))])
+        transfer_statistic.quantity_successful_bits += current_step_success_bits
+        transfer_statistic.quantity_error_bits += len(normalization_information) - current_step_success_bits
+        transfer_statistic.current_information_state = current_information_state
+        return transfer_statistic
 
     def get_information_about_last_transfer(self):
         return self.information
+
+    def _do_noise(self, information: list, noise_probability: float) -> list:
+        if self.noiseMode == EnumNoiseMode.SINGLE:
+            return chanel.Chanel().gen_interference(information=information, straight=noise_probability)
+        elif self.noiseMode == EnumNoiseMode.PACKAGE:
+            return chanel.Chanel().gen_package_interference(
+                straight=noise_probability,
+                information=information,
+                length_of_block=self.noisePackageLength,
+                flg_split_package=self.isSplitPackage
+            )
+        else:
+            raise ParametersParseException(
+                message=ParametersParseException.NOISE_MODE_UNDEFINED,
+                long_message=ParametersParseException.NOISE_MODE_UNDEFINED
+            )

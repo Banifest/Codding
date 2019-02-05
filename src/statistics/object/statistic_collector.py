@@ -1,6 +1,7 @@
 # coding=utf-8
 from typing import Optional, List
 
+from channel.enum_noise_mode import EnumNoiseMode
 from src.coders.abstract_coder import AbstractCoder
 
 
@@ -23,7 +24,7 @@ class TestResult:
     list_case_result: List[CaseResult]
     first_coder: AbstractCoder
     second_coder: Optional[AbstractCoder]
-    noise_type: int
+    noise_type: EnumNoiseMode
     noise: float
     flg_cascade: bool
 
@@ -32,7 +33,7 @@ class TestResult:
             list_case_result: List[CaseResult],
             first_coder: AbstractCoder,
             second_coder: Optional[AbstractCoder],
-            noise_type: int,
+            noise_type: EnumNoiseMode,
             noise: float,
             flg_cascade: bool
     ):
