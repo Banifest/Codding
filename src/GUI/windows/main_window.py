@@ -3,7 +3,8 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 
-from GUI.windows.main_window_noise import setup_main_window_noise, setup_main_window_noise_second_coder
+from GUI.windows.main_window_coder_settings import setup_main_window_coder, setup_main_window_second_coder
+from GUI.windows.main_window_noise import setup_main_window_noise
 from src.GUI.globals_signals import globalSignals
 from src.logger import log
 
@@ -16,19 +17,9 @@ class MainWindow(QMainWindow):
         self.controller = controller
         uic.loadUi(r'.\src\GUI\UI\window.ui', self)
 
-        setup_main_window_noise(controller, self)
-        setup_main_window_noise_second_coder(controller, self)
+        setup_main_window_coder(controller, self)
+        setup_main_window_second_coder(controller, self)
 
-        self.lenFirstInterEdit.valueChanged.connect(self.controller.firstCoderParams.set_interleaver)
-
-        self.firstCoderSetting.currentChanged.connect(self.controller.firstCoderParams.set_coder_type)
-
-        self.lenSecondInterEdit.valueChanged.connect(self.controller.secondCoderParams.set_interleaver)
-
-        self.secondCoderSetting.currentChanged.connect(self.controller.secondCoderParams.set_coder_type)
-
-        self.noiseStartEdit.valueChanged.connect(self.controller.testParams.set_noise_start)
-        self.noiseFinishEdit.valueChanged.connect(self.controller.testParams.set_noise_end)
         self.countTestEdit.valueChanged.connect(self.controller.testParams.set_count_test)
         self.informationEdit.textChanged.connect(self.controller.testParams.set_test_info)
         self.cascadeModeComboBox.activated[str].connect(self.controller.testParams.set_mode_cascade)

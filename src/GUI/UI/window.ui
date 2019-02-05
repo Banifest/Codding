@@ -730,7 +730,7 @@
                          </widget>
                      </item>
                      <item>
-                         <widget class="QRadioButton" name="singleErrorModeRadio_2">
+                         <widget class="QRadioButton" name="singleErrorModeRadio">
                              <property name="text">
                                  <string>Single Mode</string>
                              </property>
