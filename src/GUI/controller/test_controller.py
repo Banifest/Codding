@@ -2,8 +2,9 @@
 # coding=utf-8
 
 from channel.enum_noise_mode import EnumNoiseMode
+from src.GUI.controller.cascade_coder_test_thread import CascadeCoderTestThread
 from src.GUI.controller.coder_controller import CoderController
-from src.GUI.controller.thread_controllers import TestCoder, TestCascadeCoder
+from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
 from src.helper.error.error_handler import ErrorHandler
 from src.helper.error.exception.application_exception import ApplicationException
 
@@ -15,8 +16,8 @@ class TestController:
     _firstCoderParams: CoderController
     _secondCoderParams: CoderController
 
-    _firstThreadClass: TestCoder
-    _cascadeThreadClass: TestCascadeCoder
+    _firstThreadClass: SingleCoderTestThread
+    _cascadeThreadClass: CascadeCoderTestThread
 
     # TODO Why not constant?
     noiseStart: float = 1.0
@@ -71,7 +72,7 @@ class TestController:
             self.mode = 1
 
     def set_first_coder_thread_class(self):
-        self._firstThreadClass = TestCoder(
+        self._firstThreadClass = SingleCoderTestThread(
             noise_chance=self.noiseStart,
             count_test=self.countTest,
             test_info=self.testInfo,
@@ -85,7 +86,7 @@ class TestController:
         )
 
     def set_cascade_coder_thread_class(self):
-        self._cascadeThreadClass = TestCascadeCoder(
+        self._cascadeThreadClass = CascadeCoderTestThread(
             noise_chance=self.noiseStart,
             count_test=self.countTest,
             test_info=self.testInfo,
@@ -93,6 +94,9 @@ class TestController:
             first_coder=self._firstCoderParams.coder,
             second_coder=self._secondCoderParams.coder,
             last_result='',
+            is_split_package=self.isSplitPackage,
+            noise_mode=self.noiseMode,
+            noise_package_length=self.noisePackageLength,
             start=self.noiseStart,
             finish=self.noiseEnd,
             mode=self.mode

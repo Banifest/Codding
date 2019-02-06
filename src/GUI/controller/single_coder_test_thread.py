@@ -7,7 +7,6 @@ from PyQt5.QtCore import QThread
 from channel.enum_noise_mode import EnumNoiseMode
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import GraphicController
-from src.channel.cascadecodec import CascadeCodec
 from src.channel.codec import Codec
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
@@ -15,10 +14,9 @@ from src.coders.casts import int_to_bit_list
 from src.helper.error.exception.codding_exception import CoddingException
 from src.logger import log
 from src.statistics.object.statistic_collector import CaseResult, TestResult
-from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
-class TestCoder(QThread):
+class SingleCoderTestThread(QThread):
     class GlobalTestStatistic:
         quantity_successful_package: int = 0
         quantity_error_package: int = 0
@@ -60,7 +58,7 @@ class TestCoder(QThread):
             start: float = 0,
             finish: float = 20,
     ):
-        super(TestCoder, self).__init__()
+        super(SingleCoderTestThread, self).__init__()
 
         self.start_t = start
         self.finish_t = finish
@@ -93,14 +91,14 @@ class TestCoder(QThread):
     def __del__(self):
         self.wait()
 
-    def set_auto(self, flag: bool):
+    def set_auto(self, flag: bool) -> None:
         """
-        Method provide functionality for change flag for automatic
-        :return:
+        Method provide functionality for change flag for automatic testing
+        :return: None
         """
         self.is_auto = flag
 
-    def one_test(self) -> list:
+    def _one_test(self) -> TestResult:
         """
         Method provide functionality for processing single test case
         :return:
@@ -144,7 +142,7 @@ class TestCoder(QThread):
                 error_bits=transfer_statistic.quantity_error_bits
             ))
 
-        TestResult(
+        return TestResult(
             list_case_result=case_result_list,
             first_coder=self.currentCoder,
             second_coder=None,
@@ -153,9 +151,7 @@ class TestCoder(QThread):
             flg_cascade=True
         )
 
-        return case_information
-
-    def auto_test(self):
+    def _auto_test(self):
         log.debug("Кнопка авто-тестирования нажата")
         start: float = self.start_t
         finish: float = self.finish_t
@@ -170,13 +166,13 @@ class TestCoder(QThread):
         draw_data: list = []  # информация для построения графика
 
         progress: int = 0
-        for x in [start + x * step for x in range(20)]:
+        for iterator in [start + iterator * step for iterator in range(20)]:
             test_case_info = {}
 
             progress += 5
 
-            self.channel.noiseProbability = 100 * (1 / (x + 1))
-            test_case_info['case'] = self.one_test()
+            self.channel.noiseProbability = 100 * (1 / (iterator + 1))
+            test_case_info['case'] = self._one_test()
 
             test_case_info['successfully_package_count'] = \
                 self.globalTestStatistic.quantity_successful_package + self.globalTestStatistic.quantity_repair_package
@@ -190,7 +186,7 @@ class TestCoder(QThread):
                 self.globalTestStatistic.quantity_successful_package,
                 self.globalTestStatistic.quantity_repair_package,
                 self.globalTestStatistic.quantity_error_package,
-                self.self.globalTestStatistic.quantity_shadow_package,
+                self.globalTestStatistic.quantity_shadow_package,
                 self.globalTestStatistic.quantity_correct_bits,
                 self.globalTestStatistic.quantity_error_bits
             ])
@@ -211,16 +207,16 @@ class TestCoder(QThread):
         try:
             if self.is_auto:
                 self.information_dict['single_test'] = False
-                self.auto_test()
+                self._auto_test()
             else:
                 self.information_dict['single_test'] = True
-                self.information_dict['test'] = self.one_test()
+                self.information_dict['test'] = self._one_test()
 
-            # Сохраненение в JSON
-            TestResultSerializer().serialize_to_json(self.information_dict)
-            # Созранение в базе данных
-            if not self.information_dict['is_cascade']:
-                TestResultSerializer().serialize_to_db(self.information_dict, self.currentCoder)
+            # # Сохраненение в JSON
+            # TestResultSerializer().serialize_to_json(self.information_dict)
+            # # Созранение в базе данных
+            # if not self.information_dict['is_cascade']:
+            #     TestResultSerializer().serialize_to_db(self.information_dict, self.currentCoder)
 
             globalSignals.stepFinished.emit(100)
             globalSignals.ended.emit()
@@ -228,64 +224,3 @@ class TestCoder(QThread):
 
         except CoddingException:
             globalSignals.notCorrect.emit()
-
-
-class TestCascadeCoder(TestCoder):
-    def __init__(self,
-                 noise_chance: float,
-                 count_test: float,
-                 test_info: int,
-                 current_coder: AbstractCoder,
-                 first_coder: AbstractCoder,
-                 second_coder: AbstractCoder,
-                 noise_mode: EnumNoiseMode,
-                 noise_package_length: int,
-                 is_split_package: bool,
-                 last_result: str,
-                 start: float = 0,
-                 finish: float = 20,
-                 mode: int = 0
-                 ):
-        super().__init__(
-            noise_chance=noise_chance,
-            count_test=count_test,
-            test_info=test_info,
-            current_coder=current_coder,
-            last_result=last_result,
-            start=start,
-            finish=finish,
-            noise_package_length=noise_package_length,
-            is_split_package=is_split_package,
-            noise_mode=noise_mode,
-        )
-
-        self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
-        self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
-        self.channel = CascadeCodec(
-            first_coder=first_coder,
-            second_coder=second_coder,
-            noise_probability=self.noiseChance,
-            count_cyclical=self.countTest,
-            duplex=False,
-            first_interleaver=None,
-            second_interleaver=None,
-            noise_package_length=noise_package_length,
-            is_split_package=is_split_package,
-            noise_mode=noise_mode,
-        )
-
-    def run(self):
-        self.information_dict['is_cascade'] = True
-        self.information_dict['coder'] = {
-            'first_coder': self.channel.firstCoder.to_json(),
-            'second_coder': self.channel.secondCoder.to_json(),
-            'name': self.coderName,
-            'speed': self.coderSpeed
-        }
-        super().run()
-        if self.information_dict['is_cascade']:
-            TestResultSerializer().serialize_to_db(
-                self.information_dict,
-                self.channel.firstCoder,
-                self.channel.secondCoder
-            )
