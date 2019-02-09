@@ -1,10 +1,10 @@
 # coding=utf-8
 # coding=utf-8
 
-from channel.enum_noise_mode import EnumNoiseMode
 from src.GUI.controller.cascade_coder_test_thread import CascadeCoderTestThread
 from src.GUI.controller.coder_controller import CoderController
 from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
+from src.channel.enum_noise_mode import EnumNoiseMode
 from src.helper.error.error_handler import ErrorHandler
 from src.helper.error.exception.application_exception import ApplicationException
 

@@ -3,9 +3,9 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow
 
-from GUI.windows.main_window_coder_settings import setup_main_window_coder, setup_main_window_second_coder
-from GUI.windows.main_window_noise import setup_main_window_noise
 from src.GUI.globals_signals import globalSignals
+from src.GUI.windows.main_window_coder_settings import setup_main_window_coder, setup_main_window_second_coder
+from src.GUI.windows.main_window_noise import setup_main_window_noise
 from src.logger import log
 
 

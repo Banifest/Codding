@@ -4,10 +4,10 @@ from typing import Dict, List
 
 from PyQt5.QtCore import QThread
 
-from channel.enum_noise_mode import EnumNoiseMode
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import GraphicController
 from src.channel.codec import Codec
+from src.channel.enum_noise_mode import EnumNoiseMode
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import int_to_bit_list

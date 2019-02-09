@@ -1,9 +1,9 @@
 # coding=utf-8
-from GUI.controller.single_coder_test_thread import SingleCoderTestThread
-from channel.enum_noise_mode import EnumNoiseMode
+from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
 from src.channel.cascadecodec import CascadeCodec
+from src.channel.enum_noise_mode import EnumNoiseMode
 from src.coders.abstract_coder import AbstractCoder
-from statistics.object.test_result_serializer import TestResultSerializer
+from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class CascadeCoderTestThread(SingleCoderTestThread):

@@ -1,7 +1,7 @@
 # coding=utf-8
 from typing import Optional, List
 
-from channel.enum_noise_mode import EnumNoiseMode
+from src.channel.enum_noise_mode import EnumNoiseMode
 from src.coders.abstract_coder import AbstractCoder
 
 
