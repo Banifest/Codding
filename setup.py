@@ -12,5 +12,7 @@ setup(
     license='MIT',
     author='Aliaksandr Martyniuk',
     author_email='banifest@gmail.com',
-    description='Diploma', install_requires=['sqlalchemy', 'alembic', 'matplotlib', 'PyQt5', 'numpy', 'psycopg2']
+    description='Diploma Codding', install_requires=[
+        'sqlalchemy', 'alembic', 'matplotlib', 'PyQt5', 'numpy', 'psycopg2'
+    ]
 )

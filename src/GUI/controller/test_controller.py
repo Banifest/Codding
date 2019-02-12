@@ -19,16 +19,20 @@ class TestController:
     _firstThreadClass: SingleCoderTestThread
     _cascadeThreadClass: CascadeCoderTestThread
 
-    # TODO Why not constant?
-    noiseStart: float = 1.0
-    noiseEnd: float = 10.0
-    countTest: int = 100
-    testInfo: int = 985
-    mode: int = 0
+    _noiseStart: float
+    _noiseEnd: float
+    _countTest: int
+    _testInfo: int
+    _mode: int
 
-    noiseMode: EnumNoiseMode
-    noisePackageLength: int
-    isSplitPackage: bool
+    _noiseMode: EnumNoiseMode
+    _noisePackageLength: int
+    _flgSplitPackage: bool
+
+    _flgFirstInterleaver: bool
+    _flgSecondInterleaver: bool
+    _lengthFirstInterleaver: int
+    _lengthSecondInterleaver: int
 
     def __init__(
             self,
@@ -38,68 +42,81 @@ class TestController:
         self._firstCoderParams = first_coder_params
         self._secondCoderParams = second_coder_params
 
+    def set_flg_first_interleaver(self, value: bool) -> None:
+        self._flgFirstInterleaver = value
+
+    def set_flg_second_interleaver(self, value: bool) -> None:
+        self._flgSecondInterleaver = value
+
+    def set_length_first_interleaver(self, value: int) -> None:
+        self._lengthFirstInterleaver = value
+
+    def set_length_second_interleaver(self, value: int) -> None:
+        self._lengthSecondInterleaver = value
+
     def set_noise_mode(self, value: bool) -> None:
         if value:
-            self.noiseMode = EnumNoiseMode.SINGLE
+            self._noiseMode = EnumNoiseMode.SINGLE
         else:
-            self.noiseMode = EnumNoiseMode.PACKAGE
+            self._noiseMode = EnumNoiseMode.PACKAGE
 
     def set_noise_package_length(self, value: int) -> None:
-        self.noisePackageLength = value
+        self._noisePackageLength = value
 
     def set_is_split_package(self, value: bool) -> None:
-        self.isSplitPackage = value
+        self._flgSplitPackage = value
 
     def set_noise_start(self, value: float) -> None:
-        self.noiseStart = value
+        self._noiseStart = value
 
     def set_noise_end(self, value: float) -> None:
-        self.noiseEnd = value
+        self._noiseEnd = value
 
     def set_count_test(self, value: int) -> None:
-        self.countTest = value
+        self._countTest = value
 
     def set_test_info(self, value: int) -> None:
         try:
-            self.testInfo = int(value)
+            self._testInfo = int(value)
         except ValueError as rcx_value_error:
             pass
 
     def set_mode_cascade(self, value: str) -> None:
         if value == 'First':
-            self.mode = 0
+            self._mode = 0
         elif value == 'Second':
-            self.mode = 1
+            self._mode = 1
 
     def set_first_coder_thread_class(self):
         self._firstThreadClass = SingleCoderTestThread(
-            noise_chance=self.noiseStart,
-            count_test=self.countTest,
-            test_info=self.testInfo,
+            noise_chance=self._noiseStart,
+            count_test=self._countTest,
+            test_information=self._testInfo,
             current_coder=self._firstCoderParams.coder,
             last_result='',
-            start=self.noiseStart,
-            finish=self.noiseEnd,
-            noise_package_length=self.noisePackageLength,
-            noise_mode=self.noiseMode,
-            is_split_package=self.isSplitPackage,
+            start=self._noiseStart,
+            finish=self._noiseEnd,
+            noise_package_length=self._noisePackageLength,
+            noise_mode=self._noiseMode,
+            is_split_package=self._flgSplitPackage,
+            interleaver=self._lengthFirstInterleaver if self._flgFirstInterleaver else None
         )
 
     def set_cascade_coder_thread_class(self):
         self._cascadeThreadClass = CascadeCoderTestThread(
-            noise_chance=self.noiseStart,
-            count_test=self.countTest,
-            test_info=self.testInfo,
+            noise_chance=self._noiseStart,
+            count_test=self._countTest,
+            test_information=self._testInfo,
             current_coder=self._firstCoderParams.coder,
             first_coder=self._firstCoderParams.coder,
             second_coder=self._secondCoderParams.coder,
             last_result='',
-            is_split_package=self.isSplitPackage,
-            noise_mode=self.noiseMode,
-            noise_package_length=self.noisePackageLength,
-            start=self.noiseStart,
-            finish=self.noiseEnd,
-            mode=self.mode
+            is_split_package=self._flgSplitPackage,
+            noise_mode=self._noiseMode,
+            noise_package_length=self._noisePackageLength,
+            start=self._noiseStart,
+            finish=self._noiseEnd,
+
         )
 
     def start_first_single_test(self):

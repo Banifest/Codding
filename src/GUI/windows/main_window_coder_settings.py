@@ -27,8 +27,11 @@ def setup_main_window_coder(controller, window):
     window.countBlockFounEdit.valueChanged.emit(window.countBlockFounEdit.value())
 
     # Interleaver
-    window.lenFirstInterEdit.valueChanged.connect(controller.firstCoderParams.set_interleaver)
+    window.lenFirstInterEdit.valueChanged.connect(controller.testParams.set_length_first_interleaver)
     window.lenFirstInterEdit.valueChanged.emit(window.lenFirstInterEdit.value())
+
+    window.interFirstCheckBox.toggled.connect(controller.testParams.set_flg_first_interleaver)
+    window.interFirstCheckBox.toggled.emit(window.interFirstCheckBox.isChecked())
 
 
 def setup_main_window_second_coder(controller, window):
@@ -57,5 +60,8 @@ def setup_main_window_second_coder(controller, window):
     window.countBlockFounEdit2.valueChanged.emit(window.countBlockFounEdit2.value())
 
     # Interleaver
-    window.lenSecondInterEdit.valueChanged.connect(controller.secondCoderParams.set_interleaver)
+    window.lenSecondInterEdit.valueChanged.connect(controller.testParams.set_length_second_interleaver)
     window.lenSecondInterEdit.valueChanged.emit(window.lenSecondInterEdit.value())
+
+    window.interSecondCheckBox.toggled.connect(controller.testParams.set_flg_second_interleaver)
+    window.interSecondCheckBox.toggled.emit(window.interSecondCheckBox.isChecked())

@@ -13,6 +13,7 @@ from src.GUI.windows.main_window import MainWindow
 from src.coders.abstract_coder import AbstractCoder
 
 
+# noinspection PyMethodMayBeStatic
 class MainController:
     firstCoderParams: CoderController
     secondCoderParams: CoderController
