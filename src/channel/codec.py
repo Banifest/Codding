@@ -17,7 +17,7 @@ class Codec:
     countCyclical: int = 1
     duplex: bool = False
     # Информация о процессе передачи информации
-    # TODO Пересмотреть и переделать концепт хранения информации о канале
+    # TODO Пересмотреть и переделать концепт хранения информации о канале ++
     information: str = ""
     coder: AbstractCoder
     interleaver: Interleaver.Interleaver = False

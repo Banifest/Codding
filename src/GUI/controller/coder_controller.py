@@ -11,22 +11,20 @@ from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class CoderController:
-    _coder_type: int = 0
+    _coder_type: int
     coder: AbstractCoder
 
-    _hemSizePack: int = 120
+    _hemSizePack: int
 
-    _cycSizePack: int = 120
-    _cycPoly: int = 13
+    _cycSizePack: int
+    _cycPoly: int
 
-    _conListPoly: str = "3, 5, 7"
-    _conCountReg: int = 3
+    _conListPoly: str
+    _conCountReg: int
 
-    _fouSizePack: int = 30
-    _fouSizeBlock: int = 10
-    _fouCountBlock: int = 10
-
-    _interleaver: int = 0
+    _fouSizePack: int
+    _fouSizeBlock: int
+    _fouCountBlock: int
 
     def __init__(self):
         pass
@@ -57,9 +55,6 @@ class CoderController:
 
     def set_fou_count_block(self, value: int) -> None:
         self._fouCountBlock = value
-
-    def set_interleaver(self, value: int) -> None:
-        self._interleaver = value
 
     def create_coder(self):
         try:

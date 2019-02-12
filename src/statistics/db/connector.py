@@ -17,9 +17,7 @@ class Connector(metaclass=Singleton):
     def get_connection(
             self,
             login: Optional[str] = "postgres",
-            # "mjdlelvwwraanx",
             password: Optional[str] = "admin",
-            # "089bf6255905ba11b1fb462a2d0177204a3b6d6f93c7fb989a721b6686d26a1b"
     ):
         """
         Method for getting connection to native(remote) database
@@ -35,9 +33,7 @@ class Connector(metaclass=Singleton):
     def get_engine(
             self,
             login: Optional[str] = "postgres",
-            # "mjdlelvwwraanx",
             password: Optional[str] = "admin",
-            #"089bf6255905ba11b1fb462a2d0177204a3b6d6f93c7fb989a721b6686d26a1b"
     ):
         """
         Method for getting engine to remote database Heroku
@@ -52,10 +48,6 @@ class Connector(metaclass=Singleton):
                     login,
                     password
                 ), echo=True
-                # ,
-                # connect_args={
-                #    'sslmode': 'require'
-                # }
             )
         return self._engine
 

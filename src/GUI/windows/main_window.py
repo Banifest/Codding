@@ -21,7 +21,11 @@ class MainWindow(QMainWindow):
         setup_main_window_second_coder(controller, self)
 
         self.countTestEdit.valueChanged.connect(self.controller.testParams.set_count_test)
+        self.countTestEdit.valueChanged.emit(self.countTestEdit.value())
+
         self.informationEdit.textChanged.connect(self.controller.testParams.set_test_info)
+        self.informationEdit.textChanged.emit(self.informationEdit.text())
+
         self.cascadeModeComboBox.activated[str].connect(self.controller.testParams.set_mode_cascade)
 
         globalSignals.stepFinished.connect(self.singleProgress.setValue)
