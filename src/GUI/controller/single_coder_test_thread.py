@@ -13,7 +13,8 @@ from src.coders.casts import int_to_bit_list
 from src.coders.interleaver.Interleaver import Interleaver
 from src.helper.error.exception.codding_exception import CoddingException
 from src.logger import log
-from src.statistics.object.statistic_collector import CaseResult, TestResult
+from src.statistics.object.statistic_collector import CaseResult, TestResult, StatisticCollector
+from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class SingleCoderTestThread(QThread):
@@ -45,6 +46,8 @@ class SingleCoderTestThread(QThread):
     _noiseMode: EnumNoiseMode
     _noisePackageLength: int
     _isSplitPackage: bool
+
+    _sum_result_of_single_test: List[TestResult] = []
 
     def __init__(
             self,
@@ -141,42 +144,47 @@ class SingleCoderTestThread(QThread):
             flg_cascade=True
         )
 
-    def _auto_test(self):
+    def _auto_test(self) -> List[TestResult]:
         log.debug("Кнопка авто-тестирования нажата")
         start: float = self._start_t
         finish: float = self._finish_t
 
         if finish - start <= 0:
             globalSignals.notCorrect.emit()
-            return
         step: float = (finish - start) / 20
         progress: int = 0
-        sum_result_of_single_test: List[TestResult]
+
         for iterator in [start + iterator * step for iterator in range(20)]:
             progress += 5
             self.channel.noiseProbability = 100 * (1 / (iterator + 1))
-            single_test_info = self._single_test()
+            self._sum_result_of_single_test.append(self._single_test())
             globalSignals.autoStepFinished.emit(int(progress))
 
         globalSignals.autoStepFinished.emit(100)
+        return self._sum_result_of_single_test
 
     def run(self):
         try:
             if self._flg_auto:
-                self._information_dict['single_test'] = False
-                self._auto_test()
+                statistic = StatisticCollector(
+                    flg_cascade=False,
+                    first_coder=self._currentCoder,
+                    second_coder=None,
+                    test_result=self._auto_test()
+                )
             else:
-                self._information_dict['single_test'] = True
-                self._information_dict['test'] = self._single_test()
-
-            # # Сохраненение в JSON
-            # TestResultSerializer().serialize_to_json(self.information_dict)
-            # # Созранение в базе данных
-            # if not self.information_dict['is_cascade']:
-            #     TestResultSerializer().serialize_to_db(self.information_dict, self.currentCoder)
+                statistic = StatisticCollector(
+                    flg_cascade=False,
+                    first_coder=self._currentCoder,
+                    second_coder=None,
+                    test_result=[self._single_test()]
+                )
 
             globalSignals.stepFinished.emit(100)
             globalSignals.ended.emit()
+
+            # DB Action
+            TestResultSerializer().serialize_to_db(statistic)
             log.debug("Конец цикла тестов")
 
         except CoddingException:

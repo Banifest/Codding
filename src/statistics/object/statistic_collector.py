@@ -49,14 +49,14 @@ class StatisticCollector:
     flg_cascade: bool
     first_coder: AbstractCoder
     second_coder: Optional[AbstractCoder]
-    test_result: TestResult
+    test_result: List[TestResult]
 
     def __init__(
             self,
             flg_cascade: bool,
             first_coder: AbstractCoder,
             second_coder: Optional[AbstractCoder],
-            test_result: TestResult
+            test_result: List[TestResult]
     ) -> None:
         self.flg_cascade = flg_cascade
         self.first_coder = first_coder

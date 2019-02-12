@@ -3,21 +3,33 @@ import datetime
 import json
 import uuid
 
-from src.coders.abstract_coder import AbstractCoder
 from src.helper.pattern.singleton import Singleton
 # noinspection PyMethodMayBeStatic
 from src.statistics.db.connector import Connector
 from src.statistics.db.table import coder_table, result_table, case_table
-
-
 # noinspection PyMethodMayBeStatic
+from src.statistics.object.statistic_collector import StatisticCollector
+
+
 class TestResultSerializer(metaclass=Singleton):
 
-    def serialize_to_db(self, test_result: dict, first_coder: AbstractCoder, second_coder: AbstractCoder = None):
+    def serialize_to_db(self, statistic_collector: StatisticCollector):
         connection = Connector().get_connection()
 
         # Создание первого кодера
         first_coder_guid = uuid.uuid4()
+        connection.execute(coder_table.insert().values(
+            guid=first_coder_guid,
+            coder_type=first_coder.type_of_coder.value,
+            coder_speed=first_coder.get_speed(),
+            input_length=first_coder.lengthInformation,
+            additional_length=first_coder.countAdditional,
+            # TODO add interleaver determining
+            interleaver=False,
+            description=first_coder.name
+        ))
+
+
         connection.execute(coder_table.insert().values(
             guid=first_coder_guid,
             coder_type=first_coder.type_of_coder.value,

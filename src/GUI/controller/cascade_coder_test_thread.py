@@ -2,10 +2,15 @@
 from typing import Optional
 
 from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
+from src.GUI.globals_signals import globalSignals
 from src.channel.cascadecodec import CascadeCodec
 from src.channel.enum_noise_mode import EnumNoiseMode
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver.Interleaver import Interleaver
+from src.helper.error.exception.codding_exception import CoddingException
+from src.logger import log
+from src.statistics.object.statistic_collector import StatisticCollector
+from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class CascadeCoderTestThread(SingleCoderTestThread):
@@ -48,13 +53,38 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             noise_probability=self._noiseChance,
             count_cyclical=self._countTest,
             duplex=False,
-            first_interleaver=Interleaver(length_first_interleaver) if length_first_interleaver is not None else None,
-            second_interleaver=Interleaver(
-                length_second_interleaver) if length_second_interleaver is not None else None,
+            first_interleaver=Interleaver(length_first_interleaver
+                                          ) if length_first_interleaver is not None else None,
+            second_interleaver=Interleaver(length_second_interleaver
+                                           ) if length_second_interleaver is not None else None,
             noise_package_length=noise_package_length,
             is_split_package=is_split_package,
             noise_mode=noise_mode,
         )
 
     def run(self):
-        super().run()
+        try:
+            if self._flg_auto:
+                statistic = StatisticCollector(
+                    flg_cascade=False,
+                    first_coder=self._currentCoder,
+                    second_coder=None,
+                    test_result=self._auto_test()
+                )
+            else:
+                statistic = StatisticCollector(
+                    flg_cascade=False,
+                    first_coder=self._currentCoder,
+                    second_coder=None,
+                    test_result=[self._single_test()]
+                )
+
+            globalSignals.stepFinished.emit(100)
+            globalSignals.ended.emit()
+
+            # DB Action
+            TestResultSerializer().serialize_to_db(statistic)
+            log.debug("Конец цикла тестов")
+
+        except CoddingException:
+            globalSignals.notCorrect.emit()
