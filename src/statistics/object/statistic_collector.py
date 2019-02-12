@@ -50,15 +50,21 @@ class StatisticCollector:
     first_coder: AbstractCoder
     second_coder: Optional[AbstractCoder]
     test_result: List[TestResult]
+    length_first_interleaver: Optional[int]
+    length_second_interleaver: Optional[int]
 
     def __init__(
             self,
             flg_cascade: bool,
             first_coder: AbstractCoder,
             second_coder: Optional[AbstractCoder],
-            test_result: List[TestResult]
+            test_result: List[TestResult],
+            length_first_interleaver: Optional[int],
+            length_second_interleaver: Optional[int]
     ) -> None:
         self.flg_cascade = flg_cascade
         self.first_coder = first_coder
         self.second_coder = second_coder
         self.test_result = test_result
+        self.length_first_interleaver = length_first_interleaver
+        self.length_second_interleaver = length_second_interleaver

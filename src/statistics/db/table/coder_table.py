@@ -13,5 +13,6 @@ coder_table = Table(
     Column('input_length', Integer),
     Column('additional_length', Integer),
     Column('interleaver', Boolean),
+    Column('interleaver_length', Integer),
     Column('description', String(200))
 )
