@@ -14,6 +14,9 @@ from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class CascadeCoderTestThread(SingleCoderTestThread):
+    _firstCoder: AbstractCoder
+    _secondCoder: AbstractCoder
+
     def __init__(
             self,
             noise_chance: float,
@@ -45,6 +48,8 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             first_interleaver_length=length_first_interleaver
         )
 
+        self._firstCoder = first_coder
+        self._secondCoder = second_coder
         self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
         self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
         self.channel = CascadeCodec(
@@ -66,16 +71,16 @@ class CascadeCoderTestThread(SingleCoderTestThread):
         try:
             if self._flg_auto:
                 statistic = StatisticCollector(
-                    flg_cascade=False,
-                    first_coder=self._currentCoder,
-                    second_coder=None,
+                    flg_cascade=True,
+                    first_coder=self._firstCoder,
+                    second_coder=self._secondCoder,
                     test_result=self._auto_test()
                 )
             else:
                 statistic = StatisticCollector(
-                    flg_cascade=False,
-                    first_coder=self._currentCoder,
-                    second_coder=None,
+                    flg_cascade=True,
+                    first_coder=self._firstCoder,
+                    second_coder=self._secondCoder,
                     test_result=[self._single_test()]
                 )
 
