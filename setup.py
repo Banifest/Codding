@@ -13,6 +13,6 @@ setup(
     author='Aliaksandr Martyniuk',
     author_email='banifest@gmail.com',
     description='Diploma Codding', install_requires=[
-        'sqlalchemy', 'alembic', 'matplotlib', 'PyQt5', 'numpy', 'psycopg2'
+        'sqlalchemy', 'alembic', 'matplotlib', 'PyQt5', 'numpy', 'psycopg2', 'jsonpickle'
     ]
 )

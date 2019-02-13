@@ -10,7 +10,6 @@ from src.coders.interleaver.Interleaver import Interleaver
 from src.helper.error.exception.codding_exception import CoddingException
 from src.logger import log
 from src.statistics.object.statistic_collector import StatisticCollector
-from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class CascadeCoderTestThread(SingleCoderTestThread):
@@ -88,7 +87,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             globalSignals.ended.emit()
 
             # DB Action
-            TestResultSerializer().serialize_to_db(statistic)
+            # TestResultSerializer().serialize_to_db(statistic)
             log.debug("Конец цикла тестов")
 
         except CoddingException:

@@ -1,7 +1,8 @@
 # coding=utf-8
 import datetime
-import json
 import uuid
+
+import jsonpickle
 
 from src.coders.abstract_coder import AbstractCoder
 from src.helper.pattern.singleton import Singleton
@@ -70,5 +71,6 @@ class TestResultSerializer(metaclass=Singleton):
                     count_changed_bits=case_iter.changed_bits
                 ))
 
-    def serialize_to_json(self, test_result: dict, file_name: str = "lastResult.json") -> None:
-        open(file_name, "w", encoding='UTF-8').write(json.dumps(test_result, ensure_ascii=False))
+    def serialize_to_json(self, statistic_collector: StatisticCollector, file_name: str = "lastResult.json") -> None:
+        open(file_name, "w", encoding='UTF-8').write(jsonpickle.encode(statistic_collector,
+                                                                       unpicklable=False))

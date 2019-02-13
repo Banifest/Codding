@@ -23,19 +23,22 @@ class Chanel(metaclass=Singleton):
             self.__straight = straight
 
     # noinspection PyMethodMayBeStatic
-    def divide_on_blocks(self, information: list, block_len: int) -> List[list]:
+    def divide_on_blocks(self, information: List[int], block_len: int) -> List[list]:
         """
-
-        :param information:
-        :param block_len:
-        :return:
+        :param information: List[int]
+        :param block_len: int
+        :return: List[int]
         """
-        if len(information) >= block_len:
-            return [information]
+        if len(information) <= block_len:
+            return [information + ([0] * (block_len - len(information)))]
 
-        blocks: list = []
+        blocks: List[list] = []
         for number_of_block in range(ceil(block_len / len(information))):
             blocks.append(information[number_of_block * block_len: (number_of_block + 1) * block_len])
+
+        for block_iterator in blocks:
+            if len(block_iterator) < block_len:
+                block_iterator.append([0] * (block_len - len(block_iterator)))
 
         return blocks
 
