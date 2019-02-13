@@ -36,6 +36,7 @@ class SingleCoderTestThread(QThread):
     _mode: int = 0
     _currentCoder: AbstractCoder
     _flg_auto: bool = False
+    _length_interleaver: int
 
     _start_t: float = 0
     _finish_t: float = 20
@@ -68,6 +69,7 @@ class SingleCoderTestThread(QThread):
         self._start_t = start
         self._finish_t = finish
 
+        self._length_interleaver = first_interleaver_length
         self.lastResult = last_result
         self._currentCoder = current_coder
         self._noiseChance = noise_chance
@@ -170,21 +172,26 @@ class SingleCoderTestThread(QThread):
                     flg_cascade=False,
                     first_coder=self._currentCoder,
                     second_coder=None,
-                    test_result=self._auto_test()
+                    test_result=self._auto_test(),
+                    length_first_interleaver=self._length_interleaver,
+                    length_second_interleaver=None
                 )
             else:
                 statistic = StatisticCollector(
                     flg_cascade=False,
                     first_coder=self._currentCoder,
                     second_coder=None,
-                    test_result=[self._single_test()]
+                    test_result=[self._single_test()],
+                    length_first_interleaver=self._length_interleaver,
+                    length_second_interleaver=None
                 )
 
             globalSignals.stepFinished.emit(100)
             globalSignals.ended.emit()
 
             # DB Action
-            TestResultSerializer().serialize_to_db(statistic)
+            # TestResultSerializer().serialize_to_db(statistic)
+            TestResultSerializer().serialize_to_json(statistic)
             log.debug("Конец цикла тестов")
 
         except CoddingException:

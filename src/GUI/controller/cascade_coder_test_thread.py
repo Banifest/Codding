@@ -17,6 +17,9 @@ class CascadeCoderTestThread(SingleCoderTestThread):
     _firstCoder: AbstractCoder
     _secondCoder: AbstractCoder
 
+    _length_first_interleaver: Optional[int]
+    _length_second_interleaver: Optional[int]
+
     def __init__(
             self,
             noise_chance: float,
@@ -48,6 +51,9 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             first_interleaver_length=length_first_interleaver
         )
 
+        self._length_first_interleaver = length_first_interleaver
+        self._length_second_interleaver = length_first_interleaver
+
         self._firstCoder = first_coder
         self._secondCoder = second_coder
         self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
@@ -74,21 +80,26 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     flg_cascade=True,
                     first_coder=self._firstCoder,
                     second_coder=self._secondCoder,
-                    test_result=self._auto_test()
+                    test_result=self._auto_test(),
+                    length_first_interleaver=self._length_first_interleaver,
+                    length_second_interleaver=self._length_second_interleaver
                 )
             else:
                 statistic = StatisticCollector(
                     flg_cascade=True,
                     first_coder=self._firstCoder,
                     second_coder=self._secondCoder,
-                    test_result=[self._single_test()]
+                    test_result=[self._single_test()],
+                    length_first_interleaver=self._length_first_interleaver,
+                    length_second_interleaver=self._length_second_interleaver
                 )
 
             globalSignals.stepFinished.emit(100)
             globalSignals.ended.emit()
 
             # DB Action
-            TestResultSerializer().serialize_to_db(statistic)
+            # TestResultSerializer().serialize_to_db(statistic)
+            TestResultSerializer().serialize_to_json(statistic)
             log.debug("Конец цикла тестов")
 
         except CoddingException:
