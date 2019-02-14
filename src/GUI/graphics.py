@@ -3,53 +3,49 @@ import matplotlib.patches as matches
 import matplotlib.pyplot as plt
 
 from src.helper.pattern.singleton import Singleton
+from src.statistics.object.statistic_collector import StatisticCollector
 
 
 class GraphicController(metaclass=Singleton):
-    """
-    TODO
-    """
     # noinspection SpellCheckingInspection
-    result_graphic_type: str = "ggplot"
-    from_y_limit: float = 0.000000001
-    to_y_limit: float = 1.1
+    RESULT_GRAPHIC_TYPE: str = "ggplot"
+    _from_y_limit: float = 10 ** (-10)
+    _to_y_limit: float = 1.1
 
     def __init__(self):
         pass
 
     def draw_graphic(
             self,
-            draw_information: list,
-            coder_name: str = "",
-            coder_speed: float = 1,
-            start: float = 1,
-            finish: int = 20
+            static_collector: StatisticCollector
     ):
         """
-        TODO
-        :param draw_information:
-        :param coder_name:
-        :param coder_speed:
-        :param start:
-        :param finish:
+        :param static_collector: StatisticCollector
         """
-        plt.style.use(self.result_graphic_type)
-        quantity_right_bits = matches.Patch(color='blue', label='Соотношение правильных символов в пакете')
-        quantity_right_packages = matches.Patch(color='purple', label='Соотношение полностью правильных пакетов')
-        plt.legend(handles=[quantity_right_bits, quantity_right_packages])
-        plt.ylim([self.to_y_limit, self.from_y_limit])
-        plt.xlim([start, finish])
+        plt.style.use(self.RESULT_GRAPHIC_TYPE)
+        plt.legend(handles=[
+            matches.Patch(color='blue', label='Соотношение правильных символов в пакете'),
+            matches.Patch(color='purple', label='Соотношение полностью правильных пакетов')
+        ])
+        plt.ylim([self._to_y_limit, self._from_y_limit])
+        plt.xlim([static_collector.beginNoise, static_collector.endNoise])
         plt.semilogy(True)
         plt.ylabel("Вероятность потерь информации, P*10^-1")
         plt.xlabel("Мощность передатчика, Дб")
-        step: float = (finish - start) / 20
-        plt.plot([start + x * step for x in range(20)],
-                 [x[5] / (x[4] + x[5]) + 0.0000001 for x in draw_information],
+        step: float = (static_collector.endNoise - static_collector.beginNoise) / 20
+
+        #
+
+        plt.plot([static_collector.beginNoise + x * step for x in range(20)],
+                 [x.error_packages / (x.error_packages + x.repair_packages + x.successful_packages)
+                  + 10 ** (-20) for x in
+                  static_collector.testResult],
                  label="Кодер типа {0}\n"
                        "Скорость кодера {1}"
-                 .format(coder_name, str(coder_speed)))
-        plt.plot([start + x * step for x in range(20)],
-                 [x[2] / (x[0] + x[1] + x[2]) + 0.0000001 for x in draw_information])
+                 .format("Test", "Test"))
+        plt.plot([static_collector.beginNoise + x * step for x in range(20)],
+                 [x.quantity_error_bits / x.quantity_correct_bits + self._from_y_limit for x in
+                  static_collector.testResult])
         plt.show()
 
     def draw_plot_pie(self, draw_information: list):

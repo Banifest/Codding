@@ -5,6 +5,7 @@ from typing import Dict, List, Optional
 from PyQt5.QtCore import QThread
 
 from src.GUI.globals_signals import globalSignals
+from src.GUI.graphics import GraphicController
 from src.channel.codec import Codec
 from src.channel.enum_noise_mode import EnumNoiseMode
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
@@ -39,16 +40,12 @@ class SingleCoderTestThread(QThread):
     _length_interleaver: int
 
     _start_t: float = 0
-    _finish_t: float = 20
-
-    globalTestStatistic: GlobalTestStatistic = GlobalTestStatistic()
+    _finish_t: float = 20    
 
     # Package noise mode attr
     _noiseMode: EnumNoiseMode
     _noisePackageLength: int
     _isSplitPackage: bool
-
-    _sum_result_of_single_test: List[TestResult] = []
 
     def __init__(
             self,
@@ -111,21 +108,21 @@ class SingleCoderTestThread(QThread):
         step: float = self.CONST_MAX_PERCENT / self._countTest
         information: list = int_to_bit_list(self._information)
         case_result_list: List[CaseResult] = []
-
+        globalTestStatistic: SingleCoderTestThread.GlobalTestStatistic = SingleCoderTestThread.GlobalTestStatistic()
         log.debug("Начало цикла тестов")
         for x in range(self._countTest):
             transfer_statistic: Codec.TransferStatistic = self.channel.transfer_one_step(information)
             if transfer_statistic.result_status == EnumPackageTransferResult.SUCCESS:
-                self.globalTestStatistic.quantity_successful_package += 1
+                globalTestStatistic.quantity_successful_package += 1
             elif transfer_statistic.result_status == EnumPackageTransferResult.REPAIR:
-                self.globalTestStatistic.quantity_repair_package += 1
+                globalTestStatistic.quantity_repair_package += 1
             elif transfer_statistic.result_status == EnumPackageTransferResult.ERROR:
-                self.globalTestStatistic.quantity_error_package += 1
+                globalTestStatistic.quantity_error_package += 1
             else:
-                self.globalTestStatistic.quantity_shadow_package += 1
+                globalTestStatistic.quantity_shadow_package += 1
 
-            self.globalTestStatistic.quantity_correct_bits += transfer_statistic.quantity_successful_bits
-            self.globalTestStatistic.quantity_error_bits += transfer_statistic.quantity_error_bits
+            globalTestStatistic.quantity_correct_bits += transfer_statistic.quantity_successful_bits
+            globalTestStatistic.quantity_error_bits += transfer_statistic.quantity_error_bits
             progress += step
             self.lastResult += self.channel.information
             globalSignals.stepFinished.emit(int(progress))
@@ -143,7 +140,13 @@ class SingleCoderTestThread(QThread):
             second_coder=None,
             noise_type=self._noiseMode,
             noise=self.channel.noiseProbability,
-            flg_cascade=True
+            flg_cascade=True,
+            successful_packages=globalTestStatistic.quantity_successful_package,
+            repair_packages=globalTestStatistic.quantity_repair_package,
+            changed_packages=globalTestStatistic.quantity_repair_package,
+            error_packages=globalTestStatistic.quantity_error_package,
+            quantity_correct_bits=globalTestStatistic.quantity_correct_bits,
+            quantity_error_bits=globalTestStatistic.quantity_error_bits
         )
 
     def _auto_test(self) -> List[TestResult]:
@@ -155,15 +158,15 @@ class SingleCoderTestThread(QThread):
             globalSignals.notCorrect.emit()
         step: float = (finish - start) / 20
         progress: int = 0
-
+        sum_result_of_single_test: List[TestResult] = []
         for iterator in [start + iterator * step for iterator in range(20)]:
             progress += 5
             self.channel.noiseProbability = 100 * (1 / (iterator + 1))
-            self._sum_result_of_single_test.append(self._single_test())
+            sum_result_of_single_test.append(self._single_test())
             globalSignals.autoStepFinished.emit(int(progress))
 
         globalSignals.autoStepFinished.emit(100)
-        return self._sum_result_of_single_test
+        return sum_result_of_single_test
 
     def run(self):
         try:
@@ -174,7 +177,9 @@ class SingleCoderTestThread(QThread):
                     second_coder=None,
                     test_result=self._auto_test(),
                     length_first_interleaver=self._length_interleaver,
-                    length_second_interleaver=None
+                    length_second_interleaver=None,
+                    begin_noise=self._start_t,
+                    end_noise=self._finish_t
                 )
             else:
                 statistic = StatisticCollector(
@@ -183,7 +188,9 @@ class SingleCoderTestThread(QThread):
                     second_coder=None,
                     test_result=[self._single_test()],
                     length_first_interleaver=self._length_interleaver,
-                    length_second_interleaver=None
+                    length_second_interleaver=None,
+                    begin_noise=self._start_t,
+                    end_noise=self._finish_t
                 )
 
             globalSignals.stepFinished.emit(100)
@@ -192,6 +199,7 @@ class SingleCoderTestThread(QThread):
             # DB Action
             # TestResultSerializer().serialize_to_db(statistic)
             TestResultSerializer().serialize_to_json(statistic)
+            GraphicController().draw_graphic(statistic)
             log.debug("Конец цикла тестов")
 
         except CoddingException:

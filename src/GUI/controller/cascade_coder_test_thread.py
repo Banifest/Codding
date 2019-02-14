@@ -3,6 +3,7 @@ from typing import Optional
 
 from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
 from src.GUI.globals_signals import globalSignals
+from src.GUI.graphics import GraphicController
 from src.channel.cascadecodec import CascadeCodec
 from src.channel.enum_noise_mode import EnumNoiseMode
 from src.coders.abstract_coder import AbstractCoder
@@ -100,6 +101,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             # DB Action
             # TestResultSerializer().serialize_to_db(statistic)
             TestResultSerializer().serialize_to_json(statistic)
+            GraphicController().draw_graphic(statistic)
             log.debug("Конец цикла тестов")
 
         except CoddingException:

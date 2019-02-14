@@ -21,40 +21,40 @@ class TestResultSerializer(metaclass=Singleton):
 
         # Создание первого кодера
         first_coder_guid = uuid.uuid4()
-        first_coder: AbstractCoder = statistic_collector.first_coder
+        first_coder: AbstractCoder = statistic_collector.firstCoder
         connection.execute(coder_table.insert().values(
             guid=first_coder_guid,
             coder_type=first_coder.type_of_coder.value,
             coder_speed=first_coder.get_speed(),
             input_length=first_coder.lengthInformation,
             additional_length=first_coder.countAdditional,
-            interleaver=statistic_collector.length_first_interleaver is not None,
-            interleaver_length=statistic_collector.length_first_interleaver,
+            interleaver=statistic_collector.lengthFirstInterleaver is not None,
+            interleaver_length=statistic_collector.lengthFirstInterleaver,
             description=first_coder.name
         ))
 
-        if statistic_collector.flg_cascade:
+        if statistic_collector.flgCascade:
             second_coder_guid = None
         else:
             second_coder_guid = uuid.uuid4()
-            second_coder: AbstractCoder = statistic_collector.second_coder
+            second_coder: AbstractCoder = statistic_collector.secondCoder
             connection.execute(coder_table.insert().values(
                 guid=second_coder_guid,
                 coder_type=second_coder.type_of_coder.value,
                 coder_speed=second_coder.get_speed(),
                 input_length=second_coder.lengthInformation,
                 additional_length=second_coder.countAdditional,
-                interleaver=statistic_collector.length_second_interleaver is not None,
-                interleaver_length=statistic_collector.length_first_interleaver,
+                interleaver=statistic_collector.lengthSecondInterleaver is not None,
+                interleaver_length=statistic_collector.lengthFirstInterleaver,
                 description=second_coder.name
             ))
 
-        for result_iter in statistic_collector.test_result:
+        for result_iter in statistic_collector.testResult:
             timestamp = str(datetime.datetime.now())
 
             connection.execute(result_table.insert().values(
                 timestamp=timestamp,
-                flg_cascade=statistic_collector.flg_cascade,
+                flg_cascade=statistic_collector.flgCascade,
                 first_coder=first_coder_guid,
                 second_coder=second_coder_guid,
                 type_of_noise=1,
