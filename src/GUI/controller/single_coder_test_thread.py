@@ -53,7 +53,6 @@ class SingleCoderTestThread(QThread):
             count_test: float,
             test_information: int,
             current_coder: AbstractCoder,
-            last_result: str,
             noise_mode: EnumNoiseMode,
             noise_package_length: int,
             is_split_package: bool,
@@ -67,7 +66,6 @@ class SingleCoderTestThread(QThread):
         self._finish_t = finish
 
         self._length_interleaver = first_interleaver_length
-        self.lastResult = last_result
         self._currentCoder = current_coder
         self._noiseChance = noise_chance
         self._countTest = count_test

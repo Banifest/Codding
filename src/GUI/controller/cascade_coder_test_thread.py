@@ -43,7 +43,6 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             count_test=count_test,
             test_information=test_information,
             current_coder=current_coder,
-            last_result=last_result,
             start=start,
             finish=finish,
             noise_package_length=noise_package_length,
@@ -83,7 +82,9 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     second_coder=self._secondCoder,
                     test_result=self._auto_test(),
                     length_first_interleaver=self._length_first_interleaver,
-                    length_second_interleaver=self._length_second_interleaver
+                    length_second_interleaver=self._length_second_interleaver,
+                    begin_noise=self._start_t,
+                    end_noise=self._finish_t
                 )
             else:
                 statistic = StatisticCollector(
@@ -92,7 +93,9 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     second_coder=self._secondCoder,
                     test_result=[self._single_test()],
                     length_first_interleaver=self._length_first_interleaver,
-                    length_second_interleaver=self._length_second_interleaver
+                    length_second_interleaver=self._length_second_interleaver,
+                    begin_noise=self._start_t,
+                    end_noise=self._finish_t
                 )
 
             globalSignals.stepFinished.emit(100)
