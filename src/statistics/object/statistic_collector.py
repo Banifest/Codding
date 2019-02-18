@@ -75,6 +75,7 @@ class StatisticCollector:
     lengthSecondInterleaver: Optional[int]
     beginNoise: float
     endNoise: float
+    quantity_of_steps_in_cycle: int
 
     def __init__(
             self,
@@ -85,7 +86,8 @@ class StatisticCollector:
             length_first_interleaver: Optional[int],
             length_second_interleaver: Optional[int],
             begin_noise: float,
-            end_noise: float
+            end_noise: float,
+            quantity_of_steps_in_cycle: int
     ) -> None:
         self.flgCascade = flg_cascade
         self.firstCoder = first_coder
@@ -95,3 +97,4 @@ class StatisticCollector:
         self.lengthSecondInterleaver = length_second_interleaver
         self.beginNoise = begin_noise
         self.endNoise = end_noise
+        self.quantity_of_steps_in_cycle = quantity_of_steps_in_cycle

@@ -12,6 +12,7 @@ from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import int_to_bit_list
 from src.coders.interleaver.Interleaver import Interleaver
+from src.helper.calc.simple_calculation_for_transfer_process import SimpleCalculationForTransferProcess
 from src.helper.error.exception.codding_exception import CoddingException
 from src.logger import log
 from src.statistics.object.statistic_collector import CaseResult, TestResult, StatisticCollector
@@ -39,8 +40,9 @@ class SingleCoderTestThread(QThread):
     _flg_auto: bool = False
     _length_interleaver: int
 
-    _start_t: float = 0
-    _finish_t: float = 20    
+    _start_t: float
+    _finish_t: float
+    _quantity_steps: int
 
     # Package noise mode attr
     _noiseMode: EnumNoiseMode
@@ -57,8 +59,9 @@ class SingleCoderTestThread(QThread):
             noise_package_length: int,
             is_split_package: bool,
             first_interleaver_length: Optional[int],
-            start: float = 0,
-            finish: float = 20,
+            start: float,
+            finish: float,
+            quantity_step: int,
     ):
         super(SingleCoderTestThread, self).__init__()
 
@@ -75,6 +78,7 @@ class SingleCoderTestThread(QThread):
         self._noiseMode = noise_mode
         self._noisePackageLength = noise_package_length
         self._isSplitPackage = is_split_package
+        self._quantity_steps = quantity_step
 
         self.channel = Codec(
             coder=self._currentCoder,
@@ -108,7 +112,7 @@ class SingleCoderTestThread(QThread):
         case_result_list: List[CaseResult] = []
         global_test_statistic: SingleCoderTestThread.GlobalTestStatistic = SingleCoderTestThread.GlobalTestStatistic()
         log.debug("Начало цикла тестов")
-        for x in range(self._countTest):
+        for number_of_test in range(self._countTest):
             transfer_statistic: Codec.TransferStatistic = self.channel.transfer_one_step(information)
             if transfer_statistic.result_status == EnumPackageTransferResult.SUCCESS:
                 global_test_statistic.quantity_successful_package += 1
@@ -148,18 +152,21 @@ class SingleCoderTestThread(QThread):
 
     def _auto_test(self) -> List[TestResult]:
         log.debug("Кнопка авто-тестирования нажата")
-        start: float = self._start_t
-        finish: float = self._finish_t
-        step: float = (finish - start) / 20
+        step: float = SimpleCalculationForTransferProcess.calc_noise_of_steps_different(
+            start=self._start_t,
+            finish=self._finish_t,
+            quantity_steps=self._quantity_steps
+        )
         progress: int = 0
         sum_result_of_single_test: List[TestResult] = []
-        for iterator in [start + iterator * step for iterator in range(20)]:
-            progress += 5
-            self.channel.noiseProbability = 100 * (1 / (iterator + 1))
+        for iterator in [self._start_t + iterator * step for iterator in range(self._quantity_steps)]:
+            progress += int(self.CONST_MAX_PERCENT / self._quantity_steps)
+            self.channel.noiseProbability = self.CONST_MAX_PERCENT * (1 / (iterator + 1))
             sum_result_of_single_test.append(self._single_test())
             globalSignals.autoStepFinished.emit(int(progress))
 
-        globalSignals.autoStepFinished.emit(100)
+        globalSignals.autoStepFinished.emit(int(self.CONST_MAX_PERCENT))
+        globalSignals.autoStepFinished.emit(int(self.CONST_MAX_PERCENT))
         return sum_result_of_single_test
 
     def run(self):
@@ -173,7 +180,8 @@ class SingleCoderTestThread(QThread):
                     length_first_interleaver=self._length_interleaver,
                     length_second_interleaver=None,
                     begin_noise=self._start_t,
-                    end_noise=self._finish_t
+                    end_noise=self._finish_t,
+                    quantity_of_steps_in_cycle=self._quantity_steps
                 )
                 # Graphic should showing only for Cycle of the test
                 GraphicController().draw_graphic(statistic)
@@ -186,10 +194,11 @@ class SingleCoderTestThread(QThread):
                     length_first_interleaver=self._length_interleaver,
                     length_second_interleaver=None,
                     begin_noise=self._start_t,
-                    end_noise=self._finish_t
+                    end_noise=self._finish_t,
+                    quantity_of_steps_in_cycle=self._quantity_steps
                 )
 
-            globalSignals.stepFinished.emit(100)
+            globalSignals.stepFinished.emit(int(self.CONST_MAX_PERCENT))
             globalSignals.ended.emit()
 
             # DB Action

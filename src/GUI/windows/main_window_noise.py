@@ -15,3 +15,6 @@ def setup_main_window_noise(controller, window):
     window.noiseStartEdit.valueChanged.emit(window.noiseStartEdit.value())
     window.noiseFinishEdit.valueChanged.connect(controller.testParams.set_noise_end)
     window.noiseFinishEdit.valueChanged.emit(window.noiseFinishEdit.value())
+
+    window.countStepsInCycleEdit.valueChanged.connect(controller.testParams.set_quantity_steps_in_test_cycle)
+    window.countStepsInCycleEdit.valueChanged.emit(window.countStepsInCycleEdit.value())

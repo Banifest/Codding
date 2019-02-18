@@ -28,6 +28,7 @@ class TestController:
     _noiseMode: EnumNoiseMode
     _noisePackageLength: int
     _flgSplitPackage: bool
+    _quantityStepsInTestCycle: int
 
     _flgFirstInterleaver: bool
     _flgSecondInterleaver: bool
@@ -41,6 +42,9 @@ class TestController:
     ):
         self._firstCoderParams = first_coder_params
         self._secondCoderParams = second_coder_params
+
+    def set_quantity_steps_in_test_cycle(self, value: int) -> None:
+        self._quantityStepsInTestCycle = value
 
     def set_flg_first_interleaver(self, value: bool) -> None:
         self._flgFirstInterleaver = value
@@ -98,7 +102,8 @@ class TestController:
             noise_package_length=self._noisePackageLength,
             noise_mode=self._noiseMode,
             is_split_package=self._flgSplitPackage,
-            first_interleaver_length=self._lengthFirstInterleaver if self._flgFirstInterleaver else None
+            first_interleaver_length=self._lengthFirstInterleaver if self._flgFirstInterleaver else None,
+            quantity_step=self._quantityStepsInTestCycle
         )
 
     def set_cascade_coder_thread_class(self):
@@ -116,6 +121,7 @@ class TestController:
             finish=self._noiseEnd,
             length_first_interleaver=self._lengthFirstInterleaver if self._flgFirstInterleaver else None,
             length_second_interleaver=self._lengthSecondInterleaver if self._flgSecondInterleaver else None,
+            quantity_step=self._quantityStepsInTestCycle,
         )
 
     def start_first_single_test(self):

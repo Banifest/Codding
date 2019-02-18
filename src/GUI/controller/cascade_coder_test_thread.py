@@ -36,6 +36,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             length_second_interleaver: Optional[int],
             start: float,
             finish: float,
+            quantity_step: int,
     ):
         super().__init__(
             noise_chance=noise_chance,
@@ -47,7 +48,8 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             noise_package_length=noise_package_length,
             is_split_package=is_split_package,
             noise_mode=noise_mode,
-            first_interleaver_length=length_first_interleaver
+            first_interleaver_length=length_first_interleaver,
+            quantity_step=quantity_step
         )
 
         self._length_first_interleaver = length_first_interleaver
@@ -83,7 +85,8 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     length_first_interleaver=self._length_first_interleaver,
                     length_second_interleaver=self._length_second_interleaver,
                     begin_noise=self._start_t,
-                    end_noise=self._finish_t
+                    end_noise=self._finish_t,
+                    quantity_of_steps_in_cycle=self._quantity_steps
                 )
             else:
                 statistic = StatisticCollector(
@@ -94,10 +97,11 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     length_first_interleaver=self._length_first_interleaver,
                     length_second_interleaver=self._length_second_interleaver,
                     begin_noise=self._start_t,
-                    end_noise=self._finish_t
+                    end_noise=self._finish_t,
+                    quantity_of_steps_in_cycle=self._quantity_steps
                 )
 
-            globalSignals.stepFinished.emit(100)
+            globalSignals.stepFinished.emit(int(self.CONST_MAX_PERCENT))
             globalSignals.ended.emit()
 
             # DB Action

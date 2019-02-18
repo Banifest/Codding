@@ -185,13 +185,16 @@ class Codec:
             transfer_statistic.quantity_successful_bits += current_step_success_bits
             transfer_statistic.quantity_error_bits += len(normalization_information) - current_step_success_bits
 
-            if status == EnumBitTransferResult.ERROR or status == EnumBitTransferResult.SHADOW:
+            if status == EnumBitTransferResult.ERROR:
                 transfer_statistic.result_status = EnumPackageTransferResult.ERROR
+            elif status == EnumBitTransferResult.SHADOW:
+                transfer_statistic.result_status = EnumPackageTransferResult.SHADOW
             elif status == EnumBitTransferResult.REPAIR \
-                    and transfer_statistic.result_status != EnumPackageTransferResult.ERROR:
+                    and transfer_statistic.result_status != EnumPackageTransferResult.ERROR \
+                    and transfer_statistic.result_status != EnumPackageTransferResult.SHADOW:
                 transfer_statistic.result_status = EnumPackageTransferResult.REPAIR
             else:
-                transfer_statistic.result_status = status
+                transfer_statistic.result_status = EnumPackageTransferResult.SUCCESS
         return transfer_statistic
 
     def get_transfer_one_step(self, information: list) -> TransferStatistic:
