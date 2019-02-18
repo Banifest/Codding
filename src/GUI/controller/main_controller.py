@@ -1,6 +1,7 @@
 # coding=utf-8
 # coding=utf-8
 import sys
+from typing import Optional
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
@@ -9,9 +10,10 @@ from src.GUI.controller.test_controller import TestController
 from src.GUI.globals_signals import globalSignals
 from src.GUI.windows.main_window import MainWindow
 from src.coders.abstract_coder import AbstractCoder
-
-
 # noinspection PyMethodMayBeStatic
+from src.helper.error.exception.application_exception import ApplicationException
+
+
 class MainController:
     firstCoderParams: CoderController
     secondCoderParams: CoderController
@@ -36,11 +38,12 @@ class MainController:
         self._mainWindow = MainWindow(self)
         app.exec()
 
-    def error_handle(self):
+    @staticmethod
+    def error_handle(exception: Optional[ApplicationException]):
         QMessageBox().warning(
             None,
-            "Поля заполнены не верной информацией",
-            "Поля заполнены не верной информацией",
+            "Поля заполнены не верной информацией" if exception is None else exception.get_message(),
+            "Поля заполнены не верной информацией" if exception is None else exception.get_long_message(),
             QMessageBox.Ok
         )
 

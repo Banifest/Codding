@@ -1,4 +1,6 @@
 # coding=utf-8
+from typing import Optional
+
 from src.helper.error.enum_exception_standard_message import EnumExceptionStandardMessage
 from src.helper.error.enum_message_type import EnumMessageType
 
@@ -10,16 +12,26 @@ class ApplicationException(Exception):
 
     def __init__(
             self,
-            message: str = "",
-            long_message: str = "",
+            message: Optional[str] = None,
+            long_message: Optional[str] = None,
             message_type: EnumMessageType = EnumMessageType.ERROR
     ):
-        self._message = message
-        if long_message == "":
+        if message is not None:
+            self._message = message
+
+        if long_message is None and message is not None:
             self._long_message = message
-        else:
+        elif long_message is not None:
             self._long_message = long_message
+
         self._message_type = message_type
+
+    def __str__(self) -> str:
+        return """Exception was occur with type {0}. {1}. {2}""".format(
+            self._message_type,
+            self._message,
+            self._long_message
+        )
 
     def get_message(self) -> str:
         return self._message

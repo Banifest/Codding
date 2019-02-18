@@ -106,23 +106,22 @@ class SingleCoderTestThread(QThread):
         step: float = self.CONST_MAX_PERCENT / self._countTest
         information: list = int_to_bit_list(self._information)
         case_result_list: List[CaseResult] = []
-        globalTestStatistic: SingleCoderTestThread.GlobalTestStatistic = SingleCoderTestThread.GlobalTestStatistic()
+        global_test_statistic: SingleCoderTestThread.GlobalTestStatistic = SingleCoderTestThread.GlobalTestStatistic()
         log.debug("Начало цикла тестов")
         for x in range(self._countTest):
             transfer_statistic: Codec.TransferStatistic = self.channel.transfer_one_step(information)
             if transfer_statistic.result_status == EnumPackageTransferResult.SUCCESS:
-                globalTestStatistic.quantity_successful_package += 1
+                global_test_statistic.quantity_successful_package += 1
             elif transfer_statistic.result_status == EnumPackageTransferResult.REPAIR:
-                globalTestStatistic.quantity_repair_package += 1
+                global_test_statistic.quantity_repair_package += 1
             elif transfer_statistic.result_status == EnumPackageTransferResult.ERROR:
-                globalTestStatistic.quantity_error_package += 1
+                global_test_statistic.quantity_error_package += 1
             else:
-                globalTestStatistic.quantity_shadow_package += 1
+                global_test_statistic.quantity_shadow_package += 1
 
-            globalTestStatistic.quantity_correct_bits += transfer_statistic.quantity_successful_bits
-            globalTestStatistic.quantity_error_bits += transfer_statistic.quantity_error_bits
+            global_test_statistic.quantity_correct_bits += transfer_statistic.quantity_successful_bits
+            global_test_statistic.quantity_error_bits += transfer_statistic.quantity_error_bits
             progress += step
-            self.lastResult += self.channel.information
             globalSignals.stepFinished.emit(int(progress))
 
             case_result_list.append(CaseResult(
@@ -139,21 +138,18 @@ class SingleCoderTestThread(QThread):
             noise_type=self._noiseMode,
             noise=self.channel.noiseProbability,
             flg_cascade=True,
-            successful_packages=globalTestStatistic.quantity_successful_package,
-            repair_packages=globalTestStatistic.quantity_repair_package,
-            changed_packages=globalTestStatistic.quantity_repair_package,
-            error_packages=globalTestStatistic.quantity_error_package,
-            quantity_correct_bits=globalTestStatistic.quantity_correct_bits,
-            quantity_error_bits=globalTestStatistic.quantity_error_bits
+            successful_packages=global_test_statistic.quantity_successful_package,
+            repair_packages=global_test_statistic.quantity_repair_package,
+            changed_packages=global_test_statistic.quantity_repair_package,
+            error_packages=global_test_statistic.quantity_error_package,
+            quantity_correct_bits=global_test_statistic.quantity_correct_bits,
+            quantity_error_bits=global_test_statistic.quantity_error_bits
         )
 
     def _auto_test(self) -> List[TestResult]:
         log.debug("Кнопка авто-тестирования нажата")
         start: float = self._start_t
         finish: float = self._finish_t
-
-        if finish - start <= 0:
-            globalSignals.notCorrect.emit()
         step: float = (finish - start) / 20
         progress: int = 0
         sum_result_of_single_test: List[TestResult] = []
@@ -179,6 +175,8 @@ class SingleCoderTestThread(QThread):
                     begin_noise=self._start_t,
                     end_noise=self._finish_t
                 )
+                # Graphic should showing only for Cycle of the test
+                GraphicController().draw_graphic(statistic)
             else:
                 statistic = StatisticCollector(
                     flg_cascade=False,
@@ -197,8 +195,7 @@ class SingleCoderTestThread(QThread):
             # DB Action
             # TestResultSerializer().serialize_to_db(statistic)
             TestResultSerializer().serialize_to_json(statistic)
-            GraphicController().draw_graphic(statistic)
             log.debug("Конец цикла тестов")
 
-        except CoddingException:
-            globalSignals.notCorrect.emit()
+        except CoddingException as codingException:
+            globalSignals.notCorrect.emit(codingException, )

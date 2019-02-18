@@ -7,7 +7,7 @@ class GlobalSignals(QObject):
     stepFinished = pyqtSignal('int')
     autoStepFinished = pyqtSignal('int')
     ended = pyqtSignal()
-    notCorrect = pyqtSignal()
+    notCorrect = pyqtSignal(object)
 
 
 globalSignals = GlobalSignals()

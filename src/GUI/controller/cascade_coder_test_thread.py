@@ -34,9 +34,8 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             is_split_package: bool,
             length_first_interleaver: Optional[int],
             length_second_interleaver: Optional[int],
-            last_result: str,
-            start: float = 0,
-            finish: float = 20,
+            start: float,
+            finish: float,
     ):
         super().__init__(
             noise_chance=noise_chance,
@@ -107,5 +106,5 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             GraphicController().draw_graphic(statistic)
             log.debug("Конец цикла тестов")
 
-        except CoddingException:
-            globalSignals.notCorrect.emit()
+        except CoddingException as coddingException:
+            globalSignals.notCorrect.emit(coddingException)
