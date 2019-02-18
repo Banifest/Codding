@@ -8,7 +8,7 @@ from src.channel.cascadecodec import CascadeCodec
 from src.channel.enum_noise_mode import EnumNoiseMode
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver.Interleaver import Interleaver
-from src.helper.error.exception.codding_exception import CoddingException
+from src.helper.error.exception.codding_exception import CodingException
 from src.logger import log
 from src.statistics.object.statistic_collector import StatisticCollector
 from src.statistics.object.test_result_serializer import TestResultSerializer
@@ -110,5 +110,5 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             GraphicController().draw_graphic(statistic)
             log.debug("Конец цикла тестов")
 
-        except CoddingException as coddingException:
+        except CodingException as coddingException:
             globalSignals.notCorrect.emit(coddingException)

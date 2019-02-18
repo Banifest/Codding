@@ -3,7 +3,7 @@
 from abc import ABCMeta, abstractmethod
 
 from src.endpoint.console.iconsolecoder import IConsoleCoder
-from src.helper.error.exception.codding_exception import CoddingException
+from src.helper.error.exception.codding_exception import CodingException
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
@@ -70,7 +70,11 @@ class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
 
         """
         if len(bit_list) > self.lengthInformation:
-            raise CoddingException()
+            raise CodingException(
+                message=CodingException.LENGTH_OF_INPUT_PACKAGE_OVERFLOW.message,
+                long_message=CodingException.LENGTH_OF_INPUT_PACKAGE_OVERFLOW.long_message,
+                additional_information=[self.name, self.lengthInformation, len(bit_list)]
+            )
         else:
             return (self.lengthInformation - len(bit_list)) * [0] + bit_list
 

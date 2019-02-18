@@ -1,5 +1,5 @@
 # coding=utf-8
-from typing import Optional
+from typing import Optional, List, Any
 
 from src.helper.error.enum_exception_standard_message import EnumExceptionStandardMessage
 from src.helper.error.enum_message_type import EnumMessageType
@@ -14,15 +14,21 @@ class ApplicationException(Exception):
             self,
             message: Optional[str] = None,
             long_message: Optional[str] = None,
-            message_type: EnumMessageType = EnumMessageType.ERROR
+            message_type: EnumMessageType = EnumMessageType.ERROR,
+            additional_information: List[Any] = None,
     ):
+
         if message is not None:
-            self._message = message
+            self._message = message.format if additional_information is None \
+                else message.format(*additional_information)
 
         if long_message is None and message is not None:
-            self._long_message = message
+            self._long_message = message.format if additional_information is None else message.format(
+                *additional_information)
+
         elif long_message is not None:
-            self._long_message = long_message
+            self._long_message = long_message.format if additional_information is None else long_message.format(
+                *additional_information)
 
         self._message_type = message_type
 

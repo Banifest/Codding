@@ -143,6 +143,7 @@ class TestController:
 
     def start_cascade_single_test(self):
         self._firstCoderParams.create_coder()
+        self._secondCoderParams.create_coder()
         try:
             self.set_cascade_coder_thread_class()
             self._cascadeThreadClass.start()

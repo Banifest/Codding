@@ -4,7 +4,7 @@ import random
 
 from src.coders import abstract_coder
 from src.coders.casts import bit_list_to_int, bit_list_to_int_list, int_to_bit_list
-from src.helper.error.exception.codding_exception import CoddingException
+from src.helper.error.exception.codding_exception import CodingException
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
 
@@ -36,7 +36,7 @@ class Coder(abstract_coder.AbstractCoder):
         set_combination_blocks: set = set()
         while len(set_combination_blocks) < self._countCodingBlocks:
             if 2 ** self._countBlocks - 1 == len(set_combination_blocks):
-                raise CoddingException()
+                raise CodingException()
             set_combination_blocks.add(random_generator.getrandbits(self._countBlocks))
             set_combination_blocks -= {0}
 
@@ -106,7 +106,7 @@ class Coder(abstract_coder.AbstractCoder):
 
         if set(status) != {True}:
             log.debug("Недостаточно блоков для декодирования информации")
-            raise CoddingException()
+            raise CodingException()
 
         # формирование ответа в битовом представлении
         answer = answer[:-1]

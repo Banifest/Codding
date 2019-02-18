@@ -7,7 +7,7 @@ from src.channel.enum_noise_mode import EnumNoiseMode
 from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver import Interleaver
-from src.helper.error.exception.codding_exception import CoddingException
+from src.helper.error.exception.codding_exception import CodingException
 from src.helper.error.exception.parameters_parse_exception import ParametersParseException
 from src.logger import log
 
@@ -100,7 +100,7 @@ class Codec:
                     current_information_state = self.interleaver.reestablish(current_information_state)
 
                 current_information_state = self.coder.decoding(current_information_state)
-            except CoddingException:
+            except CodingException:
                 self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
                                     "востановлению\n".format(number_of_cycle)
             else:
@@ -156,7 +156,7 @@ class Codec:
                     current_information = self.interleaver.reestablish(current_information)
 
                 current_information = self.coder.decoding(current_information)
-            except CoddingException:
+            except CodingException:
                 status = EnumBitTransferResult.ERROR
                 log.info(
                     "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(current_information))
@@ -216,7 +216,7 @@ class Codec:
                 current_information_state = self.interleaver.reestablish(current_information_state)
 
             current_information_state = self.coder.decoding(current_information_state)
-        except CoddingException:
+        except CodingException:
             log.info(
                 "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(
                     current_information_state))

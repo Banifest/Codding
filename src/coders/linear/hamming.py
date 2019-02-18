@@ -69,9 +69,10 @@ class Coder(abstract_coder.AbstractCoder):
         code: list = []
 
         step: int = 0
-        for count in range(self.lengthTotal):  # добавление проверяющих битов
+        # Add checks bits
+        for count in range(self.lengthTotal):
 
-            # Проверка кратности числа на степень 2х
+            # Check that number enter in set of number (2^n), where n is natural number
             if math.log2(count + 1) != int(math.log2(count + 1)) or step >= self.lengthAdditional:
                 code.append([list_encoding_information[count - int(math.log2(count)) - 1]])
             else:
