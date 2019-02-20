@@ -130,11 +130,11 @@ class Coder(abstract_coder.AbstractCoder):
         :return:
         """
         log.info("Декодирование пакета {0} свёрточным декодером по максимуму правдоподобия".format(information))
-        last_step: list = []  # Информация об предыдущем шаге
-        now_step: list = []  # Информация о текущем шаге
-        info_about_vertex: list = []  # информация о вершине
-        travel: list = []  # путь для текущей вершины
-        cost_travel: int = 0  # стоимость для текущего пути
+        # last_step: list = []  # Информация об предыдущем шаге
+        # now_step: list = []  # Информация о текущем шаге
+        # info_about_vertex: list = []  # информация о вершине
+        # travel: list = []  # путь для текущей вершины
+        # cost_travel: int = 0  # стоимость для текущего пути
 
         info_divided_into_steps: list = []  # информация поделенная на шаги
         for x in range(0, len(information), self.countOutput):

@@ -25,6 +25,8 @@ class MainController:
     firstCoderForCascade: AbstractCoder = None
     secondCoderForCascade: AbstractCoder = None
 
+    __UNKNOWN_ERROR: str = "Field(s) contain incorrect information"
+
     def __init__(self):
         self.firstCoderParams = CoderController()
         self.secondCoderParams = CoderController()
@@ -34,6 +36,9 @@ class MainController:
         )
         globalSignals.notCorrect.connect(self.error_handle)
         globalSignals.ended.connect(self.finished_test_cycles)
+
+        self.before_start()
+
         app = QApplication(sys.argv)
         self._mainWindow = MainWindow(self)
         app.exec()
@@ -42,23 +47,22 @@ class MainController:
     def error_handle(exception: Optional[ApplicationException]):
         QMessageBox().warning(
             None,
-            "Поля заполнены не верной информацией" if exception is None else exception.get_message(),
-            "Поля заполнены не верной информацией" if exception is None else exception.get_long_message(),
+            MainController.__UNKNOWN_ERROR if exception is None else exception.get_message(),
+            MainController.__UNKNOWN_ERROR if exception is None else exception.get_long_message(),
             QMessageBox.Ok
         )
 
     def import_from_json(self):
         pass
-        # file_path = QFileDialog.getOpenFileName(filter="*.json", parent=self._mainWindow)[0]
-        # if file_path != '':
-        #     info = json.loads(open(file_path).read())
-        # GraphicController().draw_graphic(
-        #     info['draw_information'],
-        #     info['coder']['name'],
-        #     coder_speed=info['coder']['speed'],
-        #     start=info['auto_test_information']['start'],
-        #     finish=info['auto_test_information']['finish']
-        # )
+
+    def before_start(self):
+        """
+        This method for add middleware before start of GUI
+        """
+        pass
 
     def finished_test_cycles(self):
+        """
+        This method for add middleware after finish test cycle
+        """
         pass

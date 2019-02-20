@@ -2,6 +2,7 @@
 from src.GUI.controller.main_controller import MainController
 from src.endpoint.console.app_parser import AppParser
 from src.endpoint.console.enum_app_mode import EnumAppMode
+from src.helper.error.exception.application_exception import ApplicationException
 from src.logger import log
 
 if __name__ == '__main__':
@@ -14,4 +15,4 @@ if __name__ == '__main__':
             print(e)
             log.critical("Unhandled exception")
 else:
-    raise Exception("Impossible import this file")
+    raise ApplicationException("It isn't module")

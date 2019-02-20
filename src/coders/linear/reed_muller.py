@@ -69,7 +69,8 @@ class Coder(abstract_coder.AbstractCoder):
 
         def vec_inv(a): return [x ^ 1 for x in a]
 
-        def vec_gen(a, b): return [a for k in range(b)]
+        def vec_gen(a, b):
+            return [a for x in range(b)]
 
         result_voice: list = []
         for vector in self.matrix_G.tolist()[::-1][:-1]:

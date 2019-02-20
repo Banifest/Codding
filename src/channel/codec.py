@@ -258,6 +258,6 @@ class Codec:
             )
         else:
             raise ParametersParseException(
-                message=ParametersParseException.NOISE_MODE_UNDEFINED,
-                long_message=ParametersParseException.NOISE_MODE_UNDEFINED
+                message=ParametersParseException.NOISE_MODE_UNDEFINED.message,
+                long_message=ParametersParseException.NOISE_MODE_UNDEFINED.long_message
             )
