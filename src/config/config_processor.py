@@ -19,6 +19,9 @@ class ConfigProcessor(metaclass=Singleton):
         config_file.write(jsonpickle.encode(self._config, unpicklable=False))
         config_file.close()
 
+    def get_config(self) -> Config:
+        return self._config
+
     def parse_config(self):
         if os.path.exists(ConfigProcessor.CONFIG_FILE_NAME):
             config_file = open(ConfigProcessor.CONFIG_FILE_NAME)

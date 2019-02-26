@@ -12,6 +12,7 @@ from src.channel.enum_package_transfer_result import EnumPackageTransferResult
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import int_to_bit_list
 from src.coders.interleaver.Interleaver import Interleaver
+from src.config.config_processor import ConfigProcessor
 from src.helper.calc.simple_calculation_for_transfer_process import SimpleCalculationForTransferProcess
 from src.helper.error.exception.application_exception import ApplicationException
 from src.logger import log
@@ -202,9 +203,10 @@ class SingleCoderTestThread(QThread):
             globalSignals.ended.emit()
 
             # DB Action
-            # TestResultSerializer().serialize_to_db(statistic)
+            if ConfigProcessor().get_config().db_setting.flg_used:
+                TestResultSerializer().serialize_to_db(statistic)
             TestResultSerializer().serialize_to_json(statistic)
-            log.debug("Конец цикла тестов")
+            log.debug("End of test cycle")
 
         except ApplicationException as application_exception:
             globalSignals.notCorrect.emit(application_exception, )

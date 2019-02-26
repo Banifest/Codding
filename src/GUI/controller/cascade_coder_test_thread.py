@@ -8,6 +8,7 @@ from src.channel.cascadecodec import CascadeCodec
 from src.channel.enum_noise_mode import EnumNoiseMode
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver.Interleaver import Interleaver
+from src.config.config_processor import ConfigProcessor
 from src.helper.error.exception.codding_exception import CodingException
 from src.logger import log
 from src.statistics.object.statistic_collector import StatisticCollector
@@ -105,7 +106,8 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             globalSignals.ended.emit()
 
             # DB Action
-            # TestResultSerializer().serialize_to_db(statistic)
+            if ConfigProcessor().get_config().db_setting.flg_used:
+                TestResultSerializer().serialize_to_db(statistic)
             TestResultSerializer().serialize_to_json(statistic)
             GraphicController().draw_graphic(statistic)
             log.debug("End of the test cycle")

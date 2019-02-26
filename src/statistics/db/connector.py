@@ -3,6 +3,7 @@ from typing import Optional
 
 from sqlalchemy import create_engine
 
+from src.config.config_processor import ConfigProcessor
 from src.helper.pattern.singleton import Singleton
 
 
@@ -16,8 +17,8 @@ class Connector(metaclass=Singleton):
 
     def get_connection(
             self,
-            login: Optional[str] = "postgres",
-            password: Optional[str] = "admin",
+            login: Optional[str] = ConfigProcessor().get_config().db_setting.login,
+            password: Optional[str] = ConfigProcessor().get_config().db_setting.password,
     ):
         """
         Method for getting connection to native(remote) database
@@ -32,8 +33,8 @@ class Connector(metaclass=Singleton):
 
     def get_engine(
             self,
-            login: Optional[str] = "postgres",
-            password: Optional[str] = "admin",
+            login: Optional[str] = ConfigProcessor().get_config().db_setting.login,
+            password: Optional[str] = ConfigProcessor().get_config().db_setting.password,
     ):
         """
         Method for getting engine to remote database Heroku
@@ -43,7 +44,6 @@ class Connector(metaclass=Singleton):
         """
         if self._engine is None:
             self._engine = create_engine(
-                # "postgres://{0}:{1}@ec2-54-246-85-234.eu-west-1.compute.amazonaws.com:5432/d32aj68h32vv4c".format(
                 "postgres://{0}:{1}@localhost:5433/postgres".format(
                     login,
                     password
