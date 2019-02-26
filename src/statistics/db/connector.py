@@ -44,9 +44,12 @@ class Connector(metaclass=Singleton):
         """
         if self._engine is None:
             self._engine = create_engine(
-                "postgres://{0}:{1}@localhost:5433/postgres".format(
+                "postgres://{0}:{1}@{2}:{3}/{4}".format(
                     login,
-                    password
+                    password,
+                    ConfigProcessor().get_config().db_setting.address,
+                    ConfigProcessor().get_config().db_setting.port,
+                    ConfigProcessor().get_config().db_setting.database_name,
                 ), echo=True
             )
         return self._engine

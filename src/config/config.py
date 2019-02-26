@@ -6,9 +6,11 @@ from dataclasses import dataclass
 class Config:
     @dataclass
     class DBSetting:
-        url: str = ""
+        flg_used: bool = False
+        database_name: str = ""
         login: str = ""
         password: str = ""
-        flg_used: bool = False
+        address: str = ""
+        port: str = ""
 
     db_setting: DBSetting = DBSetting()
