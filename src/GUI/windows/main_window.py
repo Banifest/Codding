@@ -25,8 +25,6 @@ class MainWindow(QMainWindow):
         self.informationEdit.textChanged.connect(self.controller.testParams.set_test_info)
         self.informationEdit.textChanged.emit(self.informationEdit.text())
 
-        self.cascadeModeComboBox.activated[str].connect(self.controller.testParams.set_mode_cascade)
-
         globalSignals.stepFinished.connect(self.singleProgress.setValue)
         globalSignals.autoStepFinished.connect(self.autoProgress.setValue)
 
