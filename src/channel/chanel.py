@@ -3,7 +3,7 @@ import random
 from math import ceil
 from typing import Union, Optional, List
 
-from src.channel.chanel_exception import ChanelException
+from src.helper.error.exception.chanel_exception import ChanelException
 from src.helper.pattern.singleton import Singleton
 from src.logger import log
 
@@ -79,13 +79,18 @@ class Chanel(metaclass=Singleton):
         log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(answer))
         return answer
 
-    def gen_package_interference(self, information: list, length_of_block: int, straight: float = None,
-                                 flg_split_package: bool = False) -> list:
+    def gen_package_interference(
+            self,
+            information: list,
+            length_of_block: int,
+            straight: float = None,
+            flg_split_package: bool = False
+    ) -> list:
         """
         Генерация помех с задданной вероятностью
-        :param flg_split_package: Нужен ли хотябы один правильный символ между пакетами ошибок пакете
+        :param flg_split_package: Нужен ли хотя бы один правильный символ между пакетами ошибок пакете
         :param information: list Информация, представленная в виде массива битов
-        :param length_of_block:
+        :param length_of_block: Длина блока информации
         :param straight: Optional[float] Вероятность помех принимает значения от 0.00 до 100.00, может быть опушенна,
         в таком случае будет использоваться значение шума заданное в канале
         :return: Искажённую информацию, представленную в виде массива битов
@@ -98,19 +103,19 @@ class Chanel(metaclass=Singleton):
                   format(straight, length_of_block))
         begin_package_straight: float = straight / length_of_block
         # count error package of chanel
-        count_error_package: int = int(len(information) / begin_package_straight)
+        count_error_package: int = int(len(information) * begin_package_straight)
 
         if flg_split_package:
             if count_error_package * length_of_block + count_error_package - 1 >= len(information):
                 raise ChanelException(
-                    message=ChanelException.PACKET_LENGTH_EXCEEDED,
-                    long_message=ChanelException.PACKET_LENGTH_EXCEEDED
+                    message=ChanelException.PACKET_LENGTH_EXCEEDED.message,
+                    long_message=ChanelException.PACKET_LENGTH_EXCEEDED.long_message
                 )
         else:
             if count_error_package * length_of_block >= len(information):
                 raise ChanelException(
-                    message=ChanelException.PACKET_LENGTH_EXCEEDED,
-                    long_message=ChanelException.PACKET_LENGTH_EXCEEDED
+                    message=ChanelException.PACKET_LENGTH_EXCEEDED.message,
+                    long_message=ChanelException.PACKET_LENGTH_EXCEEDED.long_message
                 )
 
         # random generator
@@ -130,11 +135,13 @@ class Chanel(metaclass=Singleton):
                 if count_pass_bits != 0:
                     changes_bits += count_pass_bits * [0]
                 changes_bits += length_of_block * [1]
+            # We should degrease count free bits
+            count_free_bits -= count_pass_bits
 
         result: list = information.copy()
         # inversion of bits
-        for bit_value in changes_bits:
-            result[bit_value] ^= 1
+        for iterator in range(len(changes_bits)):
+            result[iterator] ^= changes_bits[iterator]
 
         log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(result))
         return result

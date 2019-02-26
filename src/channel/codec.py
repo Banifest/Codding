@@ -161,12 +161,6 @@ class Codec:
                 log.info(
                     "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(current_information))
                 self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
-            except:
-                # TODO исправить на явный перехват исключения и убрать эту заглушку
-                status = EnumBitTransferResult.ERROR
-                log.info(
-                    "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(current_information))
-                self.information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
             else:
                 if current_information == normalization_information:
                     if status != EnumBitTransferResult.REPAIR:

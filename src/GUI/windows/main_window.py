@@ -10,7 +10,7 @@ from src.logger import log
 
 class MainWindow(QMainWindow):
     def __init__(self, controller):
-        log.debug("Создание главного окна")
+        log.debug("Create main window")
 
         super(MainWindow, self).__init__()
         self.controller = controller

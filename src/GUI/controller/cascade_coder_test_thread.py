@@ -58,7 +58,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
         self._firstCoder = first_coder
         self._secondCoder = second_coder
         self.coderSpeed = first_coder.get_speed() * second_coder.get_speed()
-        self.coderName = 'Каскадный кодер из: {0} и {1}'.format(first_coder.name, second_coder.name)
+        self.coderName = 'Cascade codec: {0} and {1}'.format(first_coder.name, second_coder.name)
         self.channel = CascadeCodec(
             first_coder=first_coder,
             second_coder=second_coder,
@@ -108,7 +108,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             # TestResultSerializer().serialize_to_db(statistic)
             TestResultSerializer().serialize_to_json(statistic)
             GraphicController().draw_graphic(statistic)
-            log.debug("Конец цикла тестов")
+            log.debug("End of the test cycle")
 
         except CodingException as coddingException:
             globalSignals.notCorrect.emit(coddingException)

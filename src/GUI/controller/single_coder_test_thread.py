@@ -13,7 +13,7 @@ from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import int_to_bit_list
 from src.coders.interleaver.Interleaver import Interleaver
 from src.helper.calc.simple_calculation_for_transfer_process import SimpleCalculationForTransferProcess
-from src.helper.error.exception.codding_exception import CodingException
+from src.helper.error.exception.application_exception import ApplicationException
 from src.logger import log
 from src.statistics.object.statistic_collector import CaseResult, TestResult, StatisticCollector
 from src.statistics.object.test_result_serializer import TestResultSerializer
@@ -206,5 +206,5 @@ class SingleCoderTestThread(QThread):
             TestResultSerializer().serialize_to_json(statistic)
             log.debug("Конец цикла тестов")
 
-        except CodingException as codingException:
-            globalSignals.notCorrect.emit(codingException, )
+        except ApplicationException as application_exception:
+            globalSignals.notCorrect.emit(application_exception, )

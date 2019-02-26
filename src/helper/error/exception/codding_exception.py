@@ -17,3 +17,8 @@ class CodingException(ApplicationException):
                 Max possible length of package equals {1}, but current length is {2}
                 """
     )
+
+    LACKS_OF_BLOCKS_FOR_DECODING: TemplateException = TemplateException(
+        message="Lacks of blocks for decoding package with fountain coder",
+        long_message="Lacks of blocks for decoding package with fountain coder",
+    )

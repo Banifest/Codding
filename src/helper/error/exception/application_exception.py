@@ -19,15 +19,15 @@ class ApplicationException(Exception):
     ):
 
         if message is not None:
-            self._message = message.format if additional_information is None \
+            self._message = message if additional_information is None \
                 else message.format(*additional_information)
 
         if long_message is None and message is not None:
-            self._long_message = message.format if additional_information is None else message.format(
+            self._long_message = message if additional_information is None else message.format(
                 *additional_information)
 
         elif long_message is not None:
-            self._long_message = long_message.format if additional_information is None else long_message.format(
+            self._long_message = long_message if additional_information is None else long_message.format(
                 *additional_information)
 
         self._message_type = message_type
