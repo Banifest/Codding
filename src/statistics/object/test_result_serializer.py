@@ -34,8 +34,6 @@ class TestResultSerializer(metaclass=Singleton):
         ))
 
         if statistic_collector.flgCascade:
-            second_coder_guid = None
-        else:
             second_coder_guid = uuid.uuid4()
             second_coder: AbstractCoder = statistic_collector.secondCoder
             connection.execute(coder_table.insert().values(
@@ -48,6 +46,8 @@ class TestResultSerializer(metaclass=Singleton):
                 interleaver_length=statistic_collector.lengthFirstInterleaver,
                 description=second_coder.name
             ))
+        else:
+            second_coder_guid = None
 
         for result_iter in statistic_collector.testResult:
             timestamp = str(datetime.datetime.now())

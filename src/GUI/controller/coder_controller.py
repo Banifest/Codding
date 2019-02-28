@@ -92,4 +92,4 @@ class CoderController:
             #             int(self._addCoderWindow.sizePackageTextBox.text())
             #     )
         except SettingException as rcx_setting:
-            ErrorHandler().gui_message_box(rcx_exception=rcx_setting)
+            ErrorHandler.gui_message_box(rcx_exception=rcx_setting)

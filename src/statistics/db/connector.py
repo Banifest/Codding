@@ -17,8 +17,8 @@ class Connector(metaclass=Singleton):
 
     def get_connection(
             self,
-            login: Optional[str] = ConfigProcessor().get_config().db_setting.login,
-            password: Optional[str] = ConfigProcessor().get_config().db_setting.password,
+            login: Optional[str] = None,
+            password: Optional[str] = None,
     ):
         """
         Method for getting connection to native(remote) database
@@ -26,6 +26,11 @@ class Connector(metaclass=Singleton):
         :param password: password for user of database
         :return: Connection object
         """
+        if login is None:
+            login = ConfigProcessor().get_config().db_setting.login
+        if password is None:
+            password = ConfigProcessor().get_config().db_setting.password
+
         if self._connection is None:
             self._connection = self.get_engine(login, password).connect()
 
@@ -33,8 +38,8 @@ class Connector(metaclass=Singleton):
 
     def get_engine(
             self,
-            login: Optional[str] = ConfigProcessor().get_config().db_setting.login,
-            password: Optional[str] = ConfigProcessor().get_config().db_setting.password,
+            login: str,
+            password: str,
     ):
         """
         Method for getting engine to remote database Heroku
@@ -42,9 +47,14 @@ class Connector(metaclass=Singleton):
         :param password: password for user of database
         :return: Engine object
         """
+        if login is None:
+            login = ConfigProcessor().get_config().db_setting.login
+        if password is None:
+            password = ConfigProcessor().get_config().db_setting.password
+
         if self._engine is None:
             self._engine = create_engine(
-                "postgres://{0}:{1}@{2}:{3}/{4}".format(
+                "postgresql+psycopg2://{0}:{1}@{2}:{3}/{4}".format(
                     login,
                     password,
                     ConfigProcessor().get_config().db_setting.address,

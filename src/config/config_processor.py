@@ -10,6 +10,7 @@ from src.helper.pattern.singleton import Singleton
 class ConfigProcessor(metaclass=Singleton):
     _config: Config
     CONFIG_FILE_NAME: str = "config.json"
+    DB_CONFIG: str = "db_setting"
 
     def __init__(self):
         self._config = Config()
@@ -25,7 +26,8 @@ class ConfigProcessor(metaclass=Singleton):
     def parse_config(self):
         if os.path.exists(ConfigProcessor.CONFIG_FILE_NAME):
             config_file = open(ConfigProcessor.CONFIG_FILE_NAME)
-            self._config = jsonpickle.decode(config_file.read())
+            parsed_config = jsonpickle.decode(config_file.read())
+            self._config.db_setting = Config.DBSetting(**parsed_config[ConfigProcessor.DB_CONFIG])
             config_file.close()
         else:
             self.create_standard_config()
