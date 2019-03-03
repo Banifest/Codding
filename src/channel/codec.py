@@ -26,7 +26,7 @@ class Codec:
     # Package noise mode attr
     noiseMode: EnumNoiseMode
     noisePackageLength: int
-    isSplitPackage: bool
+    noisePackagePeriod: int
 
     class TransferStatistic:
         result_status: EnumPackageTransferResult = EnumPackageTransferResult.SUCCESS
@@ -35,6 +35,8 @@ class Codec:
         quantity_repair_bits: int = 0
         quantity_shadow_bits: int = 0
         quantity_changed_bits: int = 0
+        based_error_bits: int = 0
+        based_correct_bits: int = 0
         current_information_state: list = []
 
     def __init__(
@@ -46,13 +48,13 @@ class Codec:
             interleaver: Optional[Interleaver.Interleaver],
             noise_mode: EnumNoiseMode,
             noise_package_length: int,
-            is_split_package: bool,
+            noise_package_period: int,
     ):
 
         log.debug("Создание канала связи")
         self.noiseMode = noise_mode
         self.noisePackageLength = noise_package_length
-        self.isSplitPackage = is_split_package
+        self.noisePackagePeriod = noise_package_period
 
         self.coder: AbstractCoder = coder
         if noise_probability is not None:
@@ -93,8 +95,15 @@ class Codec:
                 if self.interleaver:
                     current_information_state = self.interleaver.shuffle(current_information_state)
 
-                    current_information_state = self._do_noise(information=current_information_state,
-                                                               noise_probability=self.noiseProbability)
+                    compare_information: list = current_information_state
+                    current_information_state = self._do_noise(
+                        information=current_information_state,
+                        noise_probability=self.noiseProbability,
+                    )
+                    transfer_statistic.based_correct_bits, transfer_statistic.based_error_bits = self._get_change_state(
+                        source_state=compare_information,
+                        current_state=current_information_state
+                    )
 
                 if self.interleaver:
                     current_information_state = self.interleaver.reestablish(current_information_state)
@@ -146,8 +155,15 @@ class Codec:
 
                 help_information = current_information
 
-                current_information = self._do_noise(information=current_information,
-                                                     noise_probability=self.noiseProbability)
+                compare_information: list = current_information
+                current_information = self._do_noise(
+                    information=current_information,
+                    noise_probability=self.noiseProbability,
+                )
+                transfer_statistic.based_correct_bits, transfer_statistic.based_error_bits = self._get_change_state(
+                    source_state=compare_information,
+                    current_state=current_information
+                )
 
                 if help_information != current_information:
                     status = EnumBitTransferResult.REPAIR
@@ -203,8 +219,15 @@ class Codec:
             if self.interleaver:
                 current_information_state = self.interleaver.shuffle(current_information_state)
 
-            current_information_state = self._do_noise(information=current_information_state,
-                                                       noise_probability=self.noiseProbability)
+            compare_information: list = current_information_state
+            current_information_state = self._do_noise(
+                information=current_information_state,
+                noise_probability=self.noiseProbability,
+            )
+            transfer_statistic.based_correct_bits, transfer_statistic.based_error_bits = self._get_change_state(
+                source_state=compare_information,
+                current_state=current_information_state
+            )
 
             if self.interleaver:
                 current_information_state = self.interleaver.reestablish(current_information_state)
@@ -244,14 +267,44 @@ class Codec:
         if self.noiseMode == EnumNoiseMode.SINGLE:
             return chanel.Chanel().gen_interference(information=information, straight=noise_probability)
         elif self.noiseMode == EnumNoiseMode.PACKAGE:
-            return chanel.Chanel().gen_package_interference(
-                straight=noise_probability,
+            return chanel.Chanel().generate_package_interference(
                 information=information,
                 length_of_block=self.noisePackageLength,
-                flg_split_package=self.isSplitPackage
+                frequency_of_block=self.noisePackagePeriod
+            )
+        elif self.noiseMode == EnumNoiseMode.MIX:
+            single_package: list = chanel.Chanel().generate_package_interference(
+                information=information,
+                length_of_block=self.noisePackageLength,
+                frequency_of_block=self.noisePackagePeriod
+            )
+            return chanel.Chanel().generate_package_interference(
+                information=single_package,
+                length_of_block=self.noisePackageLength,
+                frequency_of_block=self.noisePackagePeriod
             )
         else:
             raise ParametersParseException(
                 message=ParametersParseException.NOISE_MODE_UNDEFINED.message,
                 long_message=ParametersParseException.NOISE_MODE_UNDEFINED.long_message
             )
+
+    def _get_change_state(
+            self,
+            source_state: List[int],
+            current_state: List[int]
+    ) -> List[int]:
+        correct_bits: int = 0
+        error_bits: int = 0
+
+        if len(source_state) != len(current_state):
+            # TODO Add exception
+            pass
+
+        for iterator in range(len(source_state)):
+            if source_state[iterator] == current_state[iterator]:
+                correct_bits += 1
+            else:
+                error_bits += 1
+
+        return [correct_bits, error_bits]

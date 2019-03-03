@@ -109,7 +109,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>127</height>
+               <height>153</height>
            </rect>
           </property>
           <attribute name="label">
@@ -151,7 +151,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>127</height>
+               <height>153</height>
            </rect>
           </property>
           <attribute name="label">
@@ -222,7 +222,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>127</height>
+               <height>153</height>
            </rect>
           </property>
           <attribute name="label">
@@ -290,7 +290,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>127</height>
+               <height>153</height>
            </rect>
           </property>
           <attribute name="label">
@@ -407,7 +407,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>127</height>
+               <height>153</height>
            </rect>
           </property>
           <attribute name="label">
@@ -449,7 +449,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>127</height>
+               <height>153</height>
            </rect>
           </property>
           <attribute name="label">
@@ -520,7 +520,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>127</height>
+               <height>153</height>
            </rect>
           </property>
           <attribute name="label">
@@ -588,7 +588,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>127</height>
+               <height>153</height>
            </rect>
           </property>
           <attribute name="label">
@@ -732,19 +732,6 @@
       </layout>
      </item>
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="Line" name="line">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -755,7 +742,7 @@
       <widget class="QLabel" name="label_39">
        <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
-               font-size:11pt; font-weight:600;&quot;&gt;Test settings&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+               font-size:11pt; font-weight:600;&quot;&gt;Test configuration&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
            </string>
        </property>
       </widget>
@@ -783,6 +770,13 @@
                      </item>
                      <item>
                          <widget class="QRadioButton" name="packageErrorModeRadio">
+                             <property name="text">
+                                 <string>Package Mode</string>
+                             </property>
+                         </widget>
+                     </item>
+                     <item>
+                         <widget class="QRadioButton" name="mixedErrorModeRadio">
                              <property name="text">
                                  <string>Package Mode</string>
                              </property>
@@ -822,12 +816,31 @@
                          </widget>
                      </item>
                      <item>
-                         <widget class="QCheckBox" name="isSplitPackageCheckBox">
+                         <widget class="QLabel" name="noisePackagePeriodLabel">
+                             <property name="text">
+                                 <string>Package periodicity</string>
+                             </property>
+                         </widget>
+                     </item>
+                     <item>
+                         <widget class="QSpinBox" name="pakcagePeriodSpinBox">
                              <property name="enabled">
                                  <bool>false</bool>
                              </property>
-                             <property name="text">
-                                 <string>Is split packages non-damaged bit</string>
+                             <property name="readOnly">
+                                 <bool>false</bool>
+                             </property>
+                             <property name="prefix">
+                                 <string/>
+                             </property>
+                             <property name="minimum">
+                                 <number>3</number>
+                             </property>
+                             <property name="maximum">
+                                 <number>999999999</number>
+                             </property>
+                             <property name="value">
+                                 <number>3</number>
                              </property>
                          </widget>
                      </item>
@@ -1040,22 +1053,6 @@
             </hints>
         </connection>
         <connection>
-            <sender>packageErrorModeRadio</sender>
-            <signal>toggled(bool)</signal>
-            <receiver>isSplitPackageCheckBox</receiver>
-            <slot>setEnabled(bool)</slot>
-            <hints>
-                <hint type="sourcelabel">
-                    <x>475</x>
-                    <y>405</y>
-                </hint>
-                <hint type="destinationlabel">
-                    <x>474</x>
-                    <y>431</y>
-                </hint>
-            </hints>
-        </connection>
-        <connection>
             <sender>interFirstCheckBox</sender>
             <signal>toggled(bool)</signal>
             <receiver>lenFirstInterEdit</receiver>
@@ -1084,6 +1081,54 @@
                 <hint type="destinationlabel">
                     <x>428</x>
                     <y>318</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>packageErrorModeRadio</sender>
+            <signal>toggled(bool)</signal>
+            <receiver>pakcagePeriodSpinBox</receiver>
+            <slot>setEnabled(bool)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>356</x>
+                    <y>415</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>499</x>
+                    <y>441</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>mixedErrorModeRadio</sender>
+            <signal>toggled(bool)</signal>
+            <receiver>pakcageLengthSpinBox</receiver>
+            <slot>setEnabled(bool)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>499</x>
+                    <y>415</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>214</x>
+                    <y>441</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>mixedErrorModeRadio</sender>
+            <signal>toggled(bool)</signal>
+            <receiver>pakcagePeriodSpinBox</receiver>
+            <slot>setEnabled(bool)</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>499</x>
+                    <y>415</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>499</x>
+                    <y>441</y>
                 </hint>
             </hints>
         </connection>

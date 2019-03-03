@@ -29,6 +29,7 @@ class TestController:
     _noisePackageLength: int
     _flgSplitPackage: bool
     _quantityStepsInTestCycle: int
+    _packagePeriod: int
 
     _flgFirstInterleaver: bool
     _flgSecondInterleaver: bool
@@ -58,11 +59,20 @@ class TestController:
     def set_length_second_interleaver(self, value: int) -> None:
         self._lengthSecondInterleaver = value
 
-    def set_noise_mode(self, value: bool) -> None:
+    def set_noise_package_period(self, value: int) -> None:
+        self._packagePeriod = value
+
+    def set_noise_single_mode(self, value: bool) -> None:
         if value:
             self._noiseMode = EnumNoiseMode.SINGLE
-        else:
+
+    def set_noise_package_mode(self, value: bool) -> None:
+        if value:
             self._noiseMode = EnumNoiseMode.PACKAGE
+
+    def set_noise_mix_mode(self, value: bool) -> None:
+        if value:
+            self._noiseMode = EnumNoiseMode.MIX
 
     def set_noise_package_length(self, value: int) -> None:
         self._noisePackageLength = value
@@ -101,7 +111,7 @@ class TestController:
             finish=self._noiseEnd,
             noise_package_length=self._noisePackageLength,
             noise_mode=self._noiseMode,
-            is_split_package=self._flgSplitPackage,
+            noise_package_period=self._packagePeriod,
             first_interleaver_length=self._lengthFirstInterleaver if self._flgFirstInterleaver else None,
             quantity_step=self._quantityStepsInTestCycle
         )
@@ -114,7 +124,7 @@ class TestController:
             current_coder=self._firstCoderParams.coder,
             first_coder=self._firstCoderParams.coder,
             second_coder=self._secondCoderParams.coder,
-            is_split_package=self._flgSplitPackage,
+            noise_package_period=self._packagePeriod,
             noise_mode=self._noiseMode,
             noise_package_length=self._noisePackageLength,
             start=self._noiseStart,

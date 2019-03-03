@@ -8,6 +8,7 @@ from src.helper.pattern.singleton import Singleton
 from src.logger import log
 
 
+# noinspection PyMethodMayBeStatic
 class Chanel(metaclass=Singleton):
     """
     Chanel
@@ -144,4 +145,44 @@ class Chanel(metaclass=Singleton):
             result[iterator] ^= changes_bits[iterator]
 
         log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(result))
+        return result
+
+    def generate_package_interference(
+            self,
+            information: list,
+            length_of_block: int,
+            frequency_of_block: int
+    ) -> List[int]:
+        random_generator: random.Random = random.Random(random.random() * 50)
+
+        count_of_blocks: int = int(len(information) / frequency_of_block)
+        list_of_begin_noise_error: List[int] = []
+
+        if length_of_block >= frequency_of_block:
+            raise ChanelException(
+                message=ChanelException.PACKET_LENGTH_EXCEEDED.message,
+                long_message=ChanelException.PACKET_LENGTH_EXCEEDED.long_message
+            )
+
+        if frequency_of_block >= len(information):
+            raise ChanelException(
+                message=ChanelException.PACKET_LENGTH_EXCEEDED.message,
+                long_message=ChanelException.PACKET_LENGTH_EXCEEDED.long_message
+            )
+
+        offset_of_block: int = length_of_block
+
+        for iterator in range(count_of_blocks):
+            begin_of_error: int = iterator * frequency_of_block
+            end_of_error: int = (iterator + 1) * frequency_of_block - offset_of_block
+            list_of_begin_noise_error.append(
+                random_generator.randint(begin_of_error, end_of_error)
+            )
+
+        result: List[int] = information
+
+        for begin_iterator in list_of_begin_noise_error:
+            for iterator in range(length_of_block):
+                result[begin_iterator + iterator] ^= 1
+
         return result

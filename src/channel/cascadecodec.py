@@ -30,7 +30,7 @@ class CascadeCodec(codec.Codec):
             second_interleaver: Optional[Interleaver.Interleaver],
             noise_mode: EnumNoiseMode,
             noise_package_length: int,
-            is_split_package: bool,
+            noise_package_period: int,
             mode: int = 0,
     ):
         super().__init__(
@@ -41,7 +41,7 @@ class CascadeCodec(codec.Codec):
             interleaver=first_interleaver,
             noise_mode=noise_mode,
             noise_package_length=noise_package_length,
-            is_split_package=is_split_package,
+            noise_package_period=noise_package_period,
         )
         self._firstCoder = first_coder
         self._secondCoder = second_coder

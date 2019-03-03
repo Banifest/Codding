@@ -1,4 +1,5 @@
 # coding=utf-8
+from dataclasses import dataclass
 from typing import Optional, List
 
 from src.channel.enum_noise_mode import EnumNoiseMode
@@ -24,6 +25,7 @@ class CaseResult:
         self.successful_bits = successful_bits
 
 
+@dataclass
 class TestResult:
     list_case_result: List[CaseResult]
     first_coder: AbstractCoder
@@ -37,34 +39,9 @@ class TestResult:
     error_packages: int
     quantity_correct_bits: int
     quantity_error_bits: int
+    based_correct_bits: int
+    based_error_bits: int
 
-    def __init__(
-            self,
-            list_case_result: List[CaseResult],
-            first_coder: AbstractCoder,
-            second_coder: Optional[AbstractCoder],
-            noise_type: EnumNoiseMode,
-            noise: float,
-            flg_cascade: bool,
-            successful_packages: int,
-            repair_packages: int,
-            changed_packages: int,
-            error_packages: int,
-            quantity_correct_bits: int,
-            quantity_error_bits: int
-    ):
-        self.flg_cascade = flg_cascade
-        self.noise_type = noise_type
-        self.noise = noise
-        self.second_coder = second_coder
-        self.first_coder = first_coder
-        self.list_case_result = list_case_result
-        self.successful_packages = successful_packages
-        self.repair_packages = repair_packages
-        self.changed_packages = changed_packages
-        self.error_packages = error_packages
-        self.quantity_correct_bits = quantity_correct_bits
-        self.quantity_error_bits = quantity_error_bits
 
 class StatisticCollector:
     flgCascade: bool

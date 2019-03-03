@@ -32,7 +32,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             second_coder: AbstractCoder,
             noise_mode: EnumNoiseMode,
             noise_package_length: int,
-            is_split_package: bool,
+            noise_package_period: int,
             length_first_interleaver: Optional[int],
             length_second_interleaver: Optional[int],
             start: float,
@@ -47,7 +47,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             start=start,
             finish=finish,
             noise_package_length=noise_package_length,
-            is_split_package=is_split_package,
+            noise_package_period=noise_package_period,
             noise_mode=noise_mode,
             first_interleaver_length=length_first_interleaver,
             quantity_step=quantity_step
@@ -71,7 +71,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             second_interleaver=Interleaver(length_second_interleaver
                                            ) if length_second_interleaver is not None else None,
             noise_package_length=noise_package_length,
-            is_split_package=is_split_package,
+            noise_package_period=noise_package_period,
             noise_mode=noise_mode,
         )
 

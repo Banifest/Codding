@@ -31,6 +31,8 @@ class SingleCoderTestThread(QThread):
         quantity_shadow_package: int = 0
         quantity_correct_bits: int = 0
         quantity_error_bits: int = 0
+        based_error_bits: int = 0
+        based_correct_bits: int = 0
 
     _information_dict: Dict = {}
     _noiseChance: float = 0
@@ -48,7 +50,7 @@ class SingleCoderTestThread(QThread):
     # Package noise mode attr
     _noiseMode: EnumNoiseMode
     _noisePackageLength: int
-    _isSplitPackage: bool
+    _noisePackagePeriod: int
 
     def __init__(
             self,
@@ -58,7 +60,7 @@ class SingleCoderTestThread(QThread):
             current_coder: AbstractCoder,
             noise_mode: EnumNoiseMode,
             noise_package_length: int,
-            is_split_package: bool,
+            noise_package_period: int,
             first_interleaver_length: Optional[int],
             start: float,
             finish: float,
@@ -78,7 +80,7 @@ class SingleCoderTestThread(QThread):
         self._coderName = self._currentCoder.name
         self._noiseMode = noise_mode
         self._noisePackageLength = noise_package_length
-        self._isSplitPackage = is_split_package
+        self._noisePackagePeriod = noise_package_period
         self._quantity_steps = quantity_step
 
         self.channel = Codec(
@@ -89,7 +91,7 @@ class SingleCoderTestThread(QThread):
             interleaver=Interleaver(first_interleaver_length) if first_interleaver_length is not None else None,
             noise_mode=noise_mode,
             noise_package_length=noise_package_length,
-            is_split_package=is_split_package,
+            noise_package_period=noise_package_period,
         )
 
     def __del__(self):
@@ -126,6 +128,8 @@ class SingleCoderTestThread(QThread):
 
             global_test_statistic.quantity_correct_bits += transfer_statistic.quantity_successful_bits
             global_test_statistic.quantity_error_bits += transfer_statistic.quantity_error_bits
+            global_test_statistic.based_correct_bits += transfer_statistic.based_correct_bits
+            global_test_statistic.based_error_bits += transfer_statistic.based_error_bits
             progress += step
             globalSignals.stepFinished.emit(int(progress))
 
@@ -148,7 +152,9 @@ class SingleCoderTestThread(QThread):
             changed_packages=global_test_statistic.quantity_repair_package,
             error_packages=global_test_statistic.quantity_error_package,
             quantity_correct_bits=global_test_statistic.quantity_correct_bits,
-            quantity_error_bits=global_test_statistic.quantity_error_bits
+            quantity_error_bits=global_test_statistic.quantity_error_bits,
+            based_correct_bits=global_test_statistic.based_correct_bits,
+            based_error_bits=global_test_statistic.based_error_bits
         )
 
     def _auto_test(self) -> List[TestResult]:
