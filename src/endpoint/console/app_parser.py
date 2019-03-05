@@ -2,6 +2,7 @@
 import argparse
 from typing import Optional
 
+from src.endpoint.console.codec_parser import CodecParser
 from src.endpoint.console.coder_parser import CoderParser
 from src.endpoint.console.enum_app_mode import EnumAppMode
 from src.helper.error.exception.parameters_parse_exception import ParametersParseException
@@ -29,12 +30,10 @@ class AppParser(metaclass=Singleton):
         )
 
         self._subparsers = self._argument_parser.add_subparsers()
-        # CodecParser(subparsers=self._subparsers)
-        CoderParser(subparsers=self._subparsers)
 
-        # self._argument_parser.add_subparsers()
-        # self._argument_parser.add_subparsers()
-        # self._argument_parser.add_subparsers()
+        # Add subparsers hire
+        CodecParser(subparsers=self._subparsers)
+        CoderParser(subparsers=self._subparsers)
 
         self._arguments = vars(self._argument_parser.parse_args())
 
@@ -47,4 +46,8 @@ class AppParser(metaclass=Singleton):
         elif app_mode == EnumAppMode.CONSOLE.value:
             return EnumAppMode.CONSOLE
         else:
-            raise ParametersParseException(long_message="""Unknown application running mode""")
+            raise ParametersParseException(
+                message=ParametersParseException.APPLICATION_MODE_UNDEFINED.message,
+                long_message=ParametersParseException.APPLICATION_MODE_UNDEFINED.long_message,
+                additional_information=[app_mode]
+            )

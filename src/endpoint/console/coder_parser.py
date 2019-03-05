@@ -8,7 +8,7 @@ from src.statistics.db.enum_coders_type import EnumCodersType
 
 class CoderParser(metaclass=Singleton):
     """
-    TODO
+    TODO add documentation
     """
     _argument_parser = argparse.ArgumentParser()
     _arguments: None
@@ -33,7 +33,7 @@ class CoderParser(metaclass=Singleton):
         self._argument_parser.add_argument(
             "-ct", "--coder_type",
             required=False,
-            help="""Coder type ({0} - convolution, {1} - fountain, {2} - cyclical, {3} - hamming)""".format(
+            help="""Coder type (convolution - {0}, fountain - {1}, cyclical - {2}, hamming - {3})""".format(
                 EnumCodersType.CONVOLUTION.value,
                 EnumCodersType.FOUNTAIN.value,
                 EnumCodersType.CYCLICAL.value,
@@ -41,7 +41,9 @@ class CoderParser(metaclass=Singleton):
             )
         )
 
-        self._arguments = vars(self._argument_parser.parse_args())
+        # We should parse arguments only for unique coder
+        if self._subparsers is None:
+            self._arguments = vars(self._argument_parser.parse_args())
 
     @property
     def get_argument_parser(self) -> argparse.ArgumentParser:

@@ -28,7 +28,7 @@ class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
         Returns:
             list: encoding list of bits
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def decoding(self, information: list) -> list:
@@ -38,7 +38,7 @@ class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
         Returns:
             list: decoding list of bits
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def get_redundancy(self) -> float:
@@ -87,4 +87,4 @@ class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
         """
         Get Abstract interfaces for getting parameter coder
         """
-        pass
+        raise NotImplementedError

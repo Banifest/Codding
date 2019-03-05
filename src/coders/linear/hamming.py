@@ -15,8 +15,8 @@ class Coder(abstract_coder.AbstractCoder):
     def get_coder_parameters(self):
         pass
 
-    _name = "Хемминга"
     type_of_coder = EnumCodersType.HAMMING
+    _name = "Hamming"
     _matrixTransformation: list = []
 
     def try_normalization(self, bit_list: list) -> list:
@@ -26,7 +26,7 @@ class Coder(abstract_coder.AbstractCoder):
         return super().get_redundancy()
 
     def __init__(self, length_information: int):
-        log.debug("Создание кодера хемминга")
+        log.debug("Create of Hamming coder")
 
         # sum (2**(n-1)-1) from 1 to n must be >= length_information for correct check
         for x in range(1, length_information):

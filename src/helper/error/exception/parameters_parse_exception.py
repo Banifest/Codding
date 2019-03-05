@@ -10,5 +10,10 @@ class ParametersParseException(ApplicationException):
         long_message='Noise mode undefined'
     )
 
+    APPLICATION_MODE_UNDEFINED: TemplateException = TemplateException(
+        message="Unknown application running mode",
+        long_message="Application cannot start with provided application running mode equals {0}"
+    )
+
     _message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value
     _long_message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value

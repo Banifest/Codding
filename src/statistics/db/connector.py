@@ -8,7 +8,6 @@ from src.helper.pattern.singleton import Singleton
 
 
 class Connector(metaclass=Singleton):
-    __ref_instance = None
     _connection = None
     _engine = None
 
@@ -17,8 +16,8 @@ class Connector(metaclass=Singleton):
 
     def get_connection(
             self,
-            login: Optional[str] = None,
-            password: Optional[str] = None,
+            login: Optional[str] = ConfigProcessor().get_config().db_setting.login,
+            password: Optional[str] = ConfigProcessor().get_config().db_setting.password,
     ):
         """
         Method for getting connection to native(remote) database

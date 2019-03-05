@@ -9,7 +9,7 @@ from src.helper.pattern.singleton import Singleton
 
 class CodecParser(metaclass=Singleton):
     """
-    TODO
+    TODO add documentation
     """
     _argument_parser = argparse.ArgumentParser()
     _arguments: None
@@ -23,7 +23,7 @@ class CodecParser(metaclass=Singleton):
         if argument_parser:
             self._argument_parser = argument_parser
         else:
-            self._argument_parser = argparse.ArgumentParser()
+            self._argument_parser = argparse.ArgumentParser().add_subparsers()
 
         if subparsers is not None:
             self._subparsers = subparsers
@@ -52,15 +52,17 @@ class CodecParser(metaclass=Singleton):
         self._argument_parser.add_argument(
             "-ne", "--noise_end",
             required=False,
-            help="""End of noise(from 1.0 to 50.0)"""
+            help="""End of noise(from 1.0 to 50.0), but lt Start of noise"""
         )
 
-        self._arguments = vars(self._argument_parser.parse_args())
+        # We should parse arguments only for unique coder
+        if self._subparsers is None:
+            self._arguments = vars(self._argument_parser.parse_args())
 
     @property
     def get_codec_type(self) -> EnumCodecType:
         """
-        TODO
+        TODO add documentation
         :return:
         """
         codec_type: Optional[str] = self._arguments["codec"]

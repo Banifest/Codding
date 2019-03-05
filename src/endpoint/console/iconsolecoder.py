@@ -6,4 +6,5 @@ class IConsoleCoder(metaclass=ABCMeta):
 
     @abstractmethod
     def get_coder_parameters(self):
+        # TODO change pass -> raise NotImplemented
         pass

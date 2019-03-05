@@ -34,7 +34,7 @@ class GraphicController(metaclass=Singleton):
         plt.semilogy(True)
 
         plt.ylabel("Chance of last information, P*10^-1")
-        plt.xlabel("Power, Db")
+        plt.xlabel("Power of signal, Db")
 
         noise_step_different: float = SimpleCalculationForTransferProcess.calc_noise_of_steps_different(
             start=static_collector.beginNoise,

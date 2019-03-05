@@ -126,3 +126,6 @@ lastInformation.txt
 /.idea/encodings.xml
 lastResult.json
 /.idea/workspace.xml
+config.json
+log/
+tests/random_test.py
