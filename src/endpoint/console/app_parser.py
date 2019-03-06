@@ -10,6 +10,7 @@ from src.helper.pattern.singleton import Singleton
 
 
 class AppParser(metaclass=Singleton):
+    __MODE_PARAMETERS: str = "mode"
     _argument_parser = argparse.ArgumentParser()
     _arguments: None
     _subparsers: None
@@ -21,12 +22,15 @@ class AppParser(metaclass=Singleton):
         if argument_parser:
             self._argument_parser = argument_parser
         else:
-            self._argument_parser = argparse.ArgumentParser()
+            self._argument_parser = argparse.ArgumentParser(prog="Diploma")
 
         self._argument_parser.add_argument(
             "-m", "--mode",
             required=False,
-            help="""Type of running mode (g - for gui, c - console)"""
+            help="""Type of running mode (GUI - {0}, console - {1})""".format(
+                EnumAppMode.GUI.value,
+                EnumAppMode.CONSOLE.value
+            )
         )
 
         self._subparsers = self._argument_parser.add_subparsers()
@@ -39,7 +43,7 @@ class AppParser(metaclass=Singleton):
 
     @property
     def get_app_mode(self) -> EnumAppMode:
-        app_mode: Optional[str] = self._arguments["mode"]
+        app_mode: Optional[str] = self._arguments[AppParser.__MODE_PARAMETERS]
 
         if app_mode is None or app_mode == EnumAppMode.GUI.value:
             return EnumAppMode.GUI

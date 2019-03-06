@@ -26,13 +26,12 @@ class CoderParser(metaclass=Singleton):
 
         if subparsers is not None:
             self._subparsers = subparsers
-            self._argument_parser = self._subparsers.add_parser("-ct")
+            self._argument_parser = self._subparsers.add_parser("ct", aliases=["coder_type"], help="help")
         else:
             self._subparsers = self._argument_parser
 
         self._argument_parser.add_argument(
-            "-ct", "--coder_type",
-            required=False,
+            "-ct",
             help="""Coder type (convolution - {0}, fountain - {1}, cyclical - {2}, hamming - {3})""".format(
                 EnumCodersType.CONVOLUTION.value,
                 EnumCodersType.FOUNTAIN.value,

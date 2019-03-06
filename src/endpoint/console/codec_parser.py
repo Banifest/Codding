@@ -27,7 +27,7 @@ class CodecParser(metaclass=Singleton):
 
         if subparsers is not None:
             self._subparsers = subparsers
-            self._argument_parser = self._subparsers.add_parser("-cm")
+            self._argument_parser = self._subparsers.add_parser("cm", aliases=["coder_mode"], help="-cm help")
         else:
             self._subparsers = self._argument_parser
 
