@@ -9,12 +9,14 @@ from src.statistics.object.statistic_collector import StatisticCollector
 
 class GraphicController(metaclass=Singleton):
     # noinspection SpellCheckingInspection
-    RESULT_GRAPHIC_TYPE: str = "ggplot"
+    __RESULT_GRAPHIC_TYPE: str = "ggplot"
     __CORRECT_PACKAGE: str = "Quantity of correct packages"
     __CORRECT_BITS: str = "Quantity of correct bits"
     __SOURCE_CORRECT_BITS: str = "Quantity of source correct bits"
-    _FROM_Y_LIMIT: float = 10 ** (-10)
-    _TO_Y_LIMIT: float = 1.1
+    __FROM_Y_LIMIT: float = 10 ** (-10)
+    __TO_Y_LIMIT: float = 1.1
+    __Y_LABEL: str = "Chance of last information, P*10^-1"
+    __X_LABEL: str = "Power of signal, Db"
 
     def draw_graphic(
             self,
@@ -23,18 +25,18 @@ class GraphicController(metaclass=Singleton):
         """
         :param static_collector: StatisticCollector
         """
-        plt.style.use(self.RESULT_GRAPHIC_TYPE)
+        plt.style.use(self.__RESULT_GRAPHIC_TYPE)
         plt.legend(handles=[
             matches.Patch(color='blue', label=GraphicController.__CORRECT_PACKAGE),
             matches.Patch(color='purple', label=GraphicController.__CORRECT_BITS),
             matches.Patch(color='red', label=GraphicController.__SOURCE_CORRECT_BITS),
         ])
-        plt.ylim([self._TO_Y_LIMIT, self._FROM_Y_LIMIT])
+        plt.ylim([self.__TO_Y_LIMIT, self.__FROM_Y_LIMIT])
         plt.xlim([static_collector.beginNoise, static_collector.endNoise])
         plt.semilogy(True)
 
-        plt.ylabel("Chance of last information, P*10^-1")
-        plt.xlabel("Power of signal, Db")
+        plt.ylabel(self.__Y_LABEL)
+        plt.xlabel(self.__X_LABEL)
 
         noise_step_different: float = SimpleCalculationForTransferProcess.calc_noise_of_steps_different(
             start=static_collector.beginNoise,
@@ -53,7 +55,7 @@ class GraphicController(metaclass=Singleton):
             # Axis Y - result of test (Package)
             [test_result.error_packages
              / (test_result.error_packages + test_result.repair_packages + test_result.successful_packages)
-             + self._FROM_Y_LIMIT for test_result in static_collector.testResult],
+             + self.__FROM_Y_LIMIT for test_result in static_collector.testResult],
             label="Кодер типа {0}\n"
                   "Скорость кодера {1}".format("Test", "Test")
         )
@@ -62,7 +64,7 @@ class GraphicController(metaclass=Singleton):
         plt.plot(
             test_noise_sequence,
             # Axis Y - result of test (Bits)
-            [x.quantity_error_bits / x.quantity_correct_bits + self._FROM_Y_LIMIT for x in
+            [x.quantity_error_bits / x.quantity_correct_bits + self.__FROM_Y_LIMIT for x in
              static_collector.testResult]
         )
 
@@ -70,7 +72,7 @@ class GraphicController(metaclass=Singleton):
         plt.plot(
             test_noise_sequence,
             # Axis Y - result of test (Bits)
-            [x.based_error_bits / x.based_correct_bits + self._FROM_Y_LIMIT for x in
+            [x.based_error_bits / x.based_correct_bits + self.__FROM_Y_LIMIT for x in
              static_collector.testResult]
         )
         plt.show()

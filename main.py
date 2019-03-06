@@ -8,7 +8,7 @@ from src.logger import log
 
 if __name__ == '__main__':
     ConfigProcessor().parse_config()
-    if AppParser().get_app_mode == EnumAppMode.GUI:
+    if AppParser().app_mode == EnumAppMode.GUI:
         try:
             log.info("Start program")
             controller = MainController()

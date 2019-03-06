@@ -3,33 +3,24 @@ import argparse
 from typing import Optional
 
 from src.channel.enum_codec_type import EnumCodecType
+from src.endpoint.console.abstract_subparser import AbstractSubParser
 from src.helper.error.exception.parameters_parse_exception import ParametersParseException
 from src.helper.pattern.singleton import Singleton
 
 
-class CodecParser(metaclass=Singleton):
+class CodecParser(AbstractSubParser, metaclass=Singleton):
     """
-    TODO add documentation
+    Parser class for Codec Configure Attributes
     """
-    _argument_parser = argparse.ArgumentParser()
-    _arguments: None
-    _subparsers: None
-
     def __init__(
             self,
             argument_parser: Optional[argparse.ArgumentParser] = None,
-            subparsers: Optional[argparse.ArgumentParser] = None
+            argument_group=None
     ):
-        if argument_parser:
-            self._argument_parser = argument_parser
-        else:
-            self._argument_parser = argparse.ArgumentParser().add_subparsers()
-
-        if subparsers is not None:
-            self._subparsers = subparsers
-            self._argument_parser = self._subparsers.add_parser("cm", aliases=["coder_mode"], help="-cm help")
-        else:
-            self._subparsers = self._argument_parser
+        super().__init__(
+            argument_parser=argument_parser,
+            argument_group=argument_group
+        )
 
         self._argument_parser.add_argument(
             "-cm", "--codec",
@@ -56,14 +47,13 @@ class CodecParser(metaclass=Singleton):
         )
 
         # We should parse arguments only for unique coder
-        if self._subparsers is None:
+        if self._argument_group is None:
             self._arguments = vars(self._argument_parser.parse_args())
 
     @property
-    def get_codec_type(self) -> EnumCodecType:
+    def codec_type(self) -> EnumCodecType:
         """
-        TODO add documentation
-        :return:
+        :return: Type of Codec like EnumCodecType
         """
         codec_type: Optional[str] = self._arguments["codec"]
 
@@ -73,10 +63,3 @@ class CodecParser(metaclass=Singleton):
             return EnumCodecType.CASCADE
         else:
             raise ParametersParseException(long_message="""Unknown codec type""")
-
-    def get_argument_parser(self) -> argparse.ArgumentParser:
-        """
-        TODO
-        :return:
-        """
-        return self._argument_parser

@@ -2,33 +2,25 @@
 import argparse
 from typing import Optional
 
+from src.endpoint.console.abstract_subparser import AbstractSubParser
 from src.helper.pattern.singleton import Singleton
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
-class CoderParser(metaclass=Singleton):
+class CoderParser(AbstractSubParser, metaclass=Singleton):
     """
-    TODO add documentation
+    Parser class for Coder Type Attributes
     """
-    _argument_parser = argparse.ArgumentParser()
-    _arguments: None
-    _subparsers: None
 
     def __init__(
             self,
             argument_parser: Optional[argparse.ArgumentParser] = None,
-            subparsers: Optional[argparse.ArgumentParser] = None
+            argument_group=None
     ):
-        if argument_parser:
-            self._argument_parser = argument_parser
-        else:
-            self._argument_parser = argparse.ArgumentParser()
-
-        if subparsers is not None:
-            self._subparsers = subparsers
-            self._argument_parser = self._subparsers.add_parser("ct", aliases=["coder_type"], help="help")
-        else:
-            self._subparsers = self._argument_parser
+        super().__init__(
+            argument_parser=argument_parser,
+            argument_group=argument_group
+        )
 
         self._argument_parser.add_argument(
             "-ct",
@@ -41,13 +33,5 @@ class CoderParser(metaclass=Singleton):
         )
 
         # We should parse arguments only for unique coder
-        if self._subparsers is None:
-            self._arguments = vars(self._argument_parser.parse_args())
-
-    @property
-    def get_argument_parser(self) -> argparse.ArgumentParser:
-        """
-        TODO
-        :return:
-        """
-        return self._argument_parser
+        if self._argument_group is None:
+            self.arguments = vars(self._argument_parser.parse_args())
