@@ -5,6 +5,7 @@ from typing import Optional
 from src.endpoint.console.codec_parser import CodecParser
 from src.endpoint.console.coder_parser import CoderParser
 from src.endpoint.console.enum_app_mode import EnumAppMode
+from src.endpoint.console.transfer_info_parser import TransferInfoParser
 from src.helper.error.exception.parameters_parse_exception import ParametersParseException
 from src.helper.pattern.singleton import Singleton
 
@@ -15,6 +16,7 @@ class AppParser(metaclass=Singleton):
     _argument_parser = argparse.ArgumentParser()
     _codec_parser: CodecParser
     _coder_parser: CoderParser
+    _transfer_info_parser: TransferInfoParser
 
     def __init__(
             self,
@@ -37,10 +39,14 @@ class AppParser(metaclass=Singleton):
         # Add subparsers hire
         self._codec_parser = CodecParser(argument_group=self._argument_parser.add_argument_group("cm", "Codec mode"))
         self._coder_parser = CoderParser(argument_group=self._argument_parser.add_argument_group("ct", "Coder type"))
+        self._transfer_info_parser = TransferInfoParser(
+            argument_group=self._argument_parser.add_argument_group("ti", "Transfer information")
+        )
 
         self._arguments = vars(self._argument_parser.parse_args())
         self._coder_parser.arguments = self._arguments
         self._codec_parser.arguments = self._arguments
+        self._transfer_info_parser.arguments = self._arguments
 
     @property
     def app_mode(self) -> EnumAppMode:
