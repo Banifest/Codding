@@ -3,15 +3,16 @@ import argparse
 from typing import Optional
 
 from src.channel.enum_codec_type import EnumCodecType
-from src.endpoint.console.abstract_subparser import AbstractSubParser
+from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.helper.error.exception.parameters_parse_exception import ParametersParseException
-from src.helper.pattern.singleton import Singleton
 
 
-class CodecParser(AbstractSubParser, metaclass=Singleton):
+class CodecParser(AbstractGroupParser):
     """
     Parser class for Codec Configure Attributes
     """
+    __CODEC_OPTION: str = "codec"
+
     def __init__(
             self,
             argument_parser: Optional[argparse.ArgumentParser] = None,
@@ -55,7 +56,7 @@ class CodecParser(AbstractSubParser, metaclass=Singleton):
         """
         :return: Type of Codec like EnumCodecType
         """
-        codec_type: Optional[str] = self._arguments["codec"]
+        codec_type: Optional[str] = self._arguments[self.__CODEC_OPTION]
 
         if codec_type is None or codec_type == EnumCodecType.SINGLE.value:
             return EnumCodecType.SINGLE

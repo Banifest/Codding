@@ -26,7 +26,7 @@ class AppParser(metaclass=Singleton):
             self._argument_parser = argparse.ArgumentParser(prog="Diploma")
 
         self._argument_parser.add_argument(
-            "-m", "--mode",
+            "-m", "--{0}".format(self.__MODE_PARAMETERS),
             required=False,
             help="""Type of running mode (GUI - {0}, console - {1})""".format(
                 EnumAppMode.GUI.value,

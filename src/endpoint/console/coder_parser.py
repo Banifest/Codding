@@ -2,12 +2,11 @@
 import argparse
 from typing import Optional
 
-from src.endpoint.console.abstract_subparser import AbstractSubParser
-from src.helper.pattern.singleton import Singleton
+from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
-class CoderParser(AbstractSubParser, metaclass=Singleton):
+class CoderParser(AbstractGroupParser):
     """
     Parser class for Coder Type Attributes
     """

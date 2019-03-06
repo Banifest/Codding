@@ -4,7 +4,7 @@ from abc import ABCMeta
 from typing import Optional
 
 
-class AbstractSubParser(metaclass=ABCMeta):
+class AbstractGroupParser(metaclass=ABCMeta):
     _argument_parser = argparse.ArgumentParser()
     _arguments: None
     _argument_group: None
