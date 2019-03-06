@@ -13,4 +13,9 @@ class Config:
         address: str = ""
         port: str = ""
 
+    @dataclass
+    class GraphicSetting:
+        flg_enabled: bool = False
+
     db_setting: DBSetting = DBSetting()
+    graphic_setting: GraphicSetting = GraphicSetting()
