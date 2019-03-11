@@ -91,7 +91,7 @@ class TestController:
     def set_count_test(self, value: int) -> None:
         self._countTest = value
 
-    def set_test_info(self, value: int) -> None:
+    def set_test_info(self, value: str) -> None:
         try:
             self._testInfo = int(value)
         except ValueError as rcx_value_error:
