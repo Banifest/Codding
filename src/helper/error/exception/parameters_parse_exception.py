@@ -10,6 +10,11 @@ class ParametersParseException(ApplicationException):
         long_message='Noise mode undefined'
     )
 
+    INFORMATION_NOT_SERIALIZABLE: TemplateException = TemplateException(
+        message='Information cannot be serialize',
+        long_message='Specify integer in test information field'
+    )
+
     APPLICATION_MODE_UNDEFINED: TemplateException = TemplateException(
         message="Unknown application running mode",
         long_message="Application cannot start with provided application running mode equals {0}"

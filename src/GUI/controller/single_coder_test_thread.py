@@ -191,7 +191,8 @@ class SingleCoderTestThread(QThread):
                     quantity_of_steps_in_cycle=self._quantity_steps
                 )
                 # Graphic should showing only for Cycle of the test
-                GraphicController().draw_graphic(statistic)
+                if ConfigProcessor().config.graphic_setting.flg_enabled:
+                    GraphicController().draw_graphic(statistic)
             else:
                 statistic = StatisticCollector(
                     flg_cascade=False,
@@ -209,8 +210,9 @@ class SingleCoderTestThread(QThread):
             globalSignals.ended.emit()
 
             # DB Action
-            if ConfigProcessor().get_config().db_setting.flg_used:
+            if ConfigProcessor().config.db_setting.flg_used:
                 TestResultSerializer().serialize_to_db(statistic)
+
             TestResultSerializer().serialize_to_json(statistic)
             log.debug("End of test cycle")
 

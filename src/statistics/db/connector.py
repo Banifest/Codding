@@ -16,8 +16,8 @@ class Connector(metaclass=Singleton):
 
     def get_connection(
             self,
-            login: Optional[str] = ConfigProcessor().get_config().db_setting.login,
-            password: Optional[str] = ConfigProcessor().get_config().db_setting.password,
+            login: Optional[str] = ConfigProcessor().config.db_setting.login,
+            password: Optional[str] = ConfigProcessor().config.db_setting.password,
     ):
         """
         Method for getting connection to native(remote) database
@@ -26,9 +26,9 @@ class Connector(metaclass=Singleton):
         :return: Connection object
         """
         if login is None:
-            login = ConfigProcessor().get_config().db_setting.login
+            login = ConfigProcessor().config.db_setting.login
         if password is None:
-            password = ConfigProcessor().get_config().db_setting.password
+            password = ConfigProcessor().config.db_setting.password
 
         if self._connection is None:
             self._connection = self.get_engine(login, password).connect()
@@ -47,18 +47,18 @@ class Connector(metaclass=Singleton):
         :return: Engine object
         """
         if login is None:
-            login = ConfigProcessor().get_config().db_setting.login
+            login = ConfigProcessor().config.db_setting.login
         if password is None:
-            password = ConfigProcessor().get_config().db_setting.password
+            password = ConfigProcessor().config.db_setting.password
 
         if self._engine is None:
             self._engine = create_engine(
                 "postgresql+psycopg2://{0}:{1}@{2}:{3}/{4}".format(
                     login,
                     password,
-                    ConfigProcessor().get_config().db_setting.address,
-                    ConfigProcessor().get_config().db_setting.port,
-                    ConfigProcessor().get_config().db_setting.database_name,
+                    ConfigProcessor().config.db_setting.address,
+                    ConfigProcessor().config.db_setting.port,
+                    ConfigProcessor().config.db_setting.database_name,
                 ), echo=True
             )
         return self._engine

@@ -89,6 +89,9 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     end_noise=self._finish_t,
                     quantity_of_steps_in_cycle=self._quantity_steps
                 )
+
+                if ConfigProcessor().config.graphic_setting.flg_enabled:
+                    GraphicController().draw_graphic(statistic)
             else:
                 statistic = StatisticCollector(
                     flg_cascade=True,
@@ -106,10 +109,10 @@ class CascadeCoderTestThread(SingleCoderTestThread):
             globalSignals.ended.emit()
 
             # DB Action
-            if ConfigProcessor().get_config().db_setting.flg_used:
+            if ConfigProcessor().config.db_setting.flg_used:
                 TestResultSerializer().serialize_to_db(statistic)
             TestResultSerializer().serialize_to_json(statistic)
-            GraphicController().draw_graphic(statistic)
+
             log.debug("End of the test cycle")
 
         except CodingException as coddingException:

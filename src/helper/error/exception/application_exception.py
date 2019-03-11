@@ -9,6 +9,7 @@ class ApplicationException(Exception):
     _message: str = EnumExceptionStandardMessage.APPLICATION_EXCEPTION.value
     _long_message: str = EnumExceptionStandardMessage.APPLICATION_EXCEPTION.value
     _message_type: EnumMessageType = EnumMessageType.ERROR
+    _previous: Exception
 
     def __init__(
             self,
@@ -16,6 +17,7 @@ class ApplicationException(Exception):
             long_message: Optional[str] = None,
             message_type: EnumMessageType = EnumMessageType.ERROR,
             additional_information: List[Any] = None,
+            previous: Optional[Exception] = None
     ):
 
         if message is not None:
@@ -31,9 +33,14 @@ class ApplicationException(Exception):
                 *additional_information)
 
         self._message_type = message_type
+        self._previous = previous
+
+    @property
+    def previous(self):
+        return self._previous
 
     def __str__(self) -> str:
-        return """Exception was occur with type {0}. {1}. {2}""".format(
+        return """Exception was occurs with type {0}. {1}. {2}""".format(
             self._message_type,
             self._message,
             self._long_message

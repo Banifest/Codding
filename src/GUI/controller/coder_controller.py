@@ -78,18 +78,5 @@ class CoderController:
                     int(self._fouCountBlock),
                     int(self._fouSizePack)
                 )
-            # elif self._coder_type == 'Рида-Маллера':
-            #     self.currentCoder = ReedMullerCoder(
-            #             int(self._addCoderWindow.sizePackageTextBox.text()),
-            #             int(self._addCoderWindow.powerReedMullerTextBox.text())
-            #     )
-            # elif self._coder_type == 'Сверточный для пакетов':
-            #     self.currentCoder = ConvolutionalCoderForPacket(
-            #             str_list_to_list(self._addCoderWindow.listPolynomialTextBox.text()),
-            #             1,
-            #             int(len(str_list_to_list(self._addCoderWindow.listPolynomialTextBox.text()))),
-            #             int(self._addCoderWindow.countMemoryRegistersTextBox.text()),
-            #             int(self._addCoderWindow.sizePackageTextBox.text())
-            #     )
         except SettingException as rcx_setting:
             ErrorHandler.gui_message_box(rcx_exception=rcx_setting)
