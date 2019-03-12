@@ -1,10 +1,10 @@
 # coding=utf-8
+from typing import Optional
+
 from src.GUI.controller.cascade_coder_test_thread import CascadeCoderTestThread
 from src.GUI.controller.coder_controller import CoderController
 from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
 from src.channel.enum_noise_mode import EnumNoiseMode
-from src.helper.error.error_handler import ErrorHandler
-from src.helper.error.exception.application_exception import ApplicationException
 
 
 class GeneralChanelSimulate:
@@ -36,10 +36,44 @@ class GeneralChanelSimulate:
 
     def __init__(
             self,
-            first_coder_params: CoderController,
-            second_coder_params: CoderController,
+            first_coder_params: Optional[CoderController] = None,
+            second_coder_params: Optional[CoderController] = None,
+            first_thread_class: Optional[SingleCoderTestThread] = None,
+            cascade_thread_class: Optional[CascadeCoderTestThread] = None,
+            noise_start: Optional[float] = None,
+            noise_end: Optional[float] = None,
+            count_test: Optional[int] = None,
+            test_info: Optional[int] = None,
+            mode: Optional[int] = None,
+            noise_mode: Optional[EnumNoiseMode] = None,
+            noise_package_length: Optional[int] = None,
+            flg_split_package: Optional[bool] = None,
+            quantity_steps_in_test_cycle: Optional[int] = None,
+            package_period: Optional[int] = None,
+            flg_first_interleaver: Optional[bool] = None,
+            flg_second_interleaver: Optional[bool] = None,
+            length_first_interleaver: Optional[int] = None,
+            length_second_interleaver: Optional[int] = None,
     ) -> None:
-        super().__init__()
+        self._firstCoderParams = first_coder_params
+        self._secondCoderParams = second_coder_params
+
+        _firstThreadClass = first_thread_class
+        _cascadeThreadClass = cascade_thread_class
+        _noiseStart = noise_start
+        _noiseEnd = noise_end
+        _countTest = count_test
+        _testInfo = test_info
+        _mode = mode
+        _noiseMode = noise_mode
+        _noisePackageLength = noise_package_length
+        _flgSplitPackage = flg_split_package
+        _quantityStepsInTestCycle = quantity_steps_in_test_cycle
+        _packagePeriod = package_period
+        _flgFirstInterleaver = flg_first_interleaver
+        _flgSecondInterleaver = flg_second_interleaver
+        _lengthFirstInterleaver = length_first_interleaver
+        _lengthSecondInterleaver = length_second_interleaver
 
     def set_first_coder_thread_class(self):
         self._firstThreadClass = SingleCoderTestThread(
@@ -76,36 +110,24 @@ class GeneralChanelSimulate:
 
     def start_first_single_test(self):
         self._firstCoderParams.create_coder()
-        try:
-            self.set_first_coder_thread_class()
-            self._firstThreadClass.start()
-        except ApplicationException as rcx_app_exception:
-            ErrorHandler().gui_message_box(rcx_exception=rcx_app_exception)
+        self.set_first_coder_thread_class()
+        self._firstThreadClass.start()
 
     def start_first_test_cycle(self):
         self._firstCoderParams.create_coder()
-        try:
-            self.set_first_coder_thread_class()
-            self._firstThreadClass.set_auto(True)
-            self._firstThreadClass.start()
-        except ApplicationException as rcx_app_exception:
-            ErrorHandler().gui_message_box(rcx_exception=rcx_app_exception)
+        self.set_first_coder_thread_class()
+        self._firstThreadClass.set_auto(True)
+        self._firstThreadClass.start()
 
     def start_cascade_single_test(self):
         self._firstCoderParams.create_coder()
         self._secondCoderParams.create_coder()
-        try:
-            self.set_cascade_coder_thread_class()
-            self._cascadeThreadClass.start()
-        except ApplicationException as rcx_app_exception:
-            ErrorHandler().gui_message_box(rcx_exception=rcx_app_exception)
+        self.set_cascade_coder_thread_class()
+        self._cascadeThreadClass.start()
 
     def start_cascade_test_cycle(self):
         self._firstCoderParams.create_coder()
         self._secondCoderParams.create_coder()
-        try:
-            self.set_cascade_coder_thread_class()
-            self._cascadeThreadClass.set_auto(True)
-            self._cascadeThreadClass.start()
-        except ApplicationException as rcx_app_exception:
-            ErrorHandler().gui_message_box(rcx_exception=rcx_app_exception)
+        self.set_cascade_coder_thread_class()
+        self._cascadeThreadClass.set_auto(True)
+        self._cascadeThreadClass.start()
