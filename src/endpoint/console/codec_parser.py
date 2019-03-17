@@ -3,6 +3,7 @@ import argparse
 from typing import Optional
 
 from src.channel.enum_codec_type import EnumCodecType
+from src.channel.enum_noise_mode import EnumNoiseMode
 from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.helper.error.exception.parameters_parse_exception import ParametersParseException
 
@@ -12,6 +13,13 @@ class CodecParser(AbstractGroupParser):
     Parser class for Codec Configure Attributes
     """
     __CODEC_OPTION: str = "codec"
+    __NOISE_TYPE_OPTION: str = "noises_type"
+    __NOISE_START_OPTION: str = "noise_start"
+    __NOISE_END_OPTION: str = "noise_end"
+    __INFORMATION_FOR_TEST: str = "information_for_test"
+    __NOISE_PACKAGE_LENGTH: str = "noise_package_length"
+    __NOISE_PACKAGE_PERIOD: str = "noise_package_period"
+    __TEST_QUANTITY_CYCLES: str = "test_quantity_cycles"
 
     def __init__(
             self,
@@ -32,19 +40,54 @@ class CodecParser(AbstractGroupParser):
         self._argument_parser.add_argument(
             "-nt", "--noises_type",
             required=False,
-            help="""Type of noises(s - for single noise type(Gauss noise) or p - for packages error)"""
+            help="""Type of noises({0} - for single noise type(Gauss noise) or {1} - for packages error, 
+            {2} - for mix error)""".format(
+                EnumNoiseMode.SINGLE.value,
+                EnumNoiseMode.PACKAGE.value,
+                EnumNoiseMode.MIX.value,
+            )
         )
 
         self._argument_parser.add_argument(
             "-ns", "--noise_start",
             required=False,
+            type=float,
             help="""Start of noise(from 1.0 to 50.0)"""
         )
 
         self._argument_parser.add_argument(
             "-ne", "--noise_end",
             required=False,
+            type=float,
             help="""End of noise(from 1.0 to 50.0), but lt Start of noise"""
+        )
+
+        self._argument_parser.add_argument(
+            "-ift", "--{0}".format(self.__INFORMATION_FOR_TEST),
+            required=False,
+            type=int,
+            help="""Information for testing process"""
+        )
+
+        self._argument_parser.add_argument(
+            "-npl", "--{0}".format(self.__NOISE_PACKAGE_LENGTH),
+            required=False,
+            type=int,
+            help="""Length of package"""
+        )
+
+        self._argument_parser.add_argument(
+            "-npp", "--{0}".format(self.__NOISE_PACKAGE_PERIOD),
+            required=False,
+            type=int,
+            help="""Period of package"""
+        )
+
+        self._argument_parser.add_argument(
+            "-tqc", "--{0}".format(self.__TEST_QUANTITY_CYCLES),
+            type=int,
+            required=False,
+            help="""How much test will be do"""
         )
 
         # We should parse arguments only for unique coder
@@ -64,3 +107,46 @@ class CodecParser(AbstractGroupParser):
             return EnumCodecType.CASCADE
         else:
             raise ParametersParseException(long_message="""Unknown codec type""")
+
+    @property
+    def noise_type(self) -> EnumNoiseMode:
+        """
+        :return: Type of Codec like EnumCodecType
+        """
+        if self._arguments[self.__NOISE_TYPE_OPTION] is not None:
+            noise_type: Optional[int] = int(self._arguments[self.__NOISE_TYPE_OPTION])
+        else:
+            noise_type = None
+
+        if noise_type is None or noise_type == EnumNoiseMode.SINGLE.value:
+            return EnumNoiseMode.SINGLE
+        elif noise_type == EnumNoiseMode.PACKAGE.value:
+            return EnumNoiseMode.CASCADE
+        elif noise_type == EnumNoiseMode.MIX.value:
+            return EnumNoiseMode.MIX
+        else:
+            raise ParametersParseException(long_message="""Unknown codec type""")
+
+    @property
+    def noise_start(self) -> float:
+        return self._arguments[self.__NOISE_START_OPTION]
+
+    @property
+    def noise_end(self) -> float:
+        return self._arguments[self.__NOISE_END_OPTION]
+
+    @property
+    def info_for_test(self) -> int:
+        return self._arguments[self.__INFORMATION_FOR_TEST]
+
+    @property
+    def noise_package_length(self) -> int:
+        return self._arguments[self.__NOISE_PACKAGE_LENGTH]
+
+    @property
+    def noise_package_period(self) -> int:
+        return self._arguments[self.__NOISE_PACKAGE_PERIOD]
+
+    @property
+    def test_quantity_cycles(self) -> int:
+        return self._arguments[self.__TEST_QUANTITY_CYCLES]

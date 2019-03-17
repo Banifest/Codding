@@ -2,6 +2,7 @@
 import argparse
 from typing import Optional
 
+from src.coders.linear.hamming import Coder as Hamming, Coder
 from src.endpoint.console.codec_parser import CodecParser
 from src.endpoint.console.coder_parser import CoderParser
 from src.endpoint.console.enum_app_mode import EnumAppMode
@@ -39,14 +40,21 @@ class AppParser(metaclass=Singleton):
         # Add subparsers hire
         self._codec_parser = CodecParser(argument_group=self._argument_parser.add_argument_group("cm", "Codec mode"))
         self._coder_parser = CoderParser(argument_group=self._argument_parser.add_argument_group("ct", "Coder type"))
-        self._transfer_info_parser = TransferInfoParser(
-            argument_group=self._argument_parser.add_argument_group("ti", "Transfer information")
+        # TODO temp solution for demo
+        self._firstCoder = Hamming.get_coder_parameters(
+            argument_group=self._argument_parser.add_argument_group("frtcdr", "First Coder"),
+            prefix="f"
+        )
+        self._secondCoder = Hamming.get_coder_parameters(
+            argument_group=self._argument_parser.add_argument_group("sndcdr", "Second Coder"),
+            prefix="s"
         )
 
         self._arguments = vars(self._argument_parser.parse_args())
         self._coder_parser.arguments = self._arguments
         self._codec_parser.arguments = self._arguments
-        self._transfer_info_parser.arguments = self._arguments
+        self._firstCoder.arguments = self._arguments
+        self._secondCoder.arguments = self._arguments
 
     @property
     def app_mode(self) -> EnumAppMode:
@@ -62,3 +70,19 @@ class AppParser(metaclass=Singleton):
                 long_message=ParametersParseException.APPLICATION_MODE_UNDEFINED.long_message,
                 additional_information=[app_mode]
             )
+
+    @property
+    def coder_parser(self) -> CoderParser:
+        return self._coder_parser
+
+    @property
+    def codec_parser(self) -> CodecParser:
+        return self._codec_parser
+
+    @property
+    def first_coder(self) -> Coder.HammingCoderParser:
+        return self._firstCoder
+
+    @property
+    def second_coder(self) -> Coder.HammingCoderParser:
+        return self._firstCoder

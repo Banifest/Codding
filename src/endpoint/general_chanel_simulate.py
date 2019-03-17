@@ -5,6 +5,7 @@ from src.GUI.controller.cascade_coder_test_thread import CascadeCoderTestThread
 from src.GUI.controller.coder_controller import CoderController
 from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
 from src.channel.enum_noise_mode import EnumNoiseMode
+from src.endpoint.general_coder_simulate import GeneralCoderSimulate
 
 
 class GeneralChanelSimulate:
@@ -36,8 +37,8 @@ class GeneralChanelSimulate:
 
     def __init__(
             self,
-            first_coder_params: Optional[CoderController] = None,
-            second_coder_params: Optional[CoderController] = None,
+            first_coder_params: Optional[GeneralCoderSimulate] = None,
+            second_coder_params: Optional[GeneralCoderSimulate] = None,
             first_thread_class: Optional[SingleCoderTestThread] = None,
             cascade_thread_class: Optional[CascadeCoderTestThread] = None,
             noise_start: Optional[float] = None,
@@ -58,22 +59,22 @@ class GeneralChanelSimulate:
         self._firstCoderParams = first_coder_params
         self._secondCoderParams = second_coder_params
 
-        _firstThreadClass = first_thread_class
-        _cascadeThreadClass = cascade_thread_class
-        _noiseStart = noise_start
-        _noiseEnd = noise_end
-        _countTest = count_test
-        _testInfo = test_info
-        _mode = mode
-        _noiseMode = noise_mode
-        _noisePackageLength = noise_package_length
-        _flgSplitPackage = flg_split_package
-        _quantityStepsInTestCycle = quantity_steps_in_test_cycle
-        _packagePeriod = package_period
-        _flgFirstInterleaver = flg_first_interleaver
-        _flgSecondInterleaver = flg_second_interleaver
-        _lengthFirstInterleaver = length_first_interleaver
-        _lengthSecondInterleaver = length_second_interleaver
+        self._firstThreadClass = first_thread_class
+        self._cascadeThreadClass = cascade_thread_class
+        self._noiseStart = noise_start
+        self._noiseEnd = noise_end
+        self._countTest = count_test
+        self._testInfo = test_info
+        self._mode = mode
+        self._noiseMode = noise_mode
+        self._noisePackageLength = noise_package_length
+        self._flgSplitPackage = flg_split_package
+        self._quantityStepsInTestCycle = quantity_steps_in_test_cycle
+        self._packagePeriod = package_period
+        self._flgFirstInterleaver = flg_first_interleaver
+        self._flgSecondInterleaver = flg_second_interleaver
+        self._lengthFirstInterleaver = length_first_interleaver
+        self._lengthSecondInterleaver = length_second_interleaver
 
     def set_first_coder_thread_class(self):
         self._firstThreadClass = SingleCoderTestThread(

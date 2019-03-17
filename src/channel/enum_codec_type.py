@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from enum import Enum, auto
+from enum import Enum
 
 
 class EnumCodecType(Enum):
-    SINGLE = auto()
-    CASCADE = auto()
+    SINGLE = "s"
+    CASCADE = "c"

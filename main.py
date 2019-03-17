@@ -2,6 +2,7 @@
 from src.GUI.controller.main_controller import MainController
 from src.config.config_processor import ConfigProcessor
 from src.endpoint.console.app_parser import AppParser
+from src.endpoint.console.console_processor import ConsoleProcessor
 from src.endpoint.console.enum_app_mode import EnumAppMode
 from src.helper.error.exception.application_exception import ApplicationException
 from src.logger import log
@@ -16,5 +17,7 @@ if __name__ == '__main__':
         except Exception as e:
             print(e)
             log.critical("Unhandled exception")
+    elif AppParser().app_mode == EnumAppMode.CONSOLE:
+        ConsoleProcessor().transfer()
 else:
     raise ApplicationException("It isn't module")

@@ -1,0 +1,1 @@
+python main.py -m c -cm s -nt 1 -ns 2.0 -ne 10.0 -ift 725 -tqc 100 -ct 0 -fhmgpl 2

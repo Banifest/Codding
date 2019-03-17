@@ -16,8 +16,8 @@ class Connector(metaclass=Singleton):
 
     def get_connection(
             self,
-            login: Optional[str] = ConfigProcessor().config.db_setting.login,
-            password: Optional[str] = ConfigProcessor().config.db_setting.password,
+            login: Optional[str] = None,
+            password: Optional[str] = None,
     ):
         """
         Method for getting connection to native(remote) database
@@ -46,9 +46,9 @@ class Connector(metaclass=Singleton):
         :param password: password for user of database
         :return: Engine object
         """
-        if login is None:
+        if login is None or login == '':
             login = ConfigProcessor().config.db_setting.login
-        if password is None:
+        if password is None or password == '':
             password = ConfigProcessor().config.db_setting.password
 
         if self._engine is None:

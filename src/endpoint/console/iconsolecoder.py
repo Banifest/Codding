@@ -4,7 +4,7 @@ from abc import ABCMeta, abstractmethod
 
 class IConsoleCoder(metaclass=ABCMeta):
 
+    @staticmethod
     @abstractmethod
-    def get_coder_parameters(self):
-        # TODO change pass -> raise NotImplemented
-        pass
+    def get_coder_parameters():
+        raise NotImplemented

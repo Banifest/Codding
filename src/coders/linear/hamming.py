@@ -1,29 +1,22 @@
 # coding=utf-8
 # coding=utf-8
-
+import argparse
 import math
+from typing import Optional
 
 import numpy as np
 
 from src.coders import abstract_coder
 from src.coders.casts import *
+from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
-    def get_coder_parameters(self):
-        pass
-
     type_of_coder = EnumCodersType.HAMMING
     _name = "Hamming"
     _matrixTransformation: list = []
-
-    def try_normalization(self, bit_list: list) -> list:
-        return super().try_normalization(bit_list)
-
-    def get_redundancy(self) -> float:
-        return super().get_redundancy()
 
     def __init__(self, length_information: int):
         log.debug("Create of Hamming coder")
@@ -41,7 +34,8 @@ class Coder(abstract_coder.AbstractCoder):
         for x in range(self.lengthAdditional):
             temp: list = []
             flag = True
-            count = (1 << x) - 1  # Количество символов требуемых для зануления вначале
+            # Количество символов требуемых для зануления вначале
+            count = (1 << x) - 1
             for y in range((1 << x) - 1):
                 temp.append(0)
 
@@ -119,6 +113,12 @@ class Coder(abstract_coder.AbstractCoder):
             count += 1
         return answer
 
+    def try_normalization(self, bit_list: list) -> list:
+        return super().try_normalization(bit_list)
+
+    def get_redundancy(self) -> float:
+        return super().get_redundancy()
+
     def to_json(self) -> dict:
         # noinspection PyUnresolvedReferences
         return {
@@ -129,3 +129,45 @@ class Coder(abstract_coder.AbstractCoder):
             'matrix of generating': self._matrixTransformation.tolist(),
             'speed': self.get_speed()
         }
+
+    class HammingCoderParser(AbstractGroupParser):
+        _prefix: str = ""
+        __PACKAGE_LENGTH: str = "hamming_package_length"
+
+        @property
+        def hamming_package_length(self) -> int:
+            return self.arguments["{0}{1}".format(self._prefix, self.__PACKAGE_LENGTH)]
+
+        def __init__(
+                self,
+                argument_parser: Optional[argparse.ArgumentParser] = None,
+                argument_group=None,
+                prefix: str = ""
+        ):
+            super().__init__(
+                argument_parser=argument_parser,
+                argument_group=argument_group
+            )
+            self._prefix = prefix
+
+            self._argument_parser.add_argument(
+                "-{0}hmgpl".format(prefix), "--{0}{1}".format(prefix, self.__PACKAGE_LENGTH),
+                type=int,
+                help="""Length of package for Hamming coder"""
+            )
+
+            # We should parse arguments only for unique coder
+            if self._argument_group is None:
+                self.arguments = vars(self._argument_parser.parse_args())
+
+    @staticmethod
+    def get_coder_parameters(
+            argument_parser: Optional[argparse.ArgumentParser] = None,
+            argument_group=None,
+            prefix: str = ""
+    ) -> HammingCoderParser:
+        return Coder.HammingCoderParser(
+            argument_parser=argument_parser,
+            argument_group=argument_group,
+            prefix=prefix
+        )

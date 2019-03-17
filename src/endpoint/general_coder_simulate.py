@@ -29,31 +29,31 @@ class GeneralCoderSimulate:
 
     def __init__(
             self,
-            _coder_type_int: Optional[int] = None,
-            _coder_type: Optional[EnumCodersType] = None,
-            _hem_size_pack: Optional[int] = None,
-            _cyc_size_pack: Optional[int] = None,
-            _cyc_poly: Optional[int] = None,
-            _con_list_poly: Optional[str] = None,
-            _con_count_reg: Optional[int] = None,
-            _fou_size_pack: Optional[int] = None,
-            _fou_size_block: Optional[int] = None,
-            _fou_count_block: Optional[int] = None
+            coder_type_int: Optional[int] = None,
+            coder_type: Optional[EnumCodersType] = None,
+            hem_size_pack: Optional[int] = None,
+            cyc_size_pack: Optional[int] = None,
+            cyc_poly: Optional[int] = None,
+            con_list_poly: Optional[str] = None,
+            con_count_reg: Optional[int] = None,
+            fou_size_pack: Optional[int] = None,
+            fou_size_block: Optional[int] = None,
+            fou_count_block: Optional[int] = None
     ):
-        self._coderTypeInt = _coder_type_int
-        self._coderType = _coder_type
+        self._coderTypeInt = coder_type_int
+        self._coderType = coder_type
 
-        if _coder_type is not None:
-            self._coderTypeInt = _coder_type.value
+        if coder_type is not None:
+            self._coderTypeInt = coder_type.value
 
-        self._hemSizePack = _hem_size_pack
-        self._cycSizePack = _cyc_size_pack
-        self._cycPoly = _cyc_poly
-        self._conListPoly = _con_list_poly
-        self._conCountReg = _con_count_reg
-        self._fouSizePack = _fou_size_pack
-        self._fouSizeBlock = _fou_size_block
-        self._fouCountBlock = _fou_count_block
+        self._hemSizePack = hem_size_pack
+        self._cycSizePack = cyc_size_pack
+        self._cycPoly = cyc_poly
+        self._conListPoly = con_list_poly
+        self._conCountReg = con_count_reg
+        self._fouSizePack = fou_size_pack
+        self._fouSizeBlock = fou_size_block
+        self._fouCountBlock = fou_count_block
 
     def create_coder(self):
         if self._coderTypeInt == EnumCodersType.HAMMING.value:

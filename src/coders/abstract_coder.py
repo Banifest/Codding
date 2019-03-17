@@ -2,6 +2,7 @@
 # coding=utf-8
 from abc import ABCMeta, abstractmethod
 
+from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.endpoint.console.iconsolecoder import IConsoleCoder
 from src.helper.error.exception.codding_exception import CodingException
 from src.statistics.db.enum_coders_type import EnumCodersType
@@ -82,9 +83,11 @@ class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
     def to_json(self) -> dict:
         return {}
 
+    @staticmethod
     @abstractmethod
-    def get_coder_parameters(self):
+    def get_coder_parameters() -> AbstractGroupParser:
         """
         Get Abstract interfaces for getting parameter coder
         """
+        # TODO change pass -> raise NotImplementedError
         raise NotImplementedError
