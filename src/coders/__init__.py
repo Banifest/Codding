@@ -1,5 +1,7 @@
 # coding=utf-8
-# coding=utf-8
-from src.coders import casts
-from .convolutional import *
-from .cyclical import *
+"""
+Очень хитрый и страшный костыль.
+Будет хранить весь пул классов отнаследованных от AbstractCoder
+Будет время переведу на английский зачем это нужно.
+"""
+from . import *

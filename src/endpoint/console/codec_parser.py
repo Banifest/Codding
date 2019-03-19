@@ -32,14 +32,22 @@ class CodecParser(AbstractGroupParser):
         )
 
         self._argument_parser.add_argument(
-            "-cm", "--codec",
+            "-cm", "--{0}".format(__class__.__CODEC_OPTION),
             required=False,
-            help="""Coder mode(s - codec contain only one coder, c - codec contain cascade from two coders )"""
+            type=str,
+            choices=(EnumCodecType.SINGLE.value, EnumCodecType.CASCADE.value,),
+            help="""Coder mode({0} - codec contain only one coder, 
+            {1} - codec contain cascade from two coders )""".format(
+                EnumCodecType.SINGLE.value,
+                EnumCodecType.CASCADE.value,
+            )
         )
 
         self._argument_parser.add_argument(
-            "-nt", "--noises_type",
+            "-nt", "--{0}".format(__class__.__NOISE_TYPE_OPTION),
             required=False,
+            type=str,
+            choices=(EnumNoiseMode.SINGLE.value, EnumNoiseMode.PACKAGE.value, EnumNoiseMode.MIX.value,),
             help="""Type of noises({0} - for single noise type(Gauss noise) or {1} - for packages error, 
             {2} - for mix error)""".format(
                 EnumNoiseMode.SINGLE.value,
@@ -49,14 +57,14 @@ class CodecParser(AbstractGroupParser):
         )
 
         self._argument_parser.add_argument(
-            "-ns", "--noise_start",
+            "-ns", "--{0}".format(__class__.__NOISE_START_OPTION),
             required=False,
             type=float,
             help="""Start of noise(from 1.0 to 50.0)"""
         )
 
         self._argument_parser.add_argument(
-            "-ne", "--noise_end",
+            "-ne", "--{0}".format(__class__.__NOISE_END_OPTION),
             required=False,
             type=float,
             help="""End of noise(from 1.0 to 50.0), but lt Start of noise"""

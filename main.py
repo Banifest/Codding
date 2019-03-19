@@ -1,4 +1,5 @@
 # coding=utf-8
+
 from src.GUI.controller.main_controller import MainController
 from src.config.config_processor import ConfigProcessor
 from src.endpoint.console.app_parser import AppParser
@@ -20,4 +21,4 @@ if __name__ == '__main__':
     elif AppParser().app_mode == EnumAppMode.CONSOLE:
         ConsoleProcessor().transfer()
 else:
-    raise ApplicationException("It isn't module")
+    raise ApplicationException("It doesn't module")

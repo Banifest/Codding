@@ -55,7 +55,7 @@ class CascadeCodec(codec.Codec):
             #  Разделение на пакеты
             package_list = chanel.Chanel().divide_on_blocks(
                 information=information,
-                block_len=self._firstCoder.lengthInformation
+                block_len=self._firstCoder._lengthInformation
             )
 
             transfer_information: Codec.TransferStatistic

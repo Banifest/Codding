@@ -1,5 +1,4 @@
 # coding=utf-8
-# coding=utf-8
 import argparse
 from typing import Optional, List
 
@@ -24,7 +23,7 @@ class Coder(abstract_coder.AbstractCoder):
     countOutput: int = 0
     countRegisters: int = 0
     register: int = 0
-    is_div_into_package = False
+    _is_div_into_package = False
 
     graph: list = []
 
@@ -221,7 +220,7 @@ class Coder(abstract_coder.AbstractCoder):
 
             self._argument_parser.add_argument(
                 "-{0}cnvlp".format(prefix), "--{0}{1}".format(prefix, self.__POLYNOMIAL_LIST),
-                type=List[int],
+                type=List[str],
                 help="""List of polynomial"""
             )
 
@@ -236,7 +235,7 @@ class Coder(abstract_coder.AbstractCoder):
                 self.arguments = vars(self._argument_parser.parse_args())
 
         @property
-        def convolution_polynomial_list(self) -> int:
+        def convolution_polynomial_list(self) -> str:
             return self.arguments["{0}{1}".format(self._prefix, self.__POLYNOMIAL_LIST)]
 
         @property

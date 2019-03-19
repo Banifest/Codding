@@ -60,8 +60,8 @@ class GeneralCoderSimulate:
             self.coder = Hamming(self._hemSizePack)
         elif self._coderTypeInt == EnumCodersType.CYCLICAL.value:
             self.coder = Cyclical(
-                int(self._cycSizePack),
-                int(self._cycPoly)
+                information_length=int(self._cycSizePack),
+                polynomial=int(self._cycPoly)
             )
         elif self._coderTypeInt == EnumCodersType.CONVOLUTION.value:
             self.coder = Convolutional(

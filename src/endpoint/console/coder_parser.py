@@ -11,7 +11,8 @@ class CoderParser(AbstractGroupParser):
     Parser class for Coder Type Attributes
     """
 
-    __CODER_TYPE: str = "coder_type"
+    __FIRST_CODER_TYPE: str = "first_coder_type"
+    __SECOND_CODER_TYPE: str = "second_coder_type"
 
     def __init__(
             self,
@@ -24,13 +25,31 @@ class CoderParser(AbstractGroupParser):
         )
 
         self._argument_parser.add_argument(
-            "-ct", "--{0}".format(self.__CODER_TYPE),
-            # choices=(
-            #     EnumCodersType.CONVOLUTION.value,
-            #     EnumCodersType.FOUNTAIN.value,
-            #     EnumCodersType.CYCLICAL.value,
-            #     EnumCodersType.HAMMING.value
-            # ),
+            "-fct", "--{0}".format(self.__FIRST_CODER_TYPE),
+            type=int,
+            choices=(
+                EnumCodersType.CONVOLUTION.value,
+                EnumCodersType.FOUNTAIN.value,
+                EnumCodersType.CYCLICAL.value,
+                EnumCodersType.HAMMING.value
+            ),
+            help="""Coder type (convolution - {0}, fountain - {1}, cyclical - {2}, hamming - {3})""".format(
+                EnumCodersType.CONVOLUTION.value,
+                EnumCodersType.FOUNTAIN.value,
+                EnumCodersType.CYCLICAL.value,
+                EnumCodersType.HAMMING.value
+            )
+        )
+
+        self._argument_parser.add_argument(
+            "-sct", "--{0}".format(self.__SECOND_CODER_TYPE),
+            type=int,
+            choices=(
+                EnumCodersType.CONVOLUTION.value,
+                EnumCodersType.FOUNTAIN.value,
+                EnumCodersType.CYCLICAL.value,
+                EnumCodersType.HAMMING.value
+            ),
             help="""Coder type (convolution - {0}, fountain - {1}, cyclical - {2}, hamming - {3})""".format(
                 EnumCodersType.CONVOLUTION.value,
                 EnumCodersType.FOUNTAIN.value,
@@ -44,5 +63,12 @@ class CoderParser(AbstractGroupParser):
             self.arguments = vars(self._argument_parser.parse_args())
 
     @property
-    def coder_type(self) -> int:
-        return int(self._arguments[self.__CODER_TYPE])
+    def first_coder_type(self) -> int:
+        return int(self._arguments[self.__FIRST_CODER_TYPE])
+
+    @property
+    def second_coder_type(self) -> Optional[int]:
+        if self._arguments[self.__FIRST_CODER_TYPE] is not None:
+            return int(self._arguments[self.__FIRST_CODER_TYPE])
+        else:
+            return None

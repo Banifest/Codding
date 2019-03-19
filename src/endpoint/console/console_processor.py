@@ -20,31 +20,20 @@ class ConsoleProcessor(metaclass=Singleton):
             coder_parser: Optional[CoderParser] = None,
             codec_parser: Optional[CodecParser] = None
     ):
-        if app_parser is not None:
-            self._appParser = app_parser
-        else:
-            self._appParser = AppParser()
-
-        if coder_parser is not None:
-            self._codecParser = codec_parser
-        else:
-            self._codecParser = AppParser().codec_parser
-
-        if coder_parser is not None:
-            self._coderParser = coder_parser
-        else:
-            self._coderParser = AppParser().coder_parser
+        self._appParser = app_parser if app_parser is not None else AppParser()
+        self._codecParser = codec_parser if coder_parser is not None else AppParser().codec_parser
+        self._coderParser = coder_parser if coder_parser is not None else AppParser().coder_parser
 
     def transfer(self):
 
         first_coder: ConsoleCoderSimulate = ConsoleCoderSimulate(
-            coder_type_int=self._coderParser.coder_type,
-            hem_size_pack=self._appParser.first_coder.hamming_package_length,
+            coder_type_int=self._coderParser.first_coder_type,
+            coder_parsers=self._appParser.first_coders,
         )
 
         second_coder: Optional[ConsoleCoderSimulate] = ConsoleCoderSimulate(
-            coder_type_int=self._coderParser.coder_type,
-            hem_size_pack=self._appParser.second_coder.hamming_package_length,
+            coder_type_int=self._coderParser.second_coder_type,
+            coder_parsers=self._appParser.second_coders,
         )
 
         chanel: ConsoleChanelSimulate = ConsoleChanelSimulate(
@@ -67,5 +56,7 @@ class ConsoleProcessor(metaclass=Singleton):
 
         if self._codecParser.codec_type == EnumCodecType.SINGLE:
             chanel.start_first_test_cycle()
-        else:
+        elif self._codecParser.codec_type == EnumCodecType.CASCADE:
             chanel.start_cascade_test_cycle()
+        else:
+            raise AssertionError("Impossible situation")

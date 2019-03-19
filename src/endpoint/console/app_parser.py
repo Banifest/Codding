@@ -1,9 +1,10 @@
 # coding=utf-8
 import argparse
 from enum import Enum
-from typing import Optional
+from typing import Optional, List
 
-from src.coders.linear.hamming import Coder as Hamming, Coder
+from src.coders.abstract_coder import AbstractCoder
+from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.endpoint.console.codec_parser import CodecParser
 from src.endpoint.console.coder_parser import CoderParser
 from src.endpoint.console.enum_app_mode import EnumAppMode
@@ -23,8 +24,8 @@ class AppParser(metaclass=Singleton):
     _codec_parser: CodecParser
     _coder_parser: CoderParser
     _transfer_info_parser: TransferInfoParser
-    _first_coder_list: list = []
-    _second_coder_list: list = []
+    _first_coder_parsers: List[AbstractGroupParser] = []
+    _second_coder_parsers: List[AbstractGroupParser] = []
 
     def __init__(
             self,
@@ -47,39 +48,12 @@ class AppParser(metaclass=Singleton):
         # Add subparsers hire
         self._codec_parser = CodecParser(argument_group=self._argument_parser.add_argument_group("cm", "Codec mode"))
         self._coder_parser = CoderParser(argument_group=self._argument_parser.add_argument_group("ct", "Coder type"))
-        # TODO temp solution for demo
-        self._firstCoder = Hamming.get_coder_parameters(
-            argument_group=self._argument_parser.add_argument_group("frtcdr", "First Coder"),
-            prefix=self.EnumCoderSequence.FIRST.value
-        )
-        self._secondCoder = Hamming.get_coder_parameters(
-            argument_group=self._argument_parser.add_argument_group("sndcdr", "Second Coder"),
-            prefix=self.EnumCoderSequence.SECOND.value
-        )
+        self._coders_template_generate()
 
         self._arguments = vars(self._argument_parser.parse_args())
         self._coder_parser.arguments = self._arguments
         self._codec_parser.arguments = self._arguments
-        self._firstCoder.arguments = self._arguments
-        self._secondCoder.arguments = self._arguments
-
-    def _coders_template_generate(self, argument_group):
-        self._first_coder_list.append(Hamming.get_coder_parameters(
-            argument_group=self._argument_parser.add_argument_group("frstham", "First Hamming Coder"),
-            prefix=self.EnumCoderSequence.FIRST.value
-        ))
-        self._first_coder_list.append(Hamming.get_coder_parameters(
-            argument_group=self._argument_parser.add_argument_group("frstham", "First Hamming Coder"),
-            prefix=self.EnumCoderSequence.FIRST.value
-        ))
-        self._first_coder_list.append(Hamming.get_coder_parameters(
-            argument_group=self._argument_parser.add_argument_group("frstham", "First Hamming Coder"),
-            prefix=self.EnumCoderSequence.FIRST.value
-        ))
-        self._first_coder_list.append(Hamming.get_coder_parameters(
-            argument_group=self._argument_parser.add_argument_group("frstham", "First Hamming Coder"),
-            prefix=self.EnumCoderSequence.FIRST.value
-        ))
+        self._coders_define_arguments()
 
     @property
     def app_mode(self) -> EnumAppMode:
@@ -105,9 +79,26 @@ class AppParser(metaclass=Singleton):
         return self._codec_parser
 
     @property
-    def first_coder(self) -> Coder.HammingCoderParser:
-        return self._firstCoder
+    def first_coders(self) -> List[AbstractGroupParser]:
+        return self._first_coder_parsers
 
     @property
-    def second_coder(self) -> Coder.HammingCoderParser:
-        return self._firstCoder
+    def second_coders(self) -> List[AbstractGroupParser]:
+        return self._second_coder_parsers
+
+    # noinspection SpellCheckingInspection
+    def _coders_template_generate(self):
+        for iterator in AbstractCoder.get_inheritors_coder_classes():
+            self._first_coder_parsers.append(iterator.get_coder_parameters(
+                argument_group=self._argument_parser.add_argument_group("frtcdr", "First Coder"),
+                prefix=self.EnumCoderSequence.FIRST.value
+            ))
+
+            self._second_coder_parsers.append(iterator.get_coder_parameters(
+                argument_group=self._argument_parser.add_argument_group("sndcdr", "Second Coder"),
+                prefix=self.EnumCoderSequence.SECOND.value
+            ))
+
+    def _coders_define_arguments(self):
+        for iterator in self._first_coder_parsers + self._second_coder_parsers:
+            iterator.arguments = self._arguments
