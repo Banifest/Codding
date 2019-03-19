@@ -134,10 +134,10 @@ class Codec:
         transfer_statistic = Codec.TransferStatistic()
 
         #  Разбиение на пакеты
-        if self.coder._is_div_into_package:
+        if self.coder.is_div_into_package:
             block_list = chanel.Chanel().divide_on_blocks(
                 information=information,
-                block_len=self.coder._lengthInformation
+                block_len=self.coder.lengthInformation
             )
         else:
             block_list = [information.copy()]

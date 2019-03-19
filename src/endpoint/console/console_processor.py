@@ -31,10 +31,12 @@ class ConsoleProcessor(metaclass=Singleton):
             coder_parsers=self._appParser.first_coders,
         )
 
-        second_coder: Optional[ConsoleCoderSimulate] = ConsoleCoderSimulate(
-            coder_type_int=self._coderParser.second_coder_type,
-            coder_parsers=self._appParser.second_coders,
-        )
+        second_coder = None
+        if self._appParser.second_coders is not None:
+            second_coder: Optional[ConsoleCoderSimulate] = ConsoleCoderSimulate(
+                coder_type_int=self._coderParser.second_coder_type,
+                coder_parsers=self._appParser.second_coders,
+            )
 
         chanel: ConsoleChanelSimulate = ConsoleChanelSimulate(
             first_coder_params=first_coder,
@@ -48,10 +50,10 @@ class ConsoleProcessor(metaclass=Singleton):
             flg_split_package=True,
             quantity_steps_in_test_cycle=20,
             package_period=self._codecParser.noise_package_period,
-            flg_first_interleaver=None,
-            flg_second_interleaver=None,
-            length_first_interleaver=None,
-            length_second_interleaver=None
+            flg_first_interleaver=self._coderParser.first_interleaver_length is not None,
+            flg_second_interleaver=self._coderParser.second_interleaver_length is not None,
+            length_first_interleaver=self._coderParser.first_interleaver_length,
+            length_second_interleaver=self._coderParser.first_interleaver_length
         )
 
         if self._codecParser.codec_type == EnumCodecType.SINGLE:

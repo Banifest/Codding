@@ -16,7 +16,7 @@ class ConsoleCoderSimulate(GeneralCoderSimulate):
             coder_type_int: int,
             coder_parsers: List[AbstractGroupParser],
     ):
-        if self._coderTypeInt == EnumCodersType.HAMMING.value:
+        if coder_type_int == EnumCodersType.HAMMING.value:
             coder_parser: Hamming.HammingCoderParser = ConsoleCoderSimulate._parser_searcher(
                 coder_class=Hamming.HammingCoderParser,
                 coder_parsers=coder_parsers
@@ -25,7 +25,7 @@ class ConsoleCoderSimulate(GeneralCoderSimulate):
                 coder_type_int=coder_type_int,
                 hem_size_pack=coder_parser.hamming_package_length,
             )
-        elif self._coderTypeInt == EnumCodersType.CYCLICAL.value:
+        elif coder_type_int == EnumCodersType.CYCLICAL.value:
             coder_parser: Cyclical.CyclicalCoderParser = ConsoleCoderSimulate._parser_searcher(
                 coder_class=Cyclical.CyclicalCoderParser,
                 coder_parsers=coder_parsers
@@ -35,7 +35,7 @@ class ConsoleCoderSimulate(GeneralCoderSimulate):
                 cyc_size_pack=coder_parser.cyclic_package_length,
                 cyc_poly=coder_parser.cyclic_polynomial,
             )
-        elif self._coderTypeInt == EnumCodersType.CONVOLUTION.value:
+        elif coder_type_int == EnumCodersType.CONVOLUTION.value:
             coder_parser: Convolutional.ConvolutionCoderParser = ConsoleCoderSimulate._parser_searcher(
                 coder_class=Convolutional.ConvolutionCoderParser,
                 coder_parsers=coder_parsers
@@ -45,7 +45,7 @@ class ConsoleCoderSimulate(GeneralCoderSimulate):
                 con_count_reg=coder_parser.convolution_memory_register,
                 con_list_poly=coder_parser.convolution_polynomial_list,
             )
-        elif self._coderTypeInt == EnumCodersType.FOUNTAIN.value:
+        elif coder_type_int == EnumCodersType.FOUNTAIN.value:
             coder_parser: LubyTransform.FountainCoderParser = ConsoleCoderSimulate._parser_searcher(
                 coder_class=LubyTransform.FountainCoderParser,
                 coder_parsers=coder_parsers
@@ -65,6 +65,3 @@ class ConsoleCoderSimulate(GeneralCoderSimulate):
         for iterator in coder_parsers:
             if isinstance(iterator, coder_class):
                 return iterator
-
-    def create_coder(self):
-        super().create_coder()

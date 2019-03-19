@@ -22,11 +22,11 @@ class __ObserverMeta(ABCMeta):
 class AbstractCoder(IConsoleCoder, ABC, metaclass=__ObserverMeta):
     type_of_coder: EnumCodersType
     _name: str = ""
-    _coding_information: int = 0
-    _countAdditional: int = 0
-    _lengthTotal: int = 0
-    _lengthInformation: int = 0
-    _is_div_into_package = True
+    coding_information: int = 0
+    countAdditional: int = 0
+    lengthTotal: int = 0
+    lengthInformation: int = 0
+    is_div_into_package = True
 
     @staticmethod
     def get_inheritors_coder_classes() -> list:
@@ -63,7 +63,7 @@ class AbstractCoder(IConsoleCoder, ABC, metaclass=__ObserverMeta):
         Returns:
             redundancy information for this coder
         """
-        return self._countAdditional / self._lengthInformation
+        return self.countAdditional / self.lengthInformation
 
     @abstractmethod
     def get_speed(self) -> float:
@@ -72,7 +72,7 @@ class AbstractCoder(IConsoleCoder, ABC, metaclass=__ObserverMeta):
         Returns:
             float coderSpeed coder
         """
-        return self._lengthInformation / self._lengthTotal
+        return self.lengthInformation / self.lengthTotal
 
     @abstractmethod
     def try_normalization(self, bit_list: list) -> list:
@@ -85,14 +85,14 @@ class AbstractCoder(IConsoleCoder, ABC, metaclass=__ObserverMeta):
         Returns: list consist of 0 or 1
 
         """
-        if len(bit_list) > self._lengthInformation:
+        if len(bit_list) > self.lengthInformation:
             raise CodingException(
                 message=CodingException.LENGTH_OF_INPUT_PACKAGE_OVERFLOW.message,
                 long_message=CodingException.LENGTH_OF_INPUT_PACKAGE_OVERFLOW.long_message,
-                additional_information=[self.name, self._lengthInformation, len(bit_list)]
+                additional_information=[self.name, self.lengthInformation, len(bit_list)]
             )
         else:
-            return (self._lengthInformation - len(bit_list)) * [0] + bit_list
+            return (self.lengthInformation - len(bit_list)) * [0] + bit_list
 
     @abstractmethod
     def to_json(self) -> dict:

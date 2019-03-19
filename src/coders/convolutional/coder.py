@@ -1,6 +1,6 @@
 # coding=utf-8
 import argparse
-from typing import Optional, List
+from typing import Optional
 
 from src.coders import abstract_coder
 from src.coders.casts import bit_list_to_int, get_hamming_distance, int_to_bit_list, cycle_shift_list
@@ -23,7 +23,7 @@ class Coder(abstract_coder.AbstractCoder):
     countOutput: int = 0
     countRegisters: int = 0
     register: int = 0
-    _is_div_into_package = False
+    is_div_into_package = False
 
     graph: list = []
 
@@ -220,7 +220,7 @@ class Coder(abstract_coder.AbstractCoder):
 
             self._argument_parser.add_argument(
                 "-{0}cnvlp".format(prefix), "--{0}{1}".format(prefix, self.__POLYNOMIAL_LIST),
-                type=List[str],
+                type=str,
                 help="""List of polynomial"""
             )
 

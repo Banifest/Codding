@@ -122,7 +122,7 @@ class CodecParser(AbstractGroupParser):
         :return: Type of Codec like EnumCodecType
         """
         if self._arguments[self.__NOISE_TYPE_OPTION] is not None:
-            noise_type: Optional[int] = int(self._arguments[self.__NOISE_TYPE_OPTION])
+            noise_type: Optional[str] = self._arguments[self.__NOISE_TYPE_OPTION]
         else:
             noise_type = None
 
