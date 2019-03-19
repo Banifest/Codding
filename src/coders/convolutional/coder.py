@@ -1,7 +1,11 @@
 # coding=utf-8
 # coding=utf-8
+import argparse
+from typing import Optional, List
+
 from src.coders import abstract_coder
 from src.coders.casts import bit_list_to_int, get_hamming_distance, int_to_bit_list, cycle_shift_list
+from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
 
@@ -12,7 +16,7 @@ class Coder(abstract_coder.AbstractCoder):
     """
     _name = "Сверточный"
     type_of_coder = EnumCodersType.CONVOLUTION
-    __MAX_STEPS: int = 99999999999
+    __MAX_STEPS: int = 9999999999999
 
     countPolynomials: int = 0
     listPolynomials: list = []
@@ -197,8 +201,56 @@ class Coder(abstract_coder.AbstractCoder):
             'speed': self.get_speed()
         }
 
-    def get_coder_parameters(self):
-        """
-        TODO
-        """
-        pass
+    class ConvolutionCoderParser(AbstractGroupParser):
+        _prefix: str = ""
+        __POLYNOMIAL_LIST: str = "convolution_polynomial_list"
+        __QUANTITY_MEMORY_REGISTER: str = "convolution_quantity_memory_register"
+
+        # noinspection SpellCheckingInspection
+        def __init__(
+                self,
+                argument_parser: Optional[argparse.ArgumentParser] = None,
+                argument_group=None,
+                prefix: str = ""
+        ):
+            super().__init__(
+                argument_parser=argument_parser,
+                argument_group=argument_group
+            )
+            self._prefix = prefix
+
+            self._argument_parser.add_argument(
+                "-{0}cnvlp".format(prefix), "--{0}{1}".format(prefix, self.__POLYNOMIAL_LIST),
+                type=List[int],
+                help="""List of polynomial"""
+            )
+
+            self._argument_parser.add_argument(
+                "-{0}cnvmr".format(prefix), "--{0}{1}".format(prefix, self.__QUANTITY_MEMORY_REGISTER),
+                type=int,
+                help="""Quantity of memory registers of counvolution coder"""
+            )
+
+            # We should parse arguments only for unique coder
+            if self._argument_group is None:
+                self.arguments = vars(self._argument_parser.parse_args())
+
+        @property
+        def convolution_polynomial_list(self) -> int:
+            return self.arguments["{0}{1}".format(self._prefix, self.__POLYNOMIAL_LIST)]
+
+        @property
+        def convolution_memory_register(self) -> int:
+            return self.arguments["{0}{1}".format(self._prefix, self.__QUANTITY_MEMORY_REGISTER)]
+
+    @staticmethod
+    def get_coder_parameters(
+            argument_parser: Optional[argparse.ArgumentParser] = None,
+            argument_group=None,
+            prefix: str = ""
+    ):
+        return Coder.ConvolutionCoderParser(
+            argument_parser=argument_parser,
+            argument_group=argument_group,
+            prefix=prefix
+        )

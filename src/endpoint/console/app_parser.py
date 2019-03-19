@@ -1,5 +1,6 @@
 # coding=utf-8
 import argparse
+from enum import Enum
 from typing import Optional
 
 from src.coders.linear.hamming import Coder as Hamming, Coder
@@ -12,12 +13,18 @@ from src.helper.pattern.singleton import Singleton
 
 
 class AppParser(metaclass=Singleton):
+    class EnumCoderSequence(Enum):
+        FIRST = "f"
+        SECOND = "s"
+
     __MODE_PARAMETERS: str = "mode"
     _arguments: None
     _argument_parser = argparse.ArgumentParser()
     _codec_parser: CodecParser
     _coder_parser: CoderParser
     _transfer_info_parser: TransferInfoParser
+    _first_coder_list: list = []
+    _second_coder_list: list = []
 
     def __init__(
             self,
@@ -43,11 +50,11 @@ class AppParser(metaclass=Singleton):
         # TODO temp solution for demo
         self._firstCoder = Hamming.get_coder_parameters(
             argument_group=self._argument_parser.add_argument_group("frtcdr", "First Coder"),
-            prefix="f"
+            prefix=self.EnumCoderSequence.FIRST.value
         )
         self._secondCoder = Hamming.get_coder_parameters(
             argument_group=self._argument_parser.add_argument_group("sndcdr", "Second Coder"),
-            prefix="s"
+            prefix=self.EnumCoderSequence.SECOND.value
         )
 
         self._arguments = vars(self._argument_parser.parse_args())
@@ -55,6 +62,24 @@ class AppParser(metaclass=Singleton):
         self._codec_parser.arguments = self._arguments
         self._firstCoder.arguments = self._arguments
         self._secondCoder.arguments = self._arguments
+
+    def _coders_template_generate(self, argument_group):
+        self._first_coder_list.append(Hamming.get_coder_parameters(
+            argument_group=self._argument_parser.add_argument_group("frstham", "First Hamming Coder"),
+            prefix=self.EnumCoderSequence.FIRST.value
+        ))
+        self._first_coder_list.append(Hamming.get_coder_parameters(
+            argument_group=self._argument_parser.add_argument_group("frstham", "First Hamming Coder"),
+            prefix=self.EnumCoderSequence.FIRST.value
+        ))
+        self._first_coder_list.append(Hamming.get_coder_parameters(
+            argument_group=self._argument_parser.add_argument_group("frstham", "First Hamming Coder"),
+            prefix=self.EnumCoderSequence.FIRST.value
+        ))
+        self._first_coder_list.append(Hamming.get_coder_parameters(
+            argument_group=self._argument_parser.add_argument_group("frstham", "First Hamming Coder"),
+            prefix=self.EnumCoderSequence.FIRST.value
+        ))
 
     @property
     def app_mode(self) -> EnumAppMode:

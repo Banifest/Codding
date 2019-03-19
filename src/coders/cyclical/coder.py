@@ -1,20 +1,20 @@
 # coding=utf-8
 # coding=utf-8
+import argparse
 import math
+from typing import Optional
 
 import numpy as np
 from numpy.polynomial import polynomial as plm
 
 from src.coders import abstract_coder
 from src.coders.casts import int_to_bit_list
+from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class Coder(abstract_coder.AbstractCoder):
-    def get_coder_parameters(self):
-        pass
-
     _name = "Циклический"
     polynomial: plm.Polynomial
     type_of_coder = EnumCodersType.CYCLICAL
@@ -62,3 +62,56 @@ class Coder(abstract_coder.AbstractCoder):
                 'length coding word'     : self.lengthTotal,
                 'polynomial'             : [int(x) for x in self.polynomial],
                 'speed'                  : self.get_speed()}
+
+    class CyclicalCoderParser(AbstractGroupParser):
+        _prefix: str = ""
+        __PACKAGE_LENGTH: str = "cyclic_package_length"
+        __POLYNOMIAL: str = "cyclic_polynomial"
+
+        def __init__(
+                self,
+                argument_parser: Optional[argparse.ArgumentParser] = None,
+                argument_group=None,
+                prefix: str = ""
+        ):
+            super().__init__(
+                argument_parser=argument_parser,
+                argument_group=argument_group
+            )
+            self._prefix = prefix
+
+            self._argument_parser.add_argument(
+                "-{0}cclpl".format(prefix), "--{0}{1}".format(prefix, self.__PACKAGE_LENGTH),
+                type=int,
+                help="""Length of package for Cyclical coder"""
+            )
+
+            self._argument_parser.add_argument(
+                "-{0}cclp".format(prefix), "--{0}{1}".format(prefix, self.__POLYNOMIAL),
+                type=int,
+                help="""Polynomial for Cyclical coder"""
+            )
+
+            # We should parse arguments only for unique coder
+            if self._argument_group is None:
+                self.arguments = vars(self._argument_parser.parse_args())
+
+        @property
+        def cyclic_package_length(self) -> int:
+            return self.arguments["{0}{1}".format(self._prefix, self.__PACKAGE_LENGTH)]
+
+        @property
+        def cyclic_polynomial(self) -> int:
+            return self.arguments["{0}{1}".format(self._prefix, self.__POLYNOMIAL)]
+
+    @staticmethod
+    def get_coder_parameters(
+            argument_parser: Optional[argparse.ArgumentParser] = None,
+            argument_group=None,
+            prefix: str = ""
+    ):
+        return Coder.CyclicalCoderParser(
+            argument_parser=argument_parser,
+            argument_group=argument_group,
+            prefix=prefix
+        )

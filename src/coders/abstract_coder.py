@@ -89,5 +89,4 @@ class AbstractCoder(IConsoleCoder, metaclass=ABCMeta):
         """
         Get Abstract interfaces for getting parameter coder
         """
-        # TODO change pass -> raise NotImplementedError
         raise NotImplementedError
