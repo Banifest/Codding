@@ -2,7 +2,9 @@
 # coding=utf-8
 import argparse
 import random
+from sqlite3 import Connection
 from typing import Optional
+from uuid import UUID
 
 from src.coders import abstract_coder
 from src.coders.casts import bit_list_to_int, bit_list_to_int_list, int_to_bit_list
@@ -11,6 +13,7 @@ from src.helper.error.exception.GUI.setting_exception import SettingException
 from src.helper.error.exception.codding_exception import CodingException
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
+from src.statistics.db.table import fountain_table
 
 
 class Coder(abstract_coder.AbstractCoder):
@@ -141,6 +144,15 @@ class Coder(abstract_coder.AbstractCoder):
             'length coding word': self.lengthTotal,
             'speed': self.get_speed()
         }
+
+    def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
+        connection.execute(fountain_table.insert(
+            guid=coder_guid,
+            count_info_block=self._countCodingBlocks,
+            count_block=self._countBlocks,
+            block_size=self._sizeBlock,
+            block_array=self._blocks,
+        ))
 
     class FountainCoderParser(AbstractGroupParser):
         _prefix: str = ""

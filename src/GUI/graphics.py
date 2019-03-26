@@ -72,7 +72,7 @@ class GraphicController(metaclass=Singleton):
         plt.plot(
             test_noise_sequence,
             # Axis Y - result of test (Bits)
-            [x.based_error_bits / x.based_correct_bits + self.__FROM_Y_LIMIT for x in
+            [x.based_correct_bits / (x.based_error_bits + x.based_correct_bits) + self.__FROM_Y_LIMIT for x in
              static_collector.testResult]
         )
         plt.show()

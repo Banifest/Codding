@@ -2,7 +2,9 @@
 # coding=utf-8
 import argparse
 import math
-from typing import Optional
+from sqlite3 import Connection
+from typing import Optional, List, Union
+from uuid import UUID
 
 import numpy as np
 
@@ -11,12 +13,13 @@ from src.coders.casts import *
 from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
+from src.statistics.db.table import hamming_table
 
 
 class Coder(abstract_coder.AbstractCoder):
     type_of_coder = EnumCodersType.HAMMING
     _name = "Hamming"
-    _matrixTransformation: list = []
+    _matrixTransformation: List[Union[int, List]] = []
 
     def __init__(self, length_information: int):
         log.debug("Create of Hamming coder")
@@ -129,6 +132,12 @@ class Coder(abstract_coder.AbstractCoder):
             'matrix of generating': self._matrixTransformation.tolist(),
             'speed': self.get_speed()
         }
+
+    def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
+        connection.execute(hamming_table.insert(
+            guid=coder_guid,
+            matrix=self._matrixTransformation.lolist()
+        ))
 
     class HammingCoderParser(AbstractGroupParser):
         _prefix: str = ""

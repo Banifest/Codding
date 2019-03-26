@@ -1,12 +1,15 @@
 # coding=utf-8
 import argparse
+from sqlite3 import Connection
 from typing import Optional
+from uuid import UUID
 
 from src.coders import abstract_coder
 from src.coders.casts import bit_list_to_int, get_hamming_distance, int_to_bit_list, cycle_shift_list
 from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
+from src.statistics.db.table import convolution_table
 
 
 class Coder(abstract_coder.AbstractCoder):
@@ -199,6 +202,15 @@ class Coder(abstract_coder.AbstractCoder):
             'graph': self.graph,
             'speed': self.get_speed()
         }
+
+    def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
+        connection.execute(convolution_table.insert(
+            guid=coder_guid,
+            count_polynomial=self.countPolynomials,
+            count_input_bits=self.countInput,
+            count_output_bits=self.countOutput,
+            count_registers=self.countRegisters,
+        ))
 
     class ConvolutionCoderParser(AbstractGroupParser):
         _prefix: str = ""

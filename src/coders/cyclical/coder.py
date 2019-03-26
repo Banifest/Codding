@@ -2,7 +2,9 @@
 # coding=utf-8
 import argparse
 import math
+from sqlite3 import Connection
 from typing import Optional
+from uuid import UUID
 
 import numpy as np
 from numpy.polynomial import polynomial as plm
@@ -12,6 +14,7 @@ from src.coders.casts import int_to_bit_list
 from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.logger import log
 from src.statistics.db.enum_coders_type import EnumCodersType
+from src.statistics.db.table import cyclic_table
 
 
 class Coder(abstract_coder.AbstractCoder):
@@ -56,12 +59,20 @@ class Coder(abstract_coder.AbstractCoder):
         return super().try_normalization(bit_list)
 
     def to_json(self) -> dict:
-        return {'name'                   : self.name,
+        return {'name': self.name,
                 'length information word': self.lengthInformation,
-                'length additional bits' : self.lengthAdditional,
-                'length coding word'     : self.lengthTotal,
-                'polynomial'             : [int(x) for x in self.polynomial],
-                'speed'                  : self.get_speed()}
+                'length additional bits': self.lengthAdditional,
+                'length coding word': self.lengthTotal,
+                'polynomial': [int(x) for x in self.polynomial],
+                'speed': self.get_speed()}
+
+    def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
+        connection.execute(cyclic_table.insert(
+            guid=coder_guid,
+            matrix_g=self.matrix_G,
+            matrix_h=self.matrix_H,
+            polynomial=self.polynomial,
+        ))
 
     class CyclicalCoderParser(AbstractGroupParser):
         _prefix: str = ""

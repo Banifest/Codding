@@ -1,12 +1,13 @@
 # coding=utf-8
 # coding=utf-8
-from abc import ABCMeta, abstractmethod, ABC
+from abc import ABCMeta, abstractmethod
 from collections import defaultdict
 
 from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.endpoint.console.iconsolecoder import IConsoleCoder
 from src.helper.error.exception.codding_exception import CodingException
 from src.statistics.db.enum_coders_type import EnumCodersType
+from src.statistics.object.idatabaseserialize import IDataBaseSerialize
 
 
 class __ObserverMeta(ABCMeta):
@@ -19,7 +20,7 @@ class __ObserverMeta(ABCMeta):
         return inherit_class
 
 
-class AbstractCoder(IConsoleCoder, ABC, metaclass=__ObserverMeta):
+class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta):
     type_of_coder: EnumCodersType
     _name: str = ""
     coding_information: int = 0

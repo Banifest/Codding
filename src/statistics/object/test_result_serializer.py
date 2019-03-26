@@ -32,6 +32,10 @@ class TestResultSerializer(metaclass=Singleton):
             interleaver_length=statistic_collector.lengthFirstInterleaver,
             description=first_coder.name
         ))
+        first_coder.save_to_database(
+            coder_guid=first_coder_guid,
+            connection=connection
+        )
 
         if statistic_collector.flgCascade:
             second_coder_guid = uuid.uuid4()
@@ -72,5 +76,4 @@ class TestResultSerializer(metaclass=Singleton):
                 ))
 
     def serialize_to_json(self, statistic_collector: StatisticCollector, file_name: str = "lastResult.json") -> None:
-        open(file_name, "w", encoding='UTF-8').write(jsonpickle.encode(statistic_collector,
-                                                                       unpicklable=False))
+        open(file_name, "w", encoding='UTF-8').write(jsonpickle.encode(statistic_collector, unpicklable=False))
