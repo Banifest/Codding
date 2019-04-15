@@ -29,7 +29,7 @@
          </size>
      </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+      <string>Cascade codes simulator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
       <property name="minimumSize">
@@ -778,7 +778,7 @@
                      <item>
                          <widget class="QRadioButton" name="mixedErrorModeRadio">
                              <property name="text">
-                                 <string>Package Mode</string>
+                                 <string>Complex Mode</string>
                              </property>
                          </widget>
                      </item>

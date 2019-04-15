@@ -50,6 +50,11 @@ class TestResultSerializer(metaclass=Singleton):
                 interleaver_length=statistic_collector.lengthFirstInterleaver,
                 description=second_coder.name
             ))
+
+            second_coder.save_to_database(
+                coder_guid=second_coder_guid,
+                connection=connection
+            )
         else:
             second_coder_guid = None
 

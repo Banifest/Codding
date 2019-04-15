@@ -145,7 +145,7 @@ class Codec:
         for block in block_list:
             current_information: List[int] = block.copy()
             log.info("Производиться передача последовательности битов - {0}".format(current_information))
-            status: int = EnumBitTransferResult.SUCCESS
+            status: EnumBitTransferResult = EnumBitTransferResult.SUCCESS
             normalization_information: List[int] = self.coder.try_normalization(current_information)
             try:
                 current_information = self.coder.encoding(normalization_information)

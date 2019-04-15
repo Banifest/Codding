@@ -59,7 +59,7 @@ class Connector(metaclass=Singleton):
                     ConfigProcessor().config.db_setting.address,
                     ConfigProcessor().config.db_setting.port,
                     ConfigProcessor().config.db_setting.database_name,
-                ), echo=True
+                ), echo=False
             )
         return self._engine
 

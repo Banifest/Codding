@@ -1,11 +1,11 @@
 # coding=utf-8
 # coding=utf-8
 import argparse
-import math
 from sqlite3 import Connection
 from typing import Optional, List, Union
 from uuid import UUID
 
+import math
 import numpy as np
 
 from src.coders import abstract_coder
@@ -136,7 +136,7 @@ class Coder(abstract_coder.AbstractCoder):
     def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
         connection.execute(hamming_table.insert(
             guid=coder_guid,
-            matrix=self._matrixTransformation.lolist()
+            matrix=self._matrixTransformation
         ))
 
     class HammingCoderParser(AbstractGroupParser):

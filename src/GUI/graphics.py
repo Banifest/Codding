@@ -12,7 +12,7 @@ class GraphicController(metaclass=Singleton):
     __RESULT_GRAPHIC_TYPE: str = "ggplot"
     __CORRECT_PACKAGE: str = "Quantity of correct packages"
     __CORRECT_BITS: str = "Quantity of correct bits"
-    __SOURCE_CORRECT_BITS: str = "Quantity of source correct bits"
+    __SOURCE_CORRECT_BITS: str = "Quantity of source incorrect bits"
     __FROM_Y_LIMIT: float = 10 ** (-10)
     __TO_Y_LIMIT: float = 1.1
     __Y_LABEL: str = "Chance of last information, P*10^-1"
@@ -28,7 +28,7 @@ class GraphicController(metaclass=Singleton):
         plt.style.use(self.__RESULT_GRAPHIC_TYPE)
         plt.legend(handles=[
             matches.Patch(color='blue', label=GraphicController.__CORRECT_PACKAGE),
-            matches.Patch(color='purple', label=GraphicController.__CORRECT_BITS),
+            # matches.Patch(color='purple', label=GraphicController.__CORRECT_BITS),
             matches.Patch(color='red', label=GraphicController.__SOURCE_CORRECT_BITS),
         ])
         plt.ylim([self.__TO_Y_LIMIT, self.__FROM_Y_LIMIT])
@@ -56,23 +56,23 @@ class GraphicController(metaclass=Singleton):
             [test_result.error_packages
              / (test_result.error_packages + test_result.repair_packages + test_result.successful_packages)
              + self.__FROM_Y_LIMIT for test_result in static_collector.testResult],
-            label="Кодер типа {0}\n"
-                  "Скорость кодера {1}".format("Test", "Test")
+            color='blue',
         )
 
-        # Plot information about transfer bits
-        plt.plot(
-            test_noise_sequence,
-            # Axis Y - result of test (Bits)
-            [x.quantity_error_bits / x.quantity_correct_bits + self.__FROM_Y_LIMIT for x in
-             static_collector.testResult]
-        )
+        # # Plot information about transfer bits
+        # plt.plot(
+        #     test_noise_sequence,
+        #     # Axis Y - result of test (Bits)
+        #     [x.quantity_error_bits / x.quantity_correct_bits + self.__FROM_Y_LIMIT for x in
+        #      static_collector.testResult],
+        # )
 
         # Plot information about transfer based bits
         plt.plot(
             test_noise_sequence,
             # Axis Y - result of test (Bits)
-            [x.based_correct_bits / (x.based_error_bits + x.based_correct_bits) + self.__FROM_Y_LIMIT for x in
-             static_collector.testResult]
+            [x.based_error_bits / (x.based_error_bits + x.based_correct_bits) + self.__FROM_Y_LIMIT for x in
+             static_collector.testResult],
+            color='red',
         )
         plt.show()

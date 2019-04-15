@@ -99,13 +99,13 @@ class Coder(abstract_coder.AbstractCoder):
         for x in range(2 ** self.countRegisters):
             vertex: list = []
             self.register = x
-            edge: list = int_to_bit_list(x, self.countRegisters)
-            edge = cycle_shift_list(edge)
-            edge[0] = 0
-            vertex.append([bit_list_to_int(edge), self.do_step(0)])
+            list_integers: list = int_to_bit_list(x, self.countRegisters)
+            list_integers = cycle_shift_list(list_integers)
+            list_integers[0] = 0
+            vertex.append([bit_list_to_int(list_integers), self.do_step(0)])
             self.register = x
-            edge[0] = 1
-            vertex.append([bit_list_to_int(edge), self.do_step(1)])
+            list_integers[0] = 1
+            vertex.append([bit_list_to_int(list_integers), self.do_step(1)])
             answer.append(vertex)
 
         self.register = 0
@@ -204,7 +204,7 @@ class Coder(abstract_coder.AbstractCoder):
         }
 
     def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
-        connection.execute(convolution_table.insert(
+        connection.execute(convolution_table.insert().values(
             guid=coder_guid,
             count_polynomial=self.countPolynomials,
             count_input_bits=self.countInput,
