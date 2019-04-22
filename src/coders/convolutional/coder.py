@@ -37,7 +37,7 @@ class Coder(abstract_coder.AbstractCoder):
             count_output: int,
             count_register: int
     ):
-        log.debug("Создание свёрточного кодера ....")
+        log.debug("Create convolution coder")
         self.countInput = count_input
         self.countOutput = count_output
         self.countRegisters = count_register
@@ -70,7 +70,7 @@ class Coder(abstract_coder.AbstractCoder):
         :param information_bit:
         :return:
         """
-        log.debug("Шаг при кодировании бита - {0}".format(information_bit))
+        log.debug("Step coding convolution - {0}".format(information_bit))
         self.register <<= 1
 
         # зануление старшего бита

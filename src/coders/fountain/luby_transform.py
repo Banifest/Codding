@@ -151,7 +151,7 @@ class Coder(abstract_coder.AbstractCoder):
         }
 
     def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
-        connection.execute(fountain_table.insert(
+        connection.execute(fountain_table.insert().values(
             guid=coder_guid,
             count_info_block=self._countCodingBlocks,
             count_block=self._countBlocks,

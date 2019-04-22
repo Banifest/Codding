@@ -25,5 +25,10 @@ class ParametersParseException(ApplicationException):
         long_message="Start noise should be less them end noise"
     )
 
+    INTERLEAVER_SETTING: TemplateException = TemplateException(
+        message="Incorrect interleaver settings",
+        long_message="Change interleaver setting",
+    )
+
     _message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value
     _long_message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value

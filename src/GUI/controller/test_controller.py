@@ -45,7 +45,10 @@ class TestController(GeneralChanelSimulate):
         self._lengthSecondInterleaver = value
 
     def set_noise_package_period(self, value: int) -> None:
-        self._packagePeriod = value
+        if value <= self._noisePackageLength:
+            pass
+        else:
+            self._packagePeriod = value
 
     def set_noise_single_mode(self, value: bool) -> None:
         if value:

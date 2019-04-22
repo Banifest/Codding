@@ -51,7 +51,7 @@ class Codec:
             noise_package_period: int,
     ):
 
-        log.debug("Создание канала связи")
+        log.debug("Create chanel")
         self.noiseMode = noise_mode
         self.noisePackageLength = noise_package_length
         self.noisePackagePeriod = noise_package_period
@@ -65,7 +65,7 @@ class Codec:
             self.duplex = duplex
         if interleaver is not None:
             self.interleaver = interleaver
-        log.debug("Канал создан")
+        log.debug("Chanel created")
 
     def __str__(self) -> str:
         return \
@@ -144,7 +144,7 @@ class Codec:
 
         for block in block_list:
             current_information: List[int] = block.copy()
-            log.info("Производиться передача последовательности битов - {0}".format(current_information))
+            log.info("Transfer bits - {0}".format(current_information))
             status: EnumBitTransferResult = EnumBitTransferResult.SUCCESS
             normalization_information: List[int] = self.coder.try_normalization(current_information)
             try:

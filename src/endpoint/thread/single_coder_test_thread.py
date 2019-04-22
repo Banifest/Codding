@@ -219,6 +219,6 @@ class SingleCoderTestThread(QThread):
         except ApplicationException as application_exception:
             globalSignals.ended.emit()
             globalSignals.notCorrect.emit(application_exception, )
-        except Exception:
+        except Exception as err:
             globalSignals.ended.emit()
             globalSignals.notCorrect.emit(ApplicationException())

@@ -1,11 +1,11 @@
 # coding=utf-8
 # coding=utf-8
 import argparse
-import math
 from sqlite3 import Connection
 from typing import Optional
 from uuid import UUID
 
+import math
 import numpy as np
 from numpy.polynomial import polynomial as plm
 
@@ -25,7 +25,7 @@ class Coder(abstract_coder.AbstractCoder):
     matrix_H: np.matrix  # проверочная матрицал
 
     def __init__(self, information_length: int, polynomial: int):
-        log.debug("Создание циклического кодера")
+        log.debug("Create cyclical coder")
 
         self.lengthInformation = information_length
         self.lengthAdditional = int(math.log2(polynomial))
@@ -67,11 +67,9 @@ class Coder(abstract_coder.AbstractCoder):
                 'speed': self.get_speed()}
 
     def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
-        connection.execute(cyclic_table.insert(
+        connection.execute(cyclic_table.insert().values(
             guid=coder_guid,
-            matrix_g=self.matrix_G,
-            matrix_h=self.matrix_H,
-            polynomial=self.polynomial,
+            polynomial=[int(iterator) for iterator in list(self.polynomial)],
         ))
 
     class CyclicalCoderParser(AbstractGroupParser):

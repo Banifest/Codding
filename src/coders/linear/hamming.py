@@ -134,9 +134,9 @@ class Coder(abstract_coder.AbstractCoder):
         }
 
     def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
-        connection.execute(hamming_table.insert(
+        connection.execute(hamming_table.insert().values(
             guid=coder_guid,
-            matrix=self._matrixTransformation
+            matrix=self._matrixTransformation.tolist()
         ))
 
     class HammingCoderParser(AbstractGroupParser):

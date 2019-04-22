@@ -1,7 +1,8 @@
 # coding=utf-8
 import random
-from math import ceil
 from typing import Union, Optional, List
+
+from math import ceil
 
 from src.helper.error.exception.chanel_exception import ChanelException
 from src.helper.pattern.singleton import Singleton
@@ -54,7 +55,7 @@ class Chanel(metaclass=Singleton):
         if straight is None:
             straight = self.__straight
 
-        log.debug("Симуляция шума на канале с вероятностью {0}".format(straight))
+        log.debug("Noise with probably {0}".format(straight))
 
         random_generator: random.Random = random.Random(random.random() * 50)  # генератор случайных чисел
 
@@ -77,7 +78,7 @@ class Chanel(metaclass=Singleton):
         for bit_value in changes_bits:
             answer[bit_value] ^= 1
 
-        log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(answer))
+        log.debug("During transport package noise changed package to {0}".format(answer))
         return answer
 
     def gen_package_interference(
@@ -100,7 +101,7 @@ class Chanel(metaclass=Singleton):
         if straight is None:
             straight = self.__straight
 
-        log.debug("Симуляция шума в виде пакета длинной {1} на канале с вероятностью {0}".
+        log.debug("Length of package = {1}, noise probability{0}".
                   format(straight, length_of_block))
         begin_package_straight: float = straight / length_of_block
         # count error package of chanel
@@ -144,7 +145,7 @@ class Chanel(metaclass=Singleton):
         for iterator in range(len(changes_bits)):
             result[iterator] ^= changes_bits[iterator]
 
-        log.debug("В ходе симуляции шума пакет преобразовался в {0}".format(result))
+        log.debug("During transport package noise changed package to {0}".format(result))
         return result
 
     def generate_package_interference(

@@ -31,6 +31,11 @@
   <property name="windowTitle">
       <string>Cascade codes simulator</string>
   </property>
+     <property name="windowIcon">
+         <iconset>
+             <normaloff>../../../resources/img/pic.png</normaloff>../../../resources/img/pic.png
+         </iconset>
+     </property>
   <widget class="QWidget" name="centralwidget">
       <property name="minimumSize">
           <size>
@@ -109,7 +114,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>153</height>
+               <height>182</height>
            </rect>
           </property>
           <attribute name="label">
@@ -137,9 +142,15 @@
              <height>22</height>
             </rect>
            </property>
+              <property name="minimum">
+                  <number>4</number>
+              </property>
            <property name="maximum">
             <number>999999</number>
            </property>
+              <property name="singleStep">
+                  <number>3</number>
+              </property>
            <property name="value">
             <number>120</number>
            </property>
@@ -151,7 +162,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>153</height>
+               <height>182</height>
            </rect>
           </property>
           <attribute name="label">
@@ -192,6 +203,9 @@
              <height>22</height>
             </rect>
            </property>
+              <property name="minimum">
+                  <number>4</number>
+              </property>
            <property name="maximum">
             <number>999999</number>
            </property>
@@ -208,6 +222,9 @@
              <height>22</height>
             </rect>
            </property>
+              <property name="minimum">
+                  <number>3</number>
+              </property>
            <property name="maximum">
             <number>999999</number>
            </property>
@@ -222,7 +239,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>153</height>
+               <height>182</height>
            </rect>
           </property>
           <attribute name="label">
@@ -276,6 +293,9 @@
              <height>22</height>
             </rect>
            </property>
+              <property name="minimum">
+                  <number>2</number>
+              </property>
            <property name="maximum">
             <number>99999</number>
            </property>
@@ -290,7 +310,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>153</height>
+               <height>182</height>
            </rect>
           </property>
           <attribute name="label">
@@ -348,7 +368,7 @@
             <number>99999999</number>
            </property>
            <property name="value">
-            <number>30</number>
+               <number>10</number>
            </property>
            <property name="displayIntegerBase">
             <number>10</number>
@@ -367,7 +387,7 @@
             <number>99999999</number>
            </property>
            <property name="value">
-            <number>10</number>
+               <number>3</number>
            </property>
           </widget>
           <widget class="QSpinBox" name="countBlockFounEdit">
@@ -407,7 +427,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>153</height>
+               <height>182</height>
            </rect>
           </property>
           <attribute name="label">
@@ -435,9 +455,15 @@
              <height>22</height>
             </rect>
            </property>
+              <property name="minimum">
+                  <number>4</number>
+              </property>
            <property name="maximum">
             <number>999999</number>
            </property>
+              <property name="singleStep">
+                  <number>3</number>
+              </property>
            <property name="value">
             <number>120</number>
            </property>
@@ -449,7 +475,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>153</height>
+               <height>182</height>
            </rect>
           </property>
           <attribute name="label">
@@ -490,9 +516,15 @@
              <height>22</height>
             </rect>
            </property>
+              <property name="minimum">
+                  <number>4</number>
+              </property>
            <property name="maximum">
             <number>999999</number>
            </property>
+              <property name="singleStep">
+                  <number>3</number>
+              </property>
            <property name="value">
             <number>120</number>
            </property>
@@ -506,6 +538,9 @@
              <height>22</height>
             </rect>
            </property>
+              <property name="minimum">
+                  <number>3</number>
+              </property>
            <property name="maximum">
             <number>999999</number>
            </property>
@@ -520,7 +555,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>153</height>
+               <height>182</height>
            </rect>
           </property>
           <attribute name="label">
@@ -574,6 +609,9 @@
              <height>22</height>
             </rect>
            </property>
+              <property name="minimum">
+                  <number>2</number>
+              </property>
            <property name="maximum">
             <number>99999</number>
            </property>
@@ -588,7 +626,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>153</height>
+               <height>182</height>
            </rect>
           </property>
           <attribute name="label">
@@ -646,7 +684,7 @@
             <number>99999999</number>
            </property>
            <property name="value">
-            <number>30</number>
+               <number>10</number>
            </property>
            <property name="displayIntegerBase">
             <number>10</number>
@@ -665,7 +703,7 @@
             <number>99999999</number>
            </property>
            <property name="value">
-            <number>10</number>
+               <number>3</number>
            </property>
           </widget>
           <widget class="QSpinBox" name="countBlockFounEdit2">
