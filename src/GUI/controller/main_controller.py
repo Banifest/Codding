@@ -44,6 +44,7 @@ class MainController:
 
     @staticmethod
     def error_handle(exception: Optional[ApplicationException]):
+        globalSignals.ended.emit()
         QMessageBox().warning(
             None,
             MainController.__UNKNOWN_ERROR if exception is None else exception.get_message(),

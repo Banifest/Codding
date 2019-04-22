@@ -217,6 +217,8 @@ class SingleCoderTestThread(QThread):
             log.debug("End of test cycle")
 
         except ApplicationException as application_exception:
+            globalSignals.ended.emit()
             globalSignals.notCorrect.emit(application_exception, )
         except Exception:
+            globalSignals.ended.emit()
             globalSignals.notCorrect.emit(ApplicationException())

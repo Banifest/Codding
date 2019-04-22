@@ -29,7 +29,6 @@ class TestController(GeneralChanelSimulate):
         self._noiseStart = self._NOISE_MIN
         self._noiseEnd = self._NOISE_MAX
 
-
     def set_quantity_steps_in_test_cycle(self, value: int) -> None:
         self._quantityStepsInTestCycle = value
 
