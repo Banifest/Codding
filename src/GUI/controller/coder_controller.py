@@ -28,7 +28,7 @@ class CoderController(GeneralCoderSimulate):
             str_list_to_list(value),
             self._conListPoly = value
         except ValueError:
-            if value[-1] == SEPARATE_SYMBOL:
+            if len(value) != 0 and value[-1] == SEPARATE_SYMBOL:
                 self.set_con_list_poly(value[:-1])
             else:
                 ErrorHandler.gui_message_box(rcx_exception=SettingException(
