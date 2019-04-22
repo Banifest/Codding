@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
 
         super(MainWindow, self).__init__()
         self.controller = controller
-        uic.loadUi(r'.\src\GUI\UI\window.ui', self)
+        uic.loadUi(r'./src/GUI/UI/window.ui', self)
 
         setup_main_window_coder(controller, self)
         setup_main_window_second_coder(controller, self)
