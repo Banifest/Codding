@@ -3,8 +3,10 @@
 import argparse
 import random
 from sqlite3 import Connection
-from typing import Optional
+from typing import Optional, List
 from uuid import UUID
+
+from math import ceil
 
 from src.coders import abstract_coder
 from src.coders.casts import bit_list_to_int, bit_list_to_int_list, int_to_bit_list
@@ -90,28 +92,28 @@ class Coder(abstract_coder.AbstractCoder):
         status: list = [False for x in range(self._countBlocks)]
         status.append(True)  # One block should be always true
 
-        temp_list: list = []
-        for x in range(0, len(information), self._sizeBlock):
-            temp: list = []
-            for y in range(self._sizeBlock):
-                if (x + y) < len(information):
-                    temp.append(information[x + y])
-            temp_list.append(bit_list_to_int(temp))
-        temp_list.append(0)  # One block should be always 0
+        block_int_values: List[int] = []
+        for num_of_block in range(0, len(information), self._sizeBlock):
+            help_data: list = []
+            for num_of_bit in range(self._sizeBlock):
+                if (num_of_block + num_of_bit) < len(information):
+                    help_data.append(information[num_of_block + num_of_bit])
+            block_int_values.append(bit_list_to_int(help_data))
+        block_int_values.append(0)  # One block should be always 0
 
         answer: list = [0] * self._countCodingBlocks
         while not is_kill and {True} != set(status):
             is_kill = True
-            for x in range(len(decoded_set_list)):
-                for y in range(len(decoded_set_list)):
-                    difference = decoded_set_list[x] - decoded_set_list[y]
-                    if len(difference) == 1 and (decoded_set_list[y] - decoded_set_list[x]) == set():
+            for iterator_f in range(len(decoded_set_list)):
+                for iterator_s in range(len(decoded_set_list)):
+                    difference = decoded_set_list[iterator_f] - decoded_set_list[iterator_s]
+                    if len(difference) == 1 and (decoded_set_list[iterator_s] - decoded_set_list[iterator_f]) == set():
                         is_kill = False
                         status[list(difference)[0]] = True
-                        answer[list(difference)[0]] = temp_list[x] ^ temp_list[y]
+                        answer[list(difference)[0]] = block_int_values[iterator_f] ^ block_int_values[iterator_s]
                         for z in range(len(decoded_set_list)):
                             if list(difference)[0] in decoded_set_list[z]:
-                                temp_list[z] ^= answer[list(difference)[0]]
+                                block_int_values[z] ^= answer[list(difference)[0]]
                                 decoded_set_list[z] = decoded_set_list[z] - difference
 
         if set(status) != {True}:
@@ -122,10 +124,13 @@ class Coder(abstract_coder.AbstractCoder):
             )
 
         # Form result in digital format
-        answer = answer[:-1]
-        answer = [int_to_bit_list(answer[0])] + [int_to_bit_list(x, self._sizeBlock) for x in answer[1:]]
+        answer = answer[:ceil(self.lengthInformation / self._sizeBlock)]
         answer.reverse()
-        return [y for x in answer for y in x]
+        answer = [int_to_bit_list(x, self._sizeBlock) for x in answer[:-1]] + [int_to_bit_list(answer[-1])]
+        # Unpacking answer
+        answer = [y for x in answer for y in x]
+        answer = answer[:self.lengthInformation]
+        return answer
 
     def get_redundancy(self) -> float:
         return super().get_redundancy()

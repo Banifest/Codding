@@ -56,7 +56,7 @@ class MainController:
 
     def before_start(self):
         """
-        This method for add middleware before start of GUI
+        This method for add middleware before start rendering of GUI
         """
         pass
 

@@ -20,5 +20,10 @@ class ParametersParseException(ApplicationException):
         long_message="Application cannot start with provided application running mode equals {0}"
     )
 
+    START_NOISE_LE_END: TemplateException = TemplateException(
+        message="Start noise should be less them end noise",
+        long_message="Start noise should be less them end noise"
+    )
+
     _message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value
     _long_message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value

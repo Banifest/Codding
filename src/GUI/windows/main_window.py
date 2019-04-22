@@ -28,6 +28,18 @@ class MainWindow(QMainWindow):
         globalSignals.stepFinished.connect(self.singleProgress.setValue)
         globalSignals.autoStepFinished.connect(self.autoProgress.setValue)
 
+        # Disable buttons where start
+        globalSignals.startTesting.connect(self.startSingleFirstCoderButton.setDisabled)
+        globalSignals.startTesting.connect(self.startTestsFirstCoderButton.setDisabled)
+        globalSignals.startTesting.connect(self.startSingleCascadeCoderButton.setDisabled)
+        globalSignals.startTesting.connect(self.startTestsCascadeCoderButton.setDisabled)
+
+        # Enable buttons where finish testing
+        globalSignals.ended.connect(lambda: self.startSingleFirstCoderButton.setEnabled(True))
+        globalSignals.ended.connect(lambda: self.startTestsFirstCoderButton.setEnabled(True))
+        globalSignals.ended.connect(lambda: self.startSingleCascadeCoderButton.setEnabled(True))
+        globalSignals.ended.connect(lambda: self.startTestsCascadeCoderButton.setEnabled(True))
+
         self.startSingleFirstCoderButton.clicked.connect(self.controller.testParams.start_first_single_test)
         self.startTestsFirstCoderButton.clicked.connect(self.controller.testParams.start_first_test_cycle)
         self.startSingleCascadeCoderButton.clicked.connect(self.controller.testParams.start_cascade_single_test)

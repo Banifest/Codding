@@ -104,8 +104,4 @@ def str_list_to_list(value: str) -> list:
     :param value:
     :return:
     """
-    # TODO Нужно будет переписать
-    try:
-        return [int(x) for x in value.split(",")]
-    except:
-        pass
+    return [int(x) for x in value.split(",")]

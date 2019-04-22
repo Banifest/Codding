@@ -1,4 +1,6 @@
 # coding=utf-8
+from src.coders.abstract_coder import AbstractCoder
+from src.coders.casts import str_list_to_list
 from src.endpoint.general_coder_simulate import GeneralCoderSimulate
 from src.helper.error.error_handler import ErrorHandler
 from src.helper.error.exception.GUI.setting_exception import SettingException
@@ -21,7 +23,15 @@ class CoderController(GeneralCoderSimulate):
         self._cycPoly = value
 
     def set_con_list_poly(self, value: str) -> None:
-        self._conListPoly = value
+        try:
+            # Check on valid transformation
+            str_list_to_list(value),
+            self._conListPoly = value
+        except ValueError:
+            ErrorHandler.gui_message_box(rcx_exception=SettingException(
+                message=SettingException.INCORRECT_POLYNOMIAL.message,
+                long_message=SettingException.INCORRECT_POLYNOMIAL.long_message,
+            ))
 
     def set_con_count_reg(self, value: int) -> None:
         self._conCountReg = value
@@ -34,9 +44,3 @@ class CoderController(GeneralCoderSimulate):
 
     def set_fou_count_block(self, value: int) -> None:
         self._fouCountBlock = value
-
-    def create_coder(self):
-        try:
-            super().create_coder()
-        except SettingException as rcx_setting:
-            ErrorHandler.gui_message_box(rcx_exception=rcx_setting)

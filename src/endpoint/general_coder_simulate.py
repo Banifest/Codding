@@ -1,4 +1,5 @@
 # coding=utf-8
+from abc import ABC
 from typing import Optional
 
 from src.coders.abstract_coder import AbstractCoder
@@ -10,7 +11,7 @@ from src.coders.linear.hamming import Coder as Hamming
 from src.statistics.db.enum_coders_type import EnumCodersType
 
 
-class GeneralCoderSimulate:
+class GeneralCoderSimulate(ABC):
     coder: AbstractCoder
     _coderTypeInt: int
     _coderType: EnumCodersType
@@ -55,7 +56,7 @@ class GeneralCoderSimulate:
         self._fouSizeBlock = fou_size_block
         self._fouCountBlock = fou_count_block
 
-    def create_coder(self):
+    def create_coder(self) -> AbstractCoder:
         if self._coderTypeInt == EnumCodersType.HAMMING.value:
             self.coder = Hamming(self._hemSizePack)
         elif self._coderTypeInt == EnumCodersType.CYCLICAL.value:
@@ -76,3 +77,4 @@ class GeneralCoderSimulate:
                 int(self._fouCountBlock),
                 int(self._fouSizePack)
             )
+        return self.coder

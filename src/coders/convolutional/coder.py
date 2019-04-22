@@ -44,7 +44,7 @@ class Coder(abstract_coder.AbstractCoder):
         self.countPolynomials = len(list_polynomials)
         self.listPolynomials = list_polynomials
 
-        self.lengthTotal = self.countOutput / self.countInput
+        self.lengthTotal = self.countOutput + self.countInput
         self.lengthInformation = 1
         self.lengthAdditional = self.lengthTotal - self.lengthInformation
 

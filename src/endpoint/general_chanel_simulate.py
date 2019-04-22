@@ -1,9 +1,10 @@
 # coding=utf-8
 from typing import Optional
 
-from src.GUI.controller.cascade_coder_test_thread import CascadeCoderTestThread
+from src.GUI.globals_signals import globalSignals
+from src.endpoint.thread.cascade_coder_test_thread import CascadeCoderTestThread
 from src.GUI.controller.coder_controller import CoderController
-from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
+from src.endpoint.thread.single_coder_test_thread import SingleCoderTestThread
 from src.channel.enum_noise_mode import EnumNoiseMode
 from src.endpoint.general_coder_simulate import GeneralCoderSimulate
 
@@ -12,8 +13,8 @@ class GeneralChanelSimulate:
     """
     Class provide functionality for control testing process
     """
-    _firstCoderParams: CoderController
-    _secondCoderParams: CoderController
+    _firstCoderParams: GeneralCoderSimulate
+    _secondCoderParams: GeneralCoderSimulate
 
     _firstThreadClass: SingleCoderTestThread
     _cascadeThreadClass: CascadeCoderTestThread
@@ -110,23 +111,27 @@ class GeneralChanelSimulate:
         )
 
     def start_first_single_test(self):
+        globalSignals.startTesting.emit(True)
         self._firstCoderParams.create_coder()
         self.set_first_coder_thread_class()
         self._firstThreadClass.start()
 
     def start_first_test_cycle(self):
+        globalSignals.startTesting.emit(True)
         self._firstCoderParams.create_coder()
         self.set_first_coder_thread_class()
         self._firstThreadClass.set_auto(True)
         self._firstThreadClass.start()
 
     def start_cascade_single_test(self):
+        globalSignals.startTesting.emit(True)
         self._firstCoderParams.create_coder()
         self._secondCoderParams.create_coder()
         self.set_cascade_coder_thread_class()
         self._cascadeThreadClass.start()
 
     def start_cascade_test_cycle(self):
+        globalSignals.startTesting.emit(True)
         self._firstCoderParams.create_coder()
         self._secondCoderParams.create_coder()
         self.set_cascade_coder_thread_class()

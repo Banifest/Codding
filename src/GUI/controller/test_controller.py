@@ -13,6 +13,9 @@ class TestController(GeneralChanelSimulate):
     """
     Class provide functionality for control testing process
     """
+    _NOISE_MIN: int = 1
+    _NOISE_MAX: int = 50
+
     def __init__(
             self,
             first_coder_params: CoderController,
@@ -22,6 +25,10 @@ class TestController(GeneralChanelSimulate):
             first_coder_params=first_coder_params,
             second_coder_params=second_coder_params,
         )
+        # Should be defined
+        self._noiseStart = self._NOISE_MIN
+        self._noiseEnd = self._NOISE_MAX
+
 
     def set_quantity_steps_in_test_cycle(self, value: int) -> None:
         self._quantityStepsInTestCycle = value
@@ -60,10 +67,26 @@ class TestController(GeneralChanelSimulate):
         self._flgSplitPackage = value
 
     def set_noise_start(self, value: float) -> None:
-        self._noiseStart = value
+        if value > self._noiseEnd:
+            ErrorHandler().gui_message_box(
+                rcx_exception=ParametersParseException(
+                    message=ParametersParseException.START_NOISE_LE_END.message,
+                    long_message=ParametersParseException.START_NOISE_LE_END.long_message,
+                )
+            )
+        else:
+            self._noiseStart = value
 
     def set_noise_end(self, value: float) -> None:
-        self._noiseEnd = value
+        if value < self._noiseStart:
+            ErrorHandler().gui_message_box(
+                rcx_exception=ParametersParseException(
+                    message=ParametersParseException.START_NOISE_LE_END.message,
+                    long_message=ParametersParseException.START_NOISE_LE_END.long_message,
+                )
+            )
+        else:
+            self._noiseEnd = value
 
     def set_count_test(self, value: int) -> None:
         self._countTest = value

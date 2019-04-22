@@ -1,7 +1,7 @@
 # coding=utf-8
 from typing import Optional
 
-from src.GUI.controller.single_coder_test_thread import SingleCoderTestThread
+from src.endpoint.thread.single_coder_test_thread import SingleCoderTestThread
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import GraphicController
 from src.channel.cascadecodec import CascadeCodec
@@ -25,7 +25,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
     def __init__(
             self,
             noise_chance: float,
-            count_test: float,
+            count_test: int,
             test_information: int,
             current_coder: AbstractCoder,
             first_coder: AbstractCoder,
@@ -105,7 +105,7 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     quantity_of_steps_in_cycle=self._quantity_steps
                 )
 
-            globalSignals.stepFinished.emit(int(self.CONST_MAX_PERCENT))
+            globalSignals.stepFinished.emit(int(self._MAX_PERCENT))
             globalSignals.ended.emit()
 
             # DB Action

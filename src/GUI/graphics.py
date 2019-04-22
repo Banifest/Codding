@@ -11,7 +11,7 @@ class GraphicController(metaclass=Singleton):
     # noinspection SpellCheckingInspection
     __RESULT_GRAPHIC_TYPE: str = "ggplot"
     __CORRECT_PACKAGE: str = "Quantity of correct packages"
-    __CORRECT_BITS: str = "Quantity of correct bits"
+    __CORRECT_BITS: str = "Quantity of incorrect bits"
     __SOURCE_CORRECT_BITS: str = "Quantity of source incorrect bits"
     __FROM_Y_LIMIT: float = 10 ** (-10)
     __TO_Y_LIMIT: float = 1.1

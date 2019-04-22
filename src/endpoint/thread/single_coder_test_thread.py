@@ -1,5 +1,4 @@
 # coding=utf-8
-# coding=utf-8
 from typing import Dict, List, Optional
 
 from PyQt5.QtCore import QThread
@@ -21,8 +20,8 @@ from src.statistics.object.test_result_serializer import TestResultSerializer
 
 
 class SingleCoderTestThread(QThread):
-    CONST_MIN_PERCENT: float = 0.00
-    CONST_MAX_PERCENT: float = 100.00
+    _MIN_PERCENT: float = 0.00
+    _MAX_PERCENT: float = 100.00
 
     class GlobalTestStatistic:
         quantity_successful_package: int = 0
@@ -55,7 +54,7 @@ class SingleCoderTestThread(QThread):
     def __init__(
             self,
             noise_chance: float,
-            count_test: float,
+            count_test: int,
             test_information: int,
             current_coder: AbstractCoder,
             noise_mode: EnumNoiseMode,
@@ -109,12 +108,12 @@ class SingleCoderTestThread(QThread):
         Method provide functionality for processing single test case
         :return: TestResult
         """
-        progress: float = self.CONST_MIN_PERCENT
-        step: float = self.CONST_MAX_PERCENT / self._countTest
+        progress: float = self._MIN_PERCENT
+        step: float = self._MAX_PERCENT / self._countTest
         information: list = int_to_bit_list(self._information)
         case_result_list: List[CaseResult] = []
         global_test_statistic: SingleCoderTestThread.GlobalTestStatistic = SingleCoderTestThread.GlobalTestStatistic()
-        log.debug("Начало цикла тестов")
+        log.debug("Test cycle begin")
         for number_of_test in range(self._countTest):
             transfer_statistic: Codec.TransferStatistic = self.channel.transfer_one_step(information)
             if transfer_statistic.result_status == EnumPackageTransferResult.SUCCESS:
@@ -158,7 +157,7 @@ class SingleCoderTestThread(QThread):
         )
 
     def _auto_test(self) -> List[TestResult]:
-        log.debug("Кнопка авто-тестирования нажата")
+        log.debug("Auto-test button pressed")
         step: float = SimpleCalculationForTransferProcess.calc_noise_of_steps_different(
             start=self._start_t,
             finish=self._finish_t,
@@ -167,16 +166,17 @@ class SingleCoderTestThread(QThread):
         progress: int = 0
         sum_result_of_single_test: List[TestResult] = []
         for iterator in [self._start_t + iterator * step for iterator in range(self._quantity_steps)]:
-            progress += int(self.CONST_MAX_PERCENT / self._quantity_steps)
-            self.channel.noiseProbability = self.CONST_MAX_PERCENT * (1 / (iterator + 1))
+            progress += int(self._MAX_PERCENT / self._quantity_steps)
+            self.channel.noiseProbability = self._MAX_PERCENT * (1 / (iterator + 1))
             sum_result_of_single_test.append(self._single_test())
             globalSignals.autoStepFinished.emit(int(progress))
 
-        globalSignals.autoStepFinished.emit(int(self.CONST_MAX_PERCENT))
-        globalSignals.autoStepFinished.emit(int(self.CONST_MAX_PERCENT))
+        globalSignals.autoStepFinished.emit(int(self._MAX_PERCENT))
+        globalSignals.autoStepFinished.emit(int(self._MAX_PERCENT))
         return sum_result_of_single_test
 
     def run(self):
+        # noinspection PyBroadException
         try:
             if self._flg_auto:
                 statistic = StatisticCollector(
@@ -206,7 +206,7 @@ class SingleCoderTestThread(QThread):
                     quantity_of_steps_in_cycle=self._quantity_steps
                 )
 
-            globalSignals.stepFinished.emit(int(self.CONST_MAX_PERCENT))
+            globalSignals.stepFinished.emit(int(self._MAX_PERCENT))
             globalSignals.ended.emit()
 
             # DB Action
@@ -218,3 +218,5 @@ class SingleCoderTestThread(QThread):
 
         except ApplicationException as application_exception:
             globalSignals.notCorrect.emit(application_exception, )
+        except Exception:
+            globalSignals.notCorrect.emit(ApplicationException())
