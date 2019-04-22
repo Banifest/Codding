@@ -100,7 +100,6 @@ def get_hamming_distance(first: list, second: list) -> int:
 
 def str_list_to_list(value: str) -> list:
     """
-
     :param value:
     :return:
     """
