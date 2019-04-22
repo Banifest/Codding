@@ -1,5 +1,4 @@
 # coding=utf-8
-from src.coders.abstract_coder import AbstractCoder
 from src.coders.casts import str_list_to_list
 from src.endpoint.general_coder_simulate import GeneralCoderSimulate
 from src.helper.error.error_handler import ErrorHandler
@@ -23,15 +22,19 @@ class CoderController(GeneralCoderSimulate):
         self._cycPoly = value
 
     def set_con_list_poly(self, value: str) -> None:
+        SEPARATE_SYMBOL: str = ","
         try:
             # Check on valid transformation
             str_list_to_list(value),
             self._conListPoly = value
         except ValueError:
-            ErrorHandler.gui_message_box(rcx_exception=SettingException(
-                message=SettingException.INCORRECT_POLYNOMIAL.message,
-                long_message=SettingException.INCORRECT_POLYNOMIAL.long_message,
-            ))
+            if value[-1] == SEPARATE_SYMBOL:
+                self.set_con_list_poly(value[:-1])
+            else:
+                ErrorHandler.gui_message_box(rcx_exception=SettingException(
+                    message=SettingException.INCORRECT_POLYNOMIAL.message,
+                    long_message=SettingException.INCORRECT_POLYNOMIAL.long_message,
+                ))
 
     def set_con_count_reg(self, value: int) -> None:
         self._conCountReg = value
