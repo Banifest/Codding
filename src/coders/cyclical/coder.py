@@ -1,5 +1,4 @@
 # coding=utf-8
-# coding=utf-8
 import argparse
 from sqlite3 import Connection
 from typing import Optional

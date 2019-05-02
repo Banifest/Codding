@@ -1,3 +1,4 @@
+# coding=utf-8
 from typing import Optional
 
 from src.channel.enum_codec_type import EnumCodecType

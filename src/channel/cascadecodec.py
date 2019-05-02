@@ -1,5 +1,4 @@
 # coding=utf-8
-# coding=utf-8
 from typing import Optional, Union
 
 from src.channel import codec, chanel

@@ -1,5 +1,4 @@
 # coding=utf-8
-# coding=utf-8
 from math import log2
 
 from src.coders.convolutional.coder import Coder

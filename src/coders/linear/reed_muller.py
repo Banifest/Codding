@@ -1,16 +1,20 @@
 # coding=utf-8
-# coding=utf-8
 import itertools
+import uuid
 
 import numpy as np
+from sqlalchemy.engine import Connection
 
 from src.coders import abstract_coder
 from src.coders.casts import bit_list_to_int, int_to_bit_list
 
 
 class Coder(abstract_coder.AbstractCoder):
+    def save_to_database(self, coder_guid: uuid.UUID, connection: Connection):
+        raise NotImplemented
+
     def get_coder_parameters(self):
-        pass
+        raise NotImplemented
 
     def get_redundancy(self) -> float:
         return super().get_redundancy()
@@ -63,11 +67,14 @@ class Coder(abstract_coder.AbstractCoder):
         return [x % 2 for x in (np.matrix(information) * self.matrix_G).tolist()[0]]
 
     def decoding(self, information: list):
-        def vec_xor(a, b): return [a[i] ^ b[i] for i in range(len(a))]
+        def vec_xor(a, b):
+            return [a[i] ^ b[i] for i in range(len(a))]
 
-        def vec_mul(a, b): return [a[i] & b[i] for i in range(len(a))]
+        def vec_mul(a, b):
+            return [a[i] & b[i] for i in range(len(a))]
 
-        def vec_inv(a): return [x ^ 1 for x in a]
+        def vec_inv(a):
+            return [x ^ 1 for x in a]
 
         def vec_gen(a, b):
             return [a for x in range(b)]
@@ -123,9 +130,9 @@ class Coder(abstract_coder.AbstractCoder):
         return result_voice
 
     def to_json(self) -> dict:
-        return {'name'                   : self.name,
+        return {'name': self.name,
                 'length information word': self.lengthInformation,
-                'length additional bits' : self.lengthAdditional,
-                'length coding word'     : self.lengthTotal,
-                'matrix of generating'   : self.matrix_G.tolist(),
-                'speed'                  : self.get_speed()}
+                'length additional bits': self.lengthAdditional,
+                'length coding word': self.lengthTotal,
+                'matrix of generating': self.matrix_G.tolist(),
+                'speed': self.get_speed()}

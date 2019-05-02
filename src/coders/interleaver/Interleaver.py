@@ -1,5 +1,4 @@
 # coding=utf-8
-# coding=utf-8
 import math
 
 from src.helper.error.exception.parameters_parse_exception import ParametersParseException

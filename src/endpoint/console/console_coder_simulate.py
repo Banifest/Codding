@@ -11,6 +11,8 @@ from src.statistics.db.enum_coders_type import EnumCodersType
 
 
 class ConsoleCoderSimulate(GeneralCoderSimulate):
+    # noinspection PyTypeChecker
+    # This need for disable warning via downcast
     def __init__(
             self,
             coder_type_int: int,
@@ -61,7 +63,7 @@ class ConsoleCoderSimulate(GeneralCoderSimulate):
     def _parser_searcher(
             coder_class: AbstractGroupParser.__class__,
             coder_parsers: List[AbstractGroupParser],
-    ):
+    ) -> AbstractGroupParser:
         for iterator in coder_parsers:
             if isinstance(iterator, coder_class):
                 return iterator
