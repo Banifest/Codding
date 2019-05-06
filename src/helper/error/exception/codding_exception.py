@@ -18,6 +18,14 @@ class CodingException(ApplicationException):
                 """
     )
 
+    LENGTH_OF_CURRENT_SOURCE_STATE_DIFF: TemplateException = TemplateException(
+        message="Length of current and source states doesn't equal",
+        long_message="""
+                    Length of current state is {0}.
+                    Length of source state is {1}
+                    """
+    )
+
     LACKS_OF_BLOCKS_FOR_DECODING: TemplateException = TemplateException(
         message="Lacks of blocks for decoding package with fountain coder",
         long_message="Lacks of blocks for decoding package with fountain coder",

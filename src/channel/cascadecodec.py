@@ -15,7 +15,6 @@ class CascadeCodec(codec.Codec):
     _firstInterleaver: Interleaver.Interleaver
     _secondCoder: abstract_coder.AbstractCoder
     _secondInterleaver: Interleaver.Interleaver = None
-    mode: int = 0
 
     def __init__(
             self,
@@ -29,7 +28,6 @@ class CascadeCodec(codec.Codec):
             noise_mode: EnumNoiseMode,
             noise_package_length: int,
             noise_package_period: int,
-            mode: int = 0,
     ):
         super().__init__(
             coder=None,
@@ -43,7 +41,6 @@ class CascadeCodec(codec.Codec):
         )
         self._firstCoder = first_coder
         self._secondCoder = second_coder
-        self.mode = mode
 
         self._firstInterleaver = first_interleaver if first_interleaver is not None else None
         self._secondInterleaver = second_interleaver if second_interleaver is not None else None
@@ -57,7 +54,7 @@ class CascadeCodec(codec.Codec):
                 block_len=self._firstCoder.lengthInformation,
             )
 
-        transfer_information: Codec.TransferStatistic
+        transfer_information: Codec.TransferStatistic = Codec.TransferStatistic()
         for x in package_list:
             self.coder = self._secondCoder
             normalization_information = self._firstCoder.try_normalization(x)

@@ -15,13 +15,10 @@ from src.logger import log
 class Codec:
     noiseProbability: int = 0
     countCyclical: int = 1
-    duplex: bool = False
     # Информация о процессе передачи информации
-    # TODO Пересмотреть и переделать концепт хранения информации о канале ++
     information: str = ""
     coder: AbstractCoder
     interleaver: Interleaver.Interleaver = False
-    countSuccessfullyMessage: int
 
     # Package noise mode attr
     noiseMode: EnumNoiseMode
@@ -82,53 +79,6 @@ class Codec:
                 self.countCyclical,
                 self.information
             )
-
-    def transfer(self, information: list) -> str:
-        transfer_statistic = Codec.TransferStatistic()
-        self.information += "Начата циклическая передача пакета ({0}).\n Количество передач {1}.\n". \
-            format(information, self.countCyclical)
-
-        for number_of_cycle in range(self.countCyclical):
-            try:
-                current_information_state: list = information
-                current_information_state = self.coder.encoding(current_information_state)
-                if self.interleaver:
-                    current_information_state = self.interleaver.shuffle(current_information_state)
-
-                    compare_information: list = current_information_state
-                    current_information_state = self._do_noise(
-                        information=current_information_state,
-                        noise_probability=self.noiseProbability,
-                    )
-                    transfer_statistic.based_correct_bits, transfer_statistic.based_error_bits = self._get_change_state(
-                        source_state=compare_information,
-                        current_state=current_information_state
-                    )
-
-                if self.interleaver:
-                    current_information_state = self.interleaver.reestablish(current_information_state)
-
-                current_information_state = self.coder.decoding(current_information_state)
-            except CodingException:
-                self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
-                                    "востановлению\n".format(number_of_cycle)
-            else:
-                if current_information_state == information:
-                    transfer_statistic.quantity_successful_bits += 1
-                    self.information += "Пакет при передаче попыткой под номером {0} был успешно передан\n".format(
-                        number_of_cycle)
-                else:
-                    self.information += "Пакет при передаче попыткой под номером {0} был повреждён и не подлежит " \
-                                        "востановлению\n".format(number_of_cycle)
-
-        self.information += "Циклическая передача пакета ({0}) завершена.\n" \
-                            "Всего попыток передать пакет {1}.\n" \
-                            "Количство успешно переданных пакетов {2}.\n" \
-                            "Количество неудачно переданных пакетов {3}.\n". \
-            format(information, self.countCyclical, transfer_statistic.quantity_successful_bits,
-                   self.countCyclical - transfer_statistic.quantity_successful_bits)
-
-        return self.information
 
     def transfer_one_step(self, information: list) -> TransferStatistic:
         transfer_statistic = Codec.TransferStatistic()
@@ -260,9 +210,6 @@ class Codec:
         transfer_statistic.current_information_state = current_information_state
         return transfer_statistic
 
-    def get_information_about_last_transfer(self):
-        return self.information
-
     def _do_noise(self, information: list, noise_probability: float) -> list:
         if self.noiseMode == EnumNoiseMode.SINGLE:
             return chanel.Chanel().gen_interference(information=information, straight=noise_probability)
@@ -289,6 +236,7 @@ class Codec:
                 long_message=ParametersParseException.NOISE_MODE_UNDEFINED.long_message
             )
 
+    # noinspection PyMethodMayBeStatic
     def _get_change_state(
             self,
             source_state: List[int],
@@ -298,8 +246,11 @@ class Codec:
         error_bits: int = 0
 
         if len(source_state) != len(current_state):
-            # TODO Add exception
-            pass
+            raise CodingException(
+                message=CodingException.LENGTH_OF_CURRENT_SOURCE_STATE_DIFF.message,
+                long_message=CodingException.LENGTH_OF_CURRENT_SOURCE_STATE_DIFF.long_message,
+                additional_information=[len(current_state), len(source_state)]
+            )
 
         for iterator in range(len(source_state)):
             if source_state[iterator] == current_state[iterator]:
