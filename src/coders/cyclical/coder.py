@@ -40,9 +40,9 @@ class Coder(abstract_coder.AbstractCoder):
         for x in range(len(self.polynomial)):
             if sum([int(x) % 2 for x in syndrome]) != 0:
                 arr_error: list = [int(x) % 2 for x in syndrome]
-                for iter in range(len(arr_error)):
-                    if arr_error[iter] != 0:
-                        information[iter] ^= 1
+                for iterator in range(len(arr_error)):
+                    if arr_error[iterator] != 0:
+                        information[iterator] ^= 1
             else:
                 break
 

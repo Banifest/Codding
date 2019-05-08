@@ -1,10 +1,19 @@
 # coding=utf-8
-from abc import ABCMeta, abstractmethod
+import argparse
+from abc import abstractmethod, ABC
+from typing import Optional
 
 
-class IConsoleCoder(metaclass=ABCMeta):
+class IConsoleCoder(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_coder_parameters():
+    def get_coder_parameters(
+            argument_parser: Optional[argparse.ArgumentParser] = None,
+            argument_group=None,
+            prefix: str = ""
+    ):
+        """
+        Get Abstract interfaces for getting parameter coder
+        """
         raise NotImplemented

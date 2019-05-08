@@ -1,4 +1,5 @@
 # coding=utf-8
+from typing import List
 
 
 def int_to_bit_list(num: int, size: int = None, rev: bool = False) -> list:
@@ -37,20 +38,20 @@ def bit_list_to_int_list(num: list) -> list:
     return answer
 
 
-def bit_list_to_int(num: list, rev: bool = False) -> int:
+def bit_list_to_int(num: List[int], rev: bool = False) -> int:
     """
-
-    :param num:
-    :param rev:
-    :return:
+    Convert list of bits to integer
+    :param num: List[int]
+    :param rev: bool Default value = False
+    :return: int
     """
     if rev:
         num.reverse()
 
     it = 1 << len(num) - 1
     answer = 0
-    for x in num:
-        answer += it * x
+    for power in num:
+        answer += it * power
         it >>= 1
     return answer
 

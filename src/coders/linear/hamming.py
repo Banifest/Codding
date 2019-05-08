@@ -1,7 +1,7 @@
 # coding=utf-8
 import argparse
 from sqlite3 import Connection
-from typing import Optional, List, Union
+from typing import Optional, Union
 from uuid import UUID
 
 import math
@@ -49,13 +49,11 @@ class Coder(abstract_coder.AbstractCoder):
                         break
                 flag: bool = not flag
             self._matrixTransformation.append(temp)
+        # noinspection PyTypeChecker
         self._matrixTransformation = np.transpose(np.array(self._matrixTransformation))
 
-    def get_speed(self) -> float:
-        return float(self.lengthInformation) / float(self.lengthTotal)
-
     def encoding(self, information: list) -> list:
-        log.info("Кодирование пакета {0} кодером хемминга".format(information))
+        log.info("Encoding package {0} of Hamming coder".format(information))
         list_encoding_information: list = information
         list_encoding_information.reverse()
         if len(list_encoding_information) < self.lengthInformation:
@@ -83,7 +81,7 @@ class Coder(abstract_coder.AbstractCoder):
         return answer
 
     def decoding(self, information: list) -> list:
-        log.info("Декодирование пакета {0} декодером хемминга".format(information))
+        log.info("Decoding package {0} of Hamming coder".format(information))
 
         code = np.transpose(np.array([[x] for x in information]))
         answer: list = []
@@ -114,6 +112,9 @@ class Coder(abstract_coder.AbstractCoder):
                 step += 1
             count += 1
         return answer
+
+    def get_speed(self) -> float:
+        return float(self.lengthInformation) / float(self.lengthTotal)
 
     def try_normalization(self, bit_list: list) -> list:
         return super().try_normalization(bit_list)

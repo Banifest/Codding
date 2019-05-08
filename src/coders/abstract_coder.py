@@ -1,8 +1,8 @@
 # coding=utf-8
 from abc import ABCMeta, abstractmethod
 from collections import defaultdict
+from typing import List
 
-from src.endpoint.console.abstract_group_parser import AbstractGroupParser
 from src.endpoint.console.iconsolecoder import IConsoleCoder
 from src.helper.error.exception.codding_exception import CodingException
 from src.statistics.db.enum_coders_type import EnumCodersType
@@ -37,7 +37,7 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
         return self._name
 
     @abstractmethod
-    def encoding(self, information: int or list) -> list:
+    def encoding(self, information: List[int]) -> List[int]:
         """
         Args:
             information: list of bits for encoding
@@ -47,7 +47,7 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
         raise NotImplementedError
 
     @abstractmethod
-    def decoding(self, information: list) -> list:
+    def decoding(self, information: List[int]) -> List[int]:
         """
         Args:
             information: list of bits for decoding
@@ -74,7 +74,6 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
         """
         return self.lengthInformation / self.lengthTotal
 
-    @abstractmethod
     def try_normalization(self, bit_list: list) -> list:
         """
         Method for try normalization input information for successful encoding
@@ -97,11 +96,3 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
     @abstractmethod
     def to_json(self) -> dict:
         return {}
-
-    @staticmethod
-    @abstractmethod
-    def get_coder_parameters() -> AbstractGroupParser:
-        """
-        Get Abstract interfaces for getting parameter coder
-        """
-        raise NotImplementedError
