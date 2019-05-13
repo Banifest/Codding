@@ -19,7 +19,7 @@ class AppParser(metaclass=Singleton):
         SECOND = "s"
 
     __MODE_PARAMETERS: str = "mode"
-    _arguments: None
+    _arguments: object
     _argument_parser = argparse.ArgumentParser()
     _codec_parser: CodecParser
     _coder_parser: CoderParser
@@ -57,6 +57,7 @@ class AppParser(metaclass=Singleton):
 
     @property
     def app_mode(self) -> EnumAppMode:
+        # noinspection PyUnresolvedReferences
         app_mode: Optional[str] = self._arguments[AppParser.__MODE_PARAMETERS]
 
         if app_mode is None or app_mode == EnumAppMode.GUI.value:

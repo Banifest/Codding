@@ -41,13 +41,13 @@ class GraphicController(metaclass=Singleton):
         noise_step_different: float = SimpleCalculationForTransferProcess.calc_noise_of_steps_different(
             start=static_collector.beginNoise,
             finish=static_collector.endNoise,
-            quantity_steps=static_collector.quantity_of_steps_in_cycle
+            quantity_steps=static_collector.quantityStepsInCycle
         )
 
         # Axis X - noise
         test_noise_sequence: list = [
             static_collector.beginNoise + number_of_step * noise_step_different
-            for number_of_step in range(static_collector.quantity_of_steps_in_cycle)
+            for number_of_step in range(static_collector.quantityStepsInCycle)
         ]
         # Plot information about transfer packages
         plt.plot(

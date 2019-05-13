@@ -74,7 +74,7 @@ class TestResultSerializer(metaclass=Singleton):
                 connection.execute(case_table.insert().values(
                     guid=uuid.uuid4(),
                     test_timestamp=timestamp,
-                    count_correct_bits=case_iter.successful_bits,
+                    count_correct_bits=case_iter.successfulBits,
                     count_incorrect_bits=case_iter.error_bits,
                     count_repair_bits=case_iter.repair_bits,
                     count_changed_bits=case_iter.changed_bits

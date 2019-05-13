@@ -1,7 +1,6 @@
 # coding=utf-8
 from typing import Optional
 
-from src.endpoint.thread.single_coder_test_thread import SingleCoderTestThread
 from src.GUI.globals_signals import globalSignals
 from src.GUI.graphics import GraphicController
 from src.channel.cascadecodec import CascadeCodec
@@ -9,6 +8,7 @@ from src.channel.enum_noise_mode import EnumNoiseMode
 from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver.Interleaver import Interleaver
 from src.config.config_processor import ConfigProcessor
+from src.endpoint.thread.single_coder_test_thread import SingleCoderTestThread
 from src.helper.error.exception.codding_exception import CodingException
 from src.logger import log
 from src.statistics.object.statistic_collector import StatisticCollector
@@ -79,30 +79,30 @@ class CascadeCoderTestThread(SingleCoderTestThread):
         try:
             if self._flg_auto:
                 statistic = StatisticCollector(
-                    flg_cascade=True,
-                    first_coder=self._firstCoder,
-                    second_coder=self._secondCoder,
-                    test_result=self._auto_test(),
-                    length_first_interleaver=self._length_first_interleaver,
-                    length_second_interleaver=self._length_second_interleaver,
-                    begin_noise=self._start_t,
-                    end_noise=self._finish_t,
-                    quantity_of_steps_in_cycle=self._quantity_steps
+                    flgCascade=True,
+                    firstCoder=self._firstCoder,
+                    secondCoder=self._secondCoder,
+                    testResult=self._auto_test(),
+                    lengthFirstInterleaver=self._length_first_interleaver,
+                    lengthSecondInterleaver=self._length_second_interleaver,
+                    beginNoise=self._start_t,
+                    endNoise=self._finish_t,
+                    quantityStepsInCycle=self._quantity_steps
                 )
 
                 if ConfigProcessor().config.graphic_setting.flg_enabled:
                     GraphicController().draw_graphic(statistic)
             else:
                 statistic = StatisticCollector(
-                    flg_cascade=True,
-                    first_coder=self._firstCoder,
-                    second_coder=self._secondCoder,
-                    test_result=[self._single_test()],
-                    length_first_interleaver=self._length_first_interleaver,
-                    length_second_interleaver=self._length_second_interleaver,
-                    begin_noise=self._start_t,
-                    end_noise=self._finish_t,
-                    quantity_of_steps_in_cycle=self._quantity_steps
+                    flgCascade=True,
+                    firstCoder=self._firstCoder,
+                    secondCoder=self._secondCoder,
+                    testResult=[self._single_test()],
+                    lengthFirstInterleaver=self._length_first_interleaver,
+                    lengthSecondInterleaver=self._length_second_interleaver,
+                    beginNoise=self._start_t,
+                    endNoise=self._finish_t,
+                    quantityStepsInCycle=self._quantity_steps
                 )
 
             globalSignals.stepFinished.emit(int(self._MAX_PERCENT))

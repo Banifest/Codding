@@ -22,7 +22,7 @@ class ErrorHandler(metaclass=Singleton):
     ) -> None:
         globalSignals.ended.emit()
         QMessageBox().warning(
-            None,
+            ref_window,
             ErrorHandler.__UNKNOWN_ERROR if rcx_exception is None else rcx_exception.get_message(),
             ErrorHandler.__UNKNOWN_ERROR if rcx_exception is None else rcx_exception.get_long_message(),
             QMessageBox.Ok

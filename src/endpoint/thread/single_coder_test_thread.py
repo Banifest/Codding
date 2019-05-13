@@ -133,10 +133,10 @@ class SingleCoderTestThread(QThread):
             globalSignals.stepFinished.emit(int(progress))
 
             case_result_list.append(CaseResult(
-                successful_bits=transfer_statistic.quantity_successful_bits,
-                repair_bits=transfer_statistic.quantity_repair_bits,
-                changed_bits=transfer_statistic.quantity_changed_bits,
-                error_bits=transfer_statistic.quantity_error_bits
+                successfulBits=transfer_statistic.quantity_successful_bits,
+                repairBits=transfer_statistic.quantity_repair_bits,
+                changedBits=transfer_statistic.quantity_changed_bits,
+                errorBits=transfer_statistic.quantity_error_bits
             ))
 
         return TestResult(
@@ -180,30 +180,30 @@ class SingleCoderTestThread(QThread):
         try:
             if self._flg_auto:
                 statistic = StatisticCollector(
-                    flg_cascade=False,
-                    first_coder=self._currentCoder,
-                    second_coder=None,
-                    test_result=self._auto_test(),
-                    length_first_interleaver=self._length_interleaver,
-                    length_second_interleaver=None,
-                    begin_noise=self._start_t,
-                    end_noise=self._finish_t,
-                    quantity_of_steps_in_cycle=self._quantity_steps
+                    flgCascade=False,
+                    firstCoder=self._currentCoder,
+                    secondCoder=None,
+                    testResult=self._auto_test(),
+                    lengthFirstInterleaver=self._length_interleaver,
+                    lengthSecondInterleaver=None,
+                    beginNoise=self._start_t,
+                    endNoise=self._finish_t,
+                    quantityStepsInCycle=self._quantity_steps
                 )
                 # Graphic should showing only for Cycle of the test
                 if ConfigProcessor().config.graphic_setting.flg_enabled:
                     GraphicController().draw_graphic(statistic)
             else:
                 statistic = StatisticCollector(
-                    flg_cascade=False,
-                    first_coder=self._currentCoder,
-                    second_coder=None,
-                    test_result=[self._single_test()],
-                    length_first_interleaver=self._length_interleaver,
-                    length_second_interleaver=None,
-                    begin_noise=self._start_t,
-                    end_noise=self._finish_t,
-                    quantity_of_steps_in_cycle=self._quantity_steps
+                    flgCascade=False,
+                    firstCoder=self._currentCoder,
+                    secondCoder=None,
+                    testResult=[self._single_test()],
+                    lengthFirstInterleaver=self._length_interleaver,
+                    lengthSecondInterleaver=None,
+                    beginNoise=self._start_t,
+                    endNoise=self._finish_t,
+                    quantityStepsInCycle=self._quantity_steps
                 )
 
             globalSignals.stepFinished.emit(int(self._MAX_PERCENT))

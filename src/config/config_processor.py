@@ -17,7 +17,7 @@ class ConfigProcessor(metaclass=Singleton):
     def __init__(self):
         self._config = Config()
 
-    def create_standard_config(self):
+    def _create_standard_config(self):
         config_file = open(ConfigProcessor.__CONFIG_FILE_NAME, mode="w")
         config_file.write(jsonpickle.encode(self._config, unpicklable=False))
         config_file.close()
@@ -34,4 +34,4 @@ class ConfigProcessor(metaclass=Singleton):
             self._config.graphic_setting = Config.GraphicSetting(**parsed_config[ConfigProcessor.__GRAPHIC_CONFIG])
             config_file.close()
         else:
-            self.create_standard_config()
+            self._create_standard_config()

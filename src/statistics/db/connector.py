@@ -2,6 +2,7 @@
 from typing import Optional
 
 from sqlalchemy import create_engine
+from sqlalchemy.engine import Connection, Engine
 
 from src.config.config_processor import ConfigProcessor
 from src.helper.pattern.singleton import Singleton
@@ -18,7 +19,7 @@ class Connector(metaclass=Singleton):
             self,
             login: Optional[str] = None,
             password: Optional[str] = None,
-    ):
+    ) -> Connection:
         """
         Method for getting connection to native(remote) database
         :param login: login for user of database
@@ -39,7 +40,7 @@ class Connector(metaclass=Singleton):
             self,
             login: str,
             password: str,
-    ):
+    ) -> Engine:
         """
         Method for getting engine to remote database Heroku
         :param login: login for user of database

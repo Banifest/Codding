@@ -1,6 +1,6 @@
 # coding=utf-8
 class Singleton(type):
-    __instances = {}
+    __instances: dict = {}
 
     def __call__(cls, *args, **kwargs):
         if cls not in cls.__instances:
