@@ -2,11 +2,12 @@
 from sqlalchemy import Table, Column, Integer, Boolean, Float, String
 from sqlalchemy.dialects.postgresql import UUID
 
+from src.statistics.db.table.enum_coder_table_name import EnumCoderTableName
 from src.statistics.db.table.statmetadata import StatMetaData
 
 coder_table = Table(
-    'coder',
-    StatMetaData().get_metadata(),
+    EnumCoderTableName.CODER.value,
+    StatMetaData().metadata,
     Column('guid', UUID(as_uuid=True), primary_key=True),
     Column('coder_type', Integer),
     Column('coder_speed', Float),

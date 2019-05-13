@@ -3,11 +3,12 @@
 from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID, TIMESTAMP
 
+from src.statistics.db.table.enum_coder_table_name import EnumCoderTableName
 from src.statistics.db.table.statmetadata import StatMetaData
 
 case_table = Table(
-    'case_result',
-    StatMetaData().get_metadata(),
+    EnumCoderTableName.CASE_RESULT.value,
+    StatMetaData().metadata,
     Column('guid', UUID(as_uuid=True), primary_key=True),
     Column('test_timestamp', TIMESTAMP, ForeignKey("test_result.timestamp")),
     Column('count_correct_bits', Integer),

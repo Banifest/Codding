@@ -6,7 +6,7 @@ from src.helper.error.exception.template_exception import TemplateException
 
 class SettingException(GraphicalException):
     _message = EnumExceptionStandardMessage.GUI_SETTING_EXCEPTION.value
-    _long_message = EnumExceptionStandardMessage.GUI_SETTING_EXCEPTION.value
+    _longMessage = EnumExceptionStandardMessage.GUI_SETTING_EXCEPTION.value
 
     INCORRECT_POLYNOMIAL: TemplateException = TemplateException(
         message="Incorrect values for polynomial",

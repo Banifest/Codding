@@ -2,6 +2,8 @@
 from typing import Optional
 
 from sqlalchemy import create_engine
+# Need for hints
+# noinspection PyProtectedMember
 from sqlalchemy.engine import Connection, Engine
 
 from src.config.config_processor import ConfigProcessor
@@ -9,11 +11,8 @@ from src.helper.pattern.singleton import Singleton
 
 
 class Connector(metaclass=Singleton):
-    _connection = None
-    _engine = None
-
-    def __init__(self):
-        pass
+    _connection = Connection
+    _engine = Engine
 
     def get_connection(
             self,
@@ -53,6 +52,8 @@ class Connector(metaclass=Singleton):
             password = ConfigProcessor().config.db_setting.password
 
         if self._engine is None:
+            # This is connection string. This statement shouldn't checked
+            # noinspection SpellCheckingInspection
             self._engine = create_engine(
                 "postgresql+psycopg2://{0}:{1}@{2}:{3}/{4}".format(
                     login,

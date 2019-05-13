@@ -6,10 +6,8 @@ import jsonpickle
 
 from src.coders.abstract_coder import AbstractCoder
 from src.helper.pattern.singleton import Singleton
-# noinspection PyMethodMayBeStatic
 from src.statistics.db.connector import Connector
 from src.statistics.db.table import coder_table, result_table, case_table
-# noinspection PyMethodMayBeStatic
 from src.statistics.object.statistic_collector import StatisticCollector
 
 
@@ -19,7 +17,7 @@ class TestResultSerializer(metaclass=Singleton):
     def serialize_to_db(self, statistic_collector: StatisticCollector):
         connection = Connector().get_connection()
 
-        # Создание первого кодера
+        # Generate UUID first coder
         first_coder_guid = uuid.uuid4()
         first_coder: AbstractCoder = statistic_collector.firstCoder
         connection.execute(coder_table.insert().values(
@@ -36,7 +34,7 @@ class TestResultSerializer(metaclass=Singleton):
             coder_guid=first_coder_guid,
             connection=connection
         )
-
+        # Generate second coder
         if statistic_collector.flgCascade:
             second_coder_guid = uuid.uuid4()
             second_coder: AbstractCoder = statistic_collector.secondCoder
@@ -75,9 +73,9 @@ class TestResultSerializer(metaclass=Singleton):
                     guid=uuid.uuid4(),
                     test_timestamp=timestamp,
                     count_correct_bits=case_iter.successfulBits,
-                    count_incorrect_bits=case_iter.error_bits,
-                    count_repair_bits=case_iter.repair_bits,
-                    count_changed_bits=case_iter.changed_bits
+                    count_incorrect_bits=case_iter.errorBits,
+                    count_repair_bits=case_iter.repairBits,
+                    count_changed_bits=case_iter.changedBits
                 ))
 
     def serialize_to_json(self, statistic_collector: StatisticCollector, file_name: str = "lastResult.json") -> None:

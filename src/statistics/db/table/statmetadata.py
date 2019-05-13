@@ -9,9 +9,8 @@ class StatMetaData(metaclass=Singleton):
     _metadata: MetaData = None
 
     def __init__(self):
-        self._metadata = None
+        self._metadata = MetaData()
 
-    def get_metadata(self):
-        if self._metadata is None:
-            self._metadata = MetaData()
+    @property
+    def metadata(self) -> MetaData:
         return self._metadata
