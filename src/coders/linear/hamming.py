@@ -34,21 +34,21 @@ class Coder(abstract_coder.AbstractCoder):
         self._matrixTransformation = []
 
         for x in range(self.lengthAdditional):
-            temp: list = []
+            matrix_row: list = []
             flag = True
-            # Количество символов требуемых для зануления вначале
-            count = (1 << x) - 1
-            for y in range((1 << x) - 1):
-                temp.append(0)
+            # Count nullable symbols
+            count_null_symbols = (1 << x) - 1
+            for y in range((2 ** x) - 1):
+                matrix_row.append(0)
 
-            while count < self.lengthTotal:
-                for y in range(1 << x):
-                    temp.append(1) if flag else temp.append(0)
-                    count += 1
-                    if count >= self.lengthTotal:
+            while count_null_symbols < self.lengthTotal:
+                for y in range(2 ** x):
+                    matrix_row.append(1) if flag else matrix_row.append(0)
+                    count_null_symbols += 1
+                    if count_null_symbols >= self.lengthTotal:
                         break
                 flag: bool = not flag
-            self._matrixTransformation.append(temp)
+            self._matrixTransformation.append(matrix_row)
         # noinspection PyTypeChecker
         self._matrixTransformation = np.transpose(np.array(self._matrixTransformation))
 
@@ -87,27 +87,26 @@ class Coder(abstract_coder.AbstractCoder):
         answer: list = []
         status: list = list((np.dot(code, self._matrixTransformation) % 2)[0])
         status.reverse()
-        status: int = bit_list_to_int(status)
-        if status != 0:
+        status_int_form: int = bit_list_to_int(status)
+        if status_int_form != 0:
             log.debug("Обнаруженна(ы) ошибка(и)")
 
-            if len(code[0]) > status - 1:
-                code[0][status - 1] = (code[0][status - 1] + 1) % 2
-                old_status = status
-                status = bit_list_to_int(list((np.dot(code, self._matrixTransformation) % 2)[0]))
+            if len(code[0]) > status_int_form - 1:
+                code[0][status_int_form - 1] = (code[0][status_int_form - 1] + 1) % 2
+                old_status = status_int_form
+                status_int_form = bit_list_to_int(num=list((np.dot(code, self._matrixTransformation) % 2)[0]))
 
-                if status != 0:
-                    log.debug("Не удалось успешно исправить обнаруженные ошибки")
-                    # raise CodingException("Не удалось успешно исправить обнаруженные ошибки")
-                log.debug("Произошло успешное исправление ошибки в бите под номером {0}".format(old_status))
+                if status_int_form != 0:
+                    log.debug("Impossible correction this package. But errors found")
+                log.debug("Successfully repair bit in position {0}".format(old_status))
             else:
-                log.debug("Не удалось успешно исправить обнаруженные ошибки")
-                # raise CodingException("Не удалось успешно исправить обнаруженные ошибки")
+                log.debug("Impossible correction this package")
         count: int = 0
         step: int = 0
-        for x in code[0]:
-            if math.log2(count + 1) != int(math.log2(count + 1)) or step >= self.lengthAdditional:
-                answer.append(x)
+        for iterator in code[0]:
+            if math.log2(count + 1) != int(math.log2(count + 1)) \
+                    or step >= self.lengthAdditional:
+                answer.append(iterator)
             else:
                 step += 1
             count += 1
@@ -134,6 +133,7 @@ class Coder(abstract_coder.AbstractCoder):
         }
 
     def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
+        # noinspection PyUnresolvedReferences
         connection.execute(hamming_table.insert().values(
             guid=coder_guid,
             matrix=self._matrixTransformation.tolist()

@@ -17,11 +17,11 @@ from src.statistics.db.table import cyclic_table
 
 
 class Coder(abstract_coder.AbstractCoder):
-    _name = "Циклический"
+    _name = "Cyclical"
     polynomial: plm.Polynomial
     type_of_coder = EnumCodersType.CYCLICAL
-    matrix_G: np.matrix  # порождающая матрица
-    matrix_H: np.matrix  # проверочная матрицал
+    matrix_G: np.matrix  # Generate matrix
+    matrix_H: np.matrix  # Check matrix
 
     def __init__(self, information_length: int, polynomial: int):
         log.debug("Create cyclical coder")
