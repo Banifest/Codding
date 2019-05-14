@@ -10,15 +10,17 @@ from src.logger import log
 
 if __name__ == '__main__':
     ConfigProcessor().parse_config()
-    if AppParser().app_mode == EnumAppMode.GUI:
-        try:
-            log.info("Start program")
+    try:
+        log.info("Start program")
+        if AppParser().app_mode == EnumAppMode.GUI:
+            log.info("GUI mode")
             controller = MainController()
-            log.info("End program")
-        except Exception as e:
-            print(e)
-            log.critical("Unhandled exception")
-    elif AppParser().app_mode == EnumAppMode.CONSOLE:
-        ConsoleProcessor().transfer()
+        elif AppParser().app_mode == EnumAppMode.CONSOLE:
+            log.info("Console mode")
+            ConsoleProcessor().transfer()
+        log.info("End program")
+    except Exception as error:
+        print(error)
+        log.critical("Unhandled exception")
 else:
-    raise ApplicationException("It doesn't module")
+    raise ApplicationException("Cannot be import this as module ({0})".format(__file__))
