@@ -20,16 +20,15 @@ class __ObserverMeta(ABCMeta):
 
 
 class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta):
-    type_of_coder: EnumCodersType
     _name: str = ""
-    coding_information: int = 0
+    typeOfCoder: EnumCodersType = EnumCodersType.ABSTRACT
     countAdditional: int = 0
     lengthTotal: int = 0
     lengthInformation: int = 0
-    is_div_into_package = True
+    isDivIntoPackage: bool = True
 
     @staticmethod
-    def get_inheritors_coder_classes() -> list:
+    def get_inheritors_coder_classes() -> List:
         return __class__.inheritors_classes[__class__]
 
     @property
@@ -56,7 +55,6 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
         """
         raise NotImplementedError
 
-    @abstractmethod
     def get_redundancy(self) -> float:
         """
         Method for get redundancy information
@@ -65,7 +63,6 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
         """
         return self.countAdditional / self.lengthInformation
 
-    @abstractmethod
     def get_speed(self) -> float:
         """
         Method for get coderSpeed coder
@@ -74,7 +71,7 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
         """
         return self.lengthInformation / self.lengthTotal
 
-    def try_normalization(self, bit_list: list) -> list:
+    def try_normalization(self, bit_list: List[int]) -> List[int]:
         """
         Method for try normalization input information for successful encoding
         if normalization is possible return: bit_list else raise CodingException

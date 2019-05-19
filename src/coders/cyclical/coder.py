@@ -5,7 +5,6 @@ from typing import Optional
 from uuid import UUID
 
 import math
-import numpy as np
 from numpy.polynomial import polynomial as plm
 
 from src.coders import abstract_coder
@@ -18,10 +17,8 @@ from src.statistics.db.table import cyclic_table
 
 class Coder(abstract_coder.AbstractCoder):
     _name = "Cyclical"
-    polynomial: plm.Polynomial
-    type_of_coder = EnumCodersType.CYCLICAL
-    matrix_G: np.matrix  # Generate matrix
-    matrix_H: np.matrix  # Check matrix
+    _polynomial: plm.Polynomial
+    typeOfCoder = EnumCodersType.CYCLICAL
 
     def __init__(self, information_length: int, polynomial: int):
         log.debug("Create cyclical coder")
@@ -29,15 +26,15 @@ class Coder(abstract_coder.AbstractCoder):
         self.lengthInformation = information_length
         self.lengthAdditional = int(math.log2(polynomial))
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
-        self.polynomial = plm.Polynomial(int_to_bit_list(polynomial, rev=True))
+        self._polynomial = plm.Polynomial(int_to_bit_list(polynomial, rev=True))
 
     def encoding(self, information: list):
-        mod: plm.Polynomial = plm.Polynomial([0] * self.lengthAdditional + information) % self.polynomial
+        mod: plm.Polynomial = plm.Polynomial([0] * self.lengthAdditional + information) % self._polynomial
         return [int(x) % 2 for x in mod] + [0] * (self.lengthAdditional - len(mod)) + information
 
     def decoding(self, information: list):
-        syndrome: plm.Polynomial = plm.Polynomial(information) % self.polynomial
-        for x in range(len(self.polynomial)):
+        syndrome: plm.Polynomial = plm.Polynomial(information) % self._polynomial
+        for x in range(len(self._polynomial)):
             if sum([int(x) % 2 for x in syndrome]) != 0:
                 arr_error: list = [int(x) % 2 for x in syndrome]
                 for iterator in range(len(arr_error)):
@@ -48,27 +45,18 @@ class Coder(abstract_coder.AbstractCoder):
 
         return information[self.lengthAdditional:]
 
-    def get_redundancy(self) -> float:
-        return super().get_redundancy()
-
-    def get_speed(self) -> float:
-        return super().get_speed()
-
-    def try_normalization(self, bit_list: list) -> list:
-        return super().try_normalization(bit_list)
-
     def to_json(self) -> dict:
         return {'name': self.name,
                 'length information word': self.lengthInformation,
                 'length additional bits': self.lengthAdditional,
                 'length coding word': self.lengthTotal,
-                'polynomial': [int(x) for x in self.polynomial],
+                '_polynomial': [int(x) for x in self._polynomial],
                 'speed': self.get_speed()}
 
     def save_to_database(self, coder_guid: UUID, connection: Connection) -> None:
         connection.execute(cyclic_table.insert().values(
             guid=coder_guid,
-            polynomial=[int(iterator) for iterator in list(self.polynomial)],
+            polynomial=[int(iterator) for iterator in list(self._polynomial)],
         ))
 
     class CyclicalCoderParser(AbstractGroupParser):
@@ -88,21 +76,21 @@ class Coder(abstract_coder.AbstractCoder):
             )
             self._prefix = prefix
 
-            self._argument_parser.add_argument(
+            self._argumentParser.add_argument(
                 "-{0}cclpl".format(prefix), "--{0}{1}".format(prefix, self.__PACKAGE_LENGTH),
                 type=int,
                 help="""Length of package for Cyclical coder"""
             )
 
-            self._argument_parser.add_argument(
+            self._argumentParser.add_argument(
                 "-{0}cclp".format(prefix), "--{0}{1}".format(prefix, self.__POLYNOMIAL),
                 type=int,
                 help="""Polynomial for Cyclical coder"""
             )
 
             # We should parse arguments only for unique coder
-            if self._argument_group is None:
-                self.arguments = vars(self._argument_parser.parse_args())
+            if self._argumentGroup is None:
+                self.arguments = vars(self._argumentParser.parse_args())
 
         @property
         def cyclic_package_length(self) -> int:

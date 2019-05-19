@@ -9,9 +9,9 @@ class SettingException(GraphicalException):
     _longMessage = EnumExceptionStandardMessage.GUI_SETTING_EXCEPTION.value
 
     INCORRECT_POLYNOMIAL: TemplateException = TemplateException(
-        message="Incorrect values for polynomial",
+        message="Incorrect values for _polynomial",
         long_message="""
-                    Specified correct values for polynomial.
+                    Specified correct values for _polynomial.
                     Values of attribute non-changed.  
                     """
     )

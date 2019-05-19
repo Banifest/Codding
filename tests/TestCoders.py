@@ -37,7 +37,7 @@ class TestConvolutionalCoder(unittest.TestCase):
         # так как d(min)=4, кодер не может исправить однозначно 3 подряд идущие ошибки
 
 
-class TesthammingCoder(unittest.TestCase):
+class TestHammingCoder(unittest.TestCase):
     def test_init(self):
         first_coder: hammingCoder = hammingCoder(4)
         self.assertTrue(first_coder.lengthTotal == 7)
@@ -133,6 +133,6 @@ class TestReedMullerCoder(unittest.TestCase):
 
         dec_code = test_coder.decoding(enc_code)
         print(dec_code)
-        # print(test_coder.matrix_G)
+        # print(test_coder.matrixG)
 
         pass

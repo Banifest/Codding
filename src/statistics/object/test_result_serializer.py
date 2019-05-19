@@ -22,7 +22,7 @@ class TestResultSerializer(metaclass=Singleton):
         first_coder: AbstractCoder = statistic_collector.firstCoder
         connection.execute(coder_table.insert().values(
             guid=first_coder_guid,
-            coder_type=first_coder.type_of_coder.value,
+            coder_type=first_coder.typeOfCoder.value,
             coder_speed=first_coder.get_speed(),
             input_length=first_coder.lengthInformation,
             additional_length=first_coder.countAdditional,
@@ -40,7 +40,7 @@ class TestResultSerializer(metaclass=Singleton):
             second_coder: AbstractCoder = statistic_collector.secondCoder
             connection.execute(coder_table.insert().values(
                 guid=second_coder_guid,
-                coder_type=second_coder.type_of_coder.value,
+                coder_type=second_coder.typeOfCoder.value,
                 coder_speed=second_coder.get_speed(),
                 input_length=second_coder.lengthInformation,
                 additional_length=second_coder.countAdditional,

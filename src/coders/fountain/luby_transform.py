@@ -18,8 +18,7 @@ from src.statistics.db.table import fountain_table
 
 
 class Coder(abstract_coder.AbstractCoder):
-    type_of_coder = EnumCodersType.FOUNTAIN
-
+    typeOfCoder = EnumCodersType.FOUNTAIN
     _name = "Fountain"
     # quantity information blocks
     _countCodingBlocks: int
@@ -131,15 +130,6 @@ class Coder(abstract_coder.AbstractCoder):
         answer = answer[:self.lengthInformation]
         return answer
 
-    def get_redundancy(self) -> float:
-        return super().get_redundancy()
-
-    def get_speed(self) -> float:
-        return super().get_speed()
-
-    def try_normalization(self, bit_list: list) -> list:
-        return super().try_normalization(bit_list)
-
     def to_json(self) -> dict:
         return {
             'name': self.name,
@@ -176,27 +166,27 @@ class Coder(abstract_coder.AbstractCoder):
             )
             self._prefix = prefix
 
-            self._argument_parser.add_argument(
+            self._argumentParser.add_argument(
                 "-{0}fntpl".format(prefix), "--{0}{1}".format(prefix, self.__PACKAGE_LENGTH),
                 type=int,
                 help="""Length of package for Fountain coder"""
             )
 
-            self._argument_parser.add_argument(
+            self._argumentParser.add_argument(
                 "-{0}fntbs".format(prefix), "--{0}{1}".format(prefix, self.__BLOCK_SIZE),
                 type=int,
                 help="""Size of block of Fountain coder"""
             )
 
-            self._argument_parser.add_argument(
+            self._argumentParser.add_argument(
                 "-{0}fntqb".format(prefix), "--{0}{1}".format(prefix, self.__QUANTITY_BLOCK),
                 type=int,
                 help="""Quantity of blocks of Fountain coder"""
             )
 
             # We should parse arguments only for unique coder
-            if self._argument_group is None:
-                self.arguments = vars(self._argument_parser.parse_args())
+            if self._argumentGroup is None:
+                self.arguments = vars(self._argumentParser.parse_args())
 
         @property
         def fountain_package_length(self) -> int:

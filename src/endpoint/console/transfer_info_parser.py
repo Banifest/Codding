@@ -23,14 +23,14 @@ class TransferInfoParser(AbstractGroupParser):
             argument_group=argument_group
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-tti", "--{0}".format(self.__TRANSFER_INFO_PARAMETER),
             type=int,
             required=False,
             help="""Information which will be transferred via chanel"""
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-tqc", "--{0}".format(self.__TEST_QUANTITY_CYCLES),
             type=int,
             required=False,

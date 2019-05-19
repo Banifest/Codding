@@ -48,7 +48,7 @@ class CascadeCodec(codec.Codec):
     def transfer_one_step(self, information: list) -> Codec.TransferStatistic:
         #  Разделение на пакеты
         package_list = [information]
-        if self._firstCoder.is_div_into_package:
+        if self._firstCoder.isDivIntoPackage:
             package_list = chanel.Chanel().divide_on_blocks(
                 information=information,
                 block_len=self._firstCoder.lengthInformation,

@@ -31,7 +31,7 @@ class CodecParser(AbstractGroupParser):
             argument_group=argument_group
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-cm", "--{0}".format(__class__.__CODEC_OPTION),
             required=False,
             type=str,
@@ -43,7 +43,7 @@ class CodecParser(AbstractGroupParser):
             )
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-nt", "--{0}".format(__class__.__NOISE_TYPE_OPTION),
             required=False,
             type=str,
@@ -56,42 +56,42 @@ class CodecParser(AbstractGroupParser):
             )
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-ns", "--{0}".format(__class__.__NOISE_START_OPTION),
             required=False,
             type=float,
             help="""Start of noise(from 1.0 to 50.0)"""
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-ne", "--{0}".format(__class__.__NOISE_END_OPTION),
             required=False,
             type=float,
             help="""End of noise(from 1.0 to 50.0), but lt Start of noise"""
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-ift", "--{0}".format(self.__INFORMATION_FOR_TEST),
             required=False,
             type=int,
             help="""Information for testing process"""
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-npl", "--{0}".format(self.__NOISE_PACKAGE_LENGTH),
             required=False,
             type=int,
             help="""Length of package"""
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-npp", "--{0}".format(self.__NOISE_PACKAGE_PERIOD),
             required=False,
             type=int,
             help="""Period of package"""
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-tqc", "--{0}".format(self.__TEST_QUANTITY_CYCLES),
             type=int,
             required=False,
@@ -99,8 +99,8 @@ class CodecParser(AbstractGroupParser):
         )
 
         # We should parse arguments only for unique coder
-        if self._argument_group is None:
-            self._arguments = vars(self._argument_parser.parse_args())
+        if self._argumentGroup is None:
+            self._arguments = vars(self._argumentParser.parse_args())
 
     @property
     def codec_type(self) -> EnumCodecType:

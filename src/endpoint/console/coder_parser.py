@@ -26,7 +26,7 @@ class CoderParser(AbstractGroupParser):
             argument_group=argument_group
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-fct", "--{0}".format(self.__FIRST_CODER_TYPE),
             type=int,
             choices=(
@@ -43,7 +43,7 @@ class CoderParser(AbstractGroupParser):
             )
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-sct", "--{0}".format(self.__SECOND_CODER_TYPE),
             type=int,
             choices=(
@@ -60,20 +60,20 @@ class CoderParser(AbstractGroupParser):
             )
         )
 
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-firl", "--{0}".format(self.__FIRST_INTERLEAVER_LEN),
             type=int,
             help="""First length of interleaver interval"""
         )
-        self._argument_parser.add_argument(
+        self._argumentParser.add_argument(
             "-sirl", "--{0}".format(self.__SECOND_INTERLEAVER_LEN),
             type=int,
             help="""First length of interleaver interval"""
         )
 
         # We should parse arguments only for unique coder
-        if self._argument_group is None:
-            self.arguments = vars(self._argument_parser.parse_args())
+        if self._argumentGroup is None:
+            self.arguments = vars(self._argumentParser.parse_args())
 
     @property
     def first_interleaver_length(self) -> Optional[int]:

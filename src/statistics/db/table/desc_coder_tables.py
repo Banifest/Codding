@@ -21,7 +21,7 @@ cyclic_table = Table(
     Column('matrix_g', ARRAY(BigInteger)),
     # array[][]
     Column('matrix_h', ARRAY(BigInteger)),
-    Column('polynomial', ARRAY(Integer))
+    Column('_polynomial', ARRAY(Integer))
 )
 
 fountain_table = Table(

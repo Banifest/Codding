@@ -16,7 +16,7 @@ from src.statistics.db.table import hamming_table
 
 
 class Coder(abstract_coder.AbstractCoder):
-    type_of_coder = EnumCodersType.HAMMING
+    typeOfCoder = EnumCodersType.HAMMING
     _name = "Hamming"
     _matrixTransformation: List[Union[int, List]] = []
 
@@ -24,25 +24,25 @@ class Coder(abstract_coder.AbstractCoder):
         log.debug("Create of Hamming coder")
 
         # sum (2**(n-1)-1) from 1 to n must be >= length_information for correct check
-        for x in range(1, length_information):
-            if 2 ** x - x - 1 >= length_information:
-                self.lengthAdditional = x
+        for iterator in range(1, length_information):
+            if 2 ** iterator - iterator - 1 >= length_information:
+                self.lengthAdditional = iterator
                 break
 
         self.lengthInformation = length_information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
         self._matrixTransformation = []
 
-        for x in range(self.lengthAdditional):
+        for iterator in range(self.lengthAdditional):
             matrix_row: list = []
             flag = True
             # Count nullable symbols
-            count_null_symbols = (1 << x) - 1
-            for y in range((2 ** x) - 1):
+            count_null_symbols = (1 << iterator) - 1
+            for y in range((2 ** iterator) - 1):
                 matrix_row.append(0)
 
             while count_null_symbols < self.lengthTotal:
-                for y in range(2 ** x):
+                for y in range(2 ** iterator):
                     matrix_row.append(1) if flag else matrix_row.append(0)
                     count_null_symbols += 1
                     if count_null_symbols >= self.lengthTotal:
@@ -112,15 +112,6 @@ class Coder(abstract_coder.AbstractCoder):
             count += 1
         return answer
 
-    def get_speed(self) -> float:
-        return float(self.lengthInformation) / float(self.lengthTotal)
-
-    def try_normalization(self, bit_list: list) -> list:
-        return super().try_normalization(bit_list)
-
-    def get_redundancy(self) -> float:
-        return super().get_redundancy()
-
     def to_json(self) -> dict:
         # noinspection PyUnresolvedReferences
         return {
@@ -159,15 +150,15 @@ class Coder(abstract_coder.AbstractCoder):
             )
             self._prefix = prefix
 
-            self._argument_parser.add_argument(
+            self._argumentParser.add_argument(
                 "-{0}hmgpl".format(prefix), "--{0}{1}".format(prefix, self.__PACKAGE_LENGTH),
                 type=int,
                 help="""Length of package for Hamming coder"""
             )
 
             # We should parse arguments only for unique coder
-            if self._argument_group is None:
-                self.arguments = vars(self._argument_parser.parse_args())
+            if self._argumentGroup is None:
+                self.arguments = vars(self._argumentParser.parse_args())
 
     @staticmethod
     def get_coder_parameters(
