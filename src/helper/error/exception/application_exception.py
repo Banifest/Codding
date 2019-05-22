@@ -16,7 +16,7 @@ class ApplicationException(Exception):
             message: Optional[str] = None,
             long_message: Optional[str] = None,
             message_type: EnumMessageType = EnumMessageType.ERROR,
-            additional_information: List[str] = None,
+            additional_information: List[object] = None,
             previous: Optional[Exception] = None
     ):
 
@@ -36,7 +36,7 @@ class ApplicationException(Exception):
         self._previous = previous
 
     @property
-    def previous(self):
+    def previous(self) -> Exception:
         return self._previous
 
     def __str__(self) -> str:
@@ -46,8 +46,10 @@ class ApplicationException(Exception):
             self._longMessage
         )
 
-    def get_message(self) -> str:
+    @property
+    def message(self) -> str:
         return self._message
 
-    def get_long_message(self) -> str:
+    @property
+    def long_message(self) -> str:
         return self._longMessage

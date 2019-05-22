@@ -131,7 +131,7 @@ class Coder(abstract_coder.AbstractCoder):
 
     def to_json(self) -> dict:
         return {'name': self.name,
-                'length information word': self.lengthInformation,
+                'length _information word': self.lengthInformation,
                 'length additional bits': self.lengthAdditional,
                 'length coding word': self.lengthTotal,
                 'matrix of generating': self.matrix_G.tolist(),

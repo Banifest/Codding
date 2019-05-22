@@ -12,7 +12,7 @@ class ParametersParseException(ApplicationException):
 
     INFORMATION_NOT_SERIALIZABLE: TemplateException = TemplateException(
         message='Information cannot be serialize',
-        long_message='Specify integer in test information field'
+        long_message='Specify integer in test _information field'
     )
 
     APPLICATION_MODE_UNDEFINED: TemplateException = TemplateException(
@@ -26,8 +26,8 @@ class ParametersParseException(ApplicationException):
     )
 
     INTERLEAVER_SETTING: TemplateException = TemplateException(
-        message="Incorrect interleaver settings",
-        long_message="Change interleaver setting",
+        message="Incorrect _interleaver settings",
+        long_message="Change _interleaver setting",
     )
 
     _message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value

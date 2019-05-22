@@ -8,4 +8,4 @@ class EnumExceptionStandardMessage(Enum):
     GRAPHICAL_EXCEPTION = "Error occurs in graphical interface"
     GUI_SETTING_EXCEPTION = "Setting on GUI is incorrect"
     PARAMETERS_PARSE_CONSOLE_EXCEPTION = "Error occurs then parse parameters"
-    CODER_EXCEPTION = "Unknown exception with coder"
+    CODER_EXCEPTION = "Unknown exception with _coder"

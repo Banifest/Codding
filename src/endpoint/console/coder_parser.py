@@ -63,15 +63,15 @@ class CoderParser(AbstractGroupParser):
         self._argumentParser.add_argument(
             "-firl", "--{0}".format(self.__FIRST_INTERLEAVER_LEN),
             type=int,
-            help="""First length of interleaver interval"""
+            help="""First length of _interleaver interval"""
         )
         self._argumentParser.add_argument(
             "-sirl", "--{0}".format(self.__SECOND_INTERLEAVER_LEN),
             type=int,
-            help="""First length of interleaver interval"""
+            help="""First length of _interleaver interval"""
         )
 
-        # We should parse arguments only for unique coder
+        # We should parse arguments only for unique _coder
         if self._argumentGroup is None:
             self.arguments = vars(self._argumentParser.parse_args())
 

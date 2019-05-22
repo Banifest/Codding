@@ -17,7 +17,7 @@ class TestResultSerializer(metaclass=Singleton):
     def serialize_to_db(self, statistic_collector: StatisticCollector):
         connection = Connector().get_connection()
 
-        # Generate UUID first coder
+        # Generate UUID first _coder
         first_coder_guid = uuid.uuid4()
         first_coder: AbstractCoder = statistic_collector.firstCoder
         connection.execute(coder_table.insert().values(
@@ -34,7 +34,7 @@ class TestResultSerializer(metaclass=Singleton):
             coder_guid=first_coder_guid,
             connection=connection
         )
-        # Generate second coder
+        # Generate second _coder
         if statistic_collector.flgCascade:
             second_coder_guid = uuid.uuid4()
             second_coder: AbstractCoder = statistic_collector.secondCoder

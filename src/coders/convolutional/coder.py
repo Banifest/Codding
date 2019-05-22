@@ -14,7 +14,7 @@ from src.statistics.db.table import convolution_table
 
 class Coder(abstract_coder.AbstractCoder):
     """
-    Convolution coder class
+    Convolution _coder class
     """
     _name = "Сверточный"
     typeOfCoder = EnumCodersType.CONVOLUTION
@@ -36,7 +36,7 @@ class Coder(abstract_coder.AbstractCoder):
             count_output: int,
             count_register: int
     ):
-        log.debug("Create convolution coder")
+        log.debug("Create convolution _coder")
         self._countInput = count_input
         self._countOutput = count_output
         self._countRegisters = count_register
@@ -51,14 +51,14 @@ class Coder(abstract_coder.AbstractCoder):
 
     def get_speed(self) -> float:
         """
-        Method contain functionality for calculation speed of this coder configuration
+        Method contain functionality for calculation speed of this _coder configuration
         :return:
         """
         return 1 / self._countRegisters
 
     def get_redundancy(self) -> float:
         """
-        Method contain functionality for calculation redundancy of this coder configuration
+        Method contain functionality for calculation redundancy of this _coder configuration
         :return:
         """
         return self._countOutput
@@ -238,10 +238,10 @@ class Coder(abstract_coder.AbstractCoder):
             self._argumentParser.add_argument(
                 "-{0}cnvmr".format(prefix), "--{0}{1}".format(prefix, self.__QUANTITY_MEMORY_REGISTER),
                 type=int,
-                help="""Quantity of memory registers of counvolution coder"""
+                help="""Quantity of memory registers of counvolution _coder"""
             )
 
-            # We should parse arguments only for unique coder
+            # We should parse arguments only for unique _coder
             if self._argumentGroup is None:
                 self.arguments = vars(self._argumentParser.parse_args())
 

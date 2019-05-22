@@ -36,7 +36,7 @@ class CodecParser(AbstractGroupParser):
             required=False,
             type=str,
             choices=(EnumCodecType.SINGLE.value, EnumCodecType.CASCADE.value,),
-            help="""Coder mode({0} - codec contain only one coder, 
+            help="""Coder mode({0} - codec contain only one _coder, 
             {1} - codec contain cascade from two coders )""".format(
                 EnumCodecType.SINGLE.value,
                 EnumCodecType.CASCADE.value,
@@ -98,7 +98,7 @@ class CodecParser(AbstractGroupParser):
             help="""How much test will be do"""
         )
 
-        # We should parse arguments only for unique coder
+        # We should parse arguments only for unique _coder
         if self._argumentGroup is None:
             self._arguments = vars(self._argumentParser.parse_args())
 

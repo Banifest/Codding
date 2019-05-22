@@ -15,8 +15,7 @@ class MyTestCase(unittest.TestCase):
         #     coder_speed=1,
         #     input_length=1,
         #     additional_length=1,
-        #     # TODO add interleaver determining
-        #     interleaver=False,
+        #     _interleaver=False,
         #     description="test"
         # ))
         #

@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 from collections import defaultdict
 from typing import List
 
-from src.endpoint.console.iconsolecoder import IConsoleCoder
+from src.endpoint.console.i_console_coder import IConsoleCoder
 from src.helper.error.exception.codding_exception import CodingException
 from src.statistics.db.enum_coders_type import EnumCodersType
 from src.statistics.object.idatabaseserialize import IDataBaseSerialize
@@ -57,23 +57,23 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
 
     def get_redundancy(self) -> float:
         """
-        Method for get redundancy information
+        Method for get redundancy _information
         Returns:
-            redundancy information for this coder
+            redundancy _information for this _coder
         """
         return self.countAdditional / self.lengthInformation
 
     def get_speed(self) -> float:
         """
-        Method for get coderSpeed coder
+        Method for get coderSpeed _coder
         Returns:
-            float coderSpeed coder
+            float coderSpeed _coder
         """
         return self.lengthInformation / self.lengthTotal
 
     def try_normalization(self, bit_list: List[int]) -> List[int]:
         """
-        Method for try normalization input information for successful encoding
+        Method for try normalization input _information for successful encoding
         if normalization is possible return: bit_list else raise CodingException
         Args:
             bit_list: list consist of 0 or 1

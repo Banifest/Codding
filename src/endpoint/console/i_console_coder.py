@@ -14,6 +14,6 @@ class IConsoleCoder(ABC):
             prefix: str = ""
     ):
         """
-        Get Abstract interfaces for getting parameter coder
+        Get Abstract interfaces for getting parameter _coder
         """
         raise NotImplemented

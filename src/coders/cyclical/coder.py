@@ -21,7 +21,7 @@ class Coder(abstract_coder.AbstractCoder):
     typeOfCoder = EnumCodersType.CYCLICAL
 
     def __init__(self, information_length: int, polynomial: int):
-        log.debug("Create cyclical coder")
+        log.debug("Create cyclical _coder")
 
         self.lengthInformation = information_length
         self.lengthAdditional = int(math.log2(polynomial))
@@ -47,7 +47,7 @@ class Coder(abstract_coder.AbstractCoder):
 
     def to_json(self) -> dict:
         return {'name': self.name,
-                'length information word': self.lengthInformation,
+                'length _information word': self.lengthInformation,
                 'length additional bits': self.lengthAdditional,
                 'length coding word': self.lengthTotal,
                 '_polynomial': [int(x) for x in self._polynomial],
@@ -79,16 +79,16 @@ class Coder(abstract_coder.AbstractCoder):
             self._argumentParser.add_argument(
                 "-{0}cclpl".format(prefix), "--{0}{1}".format(prefix, self.__PACKAGE_LENGTH),
                 type=int,
-                help="""Length of package for Cyclical coder"""
+                help="""Length of package for Cyclical _coder"""
             )
 
             self._argumentParser.add_argument(
                 "-{0}cclp".format(prefix), "--{0}{1}".format(prefix, self.__POLYNOMIAL),
                 type=int,
-                help="""Polynomial for Cyclical coder"""
+                help="""Polynomial for Cyclical _coder"""
             )
 
-            # We should parse arguments only for unique coder
+            # We should parse arguments only for unique _coder
             if self._argumentGroup is None:
                 self.arguments = vars(self._argumentParser.parse_args())
 

@@ -15,7 +15,7 @@ class GraphicController(metaclass=Singleton):
     __SOURCE_CORRECT_BITS: str = "Quantity of source incorrect bits"
     __FROM_Y_LIMIT: float = 10 ** (-10)
     __TO_Y_LIMIT: float = 1.1
-    __Y_LABEL: str = "Chance of last information, P*10^-1"
+    __Y_LABEL: str = "Chance of last _information, P*10^-1"
     __X_LABEL: str = "Power of signal, Db"
 
     def draw_graphic(
@@ -49,7 +49,7 @@ class GraphicController(metaclass=Singleton):
             static_collector.beginNoise + number_of_step * noise_step_different
             for number_of_step in range(static_collector.quantityStepsInCycle)
         ]
-        # Plot information about transfer packages
+        # Plot _information about transfer packages
         plt.plot(
             test_noise_sequence,
             # Axis Y - result of test (Package)
@@ -59,7 +59,7 @@ class GraphicController(metaclass=Singleton):
             color='blue',
         )
 
-        # # Plot information about transfer bits
+        # # Plot _information about transfer bits
         # plt.plot(
         #     test_noise_sequence,
         #     # Axis Y - result of test (Bits)
@@ -67,7 +67,7 @@ class GraphicController(metaclass=Singleton):
         #      static_collector.testResult],
         # )
 
-        # Plot information about transfer based bits
+        # Plot _information about transfer based bits
         plt.plot(
             test_noise_sequence,
             # Axis Y - result of test (Bits)

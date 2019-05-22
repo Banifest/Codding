@@ -21,7 +21,7 @@ class Coder(abstract_coder.AbstractCoder):
     _matrixTransformation: List[Union[int, List]] = []
 
     def __init__(self, length_information: int):
-        log.debug("Create of Hamming coder")
+        log.debug("Create of Hamming _coder")
 
         # sum (2**(n-1)-1) from 1 to n must be >= length_information for correct check
         for iterator in range(1, length_information):
@@ -53,7 +53,7 @@ class Coder(abstract_coder.AbstractCoder):
         self._matrixTransformation = np.transpose(np.array(self._matrixTransformation))
 
     def encoding(self, information: list) -> list:
-        log.info("Encoding package {0} of Hamming coder".format(information))
+        log.info("Encoding package {0} of Hamming _coder".format(information))
         list_encoding_information: list = information
         list_encoding_information.reverse()
         if len(list_encoding_information) < self.lengthInformation:
@@ -81,7 +81,7 @@ class Coder(abstract_coder.AbstractCoder):
         return answer
 
     def decoding(self, information: list) -> list:
-        log.info("Decoding package {0} of Hamming coder".format(information))
+        log.info("Decoding package {0} of Hamming _coder".format(information))
 
         code = np.transpose(np.array([[x] for x in information]))
         answer: list = []
@@ -116,7 +116,7 @@ class Coder(abstract_coder.AbstractCoder):
         # noinspection PyUnresolvedReferences
         return {
             'name': self.name,
-            'length information word': self.lengthInformation,
+            'length _information word': self.lengthInformation,
             'length additional bits': self.lengthAdditional,
             'length coding word': self.lengthTotal,
             'matrix of generating': self._matrixTransformation.tolist(),
@@ -153,10 +153,10 @@ class Coder(abstract_coder.AbstractCoder):
             self._argumentParser.add_argument(
                 "-{0}hmgpl".format(prefix), "--{0}{1}".format(prefix, self.__PACKAGE_LENGTH),
                 type=int,
-                help="""Length of package for Hamming coder"""
+                help="""Length of package for Hamming _coder"""
             )
 
-            # We should parse arguments only for unique coder
+            # We should parse arguments only for unique _coder
             if self._argumentGroup is None:
                 self.arguments = vars(self._argumentParser.parse_args())
 

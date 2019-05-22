@@ -24,7 +24,7 @@ class MainController:
     firstCoderForCascade: AbstractCoder = None
     secondCoderForCascade: AbstractCoder = None
 
-    __UNKNOWN_ERROR: str = "Field(s) contain incorrect information"
+    __UNKNOWN_ERROR: str = "Field(s) contain incorrect _information"
 
     def __init__(self):
         self.firstCoderParams = CoderController()
@@ -47,8 +47,8 @@ class MainController:
         globalSignals.ended.emit()
         QMessageBox().warning(
             None,
-            MainController.__UNKNOWN_ERROR if exception is None else exception.get_message(),
-            MainController.__UNKNOWN_ERROR if exception is None else exception.get_long_message(),
+            MainController.__UNKNOWN_ERROR if exception is None else exception.message,
+            MainController.__UNKNOWN_ERROR if exception is None else exception.long_message,
             QMessageBox.Ok
         )
 

@@ -20,7 +20,7 @@ from src.statistics.db.table import fountain_table
 class Coder(abstract_coder.AbstractCoder):
     typeOfCoder = EnumCodersType.FOUNTAIN
     _name = "Fountain"
-    # quantity information blocks
+    # quantity _information blocks
     _countCodingBlocks: int
     # quantity of combination blocks
     _countBlocks: int
@@ -30,7 +30,7 @@ class Coder(abstract_coder.AbstractCoder):
     _blocks: list
 
     def __init__(self, size_block: int, count_coding_blocks: int, length_information: int):
-        log.debug("Creation of fountain coder with parameters: {0}, {1}, {2}".
+        log.debug("Creation of fountain _coder with parameters: {0}, {1}, {2}".
                   format(size_block, count_coding_blocks, length_information))
         self.lengthInformation = length_information
         self._sizeBlock = size_block
@@ -45,7 +45,7 @@ class Coder(abstract_coder.AbstractCoder):
         while len(set_combination_blocks) < self._countCodingBlocks:
             if 2 ** self._countBlocks - 1 == len(set_combination_blocks):
                 raise SettingException(
-                    message="Error occurs during creation Fountain coder"
+                    message="Error occurs during creation Fountain _coder"
                 )
             set_combination_blocks.add(random_generator.getrandbits(self._countBlocks))
             set_combination_blocks -= {0}
@@ -56,7 +56,7 @@ class Coder(abstract_coder.AbstractCoder):
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
 
     def encoding(self, information: list):
-        log.info("Fountain LT-coder start coding of package {0}".format(information))
+        log.info("Fountain LT-_coder start coding of package {0}".format(information))
         combination_blocks: list = []
         information = [0] * abs(len(information) - self.lengthInformation) + information  # добавление 0 битов вначало
         for x in range(0, len(information), self._sizeBlock):
@@ -115,7 +115,7 @@ class Coder(abstract_coder.AbstractCoder):
                                 decoded_set_list[z] = decoded_set_list[z] - difference
 
         if set(status) != {True}:
-            log.debug("Lacks of blocks for decoding package with fountain coder")
+            log.debug("Lacks of blocks for decoding package with fountain _coder")
             raise CodingException(
                 message=CodingException.LACKS_OF_BLOCKS_FOR_DECODING.message,
                 long_message=CodingException.LACKS_OF_BLOCKS_FOR_DECODING.long_message
@@ -133,7 +133,7 @@ class Coder(abstract_coder.AbstractCoder):
     def to_json(self) -> dict:
         return {
             'name': self.name,
-            'length information word': self.lengthInformation,
+            'length _information word': self.lengthInformation,
             'length additional bits': self.lengthAdditional,
             'length coding word': self.lengthTotal,
             'speed': self.get_speed()
@@ -169,22 +169,22 @@ class Coder(abstract_coder.AbstractCoder):
             self._argumentParser.add_argument(
                 "-{0}fntpl".format(prefix), "--{0}{1}".format(prefix, self.__PACKAGE_LENGTH),
                 type=int,
-                help="""Length of package for Fountain coder"""
+                help="""Length of package for Fountain _coder"""
             )
 
             self._argumentParser.add_argument(
                 "-{0}fntbs".format(prefix), "--{0}{1}".format(prefix, self.__BLOCK_SIZE),
                 type=int,
-                help="""Size of block of Fountain coder"""
+                help="""Size of block of Fountain _coder"""
             )
 
             self._argumentParser.add_argument(
                 "-{0}fntqb".format(prefix), "--{0}{1}".format(prefix, self.__QUANTITY_BLOCK),
                 type=int,
-                help="""Quantity of blocks of Fountain coder"""
+                help="""Quantity of blocks of Fountain _coder"""
             )
 
-            # We should parse arguments only for unique coder
+            # We should parse arguments only for unique _coder
             if self._argumentGroup is None:
                 self.arguments = vars(self._argumentParser.parse_args())
 

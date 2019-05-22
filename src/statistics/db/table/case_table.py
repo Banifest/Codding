@@ -3,8 +3,8 @@
 from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID, TIMESTAMP
 
+from src.statistics.db.statmetadata import StatMetaData
 from src.statistics.db.table.enum_coder_table_name import EnumCoderTableName
-from src.statistics.db.table.statmetadata import StatMetaData
 
 case_table = Table(
     EnumCoderTableName.CASE_RESULT.value,

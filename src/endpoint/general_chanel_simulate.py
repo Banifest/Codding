@@ -2,11 +2,10 @@
 from typing import Optional
 
 from src.GUI.globals_signals import globalSignals
-from src.endpoint.thread.cascade_coder_test_thread import CascadeCoderTestThread
-from src.GUI.controller.coder_controller import CoderController
-from src.endpoint.thread.single_coder_test_thread import SingleCoderTestThread
 from src.channel.enum_noise_mode import EnumNoiseMode
 from src.endpoint.general_coder_simulate import GeneralCoderSimulate
+from src.endpoint.thread.cascade_coder_test_thread import CascadeCoderTestThread
+from src.endpoint.thread.single_coder_test_thread import SingleCoderTestThread
 
 
 class GeneralChanelSimulate:
@@ -16,8 +15,8 @@ class GeneralChanelSimulate:
     _firstCoderParams: GeneralCoderSimulate
     _secondCoderParams: GeneralCoderSimulate
 
-    _firstThreadClass: SingleCoderTestThread
-    _cascadeThreadClass: CascadeCoderTestThread
+    _singleThread: SingleCoderTestThread
+    _cascadeThread: CascadeCoderTestThread
 
     _noiseStart: float
     _noiseEnd: float
@@ -60,8 +59,8 @@ class GeneralChanelSimulate:
         self._firstCoderParams = first_coder_params
         self._secondCoderParams = second_coder_params
 
-        self._firstThreadClass = first_thread_class
-        self._cascadeThreadClass = cascade_thread_class
+        self._singleThread = first_thread_class
+        self._cascadeThread = cascade_thread_class
         self._noiseStart = noise_start
         self._noiseEnd = noise_end
         self._countTest = count_test
@@ -78,7 +77,7 @@ class GeneralChanelSimulate:
         self._lengthSecondInterleaver = length_second_interleaver
 
     def set_first_coder_thread_class(self):
-        self._firstThreadClass = SingleCoderTestThread(
+        self._singleThread = SingleCoderTestThread(
             noise_chance=self._noiseStart,
             count_test=self._countTest,
             test_information=self._testInfo,
@@ -93,7 +92,7 @@ class GeneralChanelSimulate:
         )
 
     def set_cascade_coder_thread_class(self):
-        self._cascadeThreadClass = CascadeCoderTestThread(
+        self._cascadeThread = CascadeCoderTestThread(
             noise_chance=self._noiseStart,
             count_test=self._countTest,
             test_information=self._testInfo,
@@ -114,26 +113,26 @@ class GeneralChanelSimulate:
         globalSignals.startTesting.emit(True)
         self._firstCoderParams.create_coder()
         self.set_first_coder_thread_class()
-        self._firstThreadClass.start()
+        self._singleThread.start()
 
     def start_first_test_cycle(self):
         globalSignals.startTesting.emit(True)
         self._firstCoderParams.create_coder()
         self.set_first_coder_thread_class()
-        self._firstThreadClass.set_auto(True)
-        self._firstThreadClass.start()
+        self._singleThread.set_auto(True)
+        self._singleThread.start()
 
     def start_cascade_single_test(self):
         globalSignals.startTesting.emit(True)
         self._firstCoderParams.create_coder()
         self._secondCoderParams.create_coder()
         self.set_cascade_coder_thread_class()
-        self._cascadeThreadClass.start()
+        self._cascadeThread.start()
 
     def start_cascade_test_cycle(self):
         globalSignals.startTesting.emit(True)
         self._firstCoderParams.create_coder()
         self._secondCoderParams.create_coder()
         self.set_cascade_coder_thread_class()
-        self._cascadeThreadClass.set_auto(True)
-        self._cascadeThreadClass.start()
+        self._cascadeThread.set_auto(True)
+        self._cascadeThread.start()

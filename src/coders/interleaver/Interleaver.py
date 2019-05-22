@@ -12,7 +12,7 @@ class Interleaver:
         self.lengthSmashing = length_smashing
 
     def shuffle(self, information: list) -> list:
-        log.debug("Used interleaver for package {0}".format(information))
+        log.debug("Used _interleaver for package {0}".format(information))
 
         answer: list = []
         for x in range(self.lengthSmashing):

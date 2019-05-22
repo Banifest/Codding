@@ -11,9 +11,9 @@ class CodingException(ApplicationException):
     _longMessage = EnumExceptionStandardMessage.CODER_EXCEPTION.value
 
     LENGTH_OF_INPUT_PACKAGE_OVERFLOW: TemplateException = TemplateException(
-        message="Length of input package overflow for coder {0}",
+        message="Length of input package overflow for _coder {0}",
         long_message="""
-                Length of input package overflow for coder {0}.
+                Length of input package overflow for _coder {0}.
                 Max possible length of package equals {1}, but current length is {2}
                 """
     )
@@ -27,6 +27,6 @@ class CodingException(ApplicationException):
     )
 
     LACKS_OF_BLOCKS_FOR_DECODING: TemplateException = TemplateException(
-        message="Lacks of blocks for decoding package with fountain coder",
-        long_message="Lacks of blocks for decoding package with fountain coder",
+        message="Lacks of blocks for decoding package with fountain _coder",
+        long_message="Lacks of blocks for decoding package with fountain _coder",
     )
