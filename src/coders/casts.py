@@ -1,8 +1,10 @@
 # coding=utf-8
 from typing import List
 
+from src.helper.error.exception.codding_exception import CodingException
 
-def int_to_bit_list(num: int, size: int = None, rev: bool = False) -> list:
+
+def int_to_bit_list(num: int, size: int = None, rev: bool = False) -> List[int]:
     """
     Convert numeric integer to bits list
     Example: num: int = 100; size = None; return [1, 1, 0, 0, 1, 0, 0]
@@ -26,7 +28,7 @@ def int_to_bit_list(num: int, size: int = None, rev: bool = False) -> list:
     return answer
 
 
-def bit_list_to_int_list(num: list) -> list:
+def bit_list_to_int_list(num: list) -> List[int]:
     it: int = 0
     answer: list = []
 
@@ -56,18 +58,6 @@ def bit_list_to_int(num: List[int], rev: bool = False) -> int:
     return answer
 
 
-def bit_list_comb_to_int(num: list) -> int:
-    """
-
-    :param num:
-    :return:
-    """
-    answer: int = 0
-    for x in num:
-        answer += 1 << x
-    return answer
-
-
 def cycle_shift_list(num: list, right: bool = True, count: int = 1):
     """
 
@@ -82,21 +72,23 @@ def cycle_shift_list(num: list, right: bool = True, count: int = 1):
         return num[count:] + num[:count]
 
 
-def get_hamming_distance(first: list, second: list) -> int:
+def get_hamming_distance(first: List[int], second: List[int]) -> int:
     """
-
-    :param first:
-    :param second:
-    :return:
+    Determined Hamming distance
+    :param first: List[int]
+    :param second: List[int]
+    :return: hamming's distance between first and second
     """
-    answer: int = 0
+    distance: int = 0
     if len(first) != len(second):
-        raise Exception("Списки должны быть одинаковой длины")
+        raise CodingException(
+            message="Cannot determine hamming's distance between list with different length"
+        )
 
-    for x in range(len(first)):
-        if first[x] != second[x]:
-            answer += 1
-    return answer
+    for iterator in range(len(first)):
+        if first[iterator] != second[iterator]:
+            distance += 1
+    return distance
 
 
 def str_list_to_list(value: str) -> list:

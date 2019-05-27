@@ -6,8 +6,8 @@ from typing import Optional
 
 class AbstractGroupParser(ABC):
     _argumentParser = argparse.ArgumentParser()
-    _arguments: None
-    _argumentGroup: None
+    _arguments: Optional[None]
+    _argumentGroup: Optional[None]
 
     @property
     def arguments(self):

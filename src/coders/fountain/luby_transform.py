@@ -18,7 +18,7 @@ from src.statistics.db.table import fountain_table
 
 
 class Coder(abstract_coder.AbstractCoder):
-    typeOfCoder = EnumCodersType.FOUNTAIN
+    _typeOfCoder = EnumCodersType.FOUNTAIN
     _name = "Fountain"
     # quantity _information blocks
     _countCodingBlocks: int
@@ -27,14 +27,14 @@ class Coder(abstract_coder.AbstractCoder):
     # size of one block
     _sizeBlock: int
     # combination blocks
-    _blocks: list
+    _generationBlocks: List[int]
 
     def __init__(self, size_block: int, count_coding_blocks: int, length_information: int):
         log.debug("Creation of fountain _coder with parameters: {0}, {1}, {2}".
                   format(size_block, count_coding_blocks, length_information))
         self.lengthInformation = length_information
         self._sizeBlock = size_block
-        self._blocks = []
+        self._generationBlocks = []
         self._countCodingBlocks = count_coding_blocks
         # целочисленное деление с округлением вверх
         self._countBlocks = ((length_information - 1) // self._sizeBlock) + 1
@@ -50,7 +50,7 @@ class Coder(abstract_coder.AbstractCoder):
             set_combination_blocks.add(random_generator.getrandbits(self._countBlocks))
             set_combination_blocks -= {0}
 
-        self._blocks: list = list(set_combination_blocks)
+        self._generationBlocks: list = list(set_combination_blocks)
         self.lengthInformation = length_information
         self.lengthAdditional = size_block * count_coding_blocks - length_information
         self.lengthTotal = self.lengthInformation + self.lengthAdditional
@@ -67,7 +67,7 @@ class Coder(abstract_coder.AbstractCoder):
         for x in range(self._countCodingBlocks):
             value: int = 0
             count: int = 0
-            for y in int_to_bit_list(self._blocks[x], self._countBlocks):
+            for y in int_to_bit_list(self._generationBlocks[x], self._countBlocks):
                 if y == 1:
                     value ^= combination_blocks[count]
                 count += 1
@@ -82,7 +82,8 @@ class Coder(abstract_coder.AbstractCoder):
         :return: list Декодированная информация, представленная в виде массива битов
         """
         log.info("Fountain LT-decoder decoding of package {0}".format(information))
-        decoded_set_list: list = [set(bit_list_to_int_list(int_to_bit_list(x, self._sizeBlock))) for x in self._blocks]
+        decoded_set_list: list = [set(bit_list_to_int_list(int_to_bit_list(x, self._sizeBlock))) for x in
+                                  self._generationBlocks]
         decoded_set_list.append(set())  # костыль, чтобы работало
         is_kill: bool = False
 
@@ -145,7 +146,7 @@ class Coder(abstract_coder.AbstractCoder):
             count_info_block=self._countCodingBlocks,
             count_block=self._countBlocks,
             block_size=self._sizeBlock,
-            block_array=self._blocks,
+            block_array=self._generationBlocks,
         ))
 
     class FountainCoderParser(AbstractGroupParser):

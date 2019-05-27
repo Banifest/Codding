@@ -1,6 +1,7 @@
 # coding=utf-8
 from setuptools import setup
 
+# noinspection SpellCheckingInspection
 setup(
     name='codding',
     version='0.0.1',
@@ -12,7 +13,8 @@ setup(
     license='MIT',
     author='Aliaksandr Martyniuk',
     author_email='banifest@gmail.com',
-    description='Diploma Codding', install_requires=[
+    description='Diploma Codding',
+    install_requires=[
         'sqlalchemy', 'alembic', 'matplotlib', 'PyQt5', 'numpy', 'psycopg2', 'jsonpickle',
     ]
 )

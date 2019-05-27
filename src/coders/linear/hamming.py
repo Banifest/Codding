@@ -1,7 +1,7 @@
 # coding=utf-8
 import argparse
 from sqlite3 import Connection
-from typing import Optional, Union
+from typing import Optional
 from uuid import UUID
 
 import math
@@ -16,9 +16,9 @@ from src.statistics.db.table import hamming_table
 
 
 class Coder(abstract_coder.AbstractCoder):
-    typeOfCoder = EnumCodersType.HAMMING
-    _name = "Hamming"
-    _matrixTransformation: List[Union[int, List]] = []
+    _typeOfCoder: EnumCodersType = EnumCodersType.HAMMING
+    _name: str = "Hamming"
+    _matrixTransformation: List[List[int]] = []
 
     def __init__(self, length_information: int):
         log.debug("Create of Hamming _coder")
@@ -52,7 +52,7 @@ class Coder(abstract_coder.AbstractCoder):
         # noinspection PyTypeChecker
         self._matrixTransformation = np.transpose(np.array(self._matrixTransformation))
 
-    def encoding(self, information: list) -> list:
+    def encoding(self, information: List[int]) -> List[int]:
         log.info("Encoding package {0} of Hamming _coder".format(information))
         list_encoding_information: list = information
         list_encoding_information.reverse()

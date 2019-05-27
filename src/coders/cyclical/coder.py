@@ -18,7 +18,7 @@ from src.statistics.db.table import cyclic_table
 class Coder(abstract_coder.AbstractCoder):
     _name = "Cyclical"
     _polynomial: plm.Polynomial
-    typeOfCoder = EnumCodersType.CYCLICAL
+    _typeOfCoder = EnumCodersType.CYCLICAL
 
     def __init__(self, information_length: int, polynomial: int):
         log.debug("Create cyclical _coder")

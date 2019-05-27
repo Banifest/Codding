@@ -10,6 +10,16 @@ from src.coders.linear.hamming import Coder as hammingCoder
 from src.coders.linear.reed_muller import Coder as ReedMullerCoder
 
 
+async def test():
+    return await spam()
+
+
+async def spam():
+    return "123"
+
+
+print(test())
+
 class TestConvolutionalCoder(unittest.TestCase):
     def test_encode(self):
         pass

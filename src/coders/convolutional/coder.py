@@ -1,7 +1,7 @@
 # coding=utf-8
 import argparse
 from sqlite3 import Connection
-from typing import Optional, List
+from typing import Optional, List, Tuple, Dict
 from uuid import UUID
 
 from src.coders import abstract_coder
@@ -16,8 +16,8 @@ class Coder(abstract_coder.AbstractCoder):
     """
     Convolution _coder class
     """
-    _name = "Сверточный"
-    typeOfCoder = EnumCodersType.CONVOLUTION
+    _name = "Convolution"
+    _typeOfCoder = EnumCodersType.CONVOLUTION
     __MAX_STEPS: int = 9999999999999
 
     _countPolynomials: int = 0
@@ -26,12 +26,12 @@ class Coder(abstract_coder.AbstractCoder):
     _countOutput: int = 0
     _countRegisters: int = 0
     _register: int = 0
-    _graph: List[List[List[int]]] = []
+    _graph: List[List[Tuple[int, List[int]]]] = []
     isDivIntoPackage: bool = False
 
     def __init__(
             self,
-            list_polynomials: list,
+            list_polynomials: List[int],
             count_input: int,
             count_output: int,
             count_register: int
@@ -43,8 +43,8 @@ class Coder(abstract_coder.AbstractCoder):
         self._countPolynomials = len(list_polynomials)
         self._listPolynomials = list_polynomials
 
-        self.lengthTotal = self._countOutput + self._countInput
-        self.lengthInformation = 1
+        self.lengthTotal = self._countOutput
+        self.lengthInformation = self._countInput
         self.lengthAdditional = self.lengthTotal - self.lengthInformation
 
         self._graph = self._get_graph()
@@ -86,7 +86,7 @@ class Coder(abstract_coder.AbstractCoder):
             power += 1
         return answer
 
-    def _get_graph(self) -> List[List[List[int]]]:
+    def _get_graph(self) -> List[List[Tuple[int, List[int]]]]:
         """
         Формирует список представляющий граф переходов, где каждая вершина
         [
@@ -116,7 +116,7 @@ class Coder(abstract_coder.AbstractCoder):
         :param information:
         :return:
         """
-        log.info("Кодирование пакета {0} свёрточным кодером".format(information))
+        log.info("Encode package {0} by convolution coder".format(information))
         answer: list = []
 
         # текущая вершина
@@ -125,45 +125,44 @@ class Coder(abstract_coder.AbstractCoder):
             answer.append(self._graph[current_vertex][nowBit][1])
             current_vertex = self._graph[current_vertex][nowBit][0]
 
+        # Transform [[][]...] to []
         answer = [y for x in answer for y in x]
         return answer
 
-    def decoding(self, information: list):
-        """
-        TODO
-        :param information:
-        :return:
-        """
-        log.info("Декодирование пакета {0} свёрточным декодером по максимуму правдоподобия".format(information))
-        # last_step: list = []  # Информация об предыдущем шаге
-        # now_step: list = []  # Информация о текущем шаге
-        # info_about_vertex: list = []  # информация о вершине
-        # travel: list = []  # путь для текущей вершины
-        # cost_travel: int = 0  # стоимость для текущего пути
-
-        info_divided_into_steps: list = []  # информация поделенная на шаги
-        for x in range(0, len(information), self._countOutput):
+    def __divide_into_steps(self, information: List[int]) -> List[List[int]]:
+        info_divided_into_steps: list = []
+        for iterator in range(0, len(information), self._countOutput):
             count: int = 0
             temp_list: list = []
             while count < self._countOutput:
-                temp_list.append(information[x + count])
+                temp_list.append(information[iterator + count])
                 count += 1
             info_divided_into_steps.append(temp_list)
 
-        last_step = now_step = [[0, []]] + [[self.__MAX_STEPS, []] for x in
-                                            range(2 ** self._countRegisters - 1)]  # заполняет первый шаг
+        return info_divided_into_steps
 
-        for x in info_divided_into_steps:
+    def decoding(self, information: List[int]) -> List[int]:
+        """
+        Decoding of convolution coder
+        :param information: List[int]
+        :return: List[int]
+        """
+        log.info("Decode package {0} by convolution decoder".format(information))
+        info_divided_into_steps = self.__divide_into_steps(information)
+        # Fill first step value
+        last_step = [[0, []]] + [[self.__MAX_STEPS, []] for x in range(2 ** self._countRegisters - 1)]
+
+        for iterator in info_divided_into_steps:
             now_step = [[self.__MAX_STEPS, []] for x in range(2 ** self._countRegisters)]
             number: int = 0
             for info_about_vertex in last_step:
                 vertex_step: int = self._graph[number][0][0]  # вершина перехода
-                distance: int = get_hamming_distance(x, self._graph[number][0][1])
+                distance: int = get_hamming_distance(iterator, self._graph[number][0][1])
                 if now_step[vertex_step][0] > last_step[number][0] + distance:
                     now_step[vertex_step] = [info_about_vertex[0] + distance, info_about_vertex[1] + [0]]
 
                 vertex_step: int = self._graph[number][1][0]  # вершина перехода
-                distance: int = get_hamming_distance(x, self._graph[number][1][1])
+                distance: int = get_hamming_distance(iterator, self._graph[number][1][1])
                 if now_step[vertex_step][0] > last_step[number][0] + distance:
                     now_step[vertex_step] = [info_about_vertex[0] + distance, info_about_vertex[1] + [1]]
 
@@ -172,23 +171,22 @@ class Coder(abstract_coder.AbstractCoder):
 
         min_answer: list = []
         min_cost: int = self.__MAX_STEPS
-        for x in last_step:
-            if min_cost > x[0]:
-                min_cost = x[0]
-                min_answer = x[1]
+        for iterator in last_step:
+            if min_cost > iterator[0]:
+                min_cost = iterator[0]
+                min_answer = iterator[1]
         return min_answer
 
     def try_normalization(self, bit_list: List[int]) -> List[int]:
         """
-        TODO
-        :param bit_list:
-        :return:
+        This coder is not leaner and doesn't split package on blocks.
+        :return: List[int]
         """
         return bit_list
 
-    def to_json(self) -> dict:
+    def to_json(self) -> Dict[str, str]:
         """
-        TODO
+        Serialize to json format
         :return:
         """
         return {

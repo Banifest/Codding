@@ -21,7 +21,7 @@ class __ObserverMeta(ABCMeta):
 
 class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta):
     _name: str = ""
-    typeOfCoder: EnumCodersType = EnumCodersType.ABSTRACT
+    _typeOfCoder: EnumCodersType = EnumCodersType.ABSTRACT
     countAdditional: int = 0
     lengthTotal: int = 0
     lengthInformation: int = 0
@@ -30,6 +30,11 @@ class AbstractCoder(IConsoleCoder, IDataBaseSerialize, metaclass=__ObserverMeta)
     @staticmethod
     def get_inheritors_coder_classes() -> List:
         return __class__.inheritors_classes[__class__]
+
+    # noinspection PyPep8Naming
+    @property
+    def typeOfCoder(self):
+        return self._typeOfCoder
 
     @property
     def name(self):
