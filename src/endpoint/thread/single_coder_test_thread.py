@@ -207,13 +207,13 @@ class SingleCoderTestThread(QThread):
                 )
 
             globalSignals.stepFinished.emit(int(self._MAX_PERCENT))
-            globalSignals.ended.emit()
 
             # DB Action
             if ConfigProcessor().config.db_setting.flg_used:
                 TestResultSerializer().serialize_to_db(statistic)
 
             TestResultSerializer().serialize_to_json(statistic)
+            globalSignals.ended.emit()
             log.debug("End of test cycle")
 
         except ApplicationException as application_exception:
@@ -221,4 +221,5 @@ class SingleCoderTestThread(QThread):
             globalSignals.notCorrect.emit(application_exception, )
         except Exception as err:
             globalSignals.ended.emit()
+            log.error(str(Exception))
             globalSignals.notCorrect.emit(ApplicationException())

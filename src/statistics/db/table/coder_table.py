@@ -13,7 +13,7 @@ coder_table = Table(
     Column('coder_speed', Float),
     Column('input_length', Integer),
     Column('additional_length', Integer),
-    Column('_interleaver', Boolean),
+    Column('interleaver', Boolean),
     Column('interleaver_length', Integer),
     Column('description', String(200))
 )

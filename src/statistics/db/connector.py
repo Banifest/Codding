@@ -11,8 +11,8 @@ from src.helper.pattern.singleton import Singleton
 
 
 class Connector(metaclass=Singleton):
-    _connection = Connection
-    _engine = Engine
+    _connection: Connection = None
+    _engine: Engine = None
 
     def get_connection(
             self,
@@ -37,8 +37,8 @@ class Connector(metaclass=Singleton):
 
     def get_engine(
             self,
-            login: str,
-            password: str,
+            login: Optional[str] = None,
+            password: Optional[str] = None,
     ) -> Engine:
         """
         Method for getting engine to remote database Heroku

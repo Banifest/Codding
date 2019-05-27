@@ -10,8 +10,8 @@ result_table = Table(
     StatMetaData().metadata,
     Column('timestamp', TIMESTAMP, primary_key=True),
     Column('flg_cascade', Boolean),
-    Column('first_coder', UUID(as_uuid=True), ForeignKey("_coder.guid")),
-    Column('second_coder', UUID(as_uuid=True), ForeignKey("_coder.guid")),
+    Column('first_coder', UUID(as_uuid=True), ForeignKey("coder.guid")),
+    Column('second_coder', UUID(as_uuid=True), ForeignKey("coder.guid")),
     Column('type_of_noise', Integer),
     Column('noise', Float)
 )

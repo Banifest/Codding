@@ -7,5 +7,5 @@ class EnumCoderTableName(Enum):
     FOUNTAIN = "fountain"
     CONVOLUTION = "convolution"
     TEST_RESULT = "test_result"
-    CODER = "_coder"
+    CODER = "coder"
     CASE_RESULT = "case_result"

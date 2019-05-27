@@ -8,7 +8,7 @@ from src.statistics.db.table.enum_coder_table_name import EnumCoderTableName
 hamming_table = Table(
     EnumCoderTableName.HAMMING.value,
     StatMetaData().metadata,
-    Column('guid', UUID(as_uuid=True), ForeignKey("_coder.guid"), primary_key=True),
+    Column('guid', UUID(as_uuid=True), ForeignKey("coder.guid"), primary_key=True),
     # array[][]
     Column('matrix', ARRAY(Boolean))
 )
@@ -16,7 +16,7 @@ hamming_table = Table(
 cyclic_table = Table(
     EnumCoderTableName.CYCLIC.value,
     StatMetaData().metadata,
-    Column('guid', UUID(as_uuid=True), ForeignKey("_coder.guid"), primary_key=True),
+    Column('guid', UUID(as_uuid=True), ForeignKey("coder.guid"), primary_key=True),
     # array[][]
     Column('matrix_g', ARRAY(BigInteger)),
     # array[][]
@@ -27,7 +27,7 @@ cyclic_table = Table(
 fountain_table = Table(
     EnumCoderTableName.FOUNTAIN.value,
     StatMetaData().metadata,
-    Column('guid', UUID(as_uuid=True), ForeignKey("_coder.guid"), primary_key=True),
+    Column('guid', UUID(as_uuid=True), ForeignKey("coder.guid"), primary_key=True),
     Column('count_info_block', Integer),
     Column('count_block', Integer),
     Column('block_size', Integer),
@@ -38,7 +38,7 @@ fountain_table = Table(
 convolution_table = Table(
     EnumCoderTableName.CONVOLUTION.value,
     StatMetaData().metadata,
-    Column('guid', UUID(as_uuid=True), ForeignKey("_coder.guid"), primary_key=True),
+    Column('guid', UUID(as_uuid=True), ForeignKey("coder.guid"), primary_key=True),
     Column('count_polynomial', Integer),
     Column('count_input_bits', Integer),
     Column('count_output_bits', Integer),
