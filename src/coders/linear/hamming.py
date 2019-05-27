@@ -80,16 +80,22 @@ class Coder(abstract_coder.AbstractCoder):
             answer[(1 << x) - 1] = backup_info[x]
         return answer
 
-    def decoding(self, information: list) -> list:
+    def decoding(self, information: List[int]) -> List[int]:
         log.info("Decoding package {0} of Hamming _coder".format(information))
 
         code = np.transpose(np.array([[x] for x in information]))
         answer: list = []
-        status: list = list((np.dot(code, self._matrixTransformation) % 2)[0])
+
+        try:
+            status: list = list((np.dot(code, self._matrixTransformation) % 2)[0])
+        except ValueError:
+            # Impossible decoding. Not valid package length
+            return information
+
         status.reverse()
         status_int_form: int = bit_list_to_int(status)
         if status_int_form != 0:
-            log.debug("Обнаруженна(ы) ошибка(и)")
+            log.debug("Error(s) detected")
 
             if len(code[0]) > status_int_form - 1:
                 code[0][status_int_form - 1] = (code[0][status_int_form - 1] + 1) % 2

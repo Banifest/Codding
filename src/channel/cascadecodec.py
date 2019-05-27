@@ -56,7 +56,7 @@ class CascadeCodec(codec.Codec):
 
         transfer_information: Codec.TransferStatistic = Codec.TransferStatistic()
         for x in package_list:
-            self.coder = self._secondCoder
+            self._coder = self._secondCoder
             normalization_information = self._firstCoder.try_normalization(x)
 
             current_information_state: list = self._firstCoder.encoding(normalization_information)

@@ -129,6 +129,10 @@ class Coder(abstract_coder.AbstractCoder):
         # Unpacking answer
         answer = [y for x in answer for y in x]
         answer = answer[:self.lengthInformation]
+
+        if len(answer) < self.lengthInformation:
+            answer += [0] * (self.lengthInformation - len(answer))
+
         return answer
 
     def to_json(self) -> dict:

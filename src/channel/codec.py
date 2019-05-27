@@ -139,8 +139,7 @@ class Codec:
                     self._information = "Пакет при передаче был повреждён и не подлежит " \
                                         "востановлению\n"
 
-            current_step_success_bits = sum([1 if current_information[x] == normalization_information[x] else 0
-                                             for x in range(len(current_information))])
+            current_step_success_bits = self._get_different_information(current_information, normalization_information)
             transfer_statistic.quantity_successful_bits += current_step_success_bits
             transfer_statistic.quantity_error_bits += len(normalization_information) - current_step_success_bits
 
@@ -160,7 +159,7 @@ class Codec:
         transfer_statistic = Codec.TransferStatistic()
         current_information_state: List[int] = information.copy()
 
-        log.info("Производиться передача последовательности битов - {0}".format(current_information_state))
+        log.info("Transfer package - {0}".format(current_information_state))
         normalization_information: List[int] = self._coder.try_normalization(current_information_state)
         try:
             current_information_state = self._coder.encoding(normalization_information)
@@ -202,8 +201,11 @@ class Codec:
                     current_information_state))
                 self._information = "Пакет при передаче был повреждён и не подлежит " \
                                     "востановлению\n"
-        current_step_success_bits = sum([1 if current_information_state[x] == normalization_information[x] else 0
-                                         for x in range(len(current_information_state))])
+
+        # Calculate count decoded bits
+        current_step_success_bits = self._get_different_information(
+            current_information_state, normalization_information)
+
         transfer_statistic.quantity_successful_bits += current_step_success_bits
         transfer_statistic.quantity_error_bits += len(normalization_information) - current_step_success_bits
         transfer_statistic.current_information_state = current_information_state
@@ -258,3 +260,9 @@ class Codec:
                 error_bits += 1
 
         return [correct_bits, error_bits]
+
+    def _get_different_information(self, first_info: List[int], second_info: List[int]) -> int:
+        distance = sum([1 if first_info[x] == second_info[x] else 0 for x in
+                        range(min(len(first_info), len(second_info)))])
+        distance += abs(len(first_info) - len(second_info))
+        return distance
