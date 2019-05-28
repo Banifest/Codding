@@ -69,7 +69,7 @@ class Codec:
             "Является ли канал двухсторонним - {1}.\n" \
             "Используеммый кодер:\n {2}." \
             "Используется ли перемежитель на данном канале связи - {3}.\n" \
-            "Количество циклов передачи пакета - {4}\n" \
+            "Количество циклов передачи Package - {4}\n" \
             "Информация о последней передаче:\n{5}".format(
                 self.noiseProbability,
                 "Да" if self.duplex else "Нет",
@@ -82,7 +82,7 @@ class Codec:
     def transfer_one_step(self, information: List[int]) -> TransferStatistic:
         transfer_statistic = Codec.TransferStatistic()
 
-        #  Разбиение на пакеты
+        #  Разбиение на Package
         if self._coder.isDivIntoPackage:
             block_list = chanel.Chanel().divide_on_blocks(
                 information=information,
@@ -124,20 +124,19 @@ class Codec:
             except CodingException:
                 status = EnumBitTransferResult.ERROR
                 log.info(
-                    "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(current_information))
-                self._information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
+                    "During decoding package {0} founded cannot repair error".format(current_information))
+                self._information = "Package corrupted amd cannot be rapair\n"
             else:
                 if current_information == normalization_information:
                     if status != EnumBitTransferResult.REPAIR:
                         status = EnumBitTransferResult.SUCCESS
-                    log.info("Пакет {0} был успешно передан".format(information))
-                    self._information = "Пакет был успешно передан\n"
+                    log.info("Package {0} transferred successfully".format(information))
+                    self._information = "Package transferred successfully\n"
                 else:
                     status = EnumBitTransferResult.SHADOW
-                    log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
+                    log.error("Package {0} corrupted and impossible to repair it".format(
                         current_information))
-                    self._information = "Пакет при передаче был повреждён и не подлежит " \
-                                        "востановлению\n"
+                    self._information = "Package {0} corrupted and impossible to repair it\n"
 
             current_step_success_bits = self._get_different_information(current_information, normalization_information)
             transfer_statistic.quantity_successful_bits += current_step_success_bits
@@ -183,23 +182,23 @@ class Codec:
             current_information_state = self._coder.decoding(current_information_state)
         except CodingException:
             log.info(
-                "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(
+                "В ходе декодирования Packageа {0} была обнаружена неисправляемая ошибка".format(
                     current_information_state))
-            self._information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
+            self._information = "Package при передаче был повреждён и не подлежит востановлению\n"
         except:
             # TODO the same that and method below
             log.info(
-                "В ходе декодирования пакета {0} была обнаружена неисправляемая ошибка".format(
+                "В ходе декодирования Packageа {0} была обнаружена неисправляемая ошибка".format(
                     current_information_state))
-            self._information = "Пакет при передаче был повреждён и не подлежит востановлению\n"
+            self._information = "Package при передаче был повреждён и не подлежит востановлению\n"
         else:
             if current_information_state == normalization_information:
-                log.info("Пакет {0} был успешно передан".format(information))
-                self._information = "Пакет был успешно передан\n"
+                log.info("Package {0} был успешно передан".format(information))
+                self._information = "Package был успешно передан\n"
             else:
-                log.error("Пакет {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
+                log.error("Package {0} был повреждён при передаче передан и ошибку не удалось обнаружить".format(
                     current_information_state))
-                self._information = "Пакет при передаче был повреждён и не подлежит " \
+                self._information = "Package при передаче был повреждён и не подлежит " \
                                     "востановлению\n"
 
         # Calculate count decoded bits

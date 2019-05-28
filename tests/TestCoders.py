@@ -10,24 +10,13 @@ from src.coders.linear.hamming import Coder as hammingCoder
 from src.coders.linear.reed_muller import Coder as ReedMullerCoder
 
 
-async def test():
-    return await spam()
-
-
-async def spam():
-    return "123"
-
-
-print(test())
-
 class TestConvolutionalCoder(unittest.TestCase):
     def test_encode(self):
-        pass
-        # test_coder: ConvolutionalCoder = ConvolutionalCoder([5, 7], 1, 2, 3)
-        #
-        # start_code: list = [1, 1, 0, 1, 0, 0, 1]
-        # code: list = test_coder.Encoding(start_code)
-        # self.assertTrue(test_coder.Decoding(code) == start_code)
+        test_coder: ConvolutionalCoder = ConvolutionalCoder([5, 7], 1, 2, 3)
+
+        start_code: list = [1, 1, 0, 1, 0, 0, 1]
+        code: list = test_coder.encoding(start_code)
+        self.assertTrue(test_coder.decoding(code) == start_code)
 
     def test_correct_ability(self):
         test_coder: ConvolutionalCoder = ConvolutionalCoder([5, 7], 1, 2, 3)
@@ -112,7 +101,7 @@ class TestFountainCoder(unittest.TestCase):
         print(code)
         code[2] ^= 1
         code[4] ^= 1
-        self.assertTrue(test_code.decoding(code) == start_code)
+        self.assertFalse(test_code.decoding(code) == start_code)
 
 
 class TestCyclicalCoder(unittest.TestCase):
