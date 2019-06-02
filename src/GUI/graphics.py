@@ -55,7 +55,7 @@ class GraphicController(metaclass=Singleton):
             # Axis Y - result of test (Package)
             [test_result.error_packages
              / (test_result.error_packages + test_result.repair_packages + test_result.successful_packages)
-             + self.__FROM_Y_LIMIT for test_result in static_collector.testResult],
+             + (self.__FROM_Y_LIMIT * 1.1) for test_result in static_collector.testResult],
             color='blue',
         )
 
@@ -71,7 +71,7 @@ class GraphicController(metaclass=Singleton):
         plt.plot(
             test_noise_sequence,
             # Axis Y - result of test (Bits)
-            [x.based_error_bits / (x.based_error_bits + x.based_correct_bits) + self.__FROM_Y_LIMIT for x in
+            [x.based_error_bits / (x.based_error_bits + x.based_correct_bits) + (self.__FROM_Y_LIMIT * 1.1) for x in
              static_collector.testResult],
             color='red',
         )
