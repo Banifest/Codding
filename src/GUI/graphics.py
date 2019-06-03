@@ -2,6 +2,7 @@
 import matplotlib.patches as matches
 import matplotlib.pyplot as plt
 
+from src.channel.enum_noise_mode import EnumNoiseMode
 from src.helper.calc.simple_calculation_for_transfer_process import SimpleCalculationForTransferProcess
 from src.helper.pattern.singleton import Singleton
 from src.statistics.object.statistic_collector import StatisticCollector
@@ -32,7 +33,13 @@ class GraphicController(metaclass=Singleton):
             matches.Patch(color='red', label=GraphicController.__SOURCE_CORRECT_BITS),
         ])
         plt.ylim([self.__TO_Y_LIMIT, self.__FROM_Y_LIMIT])
-        plt.xlim([static_collector.beginNoise, static_collector.endNoise])
+        if static_collector.testResult[0].noise_type == EnumNoiseMode.SINGLE \
+                or static_collector.testResult[0].noise_type == EnumNoiseMode.MIX:
+            plt.xlim([static_collector.beginNoise, static_collector.endNoise])
+        else:
+            package_noise = abs(1 / static_collector.noiseLength * static_collector.noisePeriod) - 1
+            plt.xlim(package_noise - 0.1, package_noise + 0.1)
+
         plt.semilogy(True)
 
         plt.ylabel(self.__Y_LABEL)
@@ -44,11 +51,19 @@ class GraphicController(metaclass=Singleton):
             quantity_steps=static_collector.quantityStepsInCycle
         )
 
+        test_noise_sequence: list = []
         # Axis X - noise
-        test_noise_sequence: list = [
-            static_collector.beginNoise + number_of_step * noise_step_different
-            for number_of_step in range(static_collector.quantityStepsInCycle)
-        ]
+        if static_collector.testResult[0].noise_type == EnumNoiseMode.SINGLE \
+                or static_collector.testResult[0].noise_type == EnumNoiseMode.MIX:
+            test_noise_sequence: list = [
+                static_collector.beginNoise + number_of_step * noise_step_different
+                for number_of_step in range(static_collector.quantityStepsInCycle)
+            ]
+        else:
+            test_noise_sequence: list = [
+                package_noise + number_of_step * 0.01 - 0.1
+                for number_of_step in range(static_collector.quantityStepsInCycle)
+            ]
         # Plot _information about transfer packages
         plt.plot(
             test_noise_sequence,

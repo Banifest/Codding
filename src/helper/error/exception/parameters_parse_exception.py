@@ -5,6 +5,9 @@ from src.helper.error.exception.template_exception import TemplateException
 
 
 class ParametersParseException(ApplicationException):
+    _message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value
+    _longMessage = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value
+
     NOISE_MODE_UNDEFINED: TemplateException = TemplateException(
         message='Noise mode undefined',
         long_message='Noise mode undefined'
@@ -26,9 +29,6 @@ class ParametersParseException(ApplicationException):
     )
 
     INTERLEAVER_SETTING: TemplateException = TemplateException(
-        message="Incorrect _interleaver settings",
-        long_message="Change _interleaver setting",
+        message="Incorrect interleaver settings",
+        long_message="Please, change interleaver setting",
     )
-
-    _message = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value
-    _longMessage = EnumExceptionStandardMessage.PARAMETERS_PARSE_CONSOLE_EXCEPTION.value

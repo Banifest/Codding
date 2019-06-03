@@ -125,7 +125,7 @@ class Codec:
                 status = EnumBitTransferResult.ERROR
                 log.info(
                     "During decoding package {0} founded cannot repair error".format(current_information))
-                self._information = "Package corrupted amd cannot be rapair\n"
+                self._information = "Package corrupted amd cannot be repair\n"
             else:
                 if current_information == normalization_information:
                     if status != EnumBitTransferResult.REPAIR:
@@ -138,9 +138,11 @@ class Codec:
                         current_information))
                     self._information = "Package {0} corrupted and impossible to repair it\n"
 
+            # calculate changing information
             current_step_success_bits = self._get_different_information(current_information, normalization_information)
             transfer_statistic.quantity_successful_bits += current_step_success_bits
             transfer_statistic.quantity_error_bits += len(normalization_information) - current_step_success_bits
+            transfer_statistic.quantity_changed_bits = transfer_statistic.based_error_bits
 
             if status == EnumBitTransferResult.ERROR:
                 transfer_statistic.result_status = EnumPackageTransferResult.ERROR

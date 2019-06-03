@@ -9,7 +9,7 @@ from src.coders.abstract_coder import AbstractCoder
 from src.coders.interleaver.Interleaver import Interleaver
 from src.config.config_processor import ConfigProcessor
 from src.endpoint.thread.single_coder_test_thread import SingleCoderTestThread
-from src.helper.error.exception.codding_exception import CodingException
+from src.helper.error.exception.application_exception import ApplicationException
 from src.logger import log
 from src.statistics.object.statistic_collector import StatisticCollector
 from src.statistics.object.test_result_serializer import TestResultSerializer
@@ -87,7 +87,9 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     lengthSecondInterleaver=self._length_second_interleaver,
                     beginNoise=self._start_t,
                     endNoise=self._finish_t,
-                    quantityStepsInCycle=self._quantity_steps
+                    quantityStepsInCycle=self._quantity_steps,
+                    noisePeriod=self._noisePackagePeriod,
+                    noiseLength=self._noisePackageLength,
                 )
 
                 if ConfigProcessor().config.graphic_setting.flg_enabled:
@@ -102,7 +104,9 @@ class CascadeCoderTestThread(SingleCoderTestThread):
                     lengthSecondInterleaver=self._length_second_interleaver,
                     beginNoise=self._start_t,
                     endNoise=self._finish_t,
-                    quantityStepsInCycle=self._quantity_steps
+                    quantityStepsInCycle=self._quantity_steps,
+                    noisePeriod=self._noisePackagePeriod,
+                    noiseLength=self._noisePackageLength,
                 )
 
             globalSignals.stepFinished.emit(int(self._MAX_PERCENT))
@@ -115,5 +119,5 @@ class CascadeCoderTestThread(SingleCoderTestThread):
 
             log.debug("End of the test cycle")
 
-        except CodingException as coddingException:
-            globalSignals.notCorrect.emit(coddingException)
+        except ApplicationException as application_exception:
+            globalSignals.notCorrect.emit(application_exception)

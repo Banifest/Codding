@@ -43,3 +43,5 @@ class StatisticCollector:
     beginNoise: float
     endNoise: float
     quantityStepsInCycle: int
+    noisePeriod: Optional[int]
+    noiseLength: Optional[int]

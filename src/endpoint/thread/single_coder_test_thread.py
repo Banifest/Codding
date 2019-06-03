@@ -188,7 +188,9 @@ class SingleCoderTestThread(QThread):
                     lengthSecondInterleaver=None,
                     beginNoise=self._start_t,
                     endNoise=self._finish_t,
-                    quantityStepsInCycle=self._quantity_steps
+                    quantityStepsInCycle=self._quantity_steps,
+                    noisePeriod=self._noisePackagePeriod,
+                    noiseLength=self._noisePackageLength,
                 )
                 # Graphic should showing only for Cycle of the test
                 if ConfigProcessor().config.graphic_setting.flg_enabled:
@@ -203,7 +205,9 @@ class SingleCoderTestThread(QThread):
                     lengthSecondInterleaver=None,
                     beginNoise=self._start_t,
                     endNoise=self._finish_t,
-                    quantityStepsInCycle=self._quantity_steps
+                    quantityStepsInCycle=self._quantity_steps,
+                    noisePeriod=self._noisePackagePeriod,
+                    noiseLength=self._noisePackageLength,
                 )
 
             globalSignals.stepFinished.emit(int(self._MAX_PERCENT))
