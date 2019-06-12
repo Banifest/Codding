@@ -1,4 +1,4 @@
-python main.py -m c -cm s -nt s -ns 2.0 -ne 10.0 -ift 725 -tqc 100 -fct 0 -fhmgpl 120
+%python3% main.py -m c -cm s -nt s -ns 2.0 -ne 10.0 -ift 725 -tqc 100 -fct 0 -fhmgpl 120
 
 python main.py -m c -cm c -nt s -ns 2.0 -ne 10.0 -ift 725 -tqc 100 -fct 0 -fhmgpl 10 -sct 2 -scnvlp "3,5,7" -scnvmr 3
 

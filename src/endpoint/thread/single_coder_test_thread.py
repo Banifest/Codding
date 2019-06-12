@@ -94,7 +94,8 @@ class SingleCoderTestThread(QThread):
         )
 
     def __del__(self):
-        self.wait()
+        pass
+        # self.wait()
 
     def set_auto(self, flag: bool) -> None:
         """
@@ -193,6 +194,7 @@ class SingleCoderTestThread(QThread):
                     noiseLength=self._noisePackageLength,
                 )
                 # Graphic should showing only for Cycle of the test
+                globalSignals.ended.emit()
                 if ConfigProcessor().config.graphic_setting.flg_enabled:
                     GraphicController().draw_graphic(statistic)
             else:
@@ -209,15 +211,14 @@ class SingleCoderTestThread(QThread):
                     noisePeriod=self._noisePackagePeriod,
                     noiseLength=self._noisePackageLength,
                 )
+                globalSignals.ended.emit()
 
             globalSignals.stepFinished.emit(int(self._MAX_PERCENT))
 
             # DB Action
             if ConfigProcessor().config.db_setting.flg_used:
                 TestResultSerializer().serialize_to_db(statistic)
-
             TestResultSerializer().serialize_to_json(statistic)
-            globalSignals.ended.emit()
             log.debug("End of test cycle")
 
         except ApplicationException as application_exception:

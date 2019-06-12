@@ -33,7 +33,7 @@
   </property>
      <property name="windowIcon">
          <iconset>
-             <normaloff>../../../resources/img/pic.png</normaloff>../../../resources/img/pic.png
+             <normaloff>../../../../../../resources/img/pic.png</normaloff>../../../../../../resources/img/pic.png
          </iconset>
      </property>
   <widget class="QWidget" name="centralwidget">
@@ -103,10 +103,61 @@
          </property>
         </widget>
        </item>
+          <item row="3" column="1">
+              <widget class="QLabel" name="label_38">
+                  <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
+                          font-weight:600;&quot;&gt;Interleaver setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                      </string>
+                  </property>
+              </widget>
+          </item>
+          <item row="0" column="1">
+              <widget class="QLabel" name="descSecondCoderSetting">
+                  <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
+                          font-size:11pt; font-weight:600;&quot;&gt;Second coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                      </string>
+                  </property>
+              </widget>
+          </item>
+          <item row="0" column="0">
+              <widget class="QLabel" name="descFirstCoderLabel">
+                  <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
+                          font-size:12pt; font-weight:600;&quot;&gt;First coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                      </string>
+                  </property>
+              </widget>
+          </item>
+          <item row="4" column="0">
+              <widget class="QCheckBox" name="interFirstCheckBox">
+                  <property name="text">
+                      <string>On/off</string>
+                  </property>
+                  <property name="checked">
+                      <bool>false</bool>
+                  </property>
+              </widget>
+          </item>
+          <item row="4" column="1">
+              <widget class="QCheckBox" name="interSecondCheckBox">
+                  <property name="text">
+                      <string>On/off</string>
+                  </property>
+              </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+              <widget class="Line" name="line_2">
+                  <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                  </property>
+              </widget>
+          </item>
        <item row="1" column="0">
         <widget class="QToolBox" name="firstCoderSetting">
          <property name="currentIndex">
-             <number>3</number>
+             <number>0</number>
          </property>
             <widget class="QWidget" name="hamming">
           <property name="geometry">
@@ -114,7 +165,7 @@
             <x>0</x>
             <y>0</y>
             <width>281</width>
-               <height>182</height>
+               <height>138</height>
            </rect>
           </property>
           <attribute name="label">
@@ -125,7 +176,7 @@
             <rect>
              <x>20</x>
              <y>0</y>
-             <width>81</width>
+                <width>101</width>
              <height>16</height>
             </rect>
            </property>
@@ -136,7 +187,7 @@
           <widget class="QSpinBox" name="sizePackHemEdit">
            <property name="geometry">
             <rect>
-             <x>100</x>
+                <x>160</x>
              <y>0</y>
              <width>111</width>
              <height>22</height>
@@ -161,8 +212,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>281</width>
-               <height>182</height>
+               <width>100</width>
+               <height>30</height>
            </rect>
           </property>
           <attribute name="label">
@@ -173,7 +224,7 @@
             <rect>
              <x>20</x>
              <y>0</y>
-             <width>81</width>
+                <width>91</width>
              <height>16</height>
             </rect>
            </property>
@@ -186,7 +237,7 @@
             <rect>
              <x>20</x>
              <y>30</y>
-             <width>91</width>
+                <width>101</width>
              <height>16</height>
             </rect>
            </property>
@@ -197,7 +248,7 @@
           <widget class="QSpinBox" name="sizePackCycEdit">
            <property name="geometry">
             <rect>
-             <x>120</x>
+                <x>160</x>
              <y>0</y>
              <width>111</width>
              <height>22</height>
@@ -216,7 +267,7 @@
           <widget class="QSpinBox" name="poliCycEdit">
            <property name="geometry">
             <rect>
-             <x>120</x>
+                <x>160</x>
              <y>30</y>
              <width>111</width>
              <height>22</height>
@@ -238,8 +289,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>281</width>
-               <height>182</height>
+               <width>100</width>
+               <height>30</height>
            </rect>
           </property>
           <attribute name="label">
@@ -276,7 +327,7 @@
             <rect>
              <x>20</x>
              <y>30</y>
-             <width>131</width>
+                <width>81</width>
              <height>21</height>
             </rect>
            </property>
@@ -309,8 +360,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>281</width>
-               <height>182</height>
+               <width>100</width>
+               <height>30</height>
            </rect>
           </property>
           <attribute name="label">
@@ -321,7 +372,7 @@
             <rect>
              <x>20</x>
              <y>0</y>
-             <width>81</width>
+                <width>101</width>
              <height>21</height>
             </rect>
            </property>
@@ -358,8 +409,8 @@
           <widget class="QSpinBox" name="sizePackFounEdit">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>1</y>
+                <x>150</x>
+                <y>0</y>
              <width>121</width>
              <height>20</height>
             </rect>
@@ -380,10 +431,10 @@
           <widget class="QSpinBox" name="sizeBlockFounEdit">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>26</y>
+                <x>150</x>
+                <y>24</y>
              <width>121</width>
-             <height>21</height>
+                <height>20</height>
             </rect>
            </property>
               <property name="minimum">
@@ -399,8 +450,8 @@
           <widget class="QSpinBox" name="countBlockFounEdit">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>51</y>
+                <x>150</x>
+                <y>50</y>
              <width>121</width>
              <height>20</height>
             </rect>
@@ -418,17 +469,10 @@
          </widget>
         </widget>
        </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="label_38">
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Interleaver setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="1">
         <widget class="QToolBox" name="secondCoderSetting">
          <property name="currentIndex">
-             <number>3</number>
+             <number>0</number>
          </property>
             <widget class="QWidget" name="hamming_3">
           <property name="geometry">
@@ -436,7 +480,7 @@
             <x>0</x>
             <y>0</y>
             <width>280</width>
-               <height>182</height>
+               <height>138</height>
            </rect>
           </property>
           <attribute name="label">
@@ -447,7 +491,7 @@
             <rect>
              <x>20</x>
              <y>0</y>
-             <width>81</width>
+                <width>101</width>
              <height>16</height>
             </rect>
            </property>
@@ -458,7 +502,7 @@
           <widget class="QSpinBox" name="sizePackHemEdit2">
            <property name="geometry">
             <rect>
-             <x>100</x>
+                <x>150</x>
              <y>0</y>
              <width>111</width>
              <height>22</height>
@@ -483,8 +527,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>280</width>
-               <height>182</height>
+               <width>100</width>
+               <height>30</height>
            </rect>
           </property>
           <attribute name="label">
@@ -495,7 +539,7 @@
             <rect>
              <x>20</x>
              <y>0</y>
-             <width>81</width>
+                <width>111</width>
              <height>16</height>
             </rect>
            </property>
@@ -508,7 +552,7 @@
             <rect>
              <x>20</x>
              <y>30</y>
-             <width>91</width>
+                <width>111</width>
              <height>16</height>
             </rect>
            </property>
@@ -519,7 +563,7 @@
           <widget class="QSpinBox" name="sizePackCycEdit2">
            <property name="geometry">
             <rect>
-             <x>120</x>
+                <x>160</x>
              <y>0</y>
              <width>111</width>
              <height>22</height>
@@ -541,7 +585,7 @@
           <widget class="QSpinBox" name="poliCycEdit2">
            <property name="geometry">
             <rect>
-             <x>120</x>
+                <x>160</x>
              <y>30</y>
              <width>111</width>
              <height>22</height>
@@ -563,8 +607,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>280</width>
-               <height>182</height>
+               <width>100</width>
+               <height>30</height>
            </rect>
           </property>
           <attribute name="label">
@@ -601,7 +645,7 @@
             <rect>
              <x>20</x>
              <y>30</y>
-             <width>131</width>
+                <width>81</width>
              <height>21</height>
             </rect>
            </property>
@@ -634,8 +678,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>280</width>
-               <height>182</height>
+               <width>100</width>
+               <height>30</height>
            </rect>
           </property>
           <attribute name="label">
@@ -646,7 +690,7 @@
             <rect>
              <x>20</x>
              <y>0</y>
-             <width>81</width>
+                <width>101</width>
              <height>21</height>
             </rect>
            </property>
@@ -683,8 +727,8 @@
           <widget class="QSpinBox" name="sizePackFounEdit2">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>1</y>
+                <x>140</x>
+                <y>0</y>
              <width>121</width>
              <height>20</height>
             </rect>
@@ -705,10 +749,10 @@
           <widget class="QSpinBox" name="sizeBlockFounEdit2">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>26</y>
+                <x>140</x>
+                <y>22</y>
              <width>121</width>
-             <height>21</height>
+                <height>20</height>
             </rect>
            </property>
               <property name="minimum">
@@ -724,8 +768,8 @@
           <widget class="QSpinBox" name="countBlockFounEdit2">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>51</y>
+                <x>140</x>
+                <y>50</y>
              <width>121</width>
              <height>20</height>
             </rect>
@@ -743,48 +787,6 @@
          </widget>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="descSecondCoderSetting">
-         <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
-                 font-size:11pt; font-weight:600;&quot;&gt;Second coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-             </string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="interFirstCheckBox">
-         <property name="text">
-          <string>On/off</string>
-         </property>
-            <property name="checked">
-                <bool>false</bool>
-            </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QCheckBox" name="interSecondCheckBox">
-         <property name="text">
-          <string>On/off</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="Line" name="line_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-          <item row="0" column="0">
-              <widget class="QLabel" name="descFirstCoderLabel">
-                  <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
-                          font-size:12pt; font-weight:600;&quot;&gt;First coder setting&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
-                      </string>
-                  </property>
-              </widget>
-          </item>
       </layout>
      </item>
      <item>
@@ -945,7 +947,7 @@
                 <item row="6" column="2" colspan="2">
                     <widget class="QPushButton" name="startSingleCascadeCoderButton">
                         <property name="text">
-                            <string>Start single test</string>
+                            <string>Start single cascade test</string>
                         </property>
                     </widget>
                 </item>
@@ -1045,7 +1047,7 @@
                 <item row="7" column="2" colspan="2">
                     <widget class="QPushButton" name="startTestsCascadeCoderButton">
                         <property name="text">
-                            <string>Start tests</string>
+                            <string>Start cascade tests</string>
                         </property>
                     </widget>
                 </item>

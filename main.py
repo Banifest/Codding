@@ -22,5 +22,9 @@ if __name__ == '__main__':
     except Exception as error:
         print(error)
         log.critical("Unhandled exception")
+    except:
+        # noinspection PyBroadException
+        print(-1)
+        log.critical("Unhandled exception")
 else:
     raise ApplicationException("Cannot be import this as module ({0})".format(__file__))

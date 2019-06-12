@@ -184,15 +184,15 @@ class Codec:
             current_information_state = self._coder.decoding(current_information_state)
         except CodingException:
             log.info(
-                "В ходе декодирования Packageа {0} была обнаружена неисправляемая ошибка".format(
+                "During decoding package {0} founded unrepairable".format(
                     current_information_state))
-            self._information = "Package при передаче был повреждён и не подлежит востановлению\n"
+            self._information = "During decoding package founded unrepairable\n"
         except:
             # TODO the same that and method below
             log.info(
-                "В ходе декодирования Packageа {0} была обнаружена неисправляемая ошибка".format(
+                "During decoding package {0} founded unrepairable".format(
                     current_information_state))
-            self._information = "Package при передаче был повреждён и не подлежит востановлению\n"
+            self._information = "During decoding package founded unrepairable\n"
         else:
             if current_information_state == normalization_information:
                 log.info("Package {0} был успешно передан".format(information))
